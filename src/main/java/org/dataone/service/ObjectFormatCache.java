@@ -126,6 +126,32 @@ public class ObjectFormatCache {
   }
   
   /**
+   * List the object formats registered with the object format service.
+   * 
+   * @return objectFormatList - the list of object formats
+   */
+  public ObjectFormatList listFormats() {
+    
+    return this.objectFormatList;
+    
+  }
+  
+  /**
+   * Get the object format based on the given identifier.
+   * 
+   * @param format - the object format identifier
+   * @return objectFormat - the ObjectFormat represented by the format identifier
+   */
+  public ObjectFormat getFormat(ObjectFormatIdentifier fmtid) {
+    
+    ObjectFormat objectFormat = null;
+    objectFormat = this.objectFormatMap.get(fmtid);
+    
+    return objectFormat;
+    
+  }
+  
+  /**
    * Get the object format list from the cached file on disk
    * 
    * @return objectFormatList - the cached object format list
