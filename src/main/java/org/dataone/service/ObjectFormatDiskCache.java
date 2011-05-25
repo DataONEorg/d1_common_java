@@ -37,19 +37,19 @@ import org.jibx.runtime.JiBXException;
  *  This includes schema types, mime types, and other
  *  information related to a particular format.  
  */
-public class ObjectFormatCache {
+public class ObjectFormatDiskCache {
   
   /* The instance of the logging class */
-  private Logger logger = Logger.getLogger(ObjectFormatCache.class);
+  private Logger logger = Logger.getLogger(ObjectFormatDiskCache.class);
   
-  /* The singleton instance of the object format service */
-  private ObjectFormatCache objectFormatCache = null;
+  /* The instance of the object format service */
+  public ObjectFormatDiskCache objectFormatCache = null;
   
   /* The list of object formats */
-  private ObjectFormatList objectFormatList = null;
+  public ObjectFormatList objectFormatList = null;
   
   /* the searchable map of object formats */
-  private TreeMap<ObjectFormatIdentifier, ObjectFormat> objectFormatMap = 
+  public TreeMap<ObjectFormatIdentifier, ObjectFormat> objectFormatMap = 
     new TreeMap<ObjectFormatIdentifier, ObjectFormat>();
   
   /* the package path of the cached object format list*/ 
@@ -60,7 +60,7 @@ public class ObjectFormatCache {
    * Constructor: Creates an instance of the object format service. Since
    * this uses a singleton pattern, use getInstance() to gain the instance.
    */
-  private ObjectFormatCache() {
+  public ObjectFormatDiskCache() {
     
     try {
       
@@ -81,11 +81,11 @@ public class ObjectFormatCache {
    *
    * @return objectFormatCache - The instance of the object format cache
    */
-  public ObjectFormatCache getInstance(){
+  public ObjectFormatDiskCache getInstance(){
     
     if ( objectFormatCache == null ) {
       
-      objectFormatCache = new ObjectFormatCache();
+      objectFormatCache = new ObjectFormatDiskCache();
       
     }
     return objectFormatCache;
