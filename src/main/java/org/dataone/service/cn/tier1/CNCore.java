@@ -28,10 +28,10 @@ import org.dataone.service.exceptions.NotFound;
 import org.dataone.service.exceptions.NotImplemented;
 import org.dataone.service.exceptions.ServiceFailure;
 import org.dataone.service.types.Event;
-import org.dataone.service.types.Identifier;
 import org.dataone.service.types.Log;
 import org.dataone.service.types.NodeList;
 import org.dataone.service.types.ObjectFormat;
+import org.dataone.service.types.ObjectFormatIdentifier;
 import org.dataone.service.types.ObjectFormatList;
 import org.joda.time.DateTime;
 
@@ -47,7 +47,7 @@ public interface CNCore
     public ObjectFormatList listFormats()
         throws InvalidRequest, ServiceFailure, NotFound, InsufficientResources,
         NotImplemented;
-    public ObjectFormat getFormat(Identifier fmtid)
+    public ObjectFormat getFormat(ObjectFormatIdentifier fmtid)
         throws InvalidRequest, ServiceFailure, NotFound, InsufficientResources,
         NotImplemented;
     
