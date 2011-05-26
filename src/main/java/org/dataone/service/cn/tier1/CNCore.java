@@ -32,6 +32,7 @@ import org.dataone.service.types.Identifier;
 import org.dataone.service.types.Log;
 import org.dataone.service.types.NodeList;
 import org.dataone.service.types.ObjectFormat;
+import org.dataone.service.types.ObjectFormatList;
 import org.joda.time.DateTime;
 
 /**
@@ -43,11 +44,9 @@ import org.joda.time.DateTime;
  */
 public interface CNCore 
 {
-    /* TODO: add when Types are updated.
     public ObjectFormatList listFormats()
         throws InvalidRequest, ServiceFailure, NotFound, InsufficientResources,
         NotImplemented;
-    */
     public ObjectFormat getFormat(Identifier fmtid)
         throws InvalidRequest, ServiceFailure, NotFound, InsufficientResources,
         NotImplemented;
