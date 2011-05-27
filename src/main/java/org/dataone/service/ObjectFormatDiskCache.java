@@ -33,7 +33,7 @@ import org.dataone.service.types.util.ServiceTypeUtil;
 import org.jibx.runtime.JiBXException;
 
 /**
- *  The ObjectFormatCache provides a default list of object formats.
+ *  The ObjectFormatDiskCache provides a default list of object formats.
  *  This includes schema types, mime types, and other
  *  information related to a particular format.  
  */
@@ -68,7 +68,7 @@ public class ObjectFormatDiskCache {
       populateObjectFormatList();
       
     } catch (ServiceFailure se) {
-      logger.debug("There was a problem creating the ObjectFormatCache. " +
+      logger.debug("There was a problem creating the ObjectFormatDiskCache. " +
                        "The error message was: " + se.getMessage());
       
     }
@@ -76,7 +76,7 @@ public class ObjectFormatDiskCache {
   }
   
   /**
-   *  Get the instance of the ObjectFormatCache that has been instantiated,
+   *  Get the instance of the ObjectFormatDiskCache that has been instantiated,
    *  or instantiate one if it has not been already.
    *
    * @return objectFormatCache - The instance of the object format cache
@@ -92,7 +92,7 @@ public class ObjectFormatDiskCache {
   }
   
   /**
-   * Populate the ObjectFormatCache's objectFormatList from the cached list.
+   * Populate the ObjectFormatDiskCache's objectFormatList from the cached list.
    * 
    * @throws ServiceFailure
    */
