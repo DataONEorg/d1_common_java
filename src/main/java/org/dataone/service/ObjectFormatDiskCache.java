@@ -21,7 +21,7 @@
 package org.dataone.service;
 
 import java.io.InputStream;
-import java.util.TreeMap;
+import java.util.HashMap;
 
 import org.apache.log4j.Logger;
 
@@ -49,8 +49,8 @@ public class ObjectFormatDiskCache {
   public ObjectFormatList objectFormatList = null;
   
   /* the searchable map of object formats */
-  public TreeMap<ObjectFormatIdentifier, ObjectFormat> objectFormatMap = 
-    new TreeMap<ObjectFormatIdentifier, ObjectFormat>();
+  public HashMap<String, ObjectFormat> objectFormatMap = 
+    new HashMap<String, ObjectFormat>();
   
   /* the package path of the cached object format list*/ 
   private String objectFormatFilePath = "/org/dataone/service/resources/" +
@@ -118,7 +118,7 @@ public class ObjectFormatDiskCache {
       
       ObjectFormat objectFormat = 
         this.objectFormatList.getObjectFormat(i);
-      ObjectFormatIdentifier identifier = objectFormat.getFmtid();
+      String identifier = objectFormat.getFmtid().toString();
       this.objectFormatMap.put(identifier, objectFormat);
       
     }
