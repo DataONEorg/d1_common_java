@@ -18,7 +18,7 @@
  * limitations under the License.
  */
 
-package org.dataone.service.cn.tier3;
+package org.dataone.service.cn;
 
 import org.dataone.service.exceptions.InvalidRequest;
 import org.dataone.service.exceptions.InvalidToken;
@@ -26,6 +26,12 @@ import org.dataone.service.exceptions.NotAuthorized;
 import org.dataone.service.exceptions.NotFound;
 import org.dataone.service.exceptions.NotImplemented;
 import org.dataone.service.exceptions.ServiceFailure;
+
+import org.dataone.service.types.Session;
+import org.dataone.service.types.Identifier;
+import org.dataone.service.types.ReplicationStatus;
+//import org.dataone.service.types.ReplicaMetadata;
+import org.dataone.service.types.ReplicationPolicy;
 
 /**
  * The DataONE CoordinatingNode Tier3 Replication interface.  This defines an
@@ -36,4 +42,24 @@ import org.dataone.service.exceptions.ServiceFailure;
  */
 public interface CNReplication {
 
+    /**
+     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNReplication.setReplicationStatus
+     */
+    public boolean setReplicationStatus(Session session, Identifier pid, 
+        ReplicationStatus status) throws ServiceFailure, NotImplemented, 
+        InvalidToken, NotAuthorized, InvalidRequest, NotFound;
+
+    /** TODO: verify return type for this method and uncomment when ReplicaMetadata is added
+     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNReplication.updateReplicationMetadata
+    public void updateReplicationMetadata(Session session, Identifier pid, 
+        ReplicaMetadata replicaMetadata) throws NotImplemented, NotAuthorized, 
+        ServiceFailure, InvalidRequest;
+     */
+
+    /**
+     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNReplication.setReplicationPolicy
+     */
+    public boolean setReplicationPolicy(Session session, Identifier pid, 
+        ReplicationPolicy policy) throws NotImplemented, NotAuthorized, 
+        ServiceFailure, InvalidRequest;
 }

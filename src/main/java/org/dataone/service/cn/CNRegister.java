@@ -18,7 +18,7 @@
  * limitations under the License.
  */
 
-package org.dataone.service.cn.tier2;
+package org.dataone.service.cn;
 
 import org.dataone.service.exceptions.InvalidRequest;
 import org.dataone.service.exceptions.InvalidToken;
@@ -26,26 +26,32 @@ import org.dataone.service.exceptions.NotAuthorized;
 import org.dataone.service.exceptions.NotFound;
 import org.dataone.service.exceptions.NotImplemented;
 import org.dataone.service.exceptions.ServiceFailure;
-import org.dataone.service.types.AccessPolicy;
-import org.dataone.service.types.Event;
+
+import org.dataone.service.types.Session;
 import org.dataone.service.types.Identifier;
-import org.dataone.service.types.Subject;
+//import org.dataone.service.types.Capabilities;
 
 /**
- * The DataONE CoordinatingNode Tier2 Authorization interface.  This defines an
+ * The DataONE CoordinatingNode Tier2 Registration interface.  This defines an
  * implementation interface for Coordinating Nodes that wish to build an
  * implementation that is compliant with the DataONE service definitions.
  *
  * @author Matthew Jones
  */
-public interface CNAuthorization {
+public interface CNRegister {
 
-    public boolean isAuthorized(Identifier pid, Event operation)
-        throws ServiceFailure, InvalidToken, NotFound, NotAuthorized, NotImplemented, InvalidRequest;
+    /** TODO: uncomment when Capabilities type is added
+     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNRegister.addNodeCapabilities
+     *
+    public boolean addNodeCapabilities(Session session, Identifier pid, 
+        Capabilities capabilities) throws NotImplemented, NotAuthorized, 
+        ServiceFailure, InvalidRequest;
+     */
 
-    public boolean setAccess(Identifier pid, AccessPolicy accessPolicy)
-            throws InvalidToken, ServiceFailure, NotFound, NotAuthorized, NotImplemented, InvalidRequest;
-
-    public Identifier setOwner(Identifier pid, Subject userId)
-        throws InvalidToken, ServiceFailure, NotFound, NotAuthorized, NotImplemented, InvalidRequest;
+    /** TODO: uncomment when Capabilities type is added
+     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNRegister.register
+     *
+    public Identifier register(Session session, Capabilities capabilities) 
+        throws NotImplemented, NotAuthorized, ServiceFailure, InvalidRequest;
+     */
 }
