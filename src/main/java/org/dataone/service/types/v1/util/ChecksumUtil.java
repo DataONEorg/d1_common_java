@@ -24,9 +24,10 @@ package org.dataone.service.types.v1.util;
 
 import java.io.IOException;
 import java.io.InputStream;
-import org.dataone.service.types.v1.Checksum;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
+import org.dataone.service.types.v1.Checksum;
 
 /**
  *
@@ -110,4 +111,22 @@ public class ChecksumUtil {
         return hex.toString();
     }
 
+    /**
+     * Returns true if and only if checksum1 and checksum2 are equal:
+     *  Values are equal, algorithms are equal.
+     * @param checksum1
+     * @param checksum2
+     * @return
+     */
+    public static boolean areChecksumsEqual(Checksum checksum1, Checksum checksum2) {
+        boolean equal = false;
+        if (checksum1 != null && checksum2 != null && checksum1.getValue() != null
+                && checksum2.getValue() != null && checksum1.getAlgorithm() != null
+                && checksum2.getAlgorithm() != null
+                && checksum1.getValue().equals(checksum2.getValue())
+                && checksum1.getAlgorithm().equals(checksum2.getAlgorithm())) {
+            equal = true;
+        }
+        return equal;
+    }
 }
