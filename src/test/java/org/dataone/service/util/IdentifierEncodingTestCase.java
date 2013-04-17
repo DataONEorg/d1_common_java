@@ -72,7 +72,7 @@ public class IdentifierEncodingTestCase
 		}
 	}
 	
-
+	
 	@Test
 	public final void testEncodeUrlPathSegment()
 	{
@@ -136,6 +136,13 @@ public class IdentifierEncodingTestCase
 		logger.info("");
 	}
 
+	@Test
+	public final void testDecodeString_handleNulls() throws UnsupportedEncodingException 
+	{
+		assertNull("null in should return null", EncodingUtilities.decodeString(null));
+	}
+	
+	
 	@Test
 	public final void testDecodeString() throws UnsupportedEncodingException
 	{

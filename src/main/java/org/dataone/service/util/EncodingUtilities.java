@@ -267,6 +267,11 @@ public class EncodingUtilities {
 	 */
 	public static String decodeString(String string) throws UnsupportedEncodingException 
 	{
+		if (string == null) 
+		{ 
+			return null;
+		}
+		
 		// a string containing a '+' should not reach here
 		// but if it does, don't want to fail
 		string = string.replace("+", "%2B");
