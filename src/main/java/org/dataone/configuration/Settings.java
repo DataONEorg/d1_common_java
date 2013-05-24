@@ -44,6 +44,11 @@ public class Settings {
     private static CompositeConfiguration configuration = null;
     
     public static String STD_CONFIG_PATH = "org/dataone/configuration";
+    
+    static {
+    	// allow commas in the property values
+		AbstractConfiguration.setDefaultListDelimiter(';');
+    }
 
     /**
      * A private constructor to be sure no instances are created.
@@ -75,9 +80,6 @@ public class Settings {
      */
     public static Configuration getConfiguration() {
         if (configuration == null) {
-        	
-    		// allow commas in the property values
-    		AbstractConfiguration.setDefaultListDelimiter(';');
     		
         	configuration = new CompositeConfiguration();
         	      	
