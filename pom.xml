@@ -5,13 +5,13 @@
     <groupId>org.dataone</groupId>
     <artifactId>d1_common_java</artifactId>
     <packaging>jar</packaging>
-    <version>1.1.1</version>
+    <version>1.1.2</version>
     <name>DataONE_Common_Java</name>
     <url>http://dataone.org</url>
     <description>DataONE Common Code with Service Interface Definitions</description>
     <properties>
         <org.jibx.version>1.2.4.5</org.jibx.version>
-        <d1_jibx_extensions_release>1.1.0</d1_jibx_extensions_release>
+        <d1_jibx_extensions_release>1.1.1</d1_jibx_extensions_release>
         <d1_test_resources_release>1.1.0</d1_test_resources_release>
     </properties>
     <build>
@@ -267,11 +267,13 @@
             <groupId>org.jibx</groupId>
             <artifactId>jibx-bind</artifactId>
             <version>${org.jibx.version}</version>
+	    <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.jibx</groupId>
             <artifactId>jibx-extras</artifactId>
             <version>${org.jibx.version}</version>
+	    <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.jibx</groupId>
@@ -282,11 +284,13 @@
             <groupId>org.jibx</groupId>
             <artifactId>jibx-schema</artifactId>
             <version>${org.jibx.version}</version>
+	    <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.jibx</groupId>
             <artifactId>jibx-tools</artifactId>
             <version>${org.jibx.version}</version>
+	    <scope>provided</scope>
         </dependency>
 
         <dependency>
