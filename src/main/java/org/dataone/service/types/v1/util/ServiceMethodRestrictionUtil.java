@@ -81,7 +81,7 @@ public class ServiceMethodRestrictionUtil {
         List<String> administratorsProperties = Settings.getConfiguration().getList("cn.administrators");
         if (administrators != null) {
             for (String administrator : administratorsProperties) {
-                logger.debug("AdminList entry " + administrator);
+                logger.debug("Adding cn.administrators entry: " + administrator);
                 administrators.add(administrator);
             }
         }
@@ -89,6 +89,7 @@ public class ServiceMethodRestrictionUtil {
         for (Node node: nodeList) {
             if (node.getType().equals(NodeType.CN) && node.getState().equals(NodeState.UP)) {
                 for (Subject adminstrativeSubject : node.getSubjectList()) {
+                    logger.debug("Adding CN subject entry: " + adminstrativeSubject.getValue());
                      administrators.add(adminstrativeSubject.getValue());
                 }
                 List<Service> cnServices = node.getServices().getServiceList();
@@ -101,7 +102,7 @@ public class ServiceMethodRestrictionUtil {
                                 if (serviceMethodRestriction.getMethodName().equalsIgnoreCase(methodName)) {
                                     if (serviceMethodRestriction.getSubjectList() != null) {
                                            for (Subject administrator : serviceMethodRestriction.getSubjectList()) {
-                                                logger.debug("Adding ServiceMethodRestriction entry for: " + administrator);
+                                                logger.debug("Adding ServiceMethodRestriction entry: " + administrator.getValue());
                                                 administrators.add(administrator.getValue());
                                             }
                                     }
