@@ -22,9 +22,13 @@
 
 package org.dataone.service.types.v1.util;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+import org.dataone.configuration.Settings;
 import org.dataone.service.types.v1.Node;
+import org.dataone.service.types.v1.NodeState;
 import org.dataone.service.types.v1.NodeType;
 import org.dataone.service.types.v1.Service;
 import org.dataone.service.types.v1.ServiceMethodRestriction;
@@ -38,6 +42,8 @@ import org.dataone.service.types.v1.Subject;
  *
  */
 public class ServiceMethodRestrictionUtil {
+	
+	private static final Logger logger = Logger.getLogger(ServiceMethodRestrictionUtil.class);
 
 	/**
 	 * Interprets the CN's ServiceMethodRestriction for a given Subject+serviceName+methodName
@@ -48,45 +54,64 @@ public class ServiceMethodRestrictionUtil {
 	 * @return true if allowed, otherwise false
 	 */
     public static boolean isMethodAllowed(Subject subject, List<Node> nodeList, String serviceName, String methodName) {
-    	// checks if we are allowed to call this method -- should be very restricted
+    	// checks if we are allowed to call this method -- should be restricted to "admins" and other whitelisted identities
         boolean isAllowed = false;
-        // labeled break gets us out as soon as there's a match
-        subjectSearch:
-        for (Node node: nodeList) {
-        	// check if the caller is a CN
-        	for (Subject nodeSubject: node.getSubjectList()) {
-        		if (nodeSubject.equals(subject)) {
-        			if (node.getType().equals(NodeType.CN)) {
-        				// the CN is always allowed
-        				isAllowed = true;
-            			break subjectSearch;
-        			}
-        		}
-        	}
-        	// check that the CN node allows us to call it
-        	if (node.getType().equals(NodeType.CN)) {
-        		// check if it's in the service method allowed list
-            	for (Service service: node.getServices().getServiceList()) {
-            		if (service.getName().equals(serviceName)) {
-            			if (service.getRestrictionList() != null) {
-	                		for (ServiceMethodRestriction restriction: service.getRestrictionList()) {
-	                			if (restriction.getMethodName().equals(methodName)) {
-	                				if (restriction.getSubjectList() != null) {
-		                				for (Subject restrictedSubject: restriction.getSubjectList()) {
-		                					if (restrictedSubject.equals(subject)) {
-		                						isAllowed = true;
-		                						break subjectSearch;
-		                					}
-		                				}
-	                				}
-	                			}
-	                		}
-            			}
-            		}
-            	}
-        	}
+        if (subject != null) {
+	        List<String> admins = getCnAdministrativeList(nodeList, serviceName, methodName);
+	        isAllowed = admins.contains(subject.getValue());
         }
-        
         return isAllowed;
+    }
+    
+    /**
+     * Returns an array of subjects listed as CN's in the nodelist or in a properties file.
+     * If the ServiceMethodRestriction list of the given method is set, 
+     * then those subjects act as administrators as well.
+     * 
+     * @author waltz
+     * @param nodeList
+     * @param serviceName 
+     * @param methodName 
+     * 
+     * @return List<String>
+     */
+    public static List<String> getCnAdministrativeList(List<Node> nodeList, String serviceName, String methodName) {
+        List<String> administrators = new ArrayList<String>();
+
+        List<String> administratorsProperties = Settings.getConfiguration().getList("cn.administrators");
+        if (administrators != null) {
+            for (String administrator : administratorsProperties) {
+                logger.debug("AdminList entry " + administrator);
+                administrators.add(administrator);
+            }
+        }
+
+        for (Node node: nodeList) {
+            if (node.getType().equals(NodeType.CN) && node.getState().equals(NodeState.UP)) {
+                for (Subject adminstrativeSubject : node.getSubjectList()) {
+                     administrators.add(adminstrativeSubject.getValue());
+                }
+                List<Service> cnServices = node.getServices().getServiceList();
+                for (Service service : cnServices) {
+                    if (service.getName().equalsIgnoreCase(serviceName)) {
+                        if ((service.getRestrictionList() != null)
+                                && !service.getRestrictionList().isEmpty()) {
+                            List<ServiceMethodRestriction> serviceMethodRestrictionList = service.getRestrictionList();
+                            for (ServiceMethodRestriction serviceMethodRestriction : serviceMethodRestrictionList) {
+                                if (serviceMethodRestriction.getMethodName().equalsIgnoreCase(methodName)) {
+                                    if (serviceMethodRestriction.getSubjectList() != null) {
+                                           for (Subject administrator : serviceMethodRestriction.getSubjectList()) {
+                                                logger.debug("Adding ServiceMethodRestriction entry for: " + administrator);
+                                                administrators.add(administrator.getValue());
+                                            }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return administrators;
     }
 }
