@@ -101,7 +101,7 @@ public class ServiceMethodRestrictionUtil {
                                 if (serviceMethodRestriction.getMethodName().equalsIgnoreCase(methodName)) {
                                     if (serviceMethodRestriction.getSubjectList() != null) {
                                            for (Subject administrator : serviceMethodRestriction.getSubjectList()) {
-                                                logger.debug("Adding ServiceMethodRestriction entry for: " + administrator);
+                                                logger.debug("Adding ServiceMethodRestriction entry for: " + administrator.getValue());
                                                 administrators.add(administrator.getValue());
                                             }
                                     }
