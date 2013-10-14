@@ -45,26 +45,18 @@ public class DateTimeMarshallerTestCase {
 
 
         // Combinations of calendar date and local time with timezone no milliseconds
-        assertNotNull(DateTimeMarshaller.deserializeDateToUTC("19910806T155620+0100"));// Basic format
         assertNotNull(DateTimeMarshaller.deserializeDateToUTC("19910806T155620+01:00"));// Basic format
-        assertNotNull(DateTimeMarshaller.deserializeDateToUTC("19910806T095620-0500"));// Basic format
         assertNotNull(DateTimeMarshaller.deserializeDateToUTC("19910806T095600-05:00"));// Basic format
-        assertNotNull(DateTimeMarshaller.deserializeDateToUTC("1991-08-06T15:56:20+0100"));// Extended format
-        assertNotNull(DateTimeMarshaller.deserializeDateToUTC("1991-08-06T15:56:20+0100"));// Extended format
         assertNotNull(DateTimeMarshaller.deserializeDateToUTC("1991-08-06T09:56:20-05:00"));// Extended format
-        assertNotNull(DateTimeMarshaller.deserializeDateToUTC("1991-08-06T09:56:20-0500"));// Extended format
+        assertNotNull(DateTimeMarshaller.deserializeDateToUTC("1991-08-06T09:56:20-05:00"));// Extended format
 
 
 
         // Combinations of calendar date and local time with milliseconds and timezone
         assertNotNull(DateTimeMarshaller.deserializeDateToUTC("19910806T155620.123+01:00"));
-        assertNotNull(DateTimeMarshaller.deserializeDateToUTC("19910806T155620.123+0100"));
         assertNotNull(DateTimeMarshaller.deserializeDateToUTC("19910806T095620.123-05:00"));
-        assertNotNull(DateTimeMarshaller.deserializeDateToUTC("19910806T095620.123-0500"));
         assertNotNull(DateTimeMarshaller.deserializeDateToUTC("1991-08-06T15:56:20.123+01:00"));
-        assertNotNull(DateTimeMarshaller.deserializeDateToUTC("1991-08-06T15:56:20.123+0100"));
         assertNotNull(DateTimeMarshaller.deserializeDateToUTC("1991-08-06T09:56:20.123-05:00"));
-        assertNotNull(DateTimeMarshaller.deserializeDateToUTC("1991-08-06T09:56:20.123-0500"));
 
         assertNotNull(DateTimeMarshaller.deserializeDateToUTC("Tue, 06 Aug 1991 14:56:20 GMT"));
 
@@ -79,5 +71,105 @@ public class DateTimeMarshallerTestCase {
         }
 
         assertTrue(nullPointerThrown);
+    }
+    @Test
+    public void deserializeDateToUTCFailureTest() {
+
+        boolean illegalArgumentExceptionThrown = false;
+
+        // Combinations of calendar date and local time with incorrect timezone no milliseconds
+        try {
+            DateTimeMarshaller.deserializeDateToUTC("19910806T155620+0100");
+        } catch (IllegalArgumentException ex) {
+            illegalArgumentExceptionThrown = true;
+        }
+
+        assertTrue(illegalArgumentExceptionThrown);
+        illegalArgumentExceptionThrown = false;// Bad Basic format
+
+
+        try {
+            DateTimeMarshaller.deserializeDateToUTC("19910806T095620-0500");
+        } catch (IllegalArgumentException ex) {
+            illegalArgumentExceptionThrown = true;
+        }
+
+        assertTrue(illegalArgumentExceptionThrown);
+        illegalArgumentExceptionThrown = false;// Bad Basic format
+        
+
+        try {
+            DateTimeMarshaller.deserializeDateToUTC("1991-08-06T15:56:20+0100");
+        } catch (IllegalArgumentException ex) {
+            illegalArgumentExceptionThrown = true;
+        }
+
+        assertTrue(illegalArgumentExceptionThrown);
+        illegalArgumentExceptionThrown = false;// Bad Basic format
+        
+        
+        try {
+            DateTimeMarshaller.deserializeDateToUTC("1991-08-06T15:56:20+0100");
+        } catch (IllegalArgumentException ex) {
+            illegalArgumentExceptionThrown = true;
+        }
+
+        assertTrue(illegalArgumentExceptionThrown);
+        illegalArgumentExceptionThrown = false;// Bad Basic format
+        
+
+        try {
+            DateTimeMarshaller.deserializeDateToUTC("1991-08-06T09:56:20-0500");
+        } catch (IllegalArgumentException ex) {
+            illegalArgumentExceptionThrown = true;
+        }
+
+        assertTrue(illegalArgumentExceptionThrown);
+        illegalArgumentExceptionThrown = false;// Bad Basic format
+        
+
+        // Combinations of calendar date and local time with milliseconds and incorrect timezone
+
+        try {
+            DateTimeMarshaller.deserializeDateToUTC("19910806T155620.123+0100");
+        } catch (IllegalArgumentException ex) {
+            illegalArgumentExceptionThrown = true;
+        }
+
+        assertTrue(illegalArgumentExceptionThrown);
+        illegalArgumentExceptionThrown = false;// Bad Basic format
+        
+
+        try {
+            DateTimeMarshaller.deserializeDateToUTC("19910806T095620.123-0500");
+        } catch (IllegalArgumentException ex) {
+            illegalArgumentExceptionThrown = true;
+        }
+
+        assertTrue(illegalArgumentExceptionThrown);
+        illegalArgumentExceptionThrown = false;// Bad Basic format
+        
+
+        try {
+            DateTimeMarshaller.deserializeDateToUTC("1991-08-06T15:56:20.123+0100");
+        } catch (IllegalArgumentException ex) {
+            illegalArgumentExceptionThrown = true;
+        }
+
+        assertTrue(illegalArgumentExceptionThrown);
+        illegalArgumentExceptionThrown = false;// Bad Basic format
+        
+
+        try {
+            DateTimeMarshaller.deserializeDateToUTC("1991-08-06T09:56:20.123-0500");
+        } catch (IllegalArgumentException ex) {
+            illegalArgumentExceptionThrown = true;
+        }
+
+        assertTrue(illegalArgumentExceptionThrown);
+        illegalArgumentExceptionThrown = false;// Bad Basic format
+
+
+
     }
 }

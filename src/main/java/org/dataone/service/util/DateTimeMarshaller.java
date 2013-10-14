@@ -38,8 +38,9 @@ import org.joda.time.format.ISODateTimeFormat;
  * @author waltz
  */
 public class DateTimeMarshaller {
-
-    static final Pattern timezonePattern = Pattern.compile(".+(?:(?:[\\+\\-]\\d\\d:?\\d\\d)|Z)$");
+    // http://www.w3.org/TR/xmlschema-2/#dateTime
+    // The lexical representation of a timezone is a string of the form: (('+' | '-') hh ':' mm) | 'Z'
+    static final Pattern timezonePattern = Pattern.compile(".+(?:(?:[\\+\\-]\\d\\d:\\d\\d)|Z)$");
 
     static final DateTimeFormatter basicDateIsoFmt = ISODateTimeFormat.basicDate();
     static final DateTimeFormatter basicDateTimeIsoFmt = ISODateTimeFormat.basicDateTime();
