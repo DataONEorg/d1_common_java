@@ -45,7 +45,12 @@ import org.dataone.service.types.v1.SystemMetadata;
 
 /**
  * This utility class provides an efficient way to test bean-style data objects
- * (of the same type) for differences in property values.
+ * (of the same type) for differences in property values.  It uses reflection,
+ * so there's a categorical performance hit compared to non-general-case solutions
+ * you might write yourself.
+ * 
+ * The reason for use of reflection is to decouple it from datatype definitions
+ * that may change over the long term.
  * 
  * @author rnahf
  *
@@ -54,6 +59,8 @@ public class TypeCompareUtil {
 	
 	static Logger logger = Logger.getLogger(TypeCompareUtil.class.getName());
 
+	// TODO: compare with https://github.com/SQiShER/java-object-diff/ wrt/ long-term implementation
+	
 	
 	/**
 	 * Reports the properties of a systemMetadata object, one per line in xpath 
@@ -297,5 +304,21 @@ public class TypeCompareUtil {
 		}
 		logger.debug("(return)");
 		return results;
+	}
+	
+	/**
+	 * Generates a tabular listing of the field names and values, suitable for
+	 * display.  
+	 * @param o
+	 * @return
+	 */
+	public static List<String> reportSubtypesListing(Object o) {
+		Map<String,String> map = getD1SubtypesListing(o);
+		List<String> report = new ArrayList<String>();
+		report.add("field_name\tfield_value");
+		for(String key : map.keySet()) {
+			report.add(String.format("%s\t%s", key, map.get(key)));
+		}
+		return report;
 	}
 }
