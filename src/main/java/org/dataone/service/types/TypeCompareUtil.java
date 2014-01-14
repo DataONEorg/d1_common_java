@@ -243,8 +243,8 @@ public class TypeCompareUtil {
 				else if (o instanceof Boolean) {
 					results.put(path, ((Boolean)o).toString());
 				} 
-				else if (o instanceof ArrayList) {	
-					ArrayList<?> list = ((ArrayList<?>) o);
+				else if (o instanceof List) {	
+					List<?> list = ((List<?>) o);
 					if ( !list.isEmpty() ) {
 						if (sortArrays) {
 							logger.debug("arrayList size: " + list.size() );
