@@ -314,8 +314,11 @@ public class TypeCompareUtil {
 	 * @param o
 	 * @return
 	 */
-	public static List<String> reportSubtypesListing(Object o) {
-		Map<String,String> map = getD1SubtypesListing(o);
+	public static List<String> reportSubtypesListing(Object o, Boolean sort) {
+		if (sort == null) {
+			sort = Boolean.TRUE;
+		}
+		Map<String,String> map = getD1SubtypesListing("", o, sort);
 		List<String> report = new ArrayList<String>();
 		report.add("field_name\tfield_value");
 		for(String key : map.keySet()) {
