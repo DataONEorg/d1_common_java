@@ -122,23 +122,25 @@ public class TypeCompareUtil {
 			sb = new StringBuffer();
 			sb.append(prop);
 			boolean difference = false;
-			String firstValue = null;
+			List values = new LinkedList<String>();
 			for (String nodeKey : nodeKeys) {
 				sb.append("\t");
+				// map value can legitimately be either a LinkedHashMap or null
+				String value = null;
 				if (d1TypePropMap.get(nodeKey) instanceof LinkedHashMap) {
-					String value = ((LinkedHashMap<String,String>)d1TypePropMap.get(nodeKey)).get(prop);
-					sb.append(value);
-					if (firstValue == null) {
-						firstValue = value;
-					} else if ( !firstValue.equals(value) ) {
-						difference = true;
-					}
+					 value = ((LinkedHashMap<String,String>)d1TypePropMap.get(nodeKey)).get(prop);
 				} else {
-					sb.append(d1TypePropMap.get(nodeKey));
-					difference = true;
+					value = (String) d1TypePropMap.get(nodeKey);
+				}
+				sb.append(value);
+			    
+				// collect unique values
+				if (! values.contains(value)) {
+					values.add(value);
 				}
 			}
-			if (difference) {
+			if (values.size() > 1) {
+				// there's a difference, so report the line
 				report.add(sb.toString());
 			}
 		}
