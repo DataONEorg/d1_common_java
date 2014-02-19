@@ -39,6 +39,7 @@ import java.util.TreeSet;
 
 import org.apache.log4j.Logger;
 import org.dataone.service.types.v1.AccessRule;
+import org.dataone.service.types.v1.Replica;
 import org.dataone.service.types.v1.Subject;
 import org.dataone.service.types.v1.SystemMetadata;
 import org.dataone.service.util.DateTimeMarshaller;
@@ -173,8 +174,7 @@ public class TypeCompareUtil {
      * to the property paths (keys) and values of the object passed in.
      * It depends on bean-style getter methods to find the properties of the 
      * object.
-     * Even with sortArrays = true, the Replica list will not be sorted 
-     * because order is considered important. 
+     * Both empty lists and null values yield the value 'null' 
      * @param path
      * @param o - the dataone object
      * @param sortArrays - true will sort array subtypes so they can be logically compared
@@ -248,6 +248,24 @@ public class TypeCompareUtil {
                             // if those need to be sorted (where list order doesn't 
                             // affect behavior)
 
+	
+							// While Replicas are not Comparable, the replica#replicaMemberNode
+							// property is, and should be used to sort the replicas
+							else if (list.get(0) instanceof Replica) {
+								Collections.sort((List<Replica>)list, 
+								    new Comparator<Replica>() {
+									    public int compare(Replica r1, Replica r2) {
+									    	
+									    	// only using replicaMemberNodefor sorting
+									    	// NodeReferences are Comparable
+									    	return r1.getReplicaMemberNode().compareTo(r2.getReplicaMemberNode());
+									    }
+								    }
+								);
+							}
+							
+                            
+                            
                             // The order of AccessRules in an AccessPolicy doesn't
                             // affect behavior, so should be made Comparable so 
                             // equivalence can be tested
