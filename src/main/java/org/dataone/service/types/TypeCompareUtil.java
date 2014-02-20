@@ -304,7 +304,7 @@ public class TypeCompareUtil {
                                     sortArrays));
                         }
                     } else {
-                        results.put(path, "{empty}");
+                        results.put(path, "null");
                     }
                 }
             }

@@ -181,7 +181,11 @@ public class TypeMarshaller {
         	return domainObject;
         } 
         finally {
-        	inputStream.close();
+        	if (inputStream != null) {
+        		inputStream.close();
+        	} else {
+        		throw new IOException("InputStream was null");
+        	}
         }
     }
 }

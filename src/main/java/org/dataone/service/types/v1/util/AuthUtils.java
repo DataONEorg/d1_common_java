@@ -221,9 +221,11 @@ public class AuthUtils {
 	    return allowed;	    
 	}
 	
-	/*
+	/** 
 	 * a comparison algorithm for hierarchical permissions (WRITE implies READ, and CHANGE
 	 * implies WRITE and READ).
+	 * 
+	 * returns true if the requested permission is allowed.
 	 */
 	public static boolean comparePermissions(Permission requested, Collection<Permission> allowed) 
 	{
