@@ -34,11 +34,17 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.dataone.service.types.v1.AccessRule;
+import org.dataone.service.types.v1.Identifier;
+import org.dataone.service.types.v1.NodeReference;
+import org.dataone.service.types.v1.ObjectFormatIdentifier;
+import org.dataone.service.types.v1.Permission;
 import org.dataone.service.types.v1.Replica;
 import org.dataone.service.types.v1.Subject;
 import org.dataone.service.types.v1.SystemMetadata;
@@ -181,8 +187,14 @@ public class TypeCompareUtil {
      * @return using LinkedHashMap to ensure order read equals order listed
      */
     public static LinkedHashMap<String, String> getD1SubtypesListing(String path, Object o,
-            boolean sortArrays) {
+            boolean sortArrays) 
+    {
+    	return getD1SubtypesListing(path, o, sortArrays, false);
+    }
 
+    public static LinkedHashMap<String, String> getD1SubtypesListing(String path, Object o,
+                boolean sortArrays, boolean flattenSimpleTypeLists) {    	
+    	
         LinkedHashMap<String, String> results = new LinkedHashMap<String, String>();
         if (o == null) {
             results.put(path, "null");
@@ -203,7 +215,7 @@ public class TypeCompareUtil {
                         try {
                             Object p = m.invoke(o, (Object[]) null);
                             Map<String, String> subresults = getD1SubtypesListing(path + "/"
-                                    + m.getName().replace("get", ""), p, sortArrays);
+                                    + m.getName().replace("get", ""), p, sortArrays, flattenSimpleTypeLists);
                             results.putAll(subresults);
                         } catch (IllegalArgumentException e) {
                             logger.error(m.getName(), e);
@@ -233,6 +245,14 @@ public class TypeCompareUtil {
                     results.put(path, ((BigInteger) o).toString());
                 } else if (o instanceof Boolean) {
                     results.put(path, ((Boolean) o).toString());
+                } else if (o instanceof Map) {
+                	Map<?,?> map = ((Map<?,?>) o);
+                	for (Entry<?, ?> entry : map.entrySet()) {
+                		results.putAll(getD1SubtypesListing((path + "/" + entry.getKey()), 
+                						entry.getValue(),
+                        				sortArrays, flattenSimpleTypeLists));
+                	}
+                	
                 } else if (o instanceof List) {
                     List<?> list = ((List<?>) o);
                     if (!list.isEmpty()) {
@@ -298,12 +318,66 @@ public class TypeCompareUtil {
                             } else {
                                 ; // don't sort...
                             }
+                        }  // end sortArrays 
+                        
+                        boolean flattened = false;
+                        if (flattenSimpleTypeLists) {
+                        	if (list.get(0) instanceof Subject) {
+                        		flattened = true;
+                        		StringBuffer sb = new StringBuffer();
+                        		for (Subject s : (List<Subject>) list) {
+                        			sb.append(s.getValue());
+                        			sb.append(',');
+                        		}
+                        		sb.deleteCharAt(sb.length()-1);
+                        		results.put(path, sb.toString());
+                        	} else if (list.get(0) instanceof NodeReference) {
+                        		flattened = true;
+                        		StringBuffer sb = new StringBuffer();
+                        		for (NodeReference s : (List<NodeReference>) list) {
+                        			sb.append(s.getValue());
+                        			sb.append(',');
+                        		}
+                        		sb.deleteCharAt(sb.length()-1);
+                        		results.put(path, sb.toString());
+                        	} else if (list.get(0) instanceof Identifier) {
+                        		flattened = true;    
+                        		StringBuffer sb = new StringBuffer();
+                        		for (Identifier s : (List<Identifier>) list) {
+                        			sb.append(s.getValue());
+                        			sb.append(',');
+                        		}
+                        		sb.deleteCharAt(sb.length()-1);
+                        		results.put(path, sb.toString());
+                        	} else if (list.get(0) instanceof ObjectFormatIdentifier) {
+                        		flattened = true;
+                        		StringBuffer sb = new StringBuffer();
+                        		for (ObjectFormatIdentifier s : (List<ObjectFormatIdentifier>) list) {
+                        			sb.append(s.getValue());
+                        			sb.append(',');
+                        		}
+                        		sb.deleteCharAt(sb.length()-1);
+                        		results.put(path, sb.toString());
+                        	} else if (list.get(0) instanceof Permission) {
+                        		flattened = true;
+                        		StringBuffer sb = new StringBuffer();
+                        		for (Permission s : (List<Permission>) list) {
+                        			sb.append(s.xmlValue());
+                        			sb.append(',');
+                        		}
+                        		sb.deleteCharAt(sb.length()-1);
+                        		results.put(path, sb.toString());
+                        	}
+                        	
                         }
-                        for (int j = 0; j < list.size(); j++) {
-                            results.putAll(getD1SubtypesListing((path + "/" + j), list.get(j),
-                                    sortArrays));
+                        if (!flattened) {
+                        	for (int j = 0; j < list.size(); j++) {
+                        		results.putAll(getD1SubtypesListing((path + "/" + j), list.get(j),
+                        				sortArrays, flattenSimpleTypeLists));
+                        	}
                         }
-                    } else {
+                    } else {  
+                    	// empty list
                         results.put(path, "null");
                     }
                 }
