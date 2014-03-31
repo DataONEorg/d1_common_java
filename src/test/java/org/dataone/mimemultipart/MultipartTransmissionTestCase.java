@@ -38,8 +38,8 @@ import org.dataone.service.util.Constants;
 import org.junit.Test;
 
 
-public class testMultipartTransmission {
-	private static Log log = LogFactory.getLog(testMultipartTransmission.class);
+public class MultipartTransmissionTestCase {
+	private static Log log = LogFactory.getLog(MultipartTransmissionTestCase.class);
 	private static final String echoServiceUrl = "http://dev-testing.dataone.org/testsvc/echo";
 	private static final String echoAndParseServiceUrl = "http://dev-testing.dataone.org/testsvc/echomm";
 	
