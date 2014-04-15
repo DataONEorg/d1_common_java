@@ -114,6 +114,7 @@ public class ChecksumUtil {
     /**
      * Returns true if and only if checksum1 and checksum2 are equal:
      *  Values are equal, algorithms are equal.
+     *  Null objects or properties of checksum objects will return false
      * @param checksum1
      * @param checksum2
      * @return
