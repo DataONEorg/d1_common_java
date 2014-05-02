@@ -28,15 +28,13 @@ import org.dataone.service.exceptions.NotFound;
 import org.dataone.service.exceptions.NotImplemented;
 import org.dataone.service.exceptions.ServiceFailure;
 import org.dataone.service.exceptions.VersionMismatch;
-
+import org.dataone.service.types.v1.Identifier;
+import org.dataone.service.types.v1.NodeReference;
 import org.dataone.service.types.v1.Replica;
+import org.dataone.service.types.v1.ReplicationPolicy;
+import org.dataone.service.types.v1.ReplicationStatus;
 import org.dataone.service.types.v1.Session;
 import org.dataone.service.types.v1.Subject;
-import org.dataone.service.types.v1.Permission;
-import org.dataone.service.types.v1.Identifier;
-import org.dataone.service.types.v1.ReplicationStatus;
-import org.dataone.service.types.v1.ReplicationPolicy;
-import org.dataone.service.types.v1.NodeReference;
 
 /**
  * The DataONE CoordinatingNode Tier4 Replication interface.  This defines an

@@ -22,13 +22,17 @@
 
 package org.dataone.service.util;
 
-import org.apache.tools.ant.filters.StringInputStream;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 
 import javax.xml.parsers.ParserConfigurationException;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -36,13 +40,12 @@ import org.apache.http.HttpException;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
 import org.apache.http.ProtocolVersion;
-import org.apache.http.entity.BasicHttpEntity;
 import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicHttpResponse;
 import org.apache.http.message.BasicStatusLine;
-import org.dataone.mimemultipart.SimpleMultipartEntity;
+import org.apache.tools.ant.filters.StringInputStream;
 import org.dataone.service.exceptions.AuthenticationTimeout;
 import org.dataone.service.exceptions.BaseException;
 import org.dataone.service.exceptions.IdentifierNotUnique;
@@ -58,10 +61,9 @@ import org.dataone.service.exceptions.ServiceFailure;
 import org.dataone.service.exceptions.SynchronizationFailed;
 import org.dataone.service.exceptions.UnsupportedMetadataType;
 import org.dataone.service.exceptions.UnsupportedType;
-import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Ignore;
+import org.junit.Test;
 import org.xml.sax.SAXException;
 
 /**
@@ -70,10 +72,12 @@ import org.xml.sax.SAXException;
  */
 public class ExceptionHandlerTestCase {
 
+	static StringInputStream jsonErrorStream;
+	
     @Before
     public void setUpBeforeClass() throws Exception {
         NotFound nfe = new NotFound("12345", "some generic description");
-        StringInputStream jsonErrorStream = new StringInputStream(nfe.serialize(BaseException.FMT_JSON));
+        jsonErrorStream = new StringInputStream(nfe.serialize(BaseException.FMT_JSON));
     }
 
     @Test
@@ -643,9 +647,9 @@ public class ExceptionHandlerTestCase {
             BaseException {
         boolean success = false;
         try {
-            int code = 0;
-            String detail_code = null;
-            String description = null;
+//            int code = 0;
+//            String detail_code = null;
+//            String description = null;
             Integer errorCode = new Integer(404);
             String errorReason = "NotFound";
             String exceptTestSerial = "<?xml version='1.0' encoding='UTF-8'?><error name='JUNK' errorCode='404' detailCode='-1'><description></description></error>";
@@ -666,9 +670,9 @@ public class ExceptionHandlerTestCase {
             BaseException {
         boolean success = false;
         try {
-            int code = 0;
-            String detail_code = null;
-            String description = null;
+//            int code = 0;
+//            String detail_code = null;
+//            String description = null;
             Integer errorCode = new Integer(404);
             String errorReason = "NotFound";
             String exceptTestSerial = "<?xml version='1.0' encoding='UTF-8'?><error errorCode='404' detailCode='-1'><description></description></error>";

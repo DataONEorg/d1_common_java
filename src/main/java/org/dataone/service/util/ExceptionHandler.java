@@ -27,7 +27,6 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.TreeMap;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -704,7 +703,6 @@ public class ExceptionHandler {
      *            the stream to deserialize from
      * @throws ServiceFailure
      */
-    @SuppressWarnings("rawtypes")
     protected static <T> T deserializeServiceType(Class<T> domainClass, InputStream is)
     throws ServiceFailure 
     {

@@ -32,10 +32,6 @@ import java.io.PushbackInputStream;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.tools.ant.filters.StringInputStream;
-import org.codehaus.plexus.util.StringOutputStream;
-import org.dataone.service.types.v1.Identifier;
-import org.dataone.service.util.ExceptionalInputStream;
-import org.dataone.service.util.TypeMarshaller;
 import org.jibx.runtime.JiBXException;
 import org.junit.Ignore;
 import org.junit.Test;

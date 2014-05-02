@@ -22,10 +22,10 @@
 
 package org.dataone.service.util;
 
-import org.joda.time.format.ISODateTimeFormat;
-import org.joda.time.DateTime;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *

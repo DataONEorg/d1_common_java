@@ -147,8 +147,8 @@ public class Settings {
 			testSettings = myClassLoader.loadClass("org.dataone.configuration.TestSettings");
  	
 			try {
-				Method getTestConfigurations = testSettings.getMethod("getConfiguration", null);
-				configuration = (CompositeConfiguration) getTestConfigurations.invoke(null, null);
+				Method getTestConfigurations = testSettings.getMethod("getConfiguration", (Class<?>[]) null);
+				configuration = (CompositeConfiguration) getTestConfigurations.invoke(null, (Object[]) null);
 				
 			// problems loading configurations when in test situation are not
 			// recoverable, because we do not want to revert to non-test (production)

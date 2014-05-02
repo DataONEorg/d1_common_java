@@ -41,7 +41,7 @@ import org.junit.Test;
 public class IdentifierEncodingTestCase 
 {
 	private static Logger logger = Logger.getLogger(IdentifierEncodingTestCase.class);
-	private static boolean verbose = true;
+//	private static boolean verbose = true;
 	
 	private static String testUnicodeIdentifiersFile = "/org/dataone/service/encodingTestSet/testUnicodeStrings.utf8.txt";
 	private static HashMap<String,String> StandardTests = new HashMap<String,String>();

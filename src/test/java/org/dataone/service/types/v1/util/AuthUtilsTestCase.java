@@ -3,7 +3,6 @@ package org.dataone.service.types.v1.util;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -18,7 +17,6 @@ import org.dataone.service.util.Constants;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.emory.mathcs.backport.java.util.Arrays;
 
 public class AuthUtilsTestCase {
 
@@ -207,9 +205,9 @@ public class AuthUtilsTestCase {
 		ses.setSubject(publick);
 
 		SubjectInfo si = new SubjectInfo();
-		Person x = buildTestPerson("x");
-		Person y = buildTestPerson("y");
-		Person z = buildTestPerson("z"); 
+//		Person x = buildTestPerson("x");
+//		Person y = buildTestPerson("y");
+//		Person z = buildTestPerson("z"); 
 
 		ses.setSubjectInfo(si);
 		Set<Subject> subjectSet = AuthUtils.authorizedClientSubjects(ses);

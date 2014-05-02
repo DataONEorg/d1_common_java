@@ -22,7 +22,9 @@
 
 package org.dataone.service.util;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -33,7 +35,6 @@ import org.dataone.service.types.v1.Node;
 import org.dataone.service.types.v1.ObjectList;
 import org.dataone.service.types.v1.SystemMetadata;
 import org.jibx.runtime.JiBXException;
-import org.junit.Ignore;
 import org.junit.Test;
 
 
@@ -49,7 +50,7 @@ public class TypeMarshallerTestCase {
     public void deserializeSystemMetadata() {
         try {
             InputStream is = this.getClass().getResourceAsStream("/org/dataone/service/samples/v1/systemMetadataSample1.xml");
-            SystemMetadata systemMetadata = TypeMarshaller.unmarshalTypeFromStream(SystemMetadata.class, is);
+            TypeMarshaller.unmarshalTypeFromStream(SystemMetadata.class, is);
         } catch (IOException ex) {
             fail("Test misconfiguration" +  ex);
         } catch (InstantiationException ex) {
@@ -66,7 +67,7 @@ public class TypeMarshallerTestCase {
     public void deserializeNode() {
         try {
             InputStream is = this.getClass().getResourceAsStream("/org/dataone/service/samples/v1/mnNode1.xml");
-            Node node = TypeMarshaller.unmarshalTypeFromStream(Node.class, is);
+            TypeMarshaller.unmarshalTypeFromStream(Node.class, is);
         } catch (IOException ex) {
             fail("Test misconfiguration" +  ex);
         } catch (InstantiationException ex) {

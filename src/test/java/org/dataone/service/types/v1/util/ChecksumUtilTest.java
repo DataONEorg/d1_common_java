@@ -43,7 +43,7 @@ public class ChecksumUtilTest {
 	public final void testChecksumBadAlgorithm() {
 		byte[] ba = {'a','b','c','d','e'};
 		try {
-			Checksum cs = ChecksumUtil.checksum(ba, "BEEP");
+			ChecksumUtil.checksum(ba, "BEEP");
 			fail("Should have thrown exception");
 		} catch (NoSuchAlgorithmException e) {
 			
@@ -53,8 +53,8 @@ public class ChecksumUtilTest {
 	
 	@Test
 	public final void testChecksumNullParameter() {
-				try {
-			Checksum cs = ChecksumUtil.checksum((byte[]) null, "BEEP");
+		try {
+			ChecksumUtil.checksum((byte[]) null, "BEEP");
 			fail("Should have thrown exception");
 		} catch (NoSuchAlgorithmException e) {
 			System.out.println("exception thrown: " + e.getClass().getCanonicalName());

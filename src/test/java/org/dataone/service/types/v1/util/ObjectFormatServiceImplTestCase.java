@@ -25,14 +25,11 @@ package org.dataone.service.types.v1.util;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import org.dataone.service.exceptions.InsufficientResources;
-import org.dataone.service.exceptions.InvalidRequest;
 import org.dataone.service.exceptions.NotFound;
 import org.dataone.service.exceptions.NotImplemented;
 import org.dataone.service.exceptions.ServiceFailure;
 import org.dataone.service.types.v1.ObjectFormatIdentifier;
 import org.dataone.service.types.v1.ObjectFormatList;
-
 import org.junit.Test;
 
 /**
@@ -108,7 +105,6 @@ public class ObjectFormatServiceImplTestCase {
   	fmtid.setValue(badFormat);
 
 	    try {
-	      String result = 
 	      	ObjectFormatServiceImpl.getInstance().getFormat(fmtid).getFormatId().getValue();
       
 	    } catch (Exception e) {

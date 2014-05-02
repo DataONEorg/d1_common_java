@@ -25,15 +25,13 @@ import java.io.InputStream;
 import java.util.HashMap;
 
 import org.apache.log4j.Logger;
-import org.dataone.service.util.TypeMarshaller;
-import org.dataone.service.exceptions.InsufficientResources;
-import org.dataone.service.exceptions.InvalidRequest;
 import org.dataone.service.exceptions.NotFound;
 import org.dataone.service.exceptions.NotImplemented;
 import org.dataone.service.exceptions.ServiceFailure;
 import org.dataone.service.types.v1.ObjectFormat;
 import org.dataone.service.types.v1.ObjectFormatIdentifier;
 import org.dataone.service.types.v1.ObjectFormatList;
+import org.dataone.service.util.TypeMarshaller;
 import org.jibx.runtime.JiBXException;
 
 public class ObjectFormatServiceImpl {

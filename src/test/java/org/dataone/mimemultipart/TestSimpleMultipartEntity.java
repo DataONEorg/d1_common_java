@@ -42,7 +42,7 @@ import org.junit.Test;
 
 public class TestSimpleMultipartEntity {
 	private static Log log = LogFactory.getLog(TestSimpleMultipartEntity.class);
-	private static final String echoServiceUrl = "http://dev-testing.dataone.org/testsvc/echo";
+//	private static final String echoServiceUrl = "http://dev-testing.dataone.org/testsvc/echo";
 	private static final String echoAndParseServiceUrl = "http://dev-testing.dataone.org/testsvc/echomm";
 	
 	@Test
@@ -115,7 +115,6 @@ public class TestSimpleMultipartEntity {
 		
 		HttpResponse res = doPost(echoAndParseServiceUrl,smpe);
 		smpe.cleanupTempFiles();
-		int code = res.getStatusLine().getStatusCode();
 		InputStream content = res.getEntity().getContent();
 		String echoed = IOUtils.toString(content);
 		log.info("Echoed content:");
@@ -140,7 +139,6 @@ public class TestSimpleMultipartEntity {
 		
 		HttpResponse res = doPost(echoAndParseServiceUrl,smpe);
 		smpe.cleanupTempFiles();
-		int code = res.getStatusLine().getStatusCode();
 		InputStream content = res.getEntity().getContent();
 		String echoed = IOUtils.toString(content);
 		log.info("Echoed content:");
@@ -159,7 +157,6 @@ public class TestSimpleMultipartEntity {
 		smpe.addFilePart("testTwo", is);
 		
 		HttpResponse res = doPost(echoAndParseServiceUrl,smpe);
-		int code = res.getStatusLine().getStatusCode();
 		InputStream content = res.getEntity().getContent();
 		String echoed = IOUtils.toString(content);
 		log.info("Echoed content:");
@@ -178,7 +175,6 @@ public class TestSimpleMultipartEntity {
 		
 		HttpResponse res = doPost(echoAndParseServiceUrl,smpe);
 		smpe.cleanupTempFiles();
-		int code = res.getStatusLine().getStatusCode();
 		InputStream content = res.getEntity().getContent();
 		String echoed = IOUtils.toString(content);
 		log.info("Echoed content:");

@@ -38,7 +38,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.dataone.service.types.v1.AccessRule;
 import org.dataone.service.types.v1.Identifier;
@@ -129,7 +128,6 @@ public class TypeCompareUtil {
         for (String prop : propKeys) {
             sb = new StringBuffer();
             sb.append(prop);
-            boolean difference = false;
             List values = new LinkedList<String>();
             for (String nodeKey : nodeKeys) {
                 sb.append("\t");

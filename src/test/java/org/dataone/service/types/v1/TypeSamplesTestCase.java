@@ -30,8 +30,6 @@ import java.io.StringWriter;
 import java.math.BigInteger;
 import java.net.URL;
 import java.net.URLConnection;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -279,7 +277,7 @@ public class TypeSamplesTestCase {
 
             DOMSource domSource = new DOMSource(document);
             if (domSource == null) {
-                throw new Exception("TEI SOURCE IS NULL");
+                throw new Exception("THE SOURCE IS NULL");
             }
             validator.validate(domSource);
 

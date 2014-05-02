@@ -40,7 +40,7 @@ import org.junit.Test;
 
 public class MultipartTransmissionTestCase {
 	private static Log log = LogFactory.getLog(MultipartTransmissionTestCase.class);
-	private static final String echoServiceUrl = "http://dev-testing.dataone.org/testsvc/echo";
+//	private static final String echoServiceUrl = "http://dev-testing.dataone.org/testsvc/echo";
 	private static final String echoAndParseServiceUrl = "http://dev-testing.dataone.org/testsvc/echomm";
 	
 	@Test
@@ -52,7 +52,6 @@ public class MultipartTransmissionTestCase {
 		mprh.addParamPart("testTwo", "flip-flap-flop");
 		
 		HttpResponse res = mprh.executeRequest();
-		int code = res.getStatusLine().getStatusCode();
 		InputStream content = res.getEntity().getContent();
 		String echoed = IOUtils.toString(content);
 		log.info("Echoed content:");
@@ -76,7 +75,6 @@ public class MultipartTransmissionTestCase {
 		mprh.addFilePart("testTwo",outputFile);
 		
 		HttpResponse res = mprh.executeRequest();
-		int code = res.getStatusLine().getStatusCode();
 		InputStream content = res.getEntity().getContent();
 		String echoed = IOUtils.toString(content);
 		log.info("Echoed content:");
@@ -95,7 +93,6 @@ public class MultipartTransmissionTestCase {
 		mprh.addFilePart("testTwo",is);
 		
 		HttpResponse res = mprh.executeRequest();
-		int code = res.getStatusLine().getStatusCode();
 		InputStream content = res.getEntity().getContent();
 		String echoed = IOUtils.toString(content);
 		log.info("Echoed content:");
@@ -113,7 +110,6 @@ public class MultipartTransmissionTestCase {
 		mprh.addFilePart("testTwo","flip-flap-flop");
 		
 		HttpResponse res = mprh.executeRequest();
-		int code = res.getStatusLine().getStatusCode();
 		InputStream content = res.getEntity().getContent();
 		String echoed = IOUtils.toString(content);
 		log.info("Echoed content:");
