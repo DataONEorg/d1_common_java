@@ -174,7 +174,6 @@ public class MultipartRequestResolver {
                             fileItem.deleteOnExit();
                             fileItem.setWritable(true);
                             fileItem.setReadable(true);
-                            FileOutputStream fileItemOutput = new FileOutputStream(fileItem);
                             diskItem.write(fileItem);
                         }
 
