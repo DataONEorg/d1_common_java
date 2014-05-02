@@ -137,11 +137,11 @@ public class MultipartRequestResolver {
         Map<String, List<String>> mpParams = new HashMap<String, List<String>>();
         Map<String, File> mpFiles = new HashMap<String, File>();
         MultipartRequest multipartRequest = new MultipartRequest(request, mpFiles, mpParams);
-        if (!this.isMultipartContent(request)) {
+        if (!isMultipartContent(request)) {
             return multipartRequest;
         }
-        List /* FileItem */ items = upload.parseRequest(request);
-        Iterator iter = items.iterator();
+        List<?> /*FileItem */ items = upload.parseRequest(request);
+        Iterator<?> iter = items.iterator();
         while (iter.hasNext()) {
             FileItem item = (FileItem) iter.next();
 
@@ -151,7 +151,7 @@ public class MultipartRequestResolver {
                 if (mpParams.containsKey(name)) {
                     mpParams.get(name).add(value);
                 } else {
-                    List values = new ArrayList();
+                    List<String> values = new ArrayList<String>();
                     values.add(value);
                     mpParams.put(name, values);
                 }
@@ -174,8 +174,9 @@ public class MultipartRequestResolver {
                             fileItem.deleteOnExit();
                             fileItem.setWritable(true);
                             fileItem.setReadable(true);
-                            FileOutputStream fileItemOutput = new FileOutputStream(fileItem);
+//                            FileOutputStream fileItemOutput = new FileOutputStream(fileItem);
                             diskItem.write(fileItem);
+                            
                         }
 
                         mpFiles.put(fileKey, fileItem);
@@ -190,9 +191,11 @@ public class MultipartRequestResolver {
         return multipartRequest;
     }
 
-    public static final boolean isMultipartContent(
-            HttpServletRequest request) {
-        if ("post".equals(request.getMethod().toLowerCase()) || "put".equals(request.getMethod().toLowerCase())) {
+    public static final boolean isMultipartContent(HttpServletRequest request) 
+    {
+        if ("post".equals(request.getMethod().toLowerCase()) || 
+            "put".equals(request.getMethod().toLowerCase())) {
+        	
             String contentType = request.getContentType();
             if (contentType == null) {
                 return false;
