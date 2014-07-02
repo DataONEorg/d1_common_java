@@ -1,4 +1,4 @@
-package org.dataone.service.types;
+package org.dataone.service.types.v1.util;
 
 import static org.junit.Assert.*;
 
@@ -18,6 +18,7 @@ import org.dataone.service.types.v1.ReplicationStatus;
 import org.dataone.service.types.v1.Subject;
 import org.dataone.service.types.v1.SystemMetadata;
 import org.dataone.service.types.v1.util.AccessUtil;
+import org.dataone.service.types.v1.util.TypeCompareUtil;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -20,7 +20,7 @@
  * $Id$
  */
 
-package org.dataone.service.types;
+package org.dataone.service.types.v1.util;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
