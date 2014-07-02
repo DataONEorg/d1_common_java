@@ -1,0 +1,22 @@
+<binding xmlns:d1_v2.0="http://ns.dataone.org/service/types/v2.0" xmlns:d1="http://ns.dataone.org/service/types/v1" name="binding_v2_0" package="org.dataone.service.types.v2" trim-whitespace="true">
+  <namespace uri="http://ns.dataone.org/service/types/v2.0" prefix="d1_v2.0"/>
+  <include path="binding_v1.xml" precompiled="true"/>
+  <include path="binding_v1_1.xml" precompiled="true"/>
+  <mapping abstract="true" type-name="d1_v2.0:SystemMetadata" class="org.dataone.service.types.v2.SystemMetadata">
+    <structure map-as="d1:SystemMetadata"/>
+    <structure map-as="d1:Identifier" get-method="getSeriesId" set-method="setSeriesId" name="seriesId"/>
+  </mapping>
+  <mapping class="org.dataone.service.types.v2.SystemMetadata" name="systemMetadata" ns="http://ns.dataone.org/service/types/v2.0">
+    <structure map-as="d1_v2.0:SystemMetadata"/>
+  </mapping>
+  <mapping abstract="true" type-name="d1_v2.0:OptionList" class="org.dataone.service.types.v2.OptionList">
+    <collection get-method="getOptionList" set-method="setOptionList" usage="optional" create-type="java.util.ArrayList">
+      <value style="element" name="option" type="java.lang.String"/>
+    </collection>
+    <value style="attribute" name="key" get-method="getKey" set-method="setKey"/>
+    <value style="attribute" name="description" get-method="getDescription" set-method="setDescription"/>
+  </mapping>
+  <mapping class="org.dataone.service.types.v2.OptionList" name="optionList" ns="http://ns.dataone.org/service/types/v2.0">
+    <structure map-as="d1_v2.0:OptionList"/>
+  </mapping>
+</binding>

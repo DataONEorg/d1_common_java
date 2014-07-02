@@ -93,6 +93,32 @@
             <!-- <arg value="v1" /> -->
             <!-- <arg value="v1.1" /> -->
         </java>
+    	
+    	<java classname="org.jibx.schema.codegen.CodeGen" fork="yes"
+	               failonerror="true">
+	            <classpath>
+	                <pathelement path="${compile_classpath}"/>
+	                <pathelement path="${java.class.path}" />
+	            </classpath>
+
+	            <arg value="-b" />
+	            <arg value="binding_v2_0.xml" />
+	            <arg value="-c" />
+	            <arg value="${basedir}/src/main/resources/org/dataone/service/resources/config/v2/jibxConfig.xml" />
+	            <arg value="-s" />
+	            <!-- the repository url should be used for development cycles -->
+	            <arg value="https://repository.dataone.org/software/cicore/trunk/d1_schemas/" />
+	            <!-- the ns url should be used for production releases -->
+				<!-- <arg value="http://ns.dataone.org/service/types" />  -->
+	            <arg value="-t"/>
+	            <arg value="${basedir}/src/main/java"/>
+    			<arg value="-i"/>
+    			<arg value="binding_v1.xml"/>
+    			<arg value="-i"/>
+    		    <arg value="binding_v1_1.xml"/>
+	            <arg value="dataoneTypes_v2.0.xsd" />
+	            
+	        </java>
 
     </target>
 </project>
