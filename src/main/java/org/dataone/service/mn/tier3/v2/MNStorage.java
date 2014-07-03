@@ -66,13 +66,13 @@ public interface MNStorage {
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_storage.delete
      */
-    public Identifier delete(Identifier pid)
+    public Identifier delete(Identifier id)
     throws InvalidToken, ServiceFailure, NotAuthorized, NotFound, NotImplemented;
 
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_storage.archive
      */
-    public Identifier archive(Identifier pid)
+    public Identifier archive(Identifier id)
     throws InvalidToken, ServiceFailure, NotAuthorized, NotFound, NotImplemented;    
     
     /**

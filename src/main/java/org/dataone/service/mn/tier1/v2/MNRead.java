@@ -54,7 +54,7 @@ public interface MNRead {
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_read.listObjects
      *
      */
-    public InputStream get(Identifier pid)
+    public InputStream get(Identifier id)
     throws InvalidToken, NotAuthorized, NotImplemented, ServiceFailure, 
         NotFound, InsufficientResources;
 
@@ -62,14 +62,14 @@ public interface MNRead {
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_read.getSystemMetadata
      */
-    public SystemMetadata getSystemMetadata(Identifier pid)
+    public SystemMetadata getSystemMetadata(Identifier id)
     throws InvalidToken, NotAuthorized, NotImplemented, ServiceFailure, NotFound;
 
 
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_read.describe
      */
-    public DescribeResponse describe(Identifier pid)
+    public DescribeResponse describe(Identifier id)
     throws InvalidToken, NotAuthorized, NotImplemented, ServiceFailure, NotFound;
     
 
@@ -84,7 +84,7 @@ public interface MNRead {
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_read.listObjects
      */
     public ObjectList listObjects(Date fromDate, 
-            Date toDate, ObjectFormatIdentifier formatid, Boolean replicaStatus,
+            Date toDate, ObjectFormatIdentifier formatid, Identifier identifier, Boolean replicaStatus,
             Integer start, Integer count) 
     throws InvalidRequest, InvalidToken, NotAuthorized, NotImplemented, ServiceFailure;
 

@@ -52,27 +52,27 @@ public interface CNRead
      * InputStream is the Java native version of D1's OctetStream
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNRead.get
      */
-    public InputStream get(Identifier pid)
+    public InputStream get(Identifier id)
         throws InvalidToken, ServiceFailure, NotAuthorized, NotFound, NotImplemented;
 
     
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNRead.getSystemMetadata
      */
-    public SystemMetadata getSystemMetadata(Identifier pid)
+    public SystemMetadata getSystemMetadata(Identifier id)
         throws InvalidToken, ServiceFailure, NotAuthorized, NotFound, NotImplemented;
     
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_read.describe
      */
-    public DescribeResponse describe(Identifier pid)
+    public DescribeResponse describe(Identifier id)
     throws InvalidToken, NotAuthorized, NotImplemented, ServiceFailure, NotFound;
     
 
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNRead.resolve
      */
-    public ObjectLocationList resolve(Identifier pid)
+    public ObjectLocationList resolve(Identifier id)
         throws InvalidToken, ServiceFailure, NotAuthorized, NotFound, NotImplemented;
     
     
@@ -86,7 +86,7 @@ public interface CNRead
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNRead.listObjects
      */
     public ObjectList listObjects(Date fromDate, 
-            Date toDate, ObjectFormatIdentifier formatId, Boolean replicaStatus,
+            Date toDate, ObjectFormatIdentifier formatId, Identifier identifier, Boolean replicaStatus,
             Integer start, Integer count) 
     throws InvalidRequest, InvalidToken, NotAuthorized, NotImplemented, ServiceFailure;
     

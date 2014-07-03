@@ -98,7 +98,7 @@ public interface CNCore
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.reserveIdentifier
      */
-    public Identifier reserveIdentifier(Identifier pid)
+    public Identifier reserveIdentifier(Identifier id)
     	throws InvalidToken, ServiceFailure,
             NotAuthorized, IdentifierNotUnique, NotImplemented, InvalidRequest;
     
@@ -112,7 +112,7 @@ public interface CNCore
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.hasReservation
      */
-    public boolean hasReservation(Subject subject, Identifier pid)
+    public boolean hasReservation(Subject subject, Identifier id)
     	throws InvalidToken, ServiceFailure,  NotFound,
             NotAuthorized, NotImplemented, InvalidRequest, IdentifierNotUnique;
 
@@ -143,13 +143,13 @@ public interface CNCore
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.delete
      */
-    public Identifier delete(Identifier pid)
+    public Identifier delete(Identifier id)
     throws InvalidToken, ServiceFailure, NotAuthorized, NotFound, NotImplemented;
 
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.archive
      */
-    public Identifier archive(Identifier pid)
+    public Identifier archive(Identifier id)
     throws InvalidToken, ServiceFailure, NotAuthorized, NotFound, NotImplemented;
     
     
