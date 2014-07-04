@@ -43,6 +43,9 @@ import org.dataone.service.types.v1.Identifier;
  */
 public class SystemMetadata extends org.dataone.service.types.v1.SystemMetadata
 {
+
+	private static final long serialVersionUID = 10000000;
+
     private Identifier seriesId;
 
     /** 

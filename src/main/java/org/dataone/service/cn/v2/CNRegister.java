@@ -28,7 +28,6 @@ import org.dataone.service.exceptions.NotImplemented;
 import org.dataone.service.exceptions.ServiceFailure;
 import org.dataone.service.exceptions.IdentifierNotUnique;
 
-import org.dataone.service.types.v1.Session;
 import org.dataone.service.types.v1.Node;
 import org.dataone.service.types.v1.NodeReference;
 
