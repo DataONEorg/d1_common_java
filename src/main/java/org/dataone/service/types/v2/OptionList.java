@@ -1,6 +1,7 @@
 
 package org.dataone.service.types.v2;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,8 +20,9 @@ import java.util.List;
  * &lt;/xs:complexType>
  * </pre>
  */
-public class OptionList
+public class OptionList implements Serializable
 {
+    private static final long serialVersionUID = 10000000;
     private List<String> optionList = new ArrayList<String>();
     private String key;
     private String description;
@@ -49,6 +51,50 @@ public class OptionList
      */
     public void setOptionList(List<String> list) {
         optionList = list;
+    }
+
+    /** 
+     * Get the number of 'option' element items.
+     * @return count
+     */
+    public int sizeOptionList() {
+        if (optionList == null) {
+            optionList = new ArrayList<String>();
+        }
+        return optionList.size();
+    }
+
+    /** 
+     * Add a 'option' element item.
+     * @param item
+     */
+    public void addOption(String item) {
+        if (optionList == null) {
+            optionList = new ArrayList<String>();
+        }
+        optionList.add(item);
+    }
+
+    /** 
+     * Get 'option' element item by position.
+     * @return item
+     * @param index
+     */
+    public String getOption(int index) {
+        if (optionList == null) {
+            optionList = new ArrayList<String>();
+        }
+        return optionList.get(index);
+    }
+
+    /** 
+     * Remove all 'option' element items.
+     */
+    public void clearOptionList() {
+        if (optionList == null) {
+            optionList = new ArrayList<String>();
+        }
+        optionList.clear();
     }
 
     /** 

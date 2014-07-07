@@ -1,6 +1,7 @@
 
 package org.dataone.service.types.v2;
 
+import java.io.Serializable;
 import org.dataone.service.types.v1.Identifier;
 
 /** 
@@ -42,10 +43,9 @@ import org.dataone.service.types.v1.Identifier;
  * </pre>
  */
 public class SystemMetadata extends org.dataone.service.types.v1.SystemMetadata
+    implements Serializable
 {
-
-	private static final long serialVersionUID = 10000000;
-
+    private static final long serialVersionUID = 10000000;
     private Identifier seriesId;
 
     /** 

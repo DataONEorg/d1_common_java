@@ -1,5 +1,6 @@
-<binding xmlns:d1_v1.1="http://ns.dataone.org/service/types/v1.1" trim-whitespace="true">
+<binding xmlns:d1_v1.1="http://ns.dataone.org/service/types/v1.1" name="binding_v1_1" package="org.dataone.service.types.v1_1" trim-whitespace="true">
   <namespace uri="http://ns.dataone.org/service/types/v1.1" prefix="d1_v1.1"/>
+  <include path="binding_v1.xml" precompiled="true"/>
   <mapping abstract="true" type-name="d1_v1.1:QueryEngineDescription" class="org.dataone.service.types.v1_1.QueryEngineDescription">
     <value style="element" name="queryEngineVersion" get-method="getQueryEngineVersion" set-method="setQueryEngineVersion"/>
     <value style="element" name="querySchemaVersion" get-method="getQuerySchemaVersion" set-method="setQuerySchemaVersion" usage="optional"/>

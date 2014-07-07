@@ -1,11 +1,10 @@
-<binding xmlns:d1="http://ns.dataone.org/service/types/v1" name="binding_v1" package="org.dataone.service.types" trim-whitespace="true">
+<binding xmlns:d1="http://ns.dataone.org/service/types/v1" name="binding_v1" package="org.dataone.service.types.v1" trim-whitespace="true">
   <namespace uri="http://ns.dataone.org/service/types/v1" prefix="d1"/>
   <format label="d1:Event" type="org.dataone.service.types.v1.Event" enum-value-method="xmlValue"/>
   <format label="d1:NodeState" type="org.dataone.service.types.v1.NodeState" enum-value-method="xmlValue"/>
   <format label="d1:NodeType" type="org.dataone.service.types.v1.NodeType" enum-value-method="xmlValue"/>
   <format label="d1:Permission" type="org.dataone.service.types.v1.Permission" enum-value-method="xmlValue"/>
   <format label="d1:ReplicationStatus" type="org.dataone.service.types.v1.ReplicationStatus" enum-value-method="xmlValue"/>
-  <include path="binding_v1_1.xml"/>
   <mapping abstract="true" type-name="d1:ObjectFormatIdentifier" class="org.dataone.service.types.v1.ObjectFormatIdentifier">
     <value style="text" get-method="getValue" set-method="setValue"/>
   </mapping>

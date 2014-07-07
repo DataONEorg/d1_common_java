@@ -1,6 +1,8 @@
 
 package org.dataone.service.types.v2;
 
+import java.io.Serializable;
+
 /** 
  * A set of values that describe a member or coordinating
  node, its Internet location, and the services it supports. Several nodes
@@ -19,8 +21,10 @@ package org.dataone.service.types.v2;
  * &lt;/xs:complexType>
  * </pre>
  */
-public class Node extends org.dataone.service.types.v1.Node
+public class Node extends org.dataone.service.types.v1.Node implements
+    Serializable
 {
+    private static final long serialVersionUID = 10000000;
     private String serviceExtensions;
 
     /** 
