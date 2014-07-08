@@ -148,6 +148,7 @@ public interface CNCore
      
      /**
       * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.setObsoletedBy
+     * @deprecated the Authoritative Member Node is responsible for obsoleting content
       */
      public boolean setObsoletedBy(Identifier pid,
    			Identifier obsoletedByPid, long serialVersion)
@@ -162,6 +163,7 @@ public interface CNCore
 
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.archive
+     * @deprecated the Authoritative Member Node is responsible for archiving content
      */
     public Identifier archive(Identifier id)
     throws InvalidToken, ServiceFailure, NotAuthorized, NotFound, NotImplemented;
