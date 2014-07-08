@@ -54,6 +54,7 @@ public interface CNReplication {
 
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNReplication.setReplicationPolicy
+     * @deprecated use CNCore.updateSystemMetadata()
      */
     public boolean setReplicationPolicy(Identifier pid, 
         ReplicationPolicy policy, long serialVersion) 

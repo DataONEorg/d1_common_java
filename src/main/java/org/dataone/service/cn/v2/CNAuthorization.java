@@ -44,6 +44,8 @@ public interface CNAuthorization {
 
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNAuthorization.setRightsHolder
+     * @deprecated use CNCore.updateSystemMetadata()
+
      */
     public Identifier setRightsHolder(Identifier id, Subject userId, 
          long serialVersion)
@@ -59,6 +61,7 @@ public interface CNAuthorization {
 
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNAuthorization.setAccessPolicy
+     * @deprecated use CNCore.updateSystemMetadata()
      */
     public boolean setAccessPolicy(Identifier id, 
         AccessPolicy policy, long serialVersion) 
