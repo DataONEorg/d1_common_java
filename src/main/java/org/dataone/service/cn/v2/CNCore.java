@@ -131,6 +131,20 @@ public interface CNCore
      public Identifier registerSystemMetadata(Identifier pid,
         SystemMetadata sysmeta) throws NotImplemented, NotAuthorized,
         ServiceFailure, InvalidRequest, InvalidSystemMetadata, InvalidToken;
+
+     /**
+      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.updateSystemMetadata
+      */
+      public boolean updateSystemMetadata(Identifier pid,
+         SystemMetadata sysmeta) throws NotImplemented, NotAuthorized,
+         ServiceFailure, InvalidRequest, InvalidSystemMetadata, InvalidToken;
+
+      /**
+       * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.systemMetadataChanged
+       */
+      public boolean systemMetadataChanged(Identifier id, long serialVersion,
+      	Date dateSystemMetadataLastModified)
+      throws InvalidToken, ServiceFailure, NotAuthorized, NotImplemented, InvalidRequest;
      
      /**
       * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.setObsoletedBy
