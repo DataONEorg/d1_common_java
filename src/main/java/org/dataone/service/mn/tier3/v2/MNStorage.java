@@ -62,6 +62,12 @@ public interface MNStorage {
         InvalidToken, NotAuthorized, NotImplemented, ServiceFailure, UnsupportedType,
         NotFound;
 
+    /**
+     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_storage.updateSystemMetadata
+     */
+     public boolean updateSystemMetadata(Identifier pid,
+        SystemMetadata sysmeta) throws NotImplemented, NotAuthorized,
+        ServiceFailure, InvalidRequest, InvalidSystemMetadata, InvalidToken;
     
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_storage.delete
