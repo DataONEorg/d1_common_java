@@ -13,6 +13,11 @@
     <structure map-as="d1:Node"/>
     <value style="element" name="serviceExtensions" get-method="getServiceExtensions" set-method="setServiceExtensions"/>
   </mapping>
+  <mapping abstract="true" type-name="d1_v2.0:ObjectFormat" class="org.dataone.service.types.v2.ObjectFormat">
+    <structure map-as="d1:ObjectFormat"/>
+    <value style="element" name="mimeType" get-method="getMimeType" set-method="setMimeType"/>
+    <value style="element" name="extension" get-method="getExtension" set-method="setExtension"/>
+  </mapping>
   <mapping abstract="true" type-name="d1_v2.0:OptionList" class="org.dataone.service.types.v2.OptionList">
     <collection get-method="getOptionList" set-method="setOptionList" usage="optional" create-type="java.util.ArrayList">
       <value style="element" name="option" type="java.lang.String"/>
