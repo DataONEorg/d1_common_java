@@ -25,8 +25,8 @@
     <structure map-as="d1_v2.0:ObjectFormat"/>
   </mapping>
   <mapping abstract="true" type-name="d1_v2.0:ObjectFormatList" class="org.dataone.service.types.v2.ObjectFormatList">
-    <structure map-as="d1:ObjectFormatList"/>
-    <collection get-method="getObjectFormatList1s" set-method="setObjectFormatList1s" create-type="java.util.ArrayList">
+    <structure map-as="d1:Slice"/>
+    <collection get-method="getObjectFormatList" set-method="setObjectFormatList" create-type="java.util.ArrayList">
       <structure map-as="d1_v2.0:ObjectFormat" name="objectFormat"/>
     </collection>
   </mapping>
