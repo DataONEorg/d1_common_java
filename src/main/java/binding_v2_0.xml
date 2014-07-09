@@ -33,6 +33,28 @@
   <mapping class="org.dataone.service.types.v2.ObjectFormatList" name="objectFormatList" ns="http://ns.dataone.org/service/types/v2.0">
     <structure map-as="d1_v2.0:ObjectFormatList"/>
   </mapping>
+  <mapping abstract="true" type-name="d1_v2.0:Log" class="org.dataone.service.types.v2.Log">
+    <structure map-as="d1:Slice"/>
+    <collection get-method="getLogEntryList" set-method="setLogEntryList" usage="optional" create-type="java.util.ArrayList">
+      <structure map-as="d1_v2.0:LogEntry" name="logEntry"/>
+    </collection>
+  </mapping>
+  <mapping class="org.dataone.service.types.v2.Log" name="log" ns="http://ns.dataone.org/service/types/v2.0">
+    <structure map-as="d1_v2.0:Log"/>
+  </mapping>
+  <mapping abstract="true" type-name="d1_v2.0:LogEntry" class="org.dataone.service.types.v2.LogEntry">
+    <value style="element" name="entryId" get-method="getEntryId" set-method="setEntryId"/>
+    <structure map-as="d1:Identifier" get-method="getIdentifier" set-method="setIdentifier" name="identifier"/>
+    <value style="element" name="ipAddress" get-method="getIpAddress" set-method="setIpAddress"/>
+    <value style="element" name="userAgent" get-method="getUserAgent" set-method="setUserAgent"/>
+    <structure map-as="d1:Subject" get-method="getSubject" set-method="setSubject" name="subject"/>
+    <value style="element" name="event" get-method="getEvent" set-method="setEvent"/>
+    <value style="element" name="dateLogged" get-method="getDateLogged" set-method="setDateLogged"/>
+    <structure map-as="d1:NodeReference" get-method="getNodeIdentifier" set-method="setNodeIdentifier" name="nodeIdentifier"/>
+  </mapping>
+  <mapping class="org.dataone.service.types.v2.LogEntry" name="logEntry" ns="http://ns.dataone.org/service/types/v2.0">
+    <structure map-as="d1_v2.0:LogEntry"/>
+  </mapping>
   <mapping abstract="true" type-name="d1_v2.0:OptionList" class="org.dataone.service.types.v2.OptionList">
     <collection get-method="getOptionList" set-method="setOptionList" usage="optional" create-type="java.util.ArrayList">
       <value style="element" name="option" type="java.lang.String"/>

@@ -28,7 +28,7 @@
 		<schema-type type-name="long" java-class="java.math.BigInteger"
 			serializer="org.dataone.service.util.BigIntegerMarshaller.serializeBigInteger"
 			deserializer="org.dataone.service.util.BigIntegerMarshaller.deserializeBigInteger" />
-		<schema name="dataoneTypes_v2.0.xsd" includes="SystemMetadata Node OptionList ObjectFormat ObjectFormatList" />
+		<schema name="dataoneTypes_v2.0.xsd" includes="SystemMetadata Node OptionList ObjectFormat ObjectFormatList LogEntry Log" />
 		
 	</schema-set>
 
