@@ -31,7 +31,6 @@ import org.dataone.service.exceptions.ServiceFailure;
 
 import org.dataone.service.types.v1.Group;
 import org.dataone.service.types.v1.Person;
-import org.dataone.service.types.v1.Session;
 import org.dataone.service.types.v1.Subject;
 import org.dataone.service.types.v1.SubjectInfo;
 
