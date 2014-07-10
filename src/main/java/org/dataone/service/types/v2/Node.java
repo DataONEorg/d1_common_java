@@ -2,6 +2,8 @@
 package org.dataone.service.types.v2;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /** 
  * A set of values that describe a member or coordinating
@@ -15,6 +17,7 @@ import java.io.Serializable;
  *     &lt;xs:extension base="ns1:Node">
  *       &lt;xs:sequence>
  *         &lt;xs:element type="xs:string" name="serviceExtensions"/>
+ *         &lt;xs:element type="ns:Property" name="property" minOccurs="0" maxOccurs="unbounded"/>
  *       &lt;/xs:sequence>
  *     &lt;/xs:extension>
  *   &lt;/xs:complexContent>
@@ -26,6 +29,7 @@ public class Node extends org.dataone.service.types.v1.Node implements
 {
     private static final long serialVersionUID = 10000000;
     private String serviceExtensions;
+    private List<Property> propertyList = new ArrayList<Property>();
 
     /** 
      * Get the 'serviceExtensions' element value. TODO: define the content of this?
@@ -43,5 +47,67 @@ public class Node extends org.dataone.service.types.v1.Node implements
      */
     public void setServiceExtensions(String serviceExtensions) {
         this.serviceExtensions = serviceExtensions;
+    }
+
+    /** 
+     * Get the list of 'property' element items. Allows additional attributes be added to the Node document as needed
+     * 
+     * @return list
+     */
+    public List<Property> getPropertyList() {
+        return propertyList;
+    }
+
+    /** 
+     * Set the list of 'property' element items. Allows additional attributes be added to the Node document as needed
+     * 
+     * @param list
+     */
+    public void setPropertyList(List<Property> list) {
+        propertyList = list;
+    }
+
+    /** 
+     * Get the number of 'property' element items.
+     * @return count
+     */
+    public int sizePropertyList() {
+        if (propertyList == null) {
+            propertyList = new ArrayList<Property>();
+        }
+        return propertyList.size();
+    }
+
+    /** 
+     * Add a 'property' element item.
+     * @param item
+     */
+    public void addProperty(Property item) {
+        if (propertyList == null) {
+            propertyList = new ArrayList<Property>();
+        }
+        propertyList.add(item);
+    }
+
+    /** 
+     * Get 'property' element item by position.
+     * @return item
+     * @param index
+     */
+    public Property getProperty(int index) {
+        if (propertyList == null) {
+            propertyList = new ArrayList<Property>();
+        }
+        return propertyList.get(index);
+    }
+
+    /** 
+     * Remove all 'property' element items.
+     */
+    public void clearPropertyList() {
+        if (propertyList == null) {
+            propertyList = new ArrayList<Property>();
+        }
+        propertyList.clear();
     }
 }

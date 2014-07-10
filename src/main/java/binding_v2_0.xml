@@ -12,9 +12,17 @@
   <mapping abstract="true" type-name="d1_v2.0:Node" class="org.dataone.service.types.v2.Node">
     <structure map-as="d1:Node"/>
     <value style="element" name="serviceExtensions" get-method="getServiceExtensions" set-method="setServiceExtensions"/>
+    <collection get-method="getPropertyList" set-method="setPropertyList" usage="optional" create-type="java.util.ArrayList">
+      <structure map-as="d1_v2.0:Property" name="property"/>
+    </collection>
   </mapping>
   <mapping class="org.dataone.service.types.v2.Node" name="node" ns="http://ns.dataone.org/service/types/v2.0">
     <structure map-as="d1_v2.0:Node"/>
+  </mapping>
+  <mapping abstract="true" type-name="d1_v2.0:Property" class="org.dataone.service.types.v2.Property">
+    <value style="text" get-method="getValue" set-method="setValue"/>
+    <value style="attribute" name="key" get-method="getKey" set-method="setKey"/>
+    <value style="attribute" name="type" get-method="getType" set-method="setType" usage="optional"/>
   </mapping>
   <mapping abstract="true" type-name="d1_v2.0:ObjectFormat" class="org.dataone.service.types.v2.ObjectFormat">
     <structure map-as="d1:ObjectFormat"/>
@@ -49,7 +57,7 @@
     <value style="element" name="userAgent" get-method="getUserAgent" set-method="setUserAgent"/>
     <structure map-as="d1:Subject" get-method="getSubject" set-method="setSubject" name="subject"/>
     <value style="element" name="event" get-method="getEvent" set-method="setEvent"/>
-    <value style="element" name="dateLogged" get-method="getDateLogged" set-method="setDateLogged"/>
+    <value style="element" name="dateLogged" get-method="getDateLogged" set-method="setDateLogged" serializer="org.dataone.service.util.DateTimeMarshaller.serializeDateToUTC" deserializer="org.dataone.service.util.DateTimeMarshaller.deserializeDateToUTC"/>
     <structure map-as="d1:NodeReference" get-method="getNodeIdentifier" set-method="setNodeIdentifier" name="nodeIdentifier"/>
   </mapping>
   <mapping class="org.dataone.service.types.v2.LogEntry" name="logEntry" ns="http://ns.dataone.org/service/types/v2.0">
