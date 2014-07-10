@@ -53,5 +53,11 @@ public interface CNRegister {
     public NodeReference register(Node node)
         throws NotImplemented, NotAuthorized, ServiceFailure, InvalidRequest, 
         InvalidToken, IdentifierNotUnique;
+    
+    /** 
+     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNRegister.getNodeCapabilities
+     */
+    public Node getNodeCapabilities(NodeReference nodeid) throws NotImplemented, 
+        ServiceFailure, InvalidRequest, NotFound;
 
 }

@@ -40,9 +40,9 @@ import org.dataone.service.types.v1.Identifier;
 import org.dataone.service.types.v1.Log;
 import org.dataone.service.types.v2.ObjectFormat;
 import org.dataone.service.types.v1.ObjectFormatIdentifier;
+import org.dataone.service.types.v2.Node;
 import org.dataone.service.types.v2.ObjectFormatList;
-import org.dataone.service.types.v1.Event;
-import org.dataone.service.types.v1.NodeList;
+import org.dataone.service.types.v2.NodeList;
 import org.dataone.service.types.v1.Subject;
 import org.dataone.service.types.v2.SystemMetadata;
 
@@ -101,6 +101,13 @@ public interface CNCore
     public Identifier reserveIdentifier(Identifier id)
     	throws InvalidToken, ServiceFailure,
             NotAuthorized, IdentifierNotUnique, NotImplemented, InvalidRequest;
+    
+    /**
+     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.getCapabilities
+     */
+    public Node getCapabilities() 
+    throws NotImplemented, ServiceFailure;
+
     
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.generateIdentifier

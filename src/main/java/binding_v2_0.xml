@@ -9,6 +9,14 @@
   <mapping class="org.dataone.service.types.v2.SystemMetadata" name="systemMetadata" ns="http://ns.dataone.org/service/types/v2.0">
     <structure map-as="d1_v2.0:SystemMetadata"/>
   </mapping>
+  <mapping abstract="true" type-name="d1_v2.0:NodeList" class="org.dataone.service.types.v2.NodeList">
+    <collection get-method="getNodeList" set-method="setNodeList" create-type="java.util.ArrayList">
+      <structure map-as="d1_v2.0:Node" name="node"/>
+    </collection>
+  </mapping>
+  <mapping class="org.dataone.service.types.v2.NodeList" name="nodeList" ns="http://ns.dataone.org/service/types/v2.0">
+    <structure map-as="d1_v2.0:NodeList"/>
+  </mapping>
   <mapping abstract="true" type-name="d1_v2.0:Node" class="org.dataone.service.types.v2.Node">
     <structure map-as="d1:Node"/>
     <value style="element" name="serviceExtensions" get-method="getServiceExtensions" set-method="setServiceExtensions"/>
