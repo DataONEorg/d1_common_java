@@ -20,8 +20,6 @@
 
 package org.dataone.service.mn.tier2.v2;
 
-import java.util.Date;
-
 import org.dataone.service.exceptions.InvalidRequest;
 import org.dataone.service.exceptions.InvalidToken;
 import org.dataone.service.exceptions.NotAuthorized;
@@ -47,11 +45,5 @@ public interface MNAuthorization {
             throws ServiceFailure, InvalidRequest, InvalidToken, NotFound, 
                    NotAuthorized, NotImplemented;
 
-    /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_auth.systemMetadataChanged
-     */
-    public boolean systemMetadataChanged(Identifier id, long serialVersion,
-    	Date dateSystemMetadataLastModified)
-    throws InvalidToken, ServiceFailure, NotAuthorized, NotImplemented, InvalidRequest;
 
 }

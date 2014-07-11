@@ -58,14 +58,19 @@ public interface MNRead {
     throws InvalidToken, NotAuthorized, NotImplemented, ServiceFailure, 
         NotFound, InsufficientResources;
 
-
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_read.getSystemMetadata
      */
     public SystemMetadata getSystemMetadata(Identifier id)
     throws InvalidToken, NotAuthorized, NotImplemented, ServiceFailure, NotFound;
 
-
+    /**
+     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_auth.systemMetadataChanged
+     */
+    public boolean systemMetadataChanged(Identifier id, long serialVersion,
+    	Date dateSystemMetadataLastModified)
+    throws InvalidToken, ServiceFailure, NotAuthorized, NotImplemented, InvalidRequest;
+    
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_read.describe
      */
