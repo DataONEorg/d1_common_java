@@ -37,7 +37,7 @@ import org.dataone.service.exceptions.VersionMismatch;
 
 import org.dataone.service.types.v1.ChecksumAlgorithmList;
 import org.dataone.service.types.v1.Identifier;
-import org.dataone.service.types.v1.Log;
+import org.dataone.service.types.v2.Log;
 import org.dataone.service.types.v2.ObjectFormat;
 import org.dataone.service.types.v1.ObjectFormatIdentifier;
 import org.dataone.service.types.v2.Node;
