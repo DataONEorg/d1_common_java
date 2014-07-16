@@ -77,6 +77,7 @@ public interface MNStorage {
 
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_storage.archive
+     * @deprecated use updateSystemMetadata() to mark content as archived
      */
     public Identifier archive(Identifier id)
     throws InvalidToken, ServiceFailure, NotAuthorized, NotFound, NotImplemented;    
