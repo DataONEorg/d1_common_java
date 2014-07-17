@@ -28,6 +28,7 @@ import org.dataone.service.exceptions.NotImplemented;
 import org.dataone.service.exceptions.ServiceFailure;
 import org.dataone.service.exceptions.UnsupportedType;
 import org.dataone.service.types.v1.NodeReference;
+import org.dataone.service.types.v1.Session;
 import org.dataone.service.types.v2.SystemMetadata;
 
 /**
@@ -42,7 +43,7 @@ public interface MNReplication {
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_replication.replicate
      */
-    public boolean replicate(SystemMetadata sysmeta, NodeReference sourceNode) 
+    public boolean replicate(Session session, SystemMetadata sysmeta, NodeReference sourceNode) 
     throws NotImplemented, ServiceFailure, NotAuthorized, InvalidRequest, 
     	InvalidToken, InsufficientResources, UnsupportedType;
 

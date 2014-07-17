@@ -28,6 +28,7 @@ import org.dataone.service.exceptions.NotAuthorized;
 import org.dataone.service.exceptions.NotFound;
 import org.dataone.service.exceptions.NotImplemented;
 import org.dataone.service.exceptions.ServiceFailure;
+import org.dataone.service.types.v1.Session;
 import org.dataone.service.types.v1_1.QueryEngineDescription;
 import org.dataone.service.types.v1_1.QueryEngineList;
 
@@ -43,20 +44,20 @@ public interface MNQuery
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MNQuery.query
      */
-    public InputStream query(String queryEngine, String query)
+    public InputStream query(Session session, String queryEngine, String query)
         throws InvalidToken, ServiceFailure, NotAuthorized, InvalidRequest, 
         NotImplemented, NotFound;
 
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MNQuery.getQueryEngineDescription
      */
-    public QueryEngineDescription getQueryEngineDescription(String queryEngine)
+    public QueryEngineDescription getQueryEngineDescription(Session session, String queryEngine)
         throws InvalidToken, ServiceFailure, NotAuthorized, NotImplemented, NotFound;
 
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MNQuery.listQueryEngines
      */
-    public QueryEngineList listQueryEngines()
+    public QueryEngineList listQueryEngines(Session session)
         throws InvalidToken, ServiceFailure, NotAuthorized, NotImplemented;
     
 }

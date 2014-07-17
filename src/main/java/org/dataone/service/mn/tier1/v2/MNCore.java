@@ -28,6 +28,7 @@ import org.dataone.service.exceptions.InvalidToken;
 import org.dataone.service.exceptions.NotAuthorized;
 import org.dataone.service.exceptions.NotImplemented;
 import org.dataone.service.exceptions.ServiceFailure;
+import org.dataone.service.types.v1.Session;
 import org.dataone.service.types.v2.Log;
 import org.dataone.service.types.v2.Node;
 
@@ -54,7 +55,7 @@ public interface MNCore {
     /** 
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_core.getLogRecords
      */
-    public Log getLogRecords(Date fromDate, Date toDate, 
+    public Log getLogRecords(Session session, Date fromDate, Date toDate, 
            String event, String pidFilter, Integer start, Integer count) 
     throws InvalidRequest, InvalidToken, NotAuthorized, NotImplemented, ServiceFailure;
 

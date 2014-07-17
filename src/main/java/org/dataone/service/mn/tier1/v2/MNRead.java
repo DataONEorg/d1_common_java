@@ -38,6 +38,7 @@ import org.dataone.service.types.v1.DescribeResponse;
 import org.dataone.service.types.v1.Identifier;
 import org.dataone.service.types.v1.Checksum;
 import org.dataone.service.types.v1.ObjectList;
+import org.dataone.service.types.v1.Session;
 
 
 /**
@@ -54,41 +55,41 @@ public interface MNRead {
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_read.listObjects
      *
      */
-    public InputStream get(Identifier id)
+    public InputStream get(Session session, Identifier id)
     throws InvalidToken, NotAuthorized, NotImplemented, ServiceFailure, 
         NotFound, InsufficientResources;
 
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_read.getSystemMetadata
      */
-    public SystemMetadata getSystemMetadata(Identifier id)
+    public SystemMetadata getSystemMetadata(Session session, Identifier id)
     throws InvalidToken, NotAuthorized, NotImplemented, ServiceFailure, NotFound;
 
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_auth.systemMetadataChanged
      */
-    public boolean systemMetadataChanged(Identifier id, long serialVersion,
+    public boolean systemMetadataChanged(Session session, Identifier id, long serialVersion,
     	Date dateSystemMetadataLastModified)
     throws InvalidToken, ServiceFailure, NotAuthorized, NotImplemented, InvalidRequest;
     
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_read.describe
      */
-    public DescribeResponse describe(Identifier id)
+    public DescribeResponse describe(Session session, Identifier id)
     throws InvalidToken, NotAuthorized, NotImplemented, ServiceFailure, NotFound;
     
 
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_read.getChecksum
      */
-    public Checksum getChecksum(Identifier pid, String checksumAlgorithm)
+    public Checksum getChecksum(Session session, Identifier pid, String checksumAlgorithm)
     throws InvalidRequest, InvalidToken, NotAuthorized, NotImplemented, ServiceFailure,
          NotFound;
 
     /** 
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_read.listObjects
      */
-    public ObjectList listObjects(Date fromDate, 
+    public ObjectList listObjects(Session session, Date fromDate, 
             Date toDate, ObjectFormatIdentifier formatid, Identifier identifier, Boolean replicaStatus,
             Integer start, Integer count) 
     throws InvalidRequest, InvalidToken, NotAuthorized, NotImplemented, ServiceFailure;
@@ -102,7 +103,7 @@ public interface MNRead {
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MNRead.getReplica
      */
-    public InputStream getReplica(Identifier pid)
+    public InputStream getReplica(Session session, Identifier pid)
     throws InvalidToken, NotAuthorized, NotImplemented, ServiceFailure, NotFound,
     InsufficientResources;
  

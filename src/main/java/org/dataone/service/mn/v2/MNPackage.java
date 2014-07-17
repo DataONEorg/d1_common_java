@@ -30,6 +30,7 @@ import org.dataone.service.exceptions.NotImplemented;
 import org.dataone.service.exceptions.ServiceFailure;
 import org.dataone.service.types.v1.Identifier;
 import org.dataone.service.types.v1.ObjectFormatIdentifier;
+import org.dataone.service.types.v1.Session;
 
 /**
  * The DataONE Member Node Optional Package interface for providing 
@@ -42,7 +43,7 @@ public interface MNPackage
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MNPackage.getPackage
      */
-    public InputStream getPackage(ObjectFormatIdentifier packageType, Identifier id)
+    public InputStream getPackage(Session session, ObjectFormatIdentifier packageType, Identifier id)
         throws InvalidToken, ServiceFailure, NotAuthorized, InvalidRequest, 
         NotImplemented, NotFound;
 

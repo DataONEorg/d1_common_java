@@ -29,6 +29,7 @@ import org.dataone.service.exceptions.NotFound;
 import org.dataone.service.exceptions.NotImplemented;
 import org.dataone.service.exceptions.ServiceFailure;
 import org.dataone.service.types.v1.Identifier;
+import org.dataone.service.types.v1.Session;
 import org.dataone.service.types.v2.OptionList;
 
 /**
@@ -42,14 +43,14 @@ public interface MNView
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MNView.view
      */
-    public InputStream view(String theme, Identifier id)
+    public InputStream view(Session session, String theme, Identifier id)
         throws InvalidToken, ServiceFailure, NotAuthorized, InvalidRequest, 
         NotImplemented, NotFound;
 
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MNView.listViews
      */
-    public OptionList listViews()
+    public OptionList listViews(Session session)
         throws InvalidToken, ServiceFailure, NotAuthorized, InvalidRequest, NotImplemented;
     
 }
