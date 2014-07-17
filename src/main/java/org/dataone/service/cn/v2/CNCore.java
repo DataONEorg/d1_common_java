@@ -37,6 +37,7 @@ import org.dataone.service.exceptions.VersionMismatch;
 
 import org.dataone.service.types.v1.ChecksumAlgorithmList;
 import org.dataone.service.types.v1.Identifier;
+import org.dataone.service.types.v1.Session;
 import org.dataone.service.types.v2.Log;
 import org.dataone.service.types.v2.ObjectFormat;
 import org.dataone.service.types.v1.ObjectFormatIdentifier;
@@ -85,7 +86,7 @@ public interface CNCore
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.getLogRecords
      */
-    public Log getLogRecords(Date fromDate, Date toDate,
+    public Log getLogRecords(Session session, Date fromDate, Date toDate,
         String event, String pidFilter, Integer start, Integer count) 
     throws InvalidToken, InvalidRequest, ServiceFailure,
         NotAuthorized, NotImplemented, InsufficientResources;
@@ -98,7 +99,7 @@ public interface CNCore
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.reserveIdentifier
      */
-    public Identifier reserveIdentifier(Identifier id)
+    public Identifier reserveIdentifier(Session session, Identifier id)
     	throws InvalidToken, ServiceFailure,
             NotAuthorized, IdentifierNotUnique, NotImplemented, InvalidRequest;
     
@@ -112,21 +113,21 @@ public interface CNCore
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.generateIdentifier
      */
-    public Identifier generateIdentifier(String scheme, String fragment)
+    public Identifier generateIdentifier(Session session, String scheme, String fragment)
     	throws InvalidToken, ServiceFailure,
             NotAuthorized, NotImplemented, InvalidRequest;
 
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.hasReservation
      */
-    public boolean hasReservation(Subject subject, Identifier id)
+    public boolean hasReservation(Session session, Subject subject, Identifier id)
     	throws InvalidToken, ServiceFailure,  NotFound,
             NotAuthorized, NotImplemented, InvalidRequest, IdentifierNotUnique;
 
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.create
      */
-    public Identifier create(Identifier pid, InputStream object,
+    public Identifier create(Session session, Identifier pid, InputStream object,
             SystemMetadata sysmeta) throws InvalidToken, ServiceFailure,
             NotAuthorized, IdentifierNotUnique, UnsupportedType,
             InsufficientResources, InvalidSystemMetadata, NotImplemented,
@@ -135,21 +136,21 @@ public interface CNCore
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.registerSystemMetadata
      */
-     public Identifier registerSystemMetadata(Identifier pid,
+     public Identifier registerSystemMetadata(Session session, Identifier pid,
         SystemMetadata sysmeta) throws NotImplemented, NotAuthorized,
         ServiceFailure, InvalidRequest, InvalidSystemMetadata, InvalidToken;
 
      /**
       * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.updateSystemMetadata
       */
-      public boolean updateSystemMetadata(Identifier pid,
+      public boolean updateSystemMetadata(Session session, Identifier pid,
          SystemMetadata sysmeta) throws NotImplemented, NotAuthorized,
          ServiceFailure, InvalidRequest, InvalidSystemMetadata, InvalidToken;
 
       /**
        * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.systemMetadataChanged
        */
-      public boolean systemMetadataChanged(Identifier id, long serialVersion,
+      public boolean systemMetadataChanged(Session session, Identifier id, long serialVersion,
       	Date dateSystemMetadataLastModified)
       throws InvalidToken, ServiceFailure, NotAuthorized, NotImplemented, InvalidRequest;
      
@@ -157,7 +158,7 @@ public interface CNCore
       * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.setObsoletedBy
      * @deprecated the Authoritative Member Node is responsible for obsoleting content using SystemMetadata modifications
       */
-     public boolean setObsoletedBy(Identifier pid,
+     public boolean setObsoletedBy(Session session, Identifier pid,
    			Identifier obsoletedByPid, long serialVersion)
    			throws NotImplemented, NotFound, NotAuthorized, ServiceFailure,
    			InvalidRequest, InvalidToken, VersionMismatch;
@@ -165,14 +166,14 @@ public interface CNCore
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.delete
      */
-    public Identifier delete(Identifier id)
+    public Identifier delete(Session session, Identifier id)
     throws InvalidToken, ServiceFailure, NotAuthorized, NotFound, NotImplemented;
 
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.archive
      * @deprecated the Authoritative Member Node is responsible for archiving content using SystemMetadata modifications
      */
-    public Identifier archive(Identifier id)
+    public Identifier archive(Session session, Identifier id)
     throws InvalidToken, ServiceFailure, NotAuthorized, NotFound, NotImplemented;
     
     
