@@ -30,6 +30,7 @@ import org.dataone.service.exceptions.VersionMismatch;
 
 import org.dataone.service.types.v1.Permission;
 import org.dataone.service.types.v1.Identifier;
+import org.dataone.service.types.v1.Session;
 import org.dataone.service.types.v1.Subject;
 import org.dataone.service.types.v1.AccessPolicy;
 
@@ -47,7 +48,7 @@ public interface CNAuthorization {
      * @deprecated use CNCore.updateSystemMetadata()
 
      */
-    public Identifier setRightsHolder(Identifier id, Subject userId, 
+    public Identifier setRightsHolder(Session session, Identifier id, Subject userId, 
          long serialVersion)
         throws InvalidToken, ServiceFailure, NotFound, NotAuthorized, 
         NotImplemented, InvalidRequest, VersionMismatch;
@@ -55,7 +56,7 @@ public interface CNAuthorization {
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNAuthorization.isAuthorized
      */
-    public boolean isAuthorized(Identifier id, Permission permission)
+    public boolean isAuthorized(Session session, Identifier id, Permission permission)
         throws ServiceFailure, InvalidToken, NotFound, NotAuthorized, 
         NotImplemented, InvalidRequest;
 
@@ -63,7 +64,7 @@ public interface CNAuthorization {
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNAuthorization.setAccessPolicy
      * @deprecated use CNCore.updateSystemMetadata()
      */
-    public boolean setAccessPolicy(Identifier id, 
+    public boolean setAccessPolicy(Session session, Identifier id, 
         AccessPolicy policy, long serialVersion) 
         throws InvalidToken, NotFound, NotImplemented, NotAuthorized, 
         ServiceFailure, InvalidRequest, VersionMismatch;

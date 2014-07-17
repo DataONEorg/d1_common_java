@@ -29,6 +29,7 @@ import org.dataone.service.exceptions.NotFound;
 import org.dataone.service.exceptions.NotImplemented;
 import org.dataone.service.exceptions.ServiceFailure;
 import org.dataone.service.types.v1.Identifier;
+import org.dataone.service.types.v1.Session;
 import org.dataone.service.types.v2.OptionList;
 
 /**
@@ -42,7 +43,7 @@ public interface CNView
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNView.view
      */
-    public InputStream view(String theme, Identifier id)
+    public InputStream view(Session session, String theme, Identifier id)
         throws InvalidToken, ServiceFailure, NotAuthorized, InvalidRequest, 
         NotImplemented, NotFound;
 

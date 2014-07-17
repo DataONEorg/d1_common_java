@@ -30,6 +30,7 @@ import org.dataone.service.exceptions.IdentifierNotUnique;
 
 import org.dataone.service.types.v2.Node;
 import org.dataone.service.types.v1.NodeReference;
+import org.dataone.service.types.v1.Session;
 
 /**
  * The DataONE CoordinatingNode Tier2 Registration interface.  This defines an
@@ -43,14 +44,14 @@ public interface CNRegister {
     /** 
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNRegister.updateNodeCapabilities
      */
-    public boolean updateNodeCapabilities(NodeReference nodeid, 
+    public boolean updateNodeCapabilities(Session session, NodeReference nodeid, 
         Node node) throws NotImplemented, NotAuthorized, 
         ServiceFailure, InvalidRequest, NotFound, InvalidToken;
 
     /** 
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNRegister.register
      */
-    public NodeReference register(Node node)
+    public NodeReference register(Session session, Node node)
         throws NotImplemented, NotAuthorized, ServiceFailure, InvalidRequest, 
         InvalidToken, IdentifierNotUnique;
     

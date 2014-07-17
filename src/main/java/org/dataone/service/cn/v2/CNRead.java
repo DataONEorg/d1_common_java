@@ -35,6 +35,7 @@ import org.dataone.service.types.v1.Identifier;
 import org.dataone.service.types.v1.ObjectFormatIdentifier;
 import org.dataone.service.types.v1.ObjectList;
 import org.dataone.service.types.v1.ObjectLocationList;
+import org.dataone.service.types.v1.Session;
 import org.dataone.service.types.v1_1.QueryEngineDescription;
 import org.dataone.service.types.v1_1.QueryEngineList;
 import org.dataone.service.types.v2.SystemMetadata;
@@ -52,40 +53,40 @@ public interface CNRead
      * InputStream is the Java native version of D1's OctetStream
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNRead.get
      */
-    public InputStream get(Identifier id)
+    public InputStream get(Session session, Identifier id)
         throws InvalidToken, ServiceFailure, NotAuthorized, NotFound, NotImplemented;
 
     
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNRead.getSystemMetadata
      */
-    public SystemMetadata getSystemMetadata(Identifier id)
+    public SystemMetadata getSystemMetadata(Session session, Identifier id)
         throws InvalidToken, ServiceFailure, NotAuthorized, NotFound, NotImplemented;
     
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_read.describe
      */
-    public DescribeResponse describe(Identifier id)
+    public DescribeResponse describe(Session session, Identifier id)
     throws InvalidToken, NotAuthorized, NotImplemented, ServiceFailure, NotFound;
     
 
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNRead.resolve
      */
-    public ObjectLocationList resolve(Identifier id)
+    public ObjectLocationList resolve(Session session, Identifier id)
         throws InvalidToken, ServiceFailure, NotAuthorized, NotFound, NotImplemented;
     
     
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNRead.getChecksum
      */
-    public Checksum getChecksum(Identifier pid)
+    public Checksum getChecksum(Session session, Identifier pid)
         throws InvalidToken, ServiceFailure, NotAuthorized, NotFound, NotImplemented;
     
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNRead.listObjects
      */
-    public ObjectList listObjects(Date fromDate, 
+    public ObjectList listObjects(Session session, Date fromDate, 
             Date toDate, ObjectFormatIdentifier formatId, Identifier identifier, Boolean replicaStatus,
             Integer start, Integer count) 
     throws InvalidRequest, InvalidToken, NotAuthorized, NotImplemented, ServiceFailure;
@@ -93,14 +94,14 @@ public interface CNRead
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNRead.search
      */
-    public ObjectList search(String queryType, String query)
+    public ObjectList search(Session session, String queryType, String query)
         throws InvalidToken, ServiceFailure, NotAuthorized, InvalidRequest, 
         NotImplemented;
     
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNRead.query
      */
-    public InputStream query(String queryEngine, String query)
+    public InputStream query(Session session, String queryEngine, String query)
         throws InvalidToken, ServiceFailure, NotAuthorized, InvalidRequest, 
         NotImplemented, NotFound;
 
