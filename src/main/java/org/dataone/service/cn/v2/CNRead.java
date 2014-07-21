@@ -108,13 +108,13 @@ public interface CNRead
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNRead.getQueryEngineDescription
      */
-    public QueryEngineDescription getQueryEngineDescription(String queryEngine)
+    public QueryEngineDescription getQueryEngineDescription(Session session, String queryEngine)
         throws InvalidToken, ServiceFailure, NotAuthorized, NotImplemented, NotFound;
 
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNRead.listQueryEngines
      */
-    public QueryEngineList listQueryEngines()
+    public QueryEngineList listQueryEngines(Session session)
         throws InvalidToken, ServiceFailure, NotAuthorized, NotImplemented;
    
 }
