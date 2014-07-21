@@ -67,7 +67,7 @@ public interface MNStorage {
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_storage.updateSystemMetadata
      */
      public boolean updateSystemMetadata(Session session, Identifier pid,
-        SystemMetadata sysmeta) throws NotImplemented, NotAuthorized,
+        SystemMetadata sysmeta) throws NotImplemented, NotAuthorized, NotFound,
         ServiceFailure, InvalidRequest, InvalidSystemMetadata, InvalidToken;
     
     /**
