@@ -50,7 +50,7 @@ import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 
 import org.apache.log4j.Logger;
-import org.dataone.service.types.v1.util.ObjectFormatServiceImpl;
+import org.dataone.service.types.v2.util.ObjectFormatServiceImpl;
 import org.jibx.runtime.BindingDirectory;
 import org.jibx.runtime.IBindingFactory;
 import org.jibx.runtime.IMarshallingContext;

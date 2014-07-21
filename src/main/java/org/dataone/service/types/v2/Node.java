@@ -16,7 +16,7 @@ import java.util.List;
  *   &lt;xs:complexContent>
  *     &lt;xs:extension base="ns1:Node">
  *       &lt;xs:sequence>
- *         &lt;xs:element type="xs:string" name="serviceExtensions"/>
+ *         &lt;xs:element type="xs:string" name="serviceExtensions" minOccurs="0"/>
  *         &lt;xs:element type="ns:Property" name="property" minOccurs="0" maxOccurs="unbounded"/>
  *       &lt;/xs:sequence>
  *     &lt;/xs:extension>

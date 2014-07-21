@@ -35,7 +35,7 @@ import org.dataone.service.types.v1.Identifier;
  *   &lt;xs:complexContent>
  *     &lt;xs:extension base="ns1:SystemMetadata">
  *       &lt;xs:sequence>
- *         &lt;xs:element type="ns1:Identifier" name="seriesId"/>
+ *         &lt;xs:element type="ns1:Identifier" name="seriesId" minOccurs="0"/>
  *       &lt;/xs:sequence>
  *     &lt;/xs:extension>
  *   &lt;/xs:complexContent>

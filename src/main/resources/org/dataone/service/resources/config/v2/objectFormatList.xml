@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="/cn/xslt/dataone.types.v1.xsl"?>
-<d1:objectFormatList xmlns:d1="http://ns.dataone.org/service/types/v1" count="88" start="0" total="88">
+<d1:objectFormatList xmlns:d1="http://ns.dataone.org/service/types/v2.0" count="88" start="0" total="88">
     <objectFormat>
         <formatId>-//ecoinformatics.org//eml-access-2.0.0beta4//EN</formatId>
         <formatName>Ecological Metadata Language, Access module, version 2.0.0beta4</formatName>

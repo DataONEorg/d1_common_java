@@ -17,8 +17,8 @@ import java.io.Serializable;
  *   &lt;xs:complexContent>
  *     &lt;xs:extension base="ns1:ObjectFormat">
  *       &lt;xs:sequence>
- *         &lt;xs:element type="xs:string" name="mimeType"/>
- *         &lt;xs:element type="xs:string" name="extension"/>
+ *         &lt;xs:element type="xs:string" name="mimeType" minOccurs="0"/>
+ *         &lt;xs:element type="xs:string" name="extension" minOccurs="0"/>
  *       &lt;/xs:sequence>
  *     &lt;/xs:extension>
  *   &lt;/xs:complexContent>
