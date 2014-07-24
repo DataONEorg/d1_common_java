@@ -146,13 +146,6 @@ public interface CNCore
       public boolean updateSystemMetadata(Session session, Identifier pid,
          SystemMetadata sysmeta) throws NotImplemented, NotAuthorized,
          ServiceFailure, InvalidRequest, InvalidSystemMetadata, InvalidToken;
-
-      /**
-       * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.systemMetadataChanged
-       */
-      public boolean systemMetadataChanged(Session session, Identifier id, long serialVersion,
-      	Date dateSystemMetadataLastModified)
-      throws InvalidToken, ServiceFailure, NotAuthorized, NotImplemented, InvalidRequest;
      
      /**
       * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.setObsoletedBy
