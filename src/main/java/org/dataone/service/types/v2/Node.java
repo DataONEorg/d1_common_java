@@ -16,7 +16,7 @@ import java.util.List;
  *   &lt;xs:complexContent>
  *     &lt;xs:extension base="ns1:Node">
  *       &lt;xs:sequence>
- *         &lt;xs:element type="xs:string" name="serviceExtensions" minOccurs="0"/>
+ *         &lt;xs:element type="ns:ServiceExtension" name="serviceExtensions" minOccurs="0"/>
  *         &lt;xs:element type="ns:Property" name="property" minOccurs="0" maxOccurs="unbounded"/>
  *       &lt;/xs:sequence>
  *     &lt;/xs:extension>
@@ -28,7 +28,7 @@ public class Node extends org.dataone.service.types.v1.Node implements
     Serializable
 {
     private static final long serialVersionUID = 10000000;
-    private String serviceExtensions;
+    private ServiceExtension serviceExtensions;
     private List<Property> propertyList = new ArrayList<Property>();
 
     /** 
@@ -36,7 +36,7 @@ public class Node extends org.dataone.service.types.v1.Node implements
      * 
      * @return value
      */
-    public String getServiceExtensions() {
+    public ServiceExtension getServiceExtensions() {
         return serviceExtensions;
     }
 
@@ -45,7 +45,7 @@ public class Node extends org.dataone.service.types.v1.Node implements
      * 
      * @param serviceExtensions
      */
-    public void setServiceExtensions(String serviceExtensions) {
+    public void setServiceExtensions(ServiceExtension serviceExtensions) {
         this.serviceExtensions = serviceExtensions;
     }
 
