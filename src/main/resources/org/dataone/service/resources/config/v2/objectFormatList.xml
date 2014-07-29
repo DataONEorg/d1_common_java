@@ -225,29 +225,36 @@
         <extension>xml</extension>
     </objectFormat>
     <objectFormat>
+        <formatId>http://www.esri.com/metadata/esriprof80.dtd</formatId>
+        <formatName>ESRI Profile of the Content Standard for Digital Geospatial Metadata, March 2003</formatName>
+        <formatType>METADATA</formatType>
+        <mimeType>text/xml</mimeType>
+        <extension>xml</extension>
+    </objectFormat>
+    <objectFormat>
         <formatId>FGDC-STD-001.1-1999</formatId>
-        <formatName> Content Standard for Digital Geospatial Metadata, Biological Data Profile, version 001.1-1999 </formatName>
+        <formatName>Content Standard for Digital Geospatial Metadata, Biological Data Profile, version 001.1-1999 </formatName>
         <formatType>METADATA</formatType>
         <mimeType>text/xml</mimeType>
         <extension>xml</extension>
     </objectFormat>
     <objectFormat>
         <formatId>FGDC-STD-001.2-1999</formatId>
-        <formatName> Content Standard for Digital Geospatial Metadata, Metadata Profile for Shoreline Data, version 001.2-1999 </formatName>
+        <formatName>Content Standard for Digital Geospatial Metadata, Metadata Profile for Shoreline Data, version 001.2-1999 </formatName>
         <formatType>METADATA</formatType>
         <mimeType>text/xml</mimeType>
         <extension>xml</extension>
     </objectFormat>
     <objectFormat>
         <formatId>FGDC-STD-001-1998</formatId>
-        <formatName> Content Standard for Digital Geospatial Metadata, version 001-1998 </formatName>
+        <formatName>Content Standard for Digital Geospatial Metadata, version 001-1998 </formatName>
         <formatType>METADATA</formatType>
         <mimeType>text/xml</mimeType>
         <extension>xml</extension>
     </objectFormat>
     <objectFormat>
         <formatId>INCITS 453-2009</formatId>
-        <formatName> North American Profile of ISO 19115: 2003 Geographic Information - Metadata </formatName>
+        <formatName>North American Profile of ISO 19115: 2003 Geographic Information - Metadata </formatName>
         <formatType>METADATA</formatType>
         <mimeType>text/xml</mimeType>
         <extension>xml</extension>
