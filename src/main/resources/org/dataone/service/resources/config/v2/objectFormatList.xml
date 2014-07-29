@@ -483,8 +483,15 @@
         <extension>xml</extension>
     </objectFormat>
     <objectFormat>
+        <formatId>http://datadryad.org/profile/v3.1</formatId>
+        <formatName>Dryad Metadata Application Profile Version 3.1</formatName>
+        <formatType>METADATA</formatType>
+        <mimeType>text/xml</mimeType>
+        <extension>xml</extension>
+    </objectFormat>
+    <objectFormat>
         <formatId>http://purl.org/dryad/terms/</formatId>
-        <formatName> Dryad repository object description metadata</formatName>
+        <formatName>Dryad repository object description metadata</formatName>
         <formatType>METADATA</formatType>
         <mimeType>text/xml</mimeType>
         <extension>xml</extension>
