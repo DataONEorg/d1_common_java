@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="/cn/xslt/dataone.types.v1.xsl"?>
-<d1:objectFormatList xmlns:d1="http://ns.dataone.org/service/types/v2.0" count="88" start="0" total="88">
+<d1:objectFormatList xmlns:d1="http://ns.dataone.org/service/types/v2.0" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://ns.dataone.org/service/types/v2.0 https://repository.dataone.org/software/cicore/trunk/d1_schemas/dataoneTypes_v2.0.xsd" 
+	count="88" start="0" total="88">
     <objectFormat>
         <formatId>-//ecoinformatics.org//eml-access-2.0.0beta4//EN</formatId>
         <formatName>Ecological Metadata Language, Access module, version 2.0.0beta4</formatName>
