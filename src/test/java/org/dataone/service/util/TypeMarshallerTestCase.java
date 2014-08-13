@@ -29,9 +29,12 @@ import static org.junit.Assert.fail;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.util.logging.Level;
 
 import org.apache.log4j.Logger;
 import org.dataone.service.types.v1.Node;
+
 import org.dataone.service.types.v1.ObjectList;
 import org.dataone.service.types.v1.SystemMetadata;
 import org.jibx.runtime.JiBXException;
@@ -80,6 +83,46 @@ public class TypeMarshallerTestCase {
 
 
     }
+    @Test
+    public void convertV1NodeToV2Node() {
+        try {
+            InputStream is = this.getClass().getResourceAsStream("/org/dataone/service/samples/v1/mnNode1.xml");
+            Node v1Node = TypeMarshaller.unmarshalTypeFromStream(Node.class, is);
+            org.dataone.service.types.v2.Node v2Node = new org.dataone.service.types.v2.Node();
+            v2Node = TypeMarshaller.convertTypeFromType(v1Node, v2Node.getClass());
+        } catch (IOException ex) {
+            fail("Test misconfiguration" +  ex);
+        } catch (InstantiationException ex) {
+            fail("Test misconfiguration" + ex);
+        } catch (IllegalAccessException ex) {
+            fail("Test misconfiguration" +  ex);
+        } catch (JiBXException ex) {
+            fail("Test misconfiguration" +  ex);
+        }   catch (InvocationTargetException ex) {
+                fail("Test misconfiguration" +  ex);
+        }
+    }
+    @Test
+    public void convertV2NodeToV1Node() {
+        try {
+            InputStream is = this.getClass().getResourceAsStream("/org/dataone/service/samples/v2/mnNode1.xml");
+            org.dataone.service.types.v2.Node v2Node = new org.dataone.service.types.v2.Node();
+            v2Node = TypeMarshaller.unmarshalTypeFromStream(v2Node.getClass(), is);
+            
+            Node v1Node = TypeMarshaller.convertTypeFromType(v2Node, Node.class);
+        } catch (IOException ex) {
+            fail("Test misconfiguration" +  ex);
+        } catch (InstantiationException ex) {
+            fail("Test misconfiguration" + ex);
+        } catch (IllegalAccessException ex) {
+            fail("Test misconfiguration" +  ex);
+        } catch (JiBXException ex) {
+            fail("Test misconfiguration" +  ex);
+        }   catch (InvocationTargetException ex) {
+                fail("Test misconfiguration" +  ex);
+        }
+    }
+    
     @Test
     public void serializeEmptyObjectList() {
         ObjectList objectList = new ObjectList();
