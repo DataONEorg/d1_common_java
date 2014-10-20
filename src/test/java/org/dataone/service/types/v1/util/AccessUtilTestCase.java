@@ -24,6 +24,7 @@ package org.dataone.service.types.v1.util;
 
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,8 +37,6 @@ import org.dataone.service.types.v1.Subject;
 import org.dataone.service.types.v1.util.AccessUtil;
 import org.dataone.service.util.Constants;
 import org.junit.Test;
-
-import edu.emory.mathcs.backport.java.util.Arrays;
 
 public class AccessUtilTestCase {
 
