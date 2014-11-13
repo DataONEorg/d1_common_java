@@ -90,9 +90,15 @@ public class TypeCompareUtilTestCase {
 	public void testCompareSysMeta() {
 		SystemMetadata sysMeta1 = createStandardSysmeta();
 		SystemMetadata sysMeta2 = createStandardSysmeta();
-		
+
+		sysMeta2.setDateSysMetadataModified(sysMeta1.getDateSysMetadataModified());
+		sysMeta2.setDateUploaded(sysMeta1.getDateUploaded());
+		sysMeta2.getReplica(0).setReplicaVerified(sysMeta1.getReplica(0).getReplicaVerified());
+		sysMeta2.getReplica(1).setReplicaVerified(sysMeta1.getReplica(1).getReplicaVerified());
+
 		List<String> report = TypeCompareUtil.compareSystemMetadata(sysMeta1, sysMeta2);
-		
+		for (String line : report) System.out.println(line);
+
 		assertEquals("If they are the same, then it should be a one-line report",report.size(),1);
 		assertEquals("If they are the same, then should get 'OK'",report.get(0),"OK");
 		
