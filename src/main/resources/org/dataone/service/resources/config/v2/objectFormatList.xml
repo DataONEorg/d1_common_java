@@ -2,7 +2,7 @@
 <d1:objectFormatList xmlns:d1="http://ns.dataone.org/service/types/v2.0" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://ns.dataone.org/service/types/v2.0 https://repository.dataone.org/software/cicore/trunk/d1_schemas/dataoneTypes_v2.0.xsd" 
-	count="88" start="0" total="88">
+	count="91" start="0" total="91">
     <objectFormat>
         <formatId>-//ecoinformatics.org//eml-access-2.0.0beta4//EN</formatId>
         <formatName>Ecological Metadata Language, Access module, version 2.0.0beta4</formatName>
@@ -632,4 +632,25 @@
         <mimeType>video/quicktime</mimeType>
         <extension>mov</extension>
     </objectFormat>
+  <objectFormat>
+    <formatId>http://datacite.org/schema/kernel-3.0</formatId>
+    <formatName>DataCite Metadata Schema version 3.0</formatName>
+    <formatType>METADATA</formatType>
+    <mimeType>text/xml</mimeType>
+    <extension>xml</extension>
+  </objectFormat>
+  <objectFormat>
+    <formatId>http://datacite.org/schema/kernel-3.1</formatId>
+    <formatName>DataCite Metadata Schema version 3.1</formatName>
+    <formatType>METADATA</formatType>
+    <mimeType>text/xml</mimeType>
+    <extension>xml</extension>
+  </objectFormat>
+  <objectFormat>
+    <formatId>http://ns.dataone.org/metadata/schema/onedcx/v1.0</formatId>
+  	<formatName>DataONE Dublin Core Extended v1.0</formatName>
+    <formatType>METADATA</formatType>
+    <mimeType>text/xml</mimeType>
+    <extension>xml</extension>
+  </objectFormat>
 </d1:objectFormatList>
