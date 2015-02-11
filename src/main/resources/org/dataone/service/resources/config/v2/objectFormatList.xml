@@ -653,4 +653,11 @@
     <mimeType>text/xml</mimeType>
     <extension>xml</extension>
   </objectFormat>
+  <objectFormat>
+    <formatId>http://docs.annotatorjs.org/en/v1.2.x/annotation-format.html</formatId>
+  	<formatName>AnnotatorJS 1.2.x Annotation model</formatName>
+    <formatType>RESOURCE</formatType>
+    <mimeType>application/json</mimeType>
+    <extension>json</extension>
+  </objectFormat>
 </d1:objectFormatList>
