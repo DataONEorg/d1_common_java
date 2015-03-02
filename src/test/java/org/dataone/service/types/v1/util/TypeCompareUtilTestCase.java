@@ -94,8 +94,8 @@ public class TypeCompareUtilTestCase {
 		
 		List<String> report = TypeCompareUtil.compareSystemMetadata(sysMeta1, sysMeta2);
 		
-		assertEquals("If they are the same, then it should be a one-line report",report.size(),1);
-		assertEquals("If they are the same, then should get 'OK'",report.get(0),"OK");
+		assertEquals("If they are the same, then it should be a one-line report",1, report.size());
+		assertEquals("If they are the same, then should get 'OK'","OK",report.get(0));
 		
 		AccessPolicy ap = sysMeta2.getAccessPolicy();
 		AccessPolicy apNew = new AccessPolicy();
