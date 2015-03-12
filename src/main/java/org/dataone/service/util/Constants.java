@@ -60,6 +60,8 @@ public class Constants {
     /** Common API resource which handles view operations */
     public static final String RESOURCE_VIEWS = "views";
 
+    /** Common API resource which handles package operations */
+    public static final String RESOURCE_PACKAGES = "packages";
     
     /** AUTHORIZATION API resource which handles access operations */
     public static final String RESOURCE_ACCESS = "accessRules";
