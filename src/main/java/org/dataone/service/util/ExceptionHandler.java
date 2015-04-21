@@ -404,6 +404,8 @@ public class ExceptionHandler {
             throw new ServiceFailure("-1", defaultMessage + e.getMessage() + "\n" + IOUtils.toString(errorStream), "", stackTrace);
         } catch (IOException e1) {
             throw new ServiceFailure("-1", defaultMessage + "errorStream could not be reset/reread" + e1.getMessage(), "", stackTrace);
+        } finally {
+            IOUtils.closeQuietly(errorStream);
         }
 
     }
@@ -421,6 +423,8 @@ public class ExceptionHandler {
             throw new ServiceFailure("-1", defaultMessage + "parser for deserializing HTML not written yet.  Providing message body:\n" + IOUtils.toString(errorStream));
         } catch (IOException e1) {
             throw new ServiceFailure("-1", defaultMessage + "errorStream could not be reset/reread" + e1.getMessage());
+        } finally {
+            IOUtils.closeQuietly(errorStream);
         }
     }
     /*
@@ -437,6 +441,8 @@ public class ExceptionHandler {
             throw new ServiceFailure("-1", defaultMessage + "parser for deserializing JSON not written yet.  Providing message body:\n" + IOUtils.toString(errorStream));
         } catch (IOException e1) {
             throw new ServiceFailure("-1", defaultMessage + "errorStream could not be reset/reread" + e1.getMessage());
+        } finally {
+            IOUtils.closeQuietly(errorStream);
         }
     }
     /*
@@ -453,6 +459,8 @@ public class ExceptionHandler {
             throw new ServiceFailure("-1", defaultMessage + "parser for deserializing CSV not written yet.  Providing message body:\n" + IOUtils.toString(errorStream));
         } catch (IOException e1) {
             throw new ServiceFailure("-1", defaultMessage + "errorStream could not be reset/reread" + e1.getMessage());
+        } finally {
+            IOUtils.closeQuietly(errorStream);
         }
     }
     /*
@@ -469,6 +477,8 @@ public class ExceptionHandler {
             throw new ServiceFailure("-1", defaultMessage + "Deserializing Text/Plain: Just providing message body:\n" + IOUtils.toString(errorStream) + "\n{EndOfMessage}");
         } catch (IOException e1) {
             throw new ServiceFailure("-1", defaultMessage + "errorStream could not be reset/reread" + e1.getMessage());
+        } finally {
+            IOUtils.closeQuietly(errorStream);
         }
     }
 
