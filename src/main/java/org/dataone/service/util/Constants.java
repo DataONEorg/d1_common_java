@@ -62,6 +62,9 @@ public class Constants {
 
     /** Common API resource which handles package operations */
     public static final String RESOURCE_PACKAGES = "packages";
+
+    /** API resource which handles synchronize operations **/
+    public static final String RESOURCE_SYNCHRONIZE = "synchronize";
     
     /** AUTHORIZATION API resource which handles access operations */
     public static final String RESOURCE_ACCESS = "accessRules";
@@ -88,7 +91,6 @@ public class Constants {
     public static final String RESOURCE_RESERVE = "reserve";
     /** CORE API resource which handles identifier generation operations */
     public static final String RESOURCE_GENERATE = "generate";
-    
     
     /** IDENTITY API resource which handles account operations */
     public static final String RESOURCE_ACCOUNTS = "accounts";
@@ -128,7 +130,6 @@ public class Constants {
     /** REPLICATION API endpoint representing the replicas collection **/
     public static final String RESOURCE_REPLICAS = "replica";
     
-   
     /** Temporary file directory 
      * @deprecated this is OS-specific and should not be used
      * */
