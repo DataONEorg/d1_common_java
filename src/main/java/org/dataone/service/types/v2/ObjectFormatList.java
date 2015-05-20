@@ -7,12 +7,8 @@ import java.util.List;
 import org.dataone.service.types.v1.Slice;
 
 /** 
- * An ObjectFormatList is the structure returned from the
- :func:`CNCore.listFormats()` method of the CN REST interface. It
- provides a list of named object formats defined in the DataONE system.
- Each :class:`Types.ObjectFormat` returned in the list describes the
- object format via its name, and future versions may contain additional
- structured content from common external typing systems.
+ * Extends :class:`Types.ObjectFormatList` to provide a 
+ list of :class:`v2_0.Types.ObjectFormat`.
 
  * 
  * Schema fragment(s) for this class:

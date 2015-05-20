@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** 
- * A set of values that describe a member or coordinating
- node, its Internet location, and the services it supports. Several nodes
- may exist on a single physical device or hostname. 
+ * Extends the Version 1.x :class:`Types.Node` by adding 
+ an optional unbounded parameter entry that can be used to provide 
+ additional simple metadata relevant to a Node. 
  * 
  * Schema fragment(s) for this class:
  * <pre>
@@ -16,7 +16,6 @@ import java.util.List;
  *   &lt;xs:complexContent>
  *     &lt;xs:extension base="ns1:Node">
  *       &lt;xs:sequence>
- *         &lt;xs:element type="ns:ServiceExtension" name="serviceExtensions" minOccurs="0"/>
  *         &lt;xs:element type="ns:Property" name="property" minOccurs="0" maxOccurs="unbounded"/>
  *       &lt;/xs:sequence>
  *     &lt;/xs:extension>
@@ -28,29 +27,11 @@ public class Node extends org.dataone.service.types.v1.Node implements
     Serializable
 {
     private static final long serialVersionUID = 10000000;
-    private ServiceExtension serviceExtensions;
     private List<Property> propertyList = new ArrayList<Property>();
 
     /** 
-     * Get the 'serviceExtensions' element value. TODO: define the content of this?
-     * 
-     * @return value
-     */
-    public ServiceExtension getServiceExtensions() {
-        return serviceExtensions;
-    }
-
-    /** 
-     * Set the 'serviceExtensions' element value. TODO: define the content of this?
-     * 
-     * @param serviceExtensions
-     */
-    public void setServiceExtensions(ServiceExtension serviceExtensions) {
-        this.serviceExtensions = serviceExtensions;
-    }
-
-    /** 
-     * Get the list of 'property' element items. Allows additional attributes be added to the Node document as needed
+     * Get the list of 'property' element items. Allows additional attributes be added to the 
+                  Node document as needed.
      * 
      * @return list
      */
@@ -59,7 +40,8 @@ public class Node extends org.dataone.service.types.v1.Node implements
     }
 
     /** 
-     * Set the list of 'property' element items. Allows additional attributes be added to the Node document as needed
+     * Set the list of 'property' element items. Allows additional attributes be added to the 
+                  Node document as needed.
      * 
      * @param list
      */

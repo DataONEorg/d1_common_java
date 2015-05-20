@@ -4,12 +4,9 @@ package org.dataone.service.types.v2;
 import java.io.Serializable;
 
 /** 
- * One value from the DataONE Object Format Vocabulary
- which is returned by :func:`CNCore.getFormat()`.An *ObjectFormat* is the structure returned from the
- :func:`CNCore.getFormat()` method of the CN REST interface. It provides
- the unique identifier and the name associated with the object format.
- Future versions may contain additional structured content from external
- common typing systems. 
+ * Extends Version 1.x :class:`Types.ObjectFormat` by 
+ adding :term:`mediaType` and :term:`extension` elements.
+
  * 
  * Schema fragment(s) for this class:
  * <pre>
@@ -17,7 +14,7 @@ import java.io.Serializable;
  *   &lt;xs:complexContent>
  *     &lt;xs:extension base="ns1:ObjectFormat">
  *       &lt;xs:sequence>
- *         &lt;xs:element type="xs:string" name="mimeType" minOccurs="0"/>
+ *         &lt;xs:element type="ns:MediaType" name="mediaType" minOccurs="0"/>
  *         &lt;xs:element type="xs:string" name="extension" minOccurs="0"/>
  *       &lt;/xs:sequence>
  *     &lt;/xs:extension>
@@ -29,29 +26,33 @@ public class ObjectFormat extends org.dataone.service.types.v1.ObjectFormat
     implements Serializable
 {
     private static final long serialVersionUID = 10000000;
-    private String mimeType;
+    private MediaType mediaType;
     private String extension;
 
     /** 
-     * Get the 'mimeType' element value. The MIME type for this object format.
+     * Get the 'mediaType' element value. The IANA Media Type for this object format.
+                  
      * 
      * @return value
      */
-    public String getMimeType() {
-        return mimeType;
+    public MediaType getMediaType() {
+        return mediaType;
     }
 
     /** 
-     * Set the 'mimeType' element value. The MIME type for this object format.
+     * Set the 'mediaType' element value. The IANA Media Type for this object format.
+                  
      * 
-     * @param mimeType
+     * @param mediaType
      */
-    public void setMimeType(String mimeType) {
-        this.mimeType = mimeType;
+    public void setMediaType(MediaType mediaType) {
+        this.mediaType = mediaType;
     }
 
     /** 
-     * Get the 'extension' element value. The extension to be used when serializing the object to a file.
+     * Get the 'extension' element value. Suggested file name extension to be used 
+                    when serializing this type of object to a file. The value 
+                    should not include the period (.).
      * 
      * @return value
      */
@@ -60,7 +61,9 @@ public class ObjectFormat extends org.dataone.service.types.v1.ObjectFormat
     }
 
     /** 
-     * Set the 'extension' element value. The extension to be used when serializing the object to a file.
+     * Set the 'extension' element value. Suggested file name extension to be used 
+                    when serializing this type of object to a file. The value 
+                    should not include the period (.).
      * 
      * @param extension
      */

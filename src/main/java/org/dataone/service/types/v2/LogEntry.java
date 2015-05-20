@@ -8,9 +8,8 @@ import org.dataone.service.types.v1.NodeReference;
 import org.dataone.service.types.v1.Subject;
 
 /** 
- * A single log entry as reported by a Member Node or
- Coordinating Node through the :func:`MNCore.getLogRecords` or
- :func:`CNCore.getLogRecords` methods.
+ * Extends :class:`Types.LogEntry` by relaxing the value 
+ space for the *event* element.
  * 
  * Schema fragment(s) for this class:
  * <pre>
@@ -149,8 +148,10 @@ public class LogEntry implements Serializable
     }
 
     /** 
-     * Get the 'event' element value. A non-empty string that indicates the type of even logged.
-            A value from the :class:`Types.Event` enumeration is recommended but no longer required.
+     * Get the 'event' element value. A non-empty string that indicates the type of even 
+              logged. A value from the :class:`Types.Event` enumeration is 
+              recommended but no longer required for Version 2.x.
+            
      * 
      * @return value
      */
@@ -159,8 +160,10 @@ public class LogEntry implements Serializable
     }
 
     /** 
-     * Set the 'event' element value. A non-empty string that indicates the type of even logged.
-            A value from the :class:`Types.Event` enumeration is recommended but no longer required.
+     * Set the 'event' element value. A non-empty string that indicates the type of even 
+              logged. A value from the :class:`Types.Event` enumeration is 
+              recommended but no longer required for Version 2.x.
+            
      * 
      * @param event
      */

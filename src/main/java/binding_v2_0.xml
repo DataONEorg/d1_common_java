@@ -2,9 +2,17 @@
   <namespace uri="http://ns.dataone.org/service/types/v2.0" prefix="d1_v2.0"/>
   <include path="binding_v1.xml" precompiled="true"/>
   <include path="binding_v1_1.xml" precompiled="true"/>
+  <mapping abstract="true" type-name="d1_v2.0:MediaType" class="org.dataone.service.types.v2.MediaType">
+    <value style="text" get-method="getString" set-method="setString"/>
+  </mapping>
+  <mapping class="org.dataone.service.types.v2.MediaType" name="mediaType" ns="http://ns.dataone.org/service/types/v2.0">
+    <structure map-as="d1_v2.0:MediaType"/>
+  </mapping>
   <mapping abstract="true" type-name="d1_v2.0:SystemMetadata" class="org.dataone.service.types.v2.SystemMetadata">
     <structure map-as="d1:SystemMetadata"/>
     <structure map-as="d1:Identifier" get-method="getSeriesId" set-method="setSeriesId" usage="optional" name="seriesId"/>
+    <structure map-as="d1_v2.0:MediaType" get-method="getMediaType" set-method="setMediaType" usage="optional" name="mediaType"/>
+    <value style="element" name="fileName" get-method="getFileName" set-method="setFileName" usage="optional"/>
   </mapping>
   <mapping class="org.dataone.service.types.v2.SystemMetadata" name="systemMetadata" ns="http://ns.dataone.org/service/types/v2.0">
     <structure map-as="d1_v2.0:SystemMetadata"/>
@@ -19,7 +27,6 @@
   </mapping>
   <mapping abstract="true" type-name="d1_v2.0:Node" class="org.dataone.service.types.v2.Node">
     <structure map-as="d1:Node"/>
-    <structure map-as="d1_v2.0:ServiceExtension" get-method="getServiceExtensions" set-method="setServiceExtensions" usage="optional" name="serviceExtensions"/>
     <collection get-method="getPropertyList" set-method="setPropertyList" usage="optional" create-type="java.util.ArrayList">
       <structure map-as="d1_v2.0:Property" name="property"/>
     </collection>
@@ -27,26 +34,17 @@
   <mapping class="org.dataone.service.types.v2.Node" name="node" ns="http://ns.dataone.org/service/types/v2.0">
     <structure map-as="d1_v2.0:Node"/>
   </mapping>
-  <mapping abstract="true" type-name="d1_v2.0:ServiceExtension" class="org.dataone.service.types.v2.ServiceExtension">
-    <value style="element" name="name" get-method="getName" set-method="setName"/>
-    <value style="element" name="type" get-method="getType" set-method="setType" usage="optional"/>
-    <value style="element" name="description" get-method="getDescription" set-method="setDescription" usage="optional"/>
-    <value style="element" name="connection" get-method="getConnection" set-method="setConnection" usage="optional"/>
-    <structure map-as="d1_v2.0:FormatList" get-method="getFormats" set-method="setFormats" usage="optional" name="formats"/>
-  </mapping>
-  <mapping abstract="true" type-name="d1_v2.0:FormatList" class="org.dataone.service.types.v2.FormatList">
-    <collection get-method="getFormatTypeList" set-method="setFormatTypeList" create-type="java.util.ArrayList">
-      <value style="element" name="formatType" type="java.lang.String"/>
-    </collection>
-  </mapping>
   <mapping abstract="true" type-name="d1_v2.0:Property" class="org.dataone.service.types.v2.Property">
     <value style="text" get-method="getValue" set-method="setValue"/>
     <value style="attribute" name="key" get-method="getKey" set-method="setKey"/>
     <value style="attribute" name="type" get-method="getType" set-method="setType" usage="optional"/>
   </mapping>
+  <mapping class="org.dataone.service.types.v2.Property" name="property" ns="http://ns.dataone.org/service/types/v2.0">
+    <structure map-as="d1_v2.0:Property"/>
+  </mapping>
   <mapping abstract="true" type-name="d1_v2.0:ObjectFormat" class="org.dataone.service.types.v2.ObjectFormat">
     <structure map-as="d1:ObjectFormat"/>
-    <value style="element" name="mimeType" get-method="getMimeType" set-method="setMimeType" usage="optional"/>
+    <structure map-as="d1_v2.0:MediaType" get-method="getMediaType" set-method="setMediaType" usage="optional" name="mediaType"/>
     <value style="element" name="extension" get-method="getExtension" set-method="setExtension" usage="optional"/>
   </mapping>
   <mapping class="org.dataone.service.types.v2.ObjectFormat" name="objectFormat" ns="http://ns.dataone.org/service/types/v2.0">

@@ -7,9 +7,9 @@ import java.util.List;
 import org.dataone.service.types.v1.Slice;
 
 /** 
- * Represents a collection of :class:`Types.LogEntry`
- elements, used to transfer log information between DataONE
- components.
+ * Extends :class:`Types.Log` to represent a collection of 
+ :class:`v2_0.Types.LogEntry` elements, used to transfer log information 
+ between DataONE components.
  * 
  * Schema fragment(s) for this class:
  * <pre>

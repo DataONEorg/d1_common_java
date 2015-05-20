@@ -4,8 +4,9 @@ package org.dataone.service.types.v2;
 import java.io.Serializable;
 
 /** 
- * Additional Property elements can be included to describe the Node in more detail.
- Some properties will come from controlled vocabularies, indicated by the type attribute, while 
+ * Additional Property elements can be included to 
+ describe the Node in more detail. Some properties will come from 
+ controlled vocabularies, indicated by the type attribute, while 
  others will be free-form key value pairs.
  * 
  * Schema fragment(s) for this class:
@@ -46,7 +47,8 @@ public class Property implements Serializable
     }
 
     /** 
-     * Get the 'key' attribute value. The property key for this entry. Should be unique within the Node element
+     * Get the 'key' attribute value. The property key for this entry. Should be 
+                    unique within the Node element.
      * 
      * @return value
      */
@@ -55,7 +57,8 @@ public class Property implements Serializable
     }
 
     /** 
-     * Set the 'key' attribute value. The property key for this entry. Should be unique within the Node element
+     * Set the 'key' attribute value. The property key for this entry. Should be 
+                    unique within the Node element.
      * 
      * @param key
      */
@@ -64,8 +67,10 @@ public class Property implements Serializable
     }
 
     /** 
-     * Get the 'type' attribute value. The optional type for the property. Can be used to indicate if a controlled vocabulary is used for the 
-    		        	property key to better facilitate machine interpretation.
+     * Get the 'type' attribute value. The optional type for the property. Can be 
+                    used to indicate if a controlled vocabulary is used for the
+                    property key to better facilitate machine interpretation.
+                  
      * 
      * @return value
      */
@@ -74,8 +79,10 @@ public class Property implements Serializable
     }
 
     /** 
-     * Set the 'type' attribute value. The optional type for the property. Can be used to indicate if a controlled vocabulary is used for the 
-    		        	property key to better facilitate machine interpretation.
+     * Set the 'type' attribute value. The optional type for the property. Can be 
+                    used to indicate if a controlled vocabulary is used for the
+                    property key to better facilitate machine interpretation.
+                  
      * 
      * @param type
      */

@@ -7,7 +7,13 @@ import java.util.List;
 
 /** 
  * A list of options that indicate the possible values for 
- a DataONE service.  Each option that can be validly sent to a service is listed, providing the specific key that should be used when interacting with the service, as well as a description of that key that allows API users to understand the usage of the key.  For example, an OptionList might contain a list of themes that can be used with the MNView.view service, or for other services that have a configurable but controlled set of parameters.
+ a DataONE service. Each option that can be validly sent to a service is
+ listed, providing the specific key that should be used when interacting 
+ with the service, as well as a description of that key that allows API 
+ users to understand the usage of the key.  For example, an OptionList 
+ might contain a list of themes that can be used with the MNView.view 
+ service, or for other services that have a configurable but controlled 
+ set of parameters.
  * 
  * Schema fragment(s) for this class:
  * <pre>
