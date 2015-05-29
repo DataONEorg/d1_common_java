@@ -2,8 +2,15 @@
   <namespace uri="http://ns.dataone.org/service/types/v2.0" prefix="d1_v2.0"/>
   <include path="binding_v1.xml" precompiled="true"/>
   <include path="binding_v1_1.xml" precompiled="true"/>
+  <mapping abstract="true" type-name="d1_v2.0:MediaTypeProperty" class="org.dataone.service.types.v2.MediaTypeProperty">
+    <value style="text" get-method="getValue" set-method="setValue"/>
+    <value style="attribute" name="name" get-method="getName" set-method="setName"/>
+  </mapping>
   <mapping abstract="true" type-name="d1_v2.0:MediaType" class="org.dataone.service.types.v2.MediaType">
-    <value style="text" get-method="getString" set-method="setString"/>
+    <collection get-method="getPropertyList" set-method="setPropertyList" usage="optional" create-type="java.util.ArrayList">
+      <structure map-as="d1_v2.0:MediaTypeProperty" name="property"/>
+    </collection>
+    <value style="attribute" name="name" get-method="getName" set-method="setName"/>
   </mapping>
   <mapping class="org.dataone.service.types.v2.MediaType" name="mediaType" ns="http://ns.dataone.org/service/types/v2.0">
     <structure map-as="d1_v2.0:MediaType"/>

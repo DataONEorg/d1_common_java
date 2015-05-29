@@ -29,12 +29,17 @@
 			serializer="org.dataone.service.util.BigIntegerMarshaller.serializeBigInteger"
 			deserializer="org.dataone.service.util.BigIntegerMarshaller.deserializeBigInteger" />
 			
-		<schema name="dataoneTypes_v2.0.xsd" includes="SystemMetadata Node NodeList OptionList ObjectFormat ObjectFormatList LogEntry Log Property" >
+		<schema name="dataoneTypes_v2.0.xsd" includes="SystemMetadata Node NodeList OptionList ObjectFormat ObjectFormatList LogEntry Log Property MediaTypeProperty" >
 			<complexType name="Property">
                     <simpleContent>
                         <extension value-name="value" />
                     </simpleContent>
                 </complexType>
+           <complexType name="MediaTypeProperty">
+                    <simpleContent>
+                        <extension value-name="value" />
+                    </simpleContent>
+                </complexType>     
 		</schema>
 		
 	</schema-set>

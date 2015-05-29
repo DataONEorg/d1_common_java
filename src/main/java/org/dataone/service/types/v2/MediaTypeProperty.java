@@ -21,7 +21,7 @@ import java.io.Serializable;
 public class MediaTypeProperty implements Serializable
 {
     private static final long serialVersionUID = 10000000;
-    private String string;
+    private String value;
     private String name;
 
     /** 
@@ -29,17 +29,17 @@ public class MediaTypeProperty implements Serializable
      * 
      * @return value
      */
-    public String getString() {
-        return string;
+    public String getValue() {
+        return value;
     }
 
     /** 
      * Set the extension value.
      * 
-     * @param string
+     * @param value
      */
-    public void setString(String string) {
-        this.string = string;
+    public void setValue(String value) {
+        this.value = value;
     }
 
     /** 
