@@ -25,12 +25,18 @@ package org.dataone.service.types.v2.util;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
+
 import org.dataone.service.exceptions.NotFound;
 import org.dataone.service.exceptions.NotImplemented;
 import org.dataone.service.exceptions.ServiceFailure;
 import org.dataone.service.types.v1.ObjectFormatIdentifier;
+import org.dataone.service.types.v2.ObjectFormat;
 import org.dataone.service.types.v2.ObjectFormatList;
 import org.dataone.service.types.v2.util.ObjectFormatServiceImpl;
+import org.dataone.service.util.TypeMarshaller;
 import org.junit.Test;
 
 /**
@@ -45,6 +51,36 @@ public class ObjectFormatServiceImplTestCase {
   public void testHarnessCheck() {
       assertTrue(true);
   }
+	
+	/**
+	   * Test un/marshalling
+	   */
+	  @Test
+	  public void testDeserialization() {
+	  	
+	  	ObjectFormatList objectFormatList;
+	    
+	  	try {
+		    objectFormatList = ObjectFormatServiceImpl.getInstance().listFormats();
+		  	assertTrue(objectFormatList != null);
+		  	
+		  	// now serialize and deserialize it to check MediaType@name
+		  	ByteArrayOutputStream os = new ByteArrayOutputStream();
+		  	TypeMarshaller.marshalTypeToOutputStream(objectFormatList, os);
+			objectFormatList = TypeMarshaller.unmarshalTypeFromStream(ObjectFormatList.class, new ByteArrayInputStream(os.toByteArray()));
+			
+			assertTrue(objectFormatList != null);
+			assertTrue(objectFormatList.getObjectFormat(0) != null);
+			assertTrue(objectFormatList.getObjectFormat(0).getMediaType() != null);
+			assertTrue(objectFormatList.getObjectFormat(0).getMediaType().getName() != null);
+			assertTrue(objectFormatList.getObjectFormat(0).getMediaType().getName().length() > 0);
+
+		  	
+	    } catch (Exception e) {
+	      fail("The service failed: " + e.getMessage());
+	    }
+	  
+	  }
   
   /**
    * Test getting the entire object format list.  The default list has at least
@@ -78,8 +114,10 @@ public class ObjectFormatServiceImplTestCase {
     
 		String result;
     try {
-	    result = ObjectFormatServiceImpl.getInstance().getFormat(fmtid).getFormatId().getValue();
+    	ObjectFormat obf = ObjectFormatServiceImpl.getInstance().getFormat(fmtid);
+	    result = obf.getFormatId().getValue();
 		  assertTrue(result.equals(knownFormat));
+		  assertTrue(obf.getMediaType().getName().equals(knownFormat));
       
     } catch (ServiceFailure e) {
       fail("The service failed: " + e.getMessage());
