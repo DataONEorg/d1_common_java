@@ -7,9 +7,9 @@ import org.dataone.service.types.v1.Identifier;
 /** 
  * System metadata in DataONE APIs version 2.0 extends
  the :class:`types.SystemMetadata` definition of version 1.x by adding 
- :term:`seriesId`, :term:`charset`, :term:`mediaType`, and 
- :term:`fileName` elements. Each of these are optional, so Version 1.x 
- System Metadata is compatible with Version 2.x, though not vice-versa.
+ :term:`seriesId`, :term:`mediaType`, and :term:`fileName` elements. Each 
+ of these are optional, so Version 1.x System Metadata is compatible with 
+ Version 2.x, though not vice-versa.
 
  * 
  * Schema fragment(s) for this class:
