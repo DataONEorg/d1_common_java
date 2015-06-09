@@ -87,6 +87,13 @@ public class Constants {
     /** CORE API resource which handles status monitoring operations */
     public static final String RESOURCE_MONITOR_STATUS = "monitor/status";
     
+    /** CORE API resource which handles diagnostic credential echoing operations */
+    public static final String RESOURCE_DIAG_SUBJECT = "diag/subject";
+    /** CORE API resource which handles diagnostic sysmeta echoing operations */
+    public static final String RESOURCE_DIAG_SYSMETA = "diag/sysmeta";
+    /** CORE API resource which handles diagnostic object echoing operations */
+    public static final String RESOURCE_DIAG_OBJECT = "diag/object";
+    
     /** CORE API resource which handles identifier reserving operations */
     public static final String RESOURCE_RESERVE = "reserve";
     /** CORE API resource which handles identifier generation operations */
