@@ -104,9 +104,9 @@ public class OptionList implements Serializable
     }
 
     /** 
-     * Get the 'key' attribute value. A value that can be used with a DataONE
-          service. Key values must not contain any characters that need to be 
-          URL escaped, and should be short and informative. 
+     * Get the 'key' attribute value. A value that can be used with a DataONE service. Key
+          values must not contain any characters that need to be URL escaped, and
+          should be short and informative. 
           
      * 
      * @return value
@@ -116,9 +116,9 @@ public class OptionList implements Serializable
     }
 
     /** 
-     * Set the 'key' attribute value. A value that can be used with a DataONE
-          service. Key values must not contain any characters that need to be 
-          URL escaped, and should be short and informative. 
+     * Set the 'key' attribute value. A value that can be used with a DataONE service. Key
+          values must not contain any characters that need to be URL escaped, and
+          should be short and informative. 
           
      * 
      * @param key
@@ -128,8 +128,8 @@ public class OptionList implements Serializable
     }
 
     /** 
-     * Get the 'description' attribute value. The description of an option, indicating its
-          intended use and impact on a DataONE service invocation.
+     * Get the 'description' attribute value. The description of an option, indicating its intended 
+            use and impact on a DataONE service invocation.
      * 
      * @return value
      */
@@ -138,8 +138,8 @@ public class OptionList implements Serializable
     }
 
     /** 
-     * Set the 'description' attribute value. The description of an option, indicating its
-          intended use and impact on a DataONE service invocation.
+     * Set the 'description' attribute value. The description of an option, indicating its intended 
+            use and impact on a DataONE service invocation.
      * 
      * @param description
      */
