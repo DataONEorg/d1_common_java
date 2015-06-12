@@ -43,7 +43,7 @@ public class LogEntry implements Serializable
      * Get the 'entryId' element value. A unique identifier for this log entry. The
             identifier should be unique for a particular node; This is not drawn
             from the same value space as other identifiers in DataONE, and so is
-            not subjec to the same restrictions.
+            not subject to the same restrictions.
      * 
      * @return value
      */
@@ -55,7 +55,7 @@ public class LogEntry implements Serializable
      * Set the 'entryId' element value. A unique identifier for this log entry. The
             identifier should be unique for a particular node; This is not drawn
             from the same value space as other identifiers in DataONE, and so is
-            not subjec to the same restrictions.
+            not subject to the same restrictions.
      * 
      * @param entryId
      */
@@ -126,7 +126,7 @@ public class LogEntry implements Serializable
     /** 
      * Get the 'subject' element value. The :term:`Subject` used for making the request.
             This may be the DataONE :term:`public` user if the request is not
-            authenticated, otherwise it will be the *Subject* of the certificate
+            authenticated, otherwise it will be the *subject* of the certificate
             used for authenticating the request.
      * 
      * @return value
@@ -138,7 +138,7 @@ public class LogEntry implements Serializable
     /** 
      * Set the 'subject' element value. The :term:`Subject` used for making the request.
             This may be the DataONE :term:`public` user if the request is not
-            authenticated, otherwise it will be the *Subject* of the certificate
+            authenticated, otherwise it will be the *subject* of the certificate
             used for authenticating the request.
      * 
      * @param subject
@@ -148,9 +148,9 @@ public class LogEntry implements Serializable
     }
 
     /** 
-     * Get the 'event' element value. A non-empty string that indicates the type of even 
+     * Get the 'event' element value. A non-empty string indicating the type of event 
               logged. A value from the :class:`Types.Event` enumeration is 
-              recommended but no longer required for Version 2.x.
+              recommended though no longer required for Version 2.x.
             
      * 
      * @return value
@@ -160,9 +160,9 @@ public class LogEntry implements Serializable
     }
 
     /** 
-     * Set the 'event' element value. A non-empty string that indicates the type of even 
+     * Set the 'event' element value. A non-empty string indicating the type of event 
               logged. A value from the :class:`Types.Event` enumeration is 
-              recommended but no longer required for Version 2.x.
+              recommended though no longer required for Version 2.x.
             
      * 
      * @param event

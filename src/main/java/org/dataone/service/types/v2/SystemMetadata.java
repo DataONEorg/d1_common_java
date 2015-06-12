@@ -36,13 +36,10 @@ public class SystemMetadata extends org.dataone.service.types.v1.SystemMetadata
     private String fileName;
 
     /** 
-     * Get the 'seriesId' element value. The :term:`seriesId` is a unique Unicode 
-                    string that can be used to identify an object revision chain 
-                    in DataONE. When included, the seriesId can be used to 
-                    reference the latest version of and object in the revision 
-                    chain. API methods that rely on byte fixity (e.g. for content 
-                    replication) will not accept seriesId in place of discrete 
-                    identifiers.The values used for seriesId must be unique 
+     * Get the 'seriesId' element value. The :term:`seriesId` is an optional, unique
+                    Unicode string that identifies an object revision chain. A
+                    seriesId will resolve to the latest version of an object. A seriesId can not appear in any other revision chain.
+                    The values used for seriesId must be unique 
                     within DataONE and cannot be the same as the :term:`primary 
                     identifier` of an object. The same encoding rules used for identifier 
                     values apply to seriesId values.
@@ -54,13 +51,10 @@ public class SystemMetadata extends org.dataone.service.types.v1.SystemMetadata
     }
 
     /** 
-     * Set the 'seriesId' element value. The :term:`seriesId` is a unique Unicode 
-                    string that can be used to identify an object revision chain 
-                    in DataONE. When included, the seriesId can be used to 
-                    reference the latest version of and object in the revision 
-                    chain. API methods that rely on byte fixity (e.g. for content 
-                    replication) will not accept seriesId in place of discrete 
-                    identifiers.The values used for seriesId must be unique 
+     * Set the 'seriesId' element value. The :term:`seriesId` is an optional, unique
+                    Unicode string that identifies an object revision chain. A
+                    seriesId will resolve to the latest version of an object. A seriesId can not appear in any other revision chain.
+                    The values used for seriesId must be unique 
                     within DataONE and cannot be the same as the :term:`primary 
                     identifier` of an object. The same encoding rules used for identifier 
                     values apply to seriesId values.
@@ -82,15 +76,15 @@ public class SystemMetadata extends org.dataone.service.types.v1.SystemMetadata
                         of the associated object than may be available through 
                         the associated ObjectFormat.
                       When specified, the mediaType value here 
-                        should be used in preference to the value recorded in the 
-                        referenced :class:`ObjectFormat`.
+                        overrides the value recorded in the referenced
+                        :class:`ObjectFormat`.
                       This value SHOULD be set by the content 
                       creator. It MAY be set by any receiving agent if the value 
                       is not already set, the value in the ObjectFormat is less 
                       specific, and a correct value is specified elsewhere such 
                       as by a HTTP Content-Type parameter.
-                      This value may only be changed to correct 
-                        an erroneous entry.
+                      This value MAY be changed to correct an
+                      erroneous entry.
      * 
      * @return value
      */
@@ -109,15 +103,15 @@ public class SystemMetadata extends org.dataone.service.types.v1.SystemMetadata
                         of the associated object than may be available through 
                         the associated ObjectFormat.
                       When specified, the mediaType value here 
-                        should be used in preference to the value recorded in the 
-                        referenced :class:`ObjectFormat`.
+                        overrides the value recorded in the referenced
+                        :class:`ObjectFormat`.
                       This value SHOULD be set by the content 
                       creator. It MAY be set by any receiving agent if the value 
                       is not already set, the value in the ObjectFormat is less 
                       specific, and a correct value is specified elsewhere such 
                       as by a HTTP Content-Type parameter.
-                      This value may only be changed to correct 
-                        an erroneous entry.
+                      This value MAY be changed to correct an
+                      erroneous entry.
      * 
      * @param mediaType
      */
@@ -126,8 +120,8 @@ public class SystemMetadata extends org.dataone.service.types.v1.SystemMetadata
     }
 
     /** 
-     * Get the 'fileName' element value. Optional tough recommended value that 
-                      provides a suggested file name for the object. Values should
+     * Get the 'fileName' element value. Optional though recommended value providing 
+                      a suggested file name for the object. Values should
                       conform to cross platform file naming conventions.
                     This value SHOULD be set by the content 
                       creator.This value MAY be set by any receiving agent
@@ -142,8 +136,8 @@ public class SystemMetadata extends org.dataone.service.types.v1.SystemMetadata
     }
 
     /** 
-     * Set the 'fileName' element value. Optional tough recommended value that 
-                      provides a suggested file name for the object. Values should
+     * Set the 'fileName' element value. Optional though recommended value providing 
+                      a suggested file name for the object. Values should
                       conform to cross platform file naming conventions.
                     This value SHOULD be set by the content 
                       creator.This value MAY be set by any receiving agent

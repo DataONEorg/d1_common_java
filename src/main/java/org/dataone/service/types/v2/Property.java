@@ -6,7 +6,7 @@ import java.io.Serializable;
 /** 
  * Additional Property elements can be included to 
  describe the Node in more detail. Some properties will come from 
- controlled vocabularies, indicated by the type attribute, while 
+ controlled vocabularies indicated by the type attribute, while 
  others will be free-form key value pairs.
  * 
  * Schema fragment(s) for this class:

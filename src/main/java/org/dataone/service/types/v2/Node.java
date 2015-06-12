@@ -7,8 +7,8 @@ import java.util.List;
 
 /** 
  * Extends the Version 1.x :class:`Types.Node` by adding 
- an optional unbounded parameter entry that can be used to provide 
- additional simple metadata relevant to a Node. 
+ an optional unbounded parameter entry providing additional simple 
+ metadata relevant to a Node. 
  * 
  * Schema fragment(s) for this class:
  * <pre>
