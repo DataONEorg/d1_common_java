@@ -28,6 +28,7 @@ import org.dataone.service.exceptions.NotAuthorized;
 import org.dataone.service.exceptions.NotFound;
 import org.dataone.service.exceptions.NotImplemented;
 import org.dataone.service.exceptions.ServiceFailure;
+import org.dataone.service.exceptions.UnsupportedType;
 import org.dataone.service.types.v1.Identifier;
 import org.dataone.service.types.v1.ObjectFormatIdentifier;
 import org.dataone.service.types.v1.Session;
@@ -45,6 +46,6 @@ public interface MNPackage
      */
     public InputStream getPackage(Session session, ObjectFormatIdentifier packageType, Identifier id)
         throws InvalidToken, ServiceFailure, NotAuthorized, InvalidRequest, 
-        NotImplemented, NotFound;
+        NotImplemented, NotFound, UnsupportedType;
 
 }
