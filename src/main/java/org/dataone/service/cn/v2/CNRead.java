@@ -32,6 +32,7 @@ import org.dataone.service.exceptions.ServiceFailure;
 import org.dataone.service.types.v1.Checksum;
 import org.dataone.service.types.v1.DescribeResponse;
 import org.dataone.service.types.v1.Identifier;
+import org.dataone.service.types.v1.NodeReference;
 import org.dataone.service.types.v1.ObjectFormatIdentifier;
 import org.dataone.service.types.v1.ObjectList;
 import org.dataone.service.types.v1.ObjectLocationList;
@@ -87,7 +88,7 @@ public interface CNRead
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNRead.listObjects
      */
     public ObjectList listObjects(Session session, Date fromDate, 
-            Date toDate, ObjectFormatIdentifier formatId, Identifier identifier, Boolean replicaStatus,
+            Date toDate, ObjectFormatIdentifier formatId, NodeReference nodeId, Identifier identifier,
             Integer start, Integer count) 
     throws InvalidRequest, InvalidToken, NotAuthorized, NotImplemented, ServiceFailure;
     
