@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.dataone.service.types.v1.AccessPolicy;
 import org.dataone.service.types.v1.Identifier;
 import org.dataone.service.types.v1.NodeReference;
@@ -93,8 +94,15 @@ public class TypeCompareUtilTestCase {
 		SystemMetadata sysMeta2 = createStandardSysmeta();
 		
 		List<String> report = TypeCompareUtil.compareSystemMetadata(sysMeta1, sysMeta2);
-		
-		assertEquals("If they are the same, then it should be a one-line report",1, report.size());
+		if (report.size() > 1) {
+
+		    for(String line : report) {
+		        System.out.println(line);
+		    }
+		}
+		assertEquals("If they are the same, then it should be a one-line report," +
+				" not '" + StringUtils.join(report, "; ") + "'",
+		        1, report.size());
 		assertEquals("If they are the same, then should get 'OK'","OK",report.get(0));
 		
 		AccessPolicy ap = sysMeta2.getAccessPolicy();
