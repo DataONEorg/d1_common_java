@@ -90,8 +90,10 @@ public class TypeCompareUtilTestCase {
 	
 	@Test
 	public void testCompareSysMeta() {
-		SystemMetadata sysMeta1 = createStandardSysmeta();
-		SystemMetadata sysMeta2 = createStandardSysmeta();
+	    Date commonDate = new Date();
+		SystemMetadata sysMeta1 = createStandardSysmeta(commonDate);
+		SystemMetadata sysMeta2 = createStandardSysmeta(commonDate);
+        
 		
 		List<String> report = TypeCompareUtil.compareSystemMetadata(sysMeta1, sysMeta2);
 		if (report.size() > 1) {
@@ -132,25 +134,25 @@ public class TypeCompareUtilTestCase {
 
 	
 	
-	private SystemMetadata createStandardSysmeta() {
+	private SystemMetadata createStandardSysmeta(Date date) {
 		SystemMetadata smd = new SystemMetadata();
 		smd.setIdentifier(buildIdentifier("myID"));
 		smd.setFormatId(buildFormatIdentifier("myFormatID"));
-		smd.setDateUploaded(new Date());
+		smd.setDateUploaded(date);
 		smd.setAuthoritativeMemberNode(buildNodeReference("urn:node:myNode"));
-		smd.setDateSysMetadataModified(new Date());
+		smd.setDateSysMetadataModified(date);
 		smd.setRightsHolder(buildSubject("me"));
 		smd.setSerialVersion(new BigInteger("12345"));
-		Replica r = new Replica();
-		r.setReplicaMemberNode(buildNodeReference("urn:node:Xanother"));
-		r.setReplicationStatus(ReplicationStatus.REQUESTED);
-		r.setReplicaVerified(new Date());
-		smd.addReplica(r);
-		r = new Replica();
-		r.setReplicationStatus(ReplicationStatus.COMPLETED);
-		r.setReplicaVerified(new Date());
-		r.setReplicaMemberNode(buildNodeReference("urn:node:ONEmore"));
-		smd.addReplica(r);
+		Replica r1 = new Replica();
+		r1.setReplicaMemberNode(buildNodeReference("urn:node:Xanother"));
+		r1.setReplicationStatus(ReplicationStatus.REQUESTED);
+		r1.setReplicaVerified(date);
+		smd.addReplica(r1);
+		Replica r2 = new Replica();
+		r2.setReplicationStatus(ReplicationStatus.COMPLETED);
+		r2.setReplicaVerified(date);
+		r2.setReplicaMemberNode(buildNodeReference("urn:node:ONEmore"));
+		smd.addReplica(r2);
 		
 		
 		AccessPolicy ap = new AccessPolicy();
