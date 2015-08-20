@@ -25,7 +25,7 @@
   prefer-inline="false" generate-all="true"
   binding-per-schema="true"
   type-substitutions="xs:unsignedLong xs:long" enumeration-type="java5" >
-    <class-decorator class="org.dataone.jibx.schema.codegen.extend.CollectionMethodsDecorator"/>
+    
      <!-- Should add in the serializable decorator, we may want to use it at some point -->
      <class-decorator class="org.jibx.schema.codegen.extend.SerializableDecorator" serial-version="10000000"/>
      <class-decorator class="org.dataone.jibx.schema.codegen.extend.ComparableIdentifierDecorator" match-name="Identifier"/>
@@ -33,6 +33,33 @@
      <class-decorator class="org.dataone.jibx.schema.codegen.extend.ComparableIdentifierDecorator" match-name="ObjectFormatIdentifier"/>
      <class-decorator class="org.dataone.jibx.schema.codegen.extend.ComparableSubjectDecorator" match-name="Subject"/>
 
+     <!-- Classes requiring the CollectionMethodsDecorator are explicitly having the decorator applied by name. -->
+     <!-- This is so that subclasses of Slice can have a SliceMethodsDecorator applied to them, without applying 
+          the CollectionMethodsDecorator (since SliceMethodsDecorator needs to add the same methods and wouldn't work
+          in conjunction).-->
+     <class-decorator class="org.dataone.jibx.schema.codegen.extend.CollectionMethodsDecorator" match-name="SystemMetadata"/>
+     <class-decorator class="org.dataone.jibx.schema.codegen.extend.CollectionMethodsDecorator" match-name="SubjectList"/>
+     <class-decorator class="org.dataone.jibx.schema.codegen.extend.CollectionMethodsDecorator" match-name="SubjectInfo"/>
+     <class-decorator class="org.dataone.jibx.schema.codegen.extend.CollectionMethodsDecorator" match-name="Services"/>
+     <class-decorator class="org.dataone.jibx.schema.codegen.extend.CollectionMethodsDecorator" match-name="Service"/>
+     <class-decorator class="org.dataone.jibx.schema.codegen.extend.CollectionMethodsDecorator" match-name="ReplicationPolicy"/>
+     <class-decorator class="org.dataone.jibx.schema.codegen.extend.CollectionMethodsDecorator" match-name="Person"/>
+     <class-decorator class="org.dataone.jibx.schema.codegen.extend.CollectionMethodsDecorator" match-name="ObjectLocationList"/>
+     <class-decorator class="org.dataone.jibx.schema.codegen.extend.CollectionMethodsDecorator" match-name="ObjectLocation"/>
+     <class-decorator class="org.dataone.jibx.schema.codegen.extend.CollectionMethodsDecorator" match-name="NodeReplicationPolicy"/>
+     <class-decorator class="org.dataone.jibx.schema.codegen.extend.CollectionMethodsDecorator" match-name="MonitorList"/>
+     <class-decorator class="org.dataone.jibx.schema.codegen.extend.CollectionMethodsDecorator" match-name="Group"/>
+     <class-decorator class="org.dataone.jibx.schema.codegen.extend.CollectionMethodsDecorator" match-name="ChecksumAlgorithmList"/>
+     <class-decorator class="org.dataone.jibx.schema.codegen.extend.CollectionMethodsDecorator" match-name="AccessRule"/>
+     <class-decorator class="org.dataone.jibx.schema.codegen.extend.CollectionMethodsDecorator" match-name="AccessPolicy"/>
+     <class-decorator class="org.dataone.jibx.schema.codegen.extend.CollectionMethodsDecorator" match-name="NodeList"/>
+     <class-decorator class="org.dataone.jibx.schema.codegen.extend.CollectionMethodsDecorator" match-name="Node"/>
+
+     <!-- Slice subclasses: -->     
+     <class-decorator class="org.dataone.jibx.schema.codegen.extend.SliceMethodsDecorator" match-name="Log"/>
+     <class-decorator class="org.dataone.jibx.schema.codegen.extend.SliceMethodsDecorator" match-name="ObjectList"/>
+     <class-decorator class="org.dataone.jibx.schema.codegen.extend.SliceMethodsDecorator" match-name="ObjectFormatList"/>
+     
 <!--      For development cycles, we will use dataoneTypes.xsd as the schema-set name, but
           For production releases we switch to an url that has v1 as the last segment of the uri path -->
       <schema-set names="dataoneTypes.xsd" prefix="d1" namespaces="http://ns.dataone.org/service/types/v1"  package="org.dataone.service.types.v1"  binding-file-name="binding_v1.xml"> 
