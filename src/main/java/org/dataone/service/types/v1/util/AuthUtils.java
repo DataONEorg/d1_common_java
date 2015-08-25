@@ -9,8 +9,11 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.log4j.Logger;
 import org.dataone.service.types.v1.AccessRule;
 import org.dataone.service.types.v1.Group;
+import org.dataone.service.types.v1.Node;
+import org.dataone.service.types.v1.NodeList;
 import org.dataone.service.types.v1.Permission;
 import org.dataone.service.types.v1.Person;
+import org.dataone.service.types.v1.Service;
 import org.dataone.service.types.v1.Session;
 import org.dataone.service.types.v1.Subject;
 import org.dataone.service.types.v1.SubjectInfo;
@@ -247,4 +250,37 @@ public class AuthUtils {
 		return false;
 		
 	}
+	
+	/**
+	 * the CN is the authority for systemMetadata updates only for v1 MNs that
+	 * implement MNStorage services.  This method is used primarily by the CN
+	 * and ITK clients to know which node and methods to use to update SystemMetadata.
+	 * (It is assumed that a MemberNode knows if it acts as an authority or not.)
+	 * 
+	 * @param nodelist
+	 * @param systemMetadata
+	 * @return true if the authoritativeMN in the systemMetadata is the authority.
+	 *    Otherwise, the CN is the authority.
+	 */
+    public static boolean isCNAuthorityForSystemMetadataUpdate(NodeList nodelist, SystemMetadata systemMetadata) {
+        Node authMN = NodelistUtil.findNode(nodelist, systemMetadata.getAuthoritativeMemberNode());
+
+        boolean v1MNStorageAvailable = false;
+
+        for (Service service: authMN.getServices().getServiceList())
+        {   
+            if (service.getAvailable()) {
+                if (service.getVersion().equalsIgnoreCase("v1")) {
+                    if (service.getName().equalsIgnoreCase("MNStorage")) {
+                        v1MNStorageAvailable = true;
+                    }
+                } 
+                else if ( service.getVersion().matches("^[v|V](\\d+)$")) {
+                    // there is a greater-than v1 service running
+                    return false;
+                }
+            }
+        }
+        return v1MNStorageAvailable;
+    }
 }
