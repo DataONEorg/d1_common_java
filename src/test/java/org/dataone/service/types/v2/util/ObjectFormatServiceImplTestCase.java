@@ -27,7 +27,6 @@ import static org.junit.Assert.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.OutputStream;
 
 import org.dataone.service.exceptions.NotFound;
 import org.dataone.service.exceptions.NotImplemented;
@@ -35,7 +34,6 @@ import org.dataone.service.exceptions.ServiceFailure;
 import org.dataone.service.types.v1.ObjectFormatIdentifier;
 import org.dataone.service.types.v2.ObjectFormat;
 import org.dataone.service.types.v2.ObjectFormatList;
-import org.dataone.service.types.v2.util.ObjectFormatServiceImpl;
 import org.dataone.service.util.TypeMarshaller;
 import org.junit.Test;
 
@@ -150,7 +148,6 @@ public class ObjectFormatServiceImplTestCase {
         assertTrue(e instanceof NotFound);
         
       }
-        	
   }
   
 }

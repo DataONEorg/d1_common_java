@@ -29,13 +29,17 @@ import static org.junit.Assert.fail;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.InvocationTargetException;
-import java.util.logging.Level;
+import java.math.BigInteger;
+import java.util.Date;
 
 import org.apache.log4j.Logger;
+import org.dataone.service.types.v1.Checksum;
+import org.dataone.service.types.v1.Identifier;
 import org.dataone.service.types.v1.Node;
-
+import org.dataone.service.types.v1.NodeReference;
+import org.dataone.service.types.v1.ObjectFormatIdentifier;
 import org.dataone.service.types.v1.ObjectList;
+import org.dataone.service.types.v1.Subject;
 import org.dataone.service.types.v1.SystemMetadata;
 import org.jibx.runtime.JiBXException;
 import org.junit.Test;
@@ -80,48 +84,8 @@ public class TypeMarshallerTestCase {
         } catch (JiBXException ex) {
             fail("Test misconfiguration" +  ex);
         }
+    }
 
-
-    }
-    @Test
-    public void convertV1NodeToV2Node() {
-        try {
-            InputStream is = this.getClass().getResourceAsStream("/org/dataone/service/samples/v1/mnNode1.xml");
-            Node v1Node = TypeMarshaller.unmarshalTypeFromStream(Node.class, is);
-            org.dataone.service.types.v2.Node v2Node = new org.dataone.service.types.v2.Node();
-            v2Node = TypeMarshaller.convertTypeFromType(v1Node, v2Node.getClass());
-        } catch (IOException ex) {
-            fail("Test misconfiguration" +  ex);
-        } catch (InstantiationException ex) {
-            fail("Test misconfiguration" + ex);
-        } catch (IllegalAccessException ex) {
-            fail("Test misconfiguration" +  ex);
-        } catch (JiBXException ex) {
-            fail("Test misconfiguration" +  ex);
-        }   catch (InvocationTargetException ex) {
-                fail("Test misconfiguration" +  ex);
-        }
-    }
-    @Test
-    public void convertV2NodeToV1Node() {
-        try {
-            InputStream is = this.getClass().getResourceAsStream("/org/dataone/service/samples/v2/mnNode1.xml");
-            org.dataone.service.types.v2.Node v2Node = new org.dataone.service.types.v2.Node();
-            v2Node = TypeMarshaller.unmarshalTypeFromStream(v2Node.getClass(), is);
-            
-            Node v1Node = TypeMarshaller.convertTypeFromType(v2Node, Node.class);
-        } catch (IOException ex) {
-            fail("Test misconfiguration" +  ex);
-        } catch (InstantiationException ex) {
-            fail("Test misconfiguration" + ex);
-        } catch (IllegalAccessException ex) {
-            fail("Test misconfiguration" +  ex);
-        } catch (JiBXException ex) {
-            fail("Test misconfiguration" +  ex);
-        }   catch (InvocationTargetException ex) {
-                fail("Test misconfiguration" +  ex);
-        }
-    }
     
     @Test
     public void serializeEmptyObjectList() {
@@ -175,6 +139,56 @@ public class TypeMarshallerTestCase {
             fail("Test misconfiguration" + ex);
         } catch (IllegalAccessException ex) {
             fail("Test misconfiguration" +  ex);
+        } catch (JiBXException ex) {
+            fail("Test misconfiguration" +  ex);
+        }
+
+
+    }
+    
+    
+    @Test
+    public void serializeSystemMetadata() {
+        try {
+            ByteArrayOutputStream os = new ByteArrayOutputStream();
+            org.dataone.service.types.v2.SystemMetadata s = new org.dataone.service.types.v2.SystemMetadata();
+            s.setIdentifier(new Identifier());
+            s.getIdentifier().setValue("foooo2");
+            s.setAuthoritativeMemberNode(new NodeReference());
+            s.getAuthoritativeMemberNode().setValue("urn:node:authMN");
+            s.setOriginMemberNode(new NodeReference());
+            s.getOriginMemberNode().setValue("urn:node:authMN");
+            s.setChecksum(new Checksum());
+            s.getChecksum().setAlgorithm("MD5");
+            s.getChecksum().setValue("2ofo349vdwlw98voiwopwkvne");
+            Date now = new Date();
+            s.setDateSysMetadataModified(now);
+            s.setDateUploaded(now);
+            s.setFormatId(new ObjectFormatIdentifier());
+            s.getFormatId().setValue("eml://ecoinformatics.org/eml-2.1.0");
+            s.setRightsHolder(new Subject());
+            s.getRightsHolder().setValue("groucho");
+            s.setSerialVersion(BigInteger.ONE);
+            s.setSize(new BigInteger("9"));
+//            s.setSubmitter(new Subject());
+//            s.getSubmitter().setValue("harpo");
+
+            String styleSheet = "test.xsl";
+            TypeMarshaller.marshalTypeToOutputStream(s, os,styleSheet);
+
+            String result = os.toString("UTF-8");
+            log.debug("Stylesheet result: \n" + result);
+            assertTrue(result.contains("foooo2"));
+            os.close();
+            ByteArrayOutputStream os2 = new ByteArrayOutputStream();
+            TypeMarshaller.marshalTypeToOutputStream(s, os2);
+            
+        } catch (IOException ex) {
+            fail("Test misconfiguration" +  ex);
+//        } catch (InstantiationException ex) {
+//            fail("Test misconfiguration" + ex);
+//        } catch (IllegalAccessException ex) {
+//            fail("Test misconfiguration" +  ex);
         } catch (JiBXException ex) {
             fail("Test misconfiguration" +  ex);
         }

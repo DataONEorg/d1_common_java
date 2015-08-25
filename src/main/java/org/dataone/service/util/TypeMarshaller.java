@@ -20,8 +20,6 @@
 
 package org.dataone.service.util;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -30,9 +28,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Reader;
-import java.lang.reflect.InvocationTargetException;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.apache.log4j.Logger;
 import org.jibx.runtime.BindingDirectory;
 import org.jibx.runtime.IBindingFactory;
@@ -192,33 +188,5 @@ public class TypeMarshaller {
         		throw new IOException("InputStream was null");
         	}
         }
-    }
-    
-    /**
-     * Deeply copy properties from one type to another. Typically used for converting types between
-     * service versions where most properties are shared.
-     * @param original the instance being copied
-     * @param destinationClass the target class to return an instance of
-     * @return an instance of destinationClass with all shared properties copied from the original instance
-     * @throws InstantiationException
-     * @throws IllegalAccessException
-     * @throws JiBXException
-     * @throws IOException
-     * @throws InvocationTargetException
-     */
-    public static <T> T convertTypeFromType(Object original, Class<T> destinationClass) 
-    		throws InstantiationException, IllegalAccessException, JiBXException, IOException, InvocationTargetException {
-
-    	// make copy of it using the marshaller to ensure DEEP copy and no shared object references
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		TypeMarshaller.marshalTypeToOutputStream(original, baos);
-		Object copyInstance = TypeMarshaller.unmarshalTypeFromStream(original.getClass(), new ByteArrayInputStream(baos.toByteArray()));
-		
-		// copy properties to the new type
-    	T destInstance = destinationClass.newInstance();
-		BeanUtils.copyProperties(destInstance, copyInstance);
-
-		return destInstance;
-		
     }
 }

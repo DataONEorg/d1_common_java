@@ -608,7 +608,7 @@ public class ExceptionHandler {
         // detailCode should be -1 if not known or supplied
         // description should be empty string if not known or not supplied
         // traceInformation should be empty if not known or not supplied
-        if (!name.isEmpty()) {
+        if (name != null & !name.isEmpty()) {
             if (name.equals("AuthenticationTimeout")) {
                 return new AuthenticationTimeout(detailCode, description, pid, nodeId, trace_information);
             } else if (name.equals("IdentifierNotUnique")) {
