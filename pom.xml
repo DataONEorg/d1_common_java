@@ -273,6 +273,18 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
+        <!--  the apache snapshots repo is here only for the BCEL workaround -->
+<!--         <repository>
+         <id>apache.snapshots</id>
+         <url>https://repository.apache.org/content/repositories/snapshots</url>
+         <snapshots>
+            <enabled>true</enabled>
+            <updatePolicy>always</updatePolicy>
+         </snapshots>
+         <releases>
+            <enabled>false</enabled>
+         </releases>
+      </repository> -->
     </repositories>
     <dependencies>
         <dependency>
@@ -316,6 +328,11 @@
             <artifactId>maven-jibx-plugin</artifactId>
             <version>${org.jibx.version}</version>
         </dependency>
+<!--         <dependency>
+                  <groupId>org.apache.bcel</groupId>
+                  <artifactId>bcel</artifactId>
+                  <version>6.0-SNAPSHOT</version>
+               </dependency> -->
         <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
@@ -369,11 +386,6 @@
             <version>4.3.3</version>
         </dependency>
         
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.3.3</version>
-        </dependency>
         
         <dependency>
             <groupId>commons-configuration</groupId>
