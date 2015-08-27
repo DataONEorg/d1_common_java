@@ -44,6 +44,11 @@ public class Log extends Slice implements Serializable
      */
     public void setLogEntryList(List<LogEntry> list) {
         logEntryList = list;
+        int newSize = 0;
+        if (list != null)
+            newSize = list.size();
+        setTotal(getTotal() - getCount() + newSize);
+        setCount(newSize);
     }
 
     /** 
@@ -66,6 +71,8 @@ public class Log extends Slice implements Serializable
             logEntryList = new ArrayList<LogEntry>();
         }
         logEntryList.add(item);
+        setTotal(getTotal() + 1);
+        setCount(getCount() + 1);
     }
 
     /** 
@@ -87,6 +94,8 @@ public class Log extends Slice implements Serializable
         if (logEntryList == null) {
             logEntryList = new ArrayList<LogEntry>();
         }
+        setTotal(getTotal() - getCount());
+        setCount(0);
         logEntryList.clear();
     }
 }

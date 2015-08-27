@@ -43,6 +43,11 @@ public class ObjectList extends Slice implements Serializable
      */
     public void setObjectInfoList(List<ObjectInfo> list) {
         objectInfoList = list;
+        int newSize = 0;
+        if (list != null)
+            newSize = list.size();
+        setTotal(getTotal() - getCount() + newSize);
+        setCount(newSize);
     }
 
     /** 
@@ -65,6 +70,8 @@ public class ObjectList extends Slice implements Serializable
             objectInfoList = new ArrayList<ObjectInfo>();
         }
         objectInfoList.add(item);
+        setTotal(getTotal() + 1);
+        setCount(getCount() + 1);
     }
 
     /** 
@@ -86,6 +93,8 @@ public class ObjectList extends Slice implements Serializable
         if (objectInfoList == null) {
             objectInfoList = new ArrayList<ObjectInfo>();
         }
+        setTotal(getTotal() - getCount());
+        setCount(0);
         objectInfoList.clear();
     }
 }
