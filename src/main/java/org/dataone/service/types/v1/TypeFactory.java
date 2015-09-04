@@ -31,7 +31,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
 import org.apache.commons.io.input.CountingInputStream;
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.dataone.service.exceptions.NotFound;
 import org.dataone.service.exceptions.ServiceFailure;

@@ -76,9 +76,10 @@ public class ServiceMethodRestrictionUtil {
      * @return List<String>
      */
     public static List<String> getCnAdministrativeList(List<Node> nodeList, String serviceName, String methodName) {
+        
         List<String> administrators = new ArrayList<String>();
 
-        List<String> administratorsProperties = Settings.getConfiguration().getList("cn.administrators");
+        String[] administratorsProperties = Settings.getConfiguration().getStringArray("cn.administrators");
         if (administrators != null) {
             for (String administrator : administratorsProperties) {
                 logger.debug("Adding cn.administrators entry: " + administrator);

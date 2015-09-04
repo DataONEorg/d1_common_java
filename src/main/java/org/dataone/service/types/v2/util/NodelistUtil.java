@@ -82,6 +82,7 @@ public class NodelistUtil {
             throws InstantiationException, IllegalAccessException, JiBXException, IOException {
         NodeList nodeList = TypeMarshaller.unmarshalTypeFromStream(NodeList.class, nodeListStream);
         return mapNodeList(nodeList);
+        
     }
 
     /**
@@ -91,10 +92,6 @@ public class NodelistUtil {
      * @author waltz
      * @param nodeList
      * @return Map
-     * @exception InstantiationException
-     * @exception IOException
-     * @exception IllegalAccessException
-     * @exception JiBXException
      */
     public static Map<String, String> mapNodeList(NodeList nodeList) {
         // method originally used Hashtable. I've substituted ConcurrentHashMap to

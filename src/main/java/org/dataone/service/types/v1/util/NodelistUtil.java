@@ -91,10 +91,6 @@ public class NodelistUtil {
      * @author waltz
      * @param nodeList
      * @return Map
-     * @exception InstantiationException
-     * @exception IOException
-     * @exception IllegalAccessException
-     * @exception JiBXException
      */
     public static Map<String, String> mapNodeList(NodeList nodeList) {
         // method originally used Hashtable. I've substituted ConcurrentHashMap to
