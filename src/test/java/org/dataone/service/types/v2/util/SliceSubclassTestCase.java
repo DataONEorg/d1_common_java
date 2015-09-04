@@ -34,7 +34,7 @@ public class SliceSubclassTestCase {
         int total = l.getTotal();
         assertTrue("Adding 1 element to ObjectList should not change the start value.", start == 0);
         assertTrue("Adding 1 element to ObjectList should increase the count by 1.", count == 1);
-        assertTrue("Adding 1 element to ObjectList should increase the total by 1.", total == 1);
+        assertTrue("Adding 1 element to ObjectList should not change the total.", total == 0);
     }
     
     @Test
@@ -58,7 +58,7 @@ public class SliceSubclassTestCase {
         
         assertTrue("Clearing the ObjectList should not change the start value.", start == 1);
         assertTrue("Clearing the ObjectList should make the count zero.", count == 0);
-        assertTrue("Clearing the ObjectList should decrease the total by the previous count.", total == 2);
+        assertTrue("Clearing the ObjectList should not change the total.", total == 5);
     }
     
     @Test
@@ -79,7 +79,7 @@ public class SliceSubclassTestCase {
         int total = l.getTotal();
         assertTrue("Setting a new list in a ObjectList should not change the start value.", start == 1);
         assertTrue("Setting a new list in a ObjectList should change the count by the difference with the old count.", count == 2);
-        assertTrue("Setting a new list in a ObjectList should change the total by the difference with the old count.", total == 5);
+        assertTrue("Setting a new list in a ObjectList should not change the total.", total == 3);
         
         logEntryList.add(new LogEntry());
         logEntryList.add(new LogEntry());
@@ -91,7 +91,7 @@ public class SliceSubclassTestCase {
         total = l.getTotal();
         assertTrue("Setting a new list in a ObjectList should not change the start value.", start == 1);
         assertTrue("Setting a new list in a ObjectList should change the count by the difference with the old count.", count == 5);
-        assertTrue("Setting a new list in a ObjectList should change the total by the difference with the old count.", total == 8);
+        assertTrue("Setting a new list in a ObjectList should not change the total.", total == 3);
         
         l.setLogEntryList(new ArrayList<LogEntry>());
         start = l.getStart();
@@ -99,7 +99,7 @@ public class SliceSubclassTestCase {
         total = l.getTotal();
         assertTrue("Setting an empty list in a ObjectList should not change the start value.", start == 1);
         assertTrue("Setting an empty list in a ObjectList should change the count to zero.", count == 0);
-        assertTrue("Setting an empty list in a ObjectList should change the total by the difference with the old count.", total == 3);
+        assertTrue("Setting an empty list in a ObjectList should not change the total.", total == 3);
         
         try {
             l.setLogEntryList(null);
@@ -108,7 +108,7 @@ public class SliceSubclassTestCase {
         }
         assertTrue("Setting a new list to null in a ObjectList should not change the start value.", start == 1);
         assertTrue("Setting a new list to null in a ObjectList should change the count to zero.", count == 0);
-        assertTrue("Setting a new list to null in a ObjectList should change the total by subtracting the old count.", total == 3);
+        assertTrue("Setting a new list to null in a ObjectList should not change the total.", total == 3);
     }
     
     @Test
@@ -126,7 +126,7 @@ public class SliceSubclassTestCase {
         int total = l.getTotal();
         assertTrue("Adding 1 element to ObjectList should not change the start value.", start == 0);
         assertTrue("Adding 1 element to ObjectList should increase the count by 1.", count == 1);
-        assertTrue("Adding 1 element to ObjectList should increase the total by 1.", total == 1);
+        assertTrue("Adding 1 element to ObjectList should not change the total.", total == 0);
     }
     
     @Test
@@ -150,7 +150,7 @@ public class SliceSubclassTestCase {
         
         assertTrue("Clearing the ObjectList should not change the start value.", start == 1);
         assertTrue("Clearing the ObjectList should make the count zero.", count == 0);
-        assertTrue("Clearing the ObjectList should decrease the total by the previous count.", total == 2);
+        assertTrue("Clearing the ObjectList should not change the total.", total == 5);
     }
     
     @Test
@@ -171,7 +171,7 @@ public class SliceSubclassTestCase {
         int total = l.getTotal();
         assertTrue("Setting a new list in a ObjectList should not change the start value.", start == 1);
         assertTrue("Setting a new list in a ObjectList should change the count by the difference with the old count.", count == 2);
-        assertTrue("Setting a new list in a ObjectList should change the total by the difference with the old count.", total == 5);
+        assertTrue("Setting a new list in a ObjectList should not change the total.", total == 3);
         
         logEntryList.add(new org.dataone.service.types.v2.LogEntry());
         logEntryList.add(new org.dataone.service.types.v2.LogEntry());
@@ -183,7 +183,7 @@ public class SliceSubclassTestCase {
         total = l.getTotal();
         assertTrue("Setting a new list in a ObjectList should not change the start value.", start == 1);
         assertTrue("Setting a new list in a ObjectList should change the count by the difference with the old count.", count == 5);
-        assertTrue("Setting a new list in a ObjectList should change the total by the difference with the old count.", total == 8);
+        assertTrue("Setting a new list in a ObjectList should not change the total.", total == 3);
         
         l.setLogEntryList(new ArrayList<org.dataone.service.types.v2.LogEntry>());
         start = l.getStart();
@@ -191,7 +191,7 @@ public class SliceSubclassTestCase {
         total = l.getTotal();
         assertTrue("Setting an empty list in a ObjectList should not change the start value.", start == 1);
         assertTrue("Setting an empty list in a ObjectList should change the count to zero.", count == 0);
-        assertTrue("Setting an empty list in a ObjectList should change the total by the difference with the old count.", total == 3);
+        assertTrue("Setting an empty list in a ObjectList should not change the total.", total == 3);
         
         try {
             l.setLogEntryList(null);
@@ -200,7 +200,7 @@ public class SliceSubclassTestCase {
         }
         assertTrue("Setting a new list to null in a ObjectList should not change the start value.", start == 1);
         assertTrue("Setting a new list to null in a ObjectList should change the count to zero.", count == 0);
-        assertTrue("Setting a new list to null in a ObjectList should change the total by subtracting the old count.", total == 3);
+        assertTrue("Setting a new list to null in a ObjectList should not change the total.", total == 3);
     }
     
     @Test
@@ -218,7 +218,7 @@ public class SliceSubclassTestCase {
         int total = l.getTotal();
         assertTrue("Adding 1 element to ObjectFormatList should not change the start value.", start == 0);
         assertTrue("Adding 1 element to ObjectFormatList should increase the count by 1.", count == 1);
-        assertTrue("Adding 1 element to ObjectFormatList should increase the total by 1.", total == 1);
+        assertTrue("Adding 1 element to ObjectFormatList should not change the total.", total == 0);
     }
     
     @Test
@@ -242,7 +242,7 @@ public class SliceSubclassTestCase {
         
         assertTrue("Clearing the ObjectFormatList should not change the start value.", start == 1);
         assertTrue("Clearing the ObjectFormatList should make the count zero.", count == 0);
-        assertTrue("Clearing the ObjectFormatList should decrease the total by the previous count.", total == 2);
+        assertTrue("Clearing the ObjectFormatList should not change the total.", total == 5);
     }
     
     @Test
@@ -263,7 +263,7 @@ public class SliceSubclassTestCase {
         int total = l.getTotal();
         assertTrue("Setting a new list in a ObjectFormatList should not change the start value.", start == 1);
         assertTrue("Setting a new list in a ObjectFormatList should change the count by the difference with the old count.", count == 2);
-        assertTrue("Setting a new list in a ObjectFormatList should change the total by the difference with the old count.", total == 5);
+        assertTrue("Setting a new list in a should not change the total.", total == 3);
         
         objectFormatList.add(new ObjectFormat());
         objectFormatList.add(new ObjectFormat());
@@ -275,7 +275,7 @@ public class SliceSubclassTestCase {
         total = l.getTotal();
         assertTrue("Setting a new list in a ObjectFormatList should not change the start value.", start == 1);
         assertTrue("Setting a new list in a ObjectFormatList should change the count by the difference with the old count.", count == 5);
-        assertTrue("Setting a new list in a ObjectFormatList should change the total by the difference with the old count.", total == 8);
+        assertTrue("Setting a new list in a ObjectFormatList should not change the total.", total == 3);
         
         l.setObjectFormatList(new ArrayList<ObjectFormat>());
         start = l.getStart();
@@ -283,7 +283,7 @@ public class SliceSubclassTestCase {
         total = l.getTotal();
         assertTrue("Setting an empty list in a ObjectFormatList should not change the start value.", start == 1);
         assertTrue("Setting an empty list in a ObjectFormatList should change the count to zero.", count == 0);
-        assertTrue("Setting an empty list in a ObjectFormatList should change the total by the difference with the old count.", total == 3);
+        assertTrue("Setting an empty list in a ObjectFormatList should not change the total.", total == 3);
         
         try {
             l.setObjectFormatList(null);
@@ -292,7 +292,7 @@ public class SliceSubclassTestCase {
         }
         assertTrue("Setting a new list to null in a ObjectFormatList should not change the start value.", start == 1);
         assertTrue("Setting a new list to null in a ObjectFormatList should change the count to zero.", count == 0);
-        assertTrue("Setting a new list to null in a ObjectFormatList should change the total by subtracting the old count.", total == 3);
+        assertTrue("Setting a new list to null in a ObjectFormatList should not change the total.", total == 3);
     }
     
 
@@ -311,7 +311,7 @@ public class SliceSubclassTestCase {
         int total = l.getTotal();
         assertTrue("Adding 1 element to ObjectFormatList should not change the start value.", start == 0);
         assertTrue("Adding 1 element to ObjectFormatList should increase the count by 1.", count == 1);
-        assertTrue("Adding 1 element to ObjectFormatList should increase the total by 1.", total == 1);
+        assertTrue("Adding 1 element to ObjectFormatList should not change the total.", total == 0);
     }
     
     @Test
@@ -335,7 +335,7 @@ public class SliceSubclassTestCase {
         
         assertTrue("Clearing the ObjectFormatList should not change the start value.", start == 1);
         assertTrue("Clearing the ObjectFormatList should make the count zero.", count == 0);
-        assertTrue("Clearing the ObjectFormatList should decrease the total by the previous count.", total == 2);
+        assertTrue("Clearing the ObjectFormatList should not change the total.", total == 5);
     }
     
     @Test
@@ -356,7 +356,7 @@ public class SliceSubclassTestCase {
         int total = l.getTotal();
         assertTrue("Setting a new list in a ObjectFormatList should not change the start value.", start == 1);
         assertTrue("Setting a new list in a ObjectFormatList should change the count by the difference with the old count.", count == 2);
-        assertTrue("Setting a new list in a ObjectFormatList should change the total by the difference with the old count.", total == 5);
+        assertTrue("Setting a new list in a ObjectFormatList should not change the total.", total == 3);
         
         objectFormatList.add(new org.dataone.service.types.v2.ObjectFormat());
         objectFormatList.add(new org.dataone.service.types.v2.ObjectFormat());
@@ -368,7 +368,7 @@ public class SliceSubclassTestCase {
         total = l.getTotal();
         assertTrue("Setting a new list in a ObjectFormatList should not change the start value.", start == 1);
         assertTrue("Setting a new list in a ObjectFormatList should change the count by the difference with the old count.", count == 5);
-        assertTrue("Setting a new list in a ObjectFormatList should change the total by the difference with the old count.", total == 8);
+        assertTrue("Setting a new list in a ObjectFormatList should not change the total.", total == 3);
         
         l.setObjectFormatList(new ArrayList<org.dataone.service.types.v2.ObjectFormat>());
         start = l.getStart();
@@ -376,7 +376,7 @@ public class SliceSubclassTestCase {
         total = l.getTotal();
         assertTrue("Setting an empty list in a ObjectFormatList should not change the start value.", start == 1);
         assertTrue("Setting an empty list in a ObjectFormatList should change the count to zero.", count == 0);
-        assertTrue("Setting an empty list in a ObjectFormatList should change the total by the difference with the old count.", total == 3);
+        assertTrue("Setting an empty list in a ObjectFormatList should not change the total.", total == 3);
         
         try {
             l.setObjectFormatList(null);
@@ -385,7 +385,7 @@ public class SliceSubclassTestCase {
         }
         assertTrue("Setting a new list to null in a ObjectFormatList should not change the start value.", start == 1);
         assertTrue("Setting a new list to null in a ObjectFormatList should change the count to zero.", count == 0);
-        assertTrue("Setting a new list to null in a ObjectFormatList should change the total by subtracting the old count.", total == 3);
+        assertTrue("Setting a new list to null in a ObjectFormatList should not change the total.", total == 3);
     }
     
     @Test
@@ -403,7 +403,7 @@ public class SliceSubclassTestCase {
         int total = l.getTotal();
         assertTrue("Adding 1 element to ObjectList should not change the start value.", start == 0);
         assertTrue("Adding 1 element to ObjectList should increase the count by 1.", count == 1);
-        assertTrue("Adding 1 element to ObjectList should increase the total by 1.", total == 1);
+        assertTrue("Adding 1 element to ObjectList should not change the total.", total == 0);
     }
     
     @Test
@@ -427,7 +427,7 @@ public class SliceSubclassTestCase {
         
         assertTrue("Clearing the ObjectList should not change the start value.", start == 1);
         assertTrue("Clearing the ObjectList should make the count zero.", count == 0);
-        assertTrue("Clearing the ObjectList should decrease the total by the previous count.", total == 2);
+        assertTrue("Clearing the ObjectList should not change the total.", total == 5);
     }
     
     @Test
@@ -448,7 +448,7 @@ public class SliceSubclassTestCase {
         int total = l.getTotal();
         assertTrue("Setting a new list in a ObjectList should not change the start value.", start == 1);
         assertTrue("Setting a new list in a ObjectList should change the count by the difference with the old count.", count == 2);
-        assertTrue("Setting a new list in a ObjectList should change the total by the difference with the old count.", total == 5);
+        assertTrue("Setting a new list in a ObjectList should not change the total.", total == 3);
         
         objInfoList.add(new ObjectInfo());
         objInfoList.add(new ObjectInfo());
@@ -460,7 +460,7 @@ public class SliceSubclassTestCase {
         total = l.getTotal();
         assertTrue("Setting a new list in a ObjectList should not change the start value.", start == 1);
         assertTrue("Setting a new list in a ObjectList should change the count by the difference with the old count.", count == 5);
-        assertTrue("Setting a new list in a ObjectList should change the total by the difference with the old count.", total == 8);
+        assertTrue("Setting a new list in a ObjectList should not change the total.", total == 3);
         
         l.setObjectInfoList(new ArrayList<ObjectInfo>());
         start = l.getStart();
