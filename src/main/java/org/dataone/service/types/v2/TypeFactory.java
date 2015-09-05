@@ -10,6 +10,7 @@ import java.lang.reflect.Method;
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -23,7 +24,6 @@ import org.dataone.service.types.v1.Checksum;
 import org.dataone.service.types.v1.Identifier;
 import org.dataone.service.types.v1.ObjectFormatIdentifier;
 import org.dataone.service.types.v1.Subject;
-import org.dataone.service.types.v2.SystemMetadata;
 import org.dataone.service.types.v1.util.ChecksumUtil;
 import org.jibx.runtime.JiBXException;
 
@@ -95,7 +95,12 @@ public class TypeFactory extends org.dataone.service.types.v1.TypeFactory {
      * <p>
      * Properties of the destination may share references with the original.
      * Use TypeFactory.clone(original) prior to conversion if shared references
-     * are not desired. 
+     * are not desired.
+     * <p>
+     * NOTE: when converting v2.Log to v1.Log, LogEntries with incompatible events 
+     * will be removed to preclude serialization errors (the event property cannot
+     * be null).  Similarly, when converting v2.LogEntry to v1.LogEntry, an 
+     * InstantiationException will be thrown if the event is incompatible.
      * 
      * @param original the instance being converted
      * @param destinationClass the target class to return an instance of
@@ -114,8 +119,8 @@ public class TypeFactory extends org.dataone.service.types.v1.TypeFactory {
         if (original.getClass().getCanonicalName().equals(destinationClass.getCanonicalName())) 
             return (T)original;
         
-        // copy properties to the new type
-        
+        //////////// Enumeration property handling ////////////////////////////
+        //       (Enums don't have constructors we can invoke)               // 
         if (destinationClass.isEnum()) {
             T[] consts = destinationClass.getEnumConstants();
             for (T c : consts) {
@@ -123,29 +128,32 @@ public class TypeFactory extends org.dataone.service.types.v1.TypeFactory {
                     return c;
                 }
             }
-            return null;
-            //throw new InstantiationException("Could not find Enum constant for '" + original.toString() + "'");
-        } 
+            throw new InstantiationException(String.format("Could not find %s Enum element for '%s'",
+                    destinationClass.getCanonicalName(),
+                    original.toString()));
+        }
+        
         T destInstance = destinationClass.newInstance();
-        
-        
+
         Map<String,String> propMap = BeanUtils.describe(original);
         if (logger.isDebugEnabled()) 
             logger.debug("BeanUtils.describe produces map of size: " + propMap.size());
         
+        // iterate through bean properties
         for (Entry<String, String> propTypePair: propMap.entrySet()) {
             String propName = propTypePair.getKey();
+            if (propName.equals("class"))
+                continue;
             String valueClass = propTypePair.getValue();
+            if (valueClass == null)
+                continue;
+            
             String readMethodName = "get" + StringUtils.capitalize(propName);
             
             if (logger.isTraceEnabled()) 
                     logger.trace(String.format("%s : %s", propName, valueClass));
 
-            if (valueClass == null)
-                continue;
-            if (propName.equals("class"))
-                continue;
-
+            // try to copy or convert the property from the original to the destination
             try {
                 Class<?> origType = getReturnType(original,propName);
                 Class<?> destType = getReturnType(destInstance,propName);
@@ -154,6 +162,7 @@ public class TypeFactory extends org.dataone.service.types.v1.TypeFactory {
                         logger.trace(String.format("  Copying property '%s', type '%s' ==> '%s'",
                                 propName, origType.getCanonicalName(), destType.getCanonicalName()));
                 
+                //////////////////  List property handling  ////////////////////
                 if (propName.endsWith("List")) {
                     int i=0;
                     try {
@@ -164,12 +173,21 @@ public class TypeFactory extends org.dataone.service.types.v1.TypeFactory {
                             if (logger.isTraceEnabled()) 
                                 logger.trace(String.format("    [%d] Copying Indexed property '%s', type '%s' ==> '%s'",
                                         i, propName, listItem.getClass().getCanonicalName(), destListType.getCanonicalName()));
+                            
                             if (destListType == listItem.getClass())
-                                // it's not a clone!
                                 addIndexedProperty(destInstance, propName, listItem);
-                            else
-                                addIndexedProperty(destInstance, propName,
-                                        TypeFactory.convertTypeFromType(listItem, destListType));
+                            else {
+                                try {
+                                    addIndexedProperty(destInstance, propName,
+                                            TypeFactory.convertTypeFromType(listItem, destListType));
+                                } catch (InstantiationException e) {
+                                    if (destListType.equals(org.dataone.service.types.v1.LogEntry.class)) {
+                                        ; // we simply omit the LogEntry from the list
+                                    } else {
+                                        throw e;
+                                    }
+                                }
+                            }
                             i++;
                         }
                     } catch (IndexOutOfBoundsException e) {
@@ -179,17 +197,16 @@ public class TypeFactory extends org.dataone.service.types.v1.TypeFactory {
                     } catch (NoSuchMethodException e) {
                         e.printStackTrace();
                     }
-                } else {
+                } 
+                //////////////  single-Property handling  //////////////////////
+                else {
                     if (origType == boolean.class)
                         readMethodName = readMethodName.replaceFirst("get", "is");
                     
                     Method m = original.getClass().getMethod(readMethodName, (Class<?>[])null);
                     if (destType == origType) 
-                        /// did this clone?
                         BeanUtils.copyProperty(destInstance, propName,
                                 PropertyUtils.getSimpleProperty(original, propName));
-//                              m.invoke(original, (Object[])null));
-                        
                     else
                         BeanUtils.copyProperty(destInstance, propName, 
                                 TypeFactory.convertTypeFromType(

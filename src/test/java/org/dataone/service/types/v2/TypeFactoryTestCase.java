@@ -219,19 +219,68 @@ public class TypeFactoryTestCase {
         le2.setEntryId("id2");
         le2.setEvent(Event.READ.toString());
         v2Log.addLogEntry(le2);
+        v2Log.setTotal(2);
         
         try {
             org.dataone.service.types.v1.Log v1Log = 
                     TypeFactory.convertTypeFromType(v2Log, org.dataone.service.types.v1.Log.class);
             
-            assertTrue("V1 log should have 2 LogEntries", v1Log.sizeLogEntryList() == 2);
-            assertTrue("the incompatible event should be converted to null", v1Log.getLogEntry(0).getEvent() == null);
+            assertTrue("V1 log should have 1 LogEntry (incompatible one removed)", v1Log.sizeLogEntryList() == 1);
+            assertTrue("the only log should be of event type READ", v1Log.getLogEntry(0).getEvent() == Event.READ);
+            assertTrue("the Total should not have been reduced", v1Log.getTotal() == 2);
+            assertTrue("the count should have been reduced", v1Log.getCount() == 1);
         }
         catch (InstantiationException | IllegalAccessException
                 | InvocationTargetException | NoSuchMethodException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
             fail("Exception in converting log");
+        }
+    }
+    
+    @Test
+    public void convertV2LogToV1Log_emptyLog() throws InstantiationException, IllegalAccessException, JiBXException, IOException {
+        Log v2Log = new Log();
+        try {
+            org.dataone.service.types.v1.Log v1Log = 
+                    TypeFactory.convertTypeFromType(v2Log, org.dataone.service.types.v1.Log.class);
+            
+            assertTrue("V1 log should have 0 LogEntries ", v1Log.sizeLogEntryList() == 0);
+        }
+        catch (InstantiationException | IllegalAccessException
+                | InvocationTargetException | NoSuchMethodException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            fail("Exception in converting log");
+        }
+    }
+    
+    @Test
+    public void convertV2LogToV1LogEntry_incompatibleEvent() throws InstantiationException, IllegalAccessException, JiBXException, IOException {
+        LogEntry v2LogEntry = new LogEntry();
+        v2LogEntry.setDateLogged(new Date());
+        v2LogEntry.setEntryId("id1");
+        v2LogEntry.setEvent("not_a_V1_Event");
+        v2LogEntry.setIdentifier(TypeFactory.buildIdentifier("foo"));
+        v2LogEntry.setIpAddress("1.1.1.1");
+        v2LogEntry.setNodeIdentifier(TypeFactory.buildNodeReference("place"));
+        v2LogEntry.setSubject(TypeFactory.buildSubject("me"));
+        v2LogEntry.setUserAgent("firefox-v234");
+        
+        try {
+            org.dataone.service.types.v1.LogEntry v1LogEntry = 
+                    TypeFactory.convertTypeFromType(v2LogEntry, org.dataone.service.types.v1.LogEntry.class);
+            
+            fail("Should not have been able to generate a v1.LogEntry using an incompatible event");
+        }
+        catch (InstantiationException e) {
+            ; // desired outcome
+        }
+        catch (IllegalAccessException
+                | InvocationTargetException | NoSuchMethodException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            fail("Unexpected Exception in converting log");
         }
     }
     
