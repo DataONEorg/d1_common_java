@@ -52,6 +52,9 @@ public class Log extends Slice implements Serializable
      */
     @Override
     public int getCount() {
+        if (logEntryList == null) {
+            logEntryList = new ArrayList<LogEntry>();
+        }
         return logEntryList.size();
     }
 

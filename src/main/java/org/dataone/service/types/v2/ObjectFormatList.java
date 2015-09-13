@@ -53,6 +53,9 @@ public class ObjectFormatList extends Slice implements Serializable
      */
     @Override
     public int getCount() {
+        if (objectFormatList == null) {
+            objectFormatList = new ArrayList<ObjectFormat>();
+        }
         return objectFormatList.size();
     }
 

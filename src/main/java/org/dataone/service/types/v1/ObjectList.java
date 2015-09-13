@@ -51,6 +51,9 @@ public class ObjectList extends Slice implements Serializable
      */
     @Override
     public int getCount() {
+        if (objectInfoList == null) {
+            objectInfoList = new ArrayList<ObjectInfo>();
+        }
         return objectInfoList.size();
     }
 
