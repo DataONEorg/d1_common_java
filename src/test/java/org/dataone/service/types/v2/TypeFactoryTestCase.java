@@ -179,7 +179,7 @@ public class TypeFactoryTestCase {
         v2Log.addLogEntry(new LogEntry());
         v2Log.getLogEntry(0).setDateLogged(new Date());
         v2Log.getLogEntry(0).setEntryId("id1");
-        v2Log.getLogEntry(0).setEvent(Event.DELETE.toString());
+        v2Log.getLogEntry(0).setEvent(Event.DELETE.xmlValue());
         v2Log.getLogEntry(0).setIdentifier(TypeFactory.buildIdentifier("foo"));
         v2Log.getLogEntry(0).setIpAddress("1.1.1.1");
         v2Log.getLogEntry(0).setNodeIdentifier(TypeFactory.buildNodeReference("place"));
@@ -188,17 +188,19 @@ public class TypeFactoryTestCase {
         
         LogEntry le2 = TypeFactory.clone(v2Log.getLogEntry(0));
         le2.setEntryId("id2");
-        le2.setEvent(Event.READ.toString());
+        le2.setEvent(Event.READ.xmlValue());
         v2Log.addLogEntry(le2);
         try {
             org.dataone.service.types.v1.Log v1Log = 
                     TypeFactory.convertTypeFromType(v2Log, org.dataone.service.types.v1.Log.class);
+            assertEquals("Should still have 2 LogEntry", 2, v1Log.sizeLogEntryList());
         } catch (InstantiationException | IllegalAccessException
                 | InvocationTargetException | NoSuchMethodException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
             fail("Exception in converting log");
         }
+        
     }
         
     

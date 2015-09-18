@@ -21,6 +21,7 @@ import org.apache.commons.lang.StringUtils;
 import org.dataone.service.exceptions.NotFound;
 import org.dataone.service.exceptions.ServiceFailure;
 import org.dataone.service.types.v1.Checksum;
+import org.dataone.service.types.v1.Event;
 import org.dataone.service.types.v1.Identifier;
 import org.dataone.service.types.v1.ObjectFormatIdentifier;
 import org.dataone.service.types.v1.Subject;
@@ -124,7 +125,7 @@ public class TypeFactory extends org.dataone.service.types.v1.TypeFactory {
         if (destinationClass.isEnum()) {
             T[] consts = destinationClass.getEnumConstants();
             for (T c : consts) {
-                if (c.toString().equals(original.toString())) {
+                if (c.toString().equalsIgnoreCase(original.toString())) {
                     return c;
                 }
             }
