@@ -2,11 +2,13 @@ package org.dataone.service.types.v1.util;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.Set;
 import java.util.TreeSet;
 
 
+import org.dataone.service.exceptions.InvalidSystemMetadata;
 import org.dataone.service.types.v1.TypeFactory;
 import org.dataone.service.types.v1.Group;
 import org.dataone.service.types.v1.Node;
@@ -426,116 +428,4 @@ public class AuthUtilsTestCase {
 		assertTrue("testRightsHolder should be able to change the object", AuthUtils.isAuthorized(subjectSet, Permission.CHANGE_PERMISSION, sysmeta));
 	}
 	
-	@Test
-	public void testIsCNAuthorityForSystemMetadataUpdates_Yes() {
-	    NodeReference nodeId = TypeFactory.buildNodeReference("fooNode");
-	    NodeList nl = new NodeList();
-	    nl.addNode(new Node());
-	    nl.getNode(0).setIdentifier(nodeId);
-	    nl.getNode(0).setServices(new Services());
-
-	    nl.getNode(0).getServices().addService(new Service());
-        nl.getNode(0).getServices().getService(0).setName("MNCore");
-        nl.getNode(0).getServices().getService(0).setVersion("v1");
-        nl.getNode(0).getServices().getService(0).setAvailable(true);
-
-        nl.getNode(0).getServices().addService(new Service());
-        nl.getNode(0).getServices().getService(1).setName("MNStorage");
-        nl.getNode(0).getServices().getService(1).setVersion("v1");
-        nl.getNode(0).getServices().getService(1).setAvailable(true);
-	        
-	    SystemMetadata sysmeta = new SystemMetadata();
-	    sysmeta.setAuthoritativeMemberNode(nodeId);
-	    
-	    assertTrue("The CN should be the authority",AuthUtils.isCNAuthorityForSystemMetadataUpdate(nl, sysmeta));
-	    
-	}
-	
-	
-	@Test
-	public void testIsCNAuthorityForSystemMetadataUpdates_No_HigherVersionServices() {
-	    NodeReference nodeId = TypeFactory.buildNodeReference("fooNode");
-	    NodeList nl = new NodeList();
-	    nl.addNode(new Node());
-	    nl.getNode(0).setIdentifier(nodeId);
-	    nl.getNode(0).setServices(new Services());
-
-	    nl.getNode(0).getServices().addService(new Service());
-	    nl.getNode(0).getServices().getService(0).setName("MNCore");
-	    nl.getNode(0).getServices().getService(0).setVersion("v3");
-	    nl.getNode(0).getServices().getService(0).setAvailable(true);
-
-	    nl.getNode(0).getServices().addService(new Service());
-	    nl.getNode(0).getServices().getService(1).setName("MNStorage");
-	    nl.getNode(0).getServices().getService(1).setVersion("v1");
-	    nl.getNode(0).getServices().getService(1).setAvailable(true);
-
-	    SystemMetadata sysmeta = new SystemMetadata();
-	    sysmeta.setAuthoritativeMemberNode(nodeId);
-
-	    assertFalse("The CN should not be the authority",AuthUtils.isCNAuthorityForSystemMetadataUpdate(nl, sysmeta));
-
-	}
-	
-	   @Test
-	    public void testIsCNAuthorityForSystemMetadataUpdates_No_v1ReadOnly() {
-	        NodeReference nodeId = TypeFactory.buildNodeReference("fooNode");
-	        NodeList nl = new NodeList();
-	        nl.addNode(new Node());
-	        nl.getNode(0).setIdentifier(nodeId);
-	        nl.getNode(0).setServices(new Services());
-
-	        nl.getNode(0).getServices().addService(new Service());
-	        nl.getNode(0).getServices().getService(0).setName("MNCore");
-	        nl.getNode(0).getServices().getService(0).setVersion("v1");
-	        nl.getNode(0).getServices().getService(0).setAvailable(true);
-
-	        nl.getNode(0).getServices().addService(new Service());
-	        nl.getNode(0).getServices().getService(1).setName("MNRead");
-	        nl.getNode(0).getServices().getService(1).setVersion("v1");
-	        nl.getNode(0).getServices().getService(1).setAvailable(true);
-	        
-	        nl.getNode(0).getServices().addService(new Service());
-            nl.getNode(0).getServices().getService(2).setName("MNStorage");
-            nl.getNode(0).getServices().getService(2).setVersion("v1");
-            nl.getNode(0).getServices().getService(2).setAvailable(false);
-
-
-	        SystemMetadata sysmeta = new SystemMetadata();
-	        sysmeta.setAuthoritativeMemberNode(nodeId);
-
-	        assertFalse("The CN should not be the authority",AuthUtils.isCNAuthorityForSystemMetadataUpdate(nl, sysmeta));
-
-	    }
-	   
-       @Test
-       public void testIsCNAuthorityForSystemMetadataUpdates_No_BadVersionString() {
-           NodeReference nodeId = TypeFactory.buildNodeReference("fooNode");
-           NodeList nl = new NodeList();
-           nl.addNode(new Node());
-           nl.getNode(0).setIdentifier(nodeId);
-           nl.getNode(0).setServices(new Services());
-
-           nl.getNode(0).getServices().addService(new Service());
-           nl.getNode(0).getServices().getService(0).setName("MNCore");
-           nl.getNode(0).getServices().getService(0).setVersion("v1");
-           nl.getNode(0).getServices().getService(0).setAvailable(true);
-
-           nl.getNode(0).getServices().addService(new Service());
-           nl.getNode(0).getServices().getService(1).setName("MNRead");
-           nl.getNode(0).getServices().getService(1).setVersion("vsdf2");
-           nl.getNode(0).getServices().getService(1).setAvailable(true);
-           
-           nl.getNode(0).getServices().addService(new Service());
-           nl.getNode(0).getServices().getService(2).setName("MNStorage");
-           nl.getNode(0).getServices().getService(2).setVersion("v1");
-           nl.getNode(0).getServices().getService(2).setAvailable(true);
-
-
-           SystemMetadata sysmeta = new SystemMetadata();
-           sysmeta.setAuthoritativeMemberNode(nodeId);
-
-           assertTrue("The CN should be the authority",AuthUtils.isCNAuthorityForSystemMetadataUpdate(nl, sysmeta));
-
-       }
 }

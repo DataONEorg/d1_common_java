@@ -200,9 +200,8 @@ public class TypeFactoryTestCase {
             e.printStackTrace();
             fail("Exception in converting log");
         }
-        
     }
-        
+
     
     @Test
     public void convertV2LogToV1Log_incompatibleEvent() throws InstantiationException, IllegalAccessException, JiBXException, IOException {
