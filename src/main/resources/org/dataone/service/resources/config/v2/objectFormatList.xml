@@ -2,7 +2,7 @@
 <d1:objectFormatList xmlns:d1="http://ns.dataone.org/service/types/v2.0" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://ns.dataone.org/service/types/v2.0 https://repository.dataone.org/software/cicore/trunk/d1_schemas/dataoneTypes_v2.0.xsd" 
-	count="93" start="0" total="93">
+	count="94" start="0" total="94">
     <objectFormat>
         <formatId>-//ecoinformatics.org//eml-access-2.0.0beta4//EN</formatId>
         <formatName>Ecological Metadata Language, Access module, version 2.0.0beta4</formatName>
@@ -652,5 +652,12 @@
     <formatType>RESOURCE</formatType>
     <mediaType name="application/json" />
     <extension>json</extension>
+  </objectFormat>
+  <objectFormat>
+    <formatId>http://www.isotc211.org/2005/gmd</formatId>
+	<formatName>Geographic MetaData (GMD) Extensible Markup Language</formatName>
+	<formatType>METADATA</formatType>
+	<mediaType name="text/xml" />
+    <extension>xml</extension>
   </objectFormat>
 </d1:objectFormatList>
