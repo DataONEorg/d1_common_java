@@ -115,7 +115,7 @@ public interface CNCore
      */
     public boolean hasReservation(Subject subject, Identifier pid)
     	throws InvalidToken, ServiceFailure,  NotFound,
-            NotAuthorized, NotImplemented, InvalidRequest, IdentifierNotUnique;
+            NotAuthorized, NotImplemented, InvalidRequest;
 
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.create
@@ -186,7 +186,7 @@ public interface CNCore
     @Deprecated
     public boolean hasReservation(Session session, Subject subject, Identifier pid)
     	throws InvalidToken, ServiceFailure,  NotFound,
-            NotAuthorized, NotImplemented, InvalidRequest, IdentifierNotUnique;
+            NotAuthorized, NotImplemented, InvalidRequest;
 
     /**
      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.create
