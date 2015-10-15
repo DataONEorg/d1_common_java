@@ -115,7 +115,7 @@ public class NodelistUtil {
     	for(int i=0; i < nodeList.sizeNodeList(); i++) 
     	{
     		node = nodeList.getNode(i);
-    		if (node.getIdentifier() == nodeRef) {
+    		if (node.getIdentifier().equals(nodeRef) ) {
     			break;
     		}
     		node = null;

@@ -20,7 +20,7 @@
  * $Id$
  */
 
-package org.dataone.service.types.v1.util;
+package org.dataone.service.types.v2.util;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -34,8 +34,8 @@ import java.util.Set;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.dataone.service.types.v1.Node;
-import org.dataone.service.types.v1.NodeList;
+import org.dataone.service.types.v2.Node;
+import org.dataone.service.types.v2.NodeList;
 import org.dataone.service.types.v1.NodeReference;
 import org.dataone.service.types.v1.NodeState;
 import org.dataone.service.types.v1.NodeType;
@@ -64,7 +64,7 @@ public class NodelistUtilTestCase
         try
         {
 
-            InputStream is = this.getClass().getResourceAsStream("/org/dataone/service/samples/v1/nodeListSample2.xml");
+            InputStream is = this.getClass().getResourceAsStream("/org/dataone/service/samples/v2/nodeListSample2.xml");
             String nodeDoc = IOUtils.toString(is);
             
             assertTrue("Node document null.", (nodeDoc != null));
@@ -87,7 +87,7 @@ public class NodelistUtilTestCase
     @Test
     public void testSelectNode_comparator() throws InstantiationException, IllegalAccessException, JiBXException, IOException {
     	
-        InputStream is = this.getClass().getResourceAsStream("/org/dataone/service/samples/v1/nodeListSample2.xml");   
+        InputStream is = this.getClass().getResourceAsStream("/org/dataone/service/samples/v2/nodeListSample2.xml");   
         NodeList nodeList = TypeMarshaller.unmarshalTypeFromStream(NodeList.class, is);
     	
     	Set<Node> nodeSet = NodelistUtil.selectNodes(nodeList, NodeType.MN);
@@ -107,10 +107,8 @@ public class NodelistUtilTestCase
         try
         {
 
-            InputStream is = this.getClass().getResourceAsStream("/org/dataone/service/samples/v1/nodeListSample2.xml");   
+            InputStream is = this.getClass().getResourceAsStream("/org/dataone/service/samples/v2/nodeListSample2.xml");   
             NodeList nodeList = TypeMarshaller.unmarshalTypeFromStream(NodeList.class, is);
-            List<Node> nodeListArray = nodeList.getNodeList();
-            System.out.println(nodeListArray.size());
             NodeReference nodeReference = new NodeReference();
             nodeReference.setValue("urn:node:d1m1");
             Node n = NodelistUtil.findNode(nodeList, nodeReference);
