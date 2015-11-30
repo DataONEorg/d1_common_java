@@ -47,13 +47,13 @@ public interface MNCore {
 	
 	
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_core.ping
+     * @see https://purl.dataone.org/architecturev2/apis/MN_APIs.html#MN_core.ping
      */
     public Date ping() 
     throws NotImplemented, ServiceFailure, InsufficientResources;
 
     /** 
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_core.getLogRecords
+     * @see https://purl.dataone.org/architecturev2/apis/MN_APIs.html#MN_core.getLogRecords
      */
     public Log getLogRecords(Session session, Date fromDate, Date toDate, 
            String event, String pidFilter, Integer start, Integer count) 
@@ -61,7 +61,7 @@ public interface MNCore {
 
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_core.getCapabilities
+     * @see https://purl.dataone.org/architecturev2/apis/MN_APIs.html#MN_core.getCapabilities
      */
     public Node getCapabilities() 
     throws NotImplemented, ServiceFailure;

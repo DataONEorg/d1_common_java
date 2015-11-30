@@ -46,7 +46,7 @@ import org.dataone.service.types.v1.SystemMetadata;
 public interface MNStorage {
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_storage.create
+     * @see https://purl.dataone.org/architecturev2/apis/MN_APIs.html#MN_storage.create
      */
     public Identifier create(Identifier pid, InputStream object, 
         SystemMetadata sysmeta) 
@@ -55,7 +55,7 @@ public interface MNStorage {
 
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_storage.update
+     * @see https://purl.dataone.org/architecturev2/apis/MN_APIs.html#MN_storage.update
      */
     public Identifier update(Identifier pid, InputStream object, 
         Identifier newPid, SystemMetadata sysmeta) 
@@ -65,19 +65,19 @@ public interface MNStorage {
 
     
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_storage.delete
+     * @see https://purl.dataone.org/architecturev2/apis/MN_APIs.html#MN_storage.delete
      */
     public Identifier delete(Identifier pid)
     throws InvalidToken, ServiceFailure, NotAuthorized, NotFound, NotImplemented;
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_storage.archive
+     * @see https://purl.dataone.org/architecturev2/apis/MN_APIs.html#MN_storage.archive
      */
     public Identifier archive(Identifier pid)
     throws InvalidToken, ServiceFailure, NotAuthorized, NotFound, NotImplemented;    
     
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MNStorage.generateIdentifier
+     * @see https://purl.dataone.org/architecturev2/apis/MN_APIs.html#MNStorage.generateIdentifier
      */
     public Identifier generateIdentifier(String scheme, String fragment)
     	throws InvalidToken, ServiceFailure,
@@ -87,7 +87,7 @@ public interface MNStorage {
     
     
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_storage.create
+     * @see https://purl.dataone.org/architecturev2/apis/MN_APIs.html#MN_storage.create
      */
     @Deprecated
     public Identifier create(Session session, Identifier pid, InputStream object, 
@@ -97,7 +97,7 @@ public interface MNStorage {
 
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_storage.update
+     * @see https://purl.dataone.org/architecturev2/apis/MN_APIs.html#MN_storage.update
      */
     @Deprecated
     public Identifier update(Session session, Identifier pid, InputStream object, 
@@ -108,21 +108,21 @@ public interface MNStorage {
 
     
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_storage.delete
+     * @see https://purl.dataone.org/architecturev2/apis/MN_APIs.html#MN_storage.delete
      */
     @Deprecated
     public Identifier delete(Session session, Identifier pid)
     throws InvalidToken, ServiceFailure, NotAuthorized, NotFound, NotImplemented;
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_storage.archive
+     * @see https://purl.dataone.org/architecturev2/apis/MN_APIs.html#MN_storage.archive
      */
     @Deprecated
     public Identifier archive(Session session, Identifier pid)
     throws InvalidToken, ServiceFailure, NotAuthorized, NotFound, NotImplemented;    
     
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MNStorage.generateIdentifier
+     * @see https://purl.dataone.org/architecturev2/apis/MN_APIs.html#MNStorage.generateIdentifier
      */
     @Deprecated
     public Identifier generateIdentifier(Session session, String scheme, String fragment)

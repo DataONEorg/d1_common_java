@@ -42,21 +42,21 @@ import org.dataone.service.types.v1.Session;
 public interface CNRegister {
 
     /** 
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNRegister.updateNodeCapabilities
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNRegister.updateNodeCapabilities
      */
     public boolean updateNodeCapabilities(Session session, NodeReference nodeid, 
         Node node) throws NotImplemented, NotAuthorized, 
         ServiceFailure, InvalidRequest, NotFound, InvalidToken;
 
     /** 
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNRegister.register
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNRegister.register
      */
     public NodeReference register(Session session, Node node)
         throws NotImplemented, NotAuthorized, ServiceFailure, InvalidRequest, 
         InvalidToken, IdentifierNotUnique;
     
     /** 
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNRegister.getNodeCapabilities
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNRegister.getNodeCapabilities
      */
     public Node getNodeCapabilities(NodeReference nodeid) throws NotImplemented, 
         ServiceFailure, InvalidRequest, NotFound;

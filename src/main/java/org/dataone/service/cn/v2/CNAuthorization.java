@@ -44,7 +44,7 @@ import org.dataone.service.types.v1.AccessPolicy;
 public interface CNAuthorization {
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNAuthorization.setRightsHolder
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNAuthorization.setRightsHolder
      * @deprecated use CNCore.updateSystemMetadata()
 
      */
@@ -54,14 +54,14 @@ public interface CNAuthorization {
         NotImplemented, InvalidRequest, VersionMismatch;
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNAuthorization.isAuthorized
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNAuthorization.isAuthorized
      */
     public boolean isAuthorized(Session session, Identifier id, Permission permission)
         throws ServiceFailure, InvalidToken, NotFound, NotAuthorized, 
         NotImplemented, InvalidRequest;
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNAuthorization.setAccessPolicy
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNAuthorization.setAccessPolicy
      * @deprecated use CNCore.updateSystemMetadata()
      */
     public boolean setAccessPolicy(Session session, Identifier id, 

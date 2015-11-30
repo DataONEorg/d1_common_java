@@ -41,14 +41,14 @@ import org.dataone.service.types.v2.OptionList;
 public interface CNView 
 {   
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNView.view
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNView.view
      */
     public InputStream view(Session session, String theme, Identifier id)
         throws InvalidToken, ServiceFailure, NotAuthorized, InvalidRequest, 
         NotImplemented, NotFound;
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNView.listViews
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNView.listViews
      */
     public OptionList listViews()
         throws InvalidToken, ServiceFailure, NotAuthorized, InvalidRequest, NotImplemented;

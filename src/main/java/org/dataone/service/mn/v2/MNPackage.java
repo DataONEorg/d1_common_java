@@ -42,7 +42,7 @@ import org.dataone.service.types.v1.Session;
 public interface MNPackage 
 {   
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MNPackage.getPackage
+     * @see https://purl.dataone.org/architecturev2/apis/MN_APIs.html#MNPackage.getPackage
      */
     public InputStream getPackage(Session session, ObjectFormatIdentifier packageType, Identifier id)
         throws InvalidToken, ServiceFailure, NotAuthorized, InvalidRequest, 

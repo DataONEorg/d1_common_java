@@ -53,7 +53,7 @@ public interface MNRead {
 
     /**
      * InputStream is the Java native version of D1's OctetStream
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_read.listObjects
+     * @see https://purl.dataone.org/architecturev2/apis/MN_APIs.html#MN_read.listObjects
      *
      */
     public InputStream get(Identifier pid)
@@ -62,28 +62,28 @@ public interface MNRead {
 
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_read.getSystemMetadata
+     * @see https://purl.dataone.org/architecturev2/apis/MN_APIs.html#MN_read.getSystemMetadata
      */
     public SystemMetadata getSystemMetadata(Identifier pid)
     throws InvalidToken, NotAuthorized, NotImplemented, ServiceFailure, NotFound;
 
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_read.describe
+     * @see https://purl.dataone.org/architecturev2/apis/MN_APIs.html#MN_read.describe
      */
     public DescribeResponse describe(Identifier pid)
     throws InvalidToken, NotAuthorized, NotImplemented, ServiceFailure, NotFound;
     
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_read.getChecksum
+     * @see https://purl.dataone.org/architecturev2/apis/MN_APIs.html#MN_read.getChecksum
      */
     public Checksum getChecksum(Identifier pid, String checksumAlgorithm)
     throws InvalidRequest, InvalidToken, NotAuthorized, NotImplemented, ServiceFailure,
          NotFound;
 
     /** 
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_read.listObjects
+     * @see https://purl.dataone.org/architecturev2/apis/MN_APIs.html#MN_read.listObjects
      */
     public ObjectList listObjects(Date fromDate, 
             Date toDate, ObjectFormatIdentifier formatid, Boolean replicaStatus,
@@ -91,13 +91,13 @@ public interface MNRead {
     throws InvalidRequest, InvalidToken, NotAuthorized, NotImplemented, ServiceFailure;
 
     /** 
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_read.synchronizationFailed
+     * @see https://purl.dataone.org/architecturev2/apis/MN_APIs.html#MN_read.synchronizationFailed
      */
     public boolean synchronizationFailed(SynchronizationFailed message)
     throws InvalidToken, NotAuthorized, NotImplemented, ServiceFailure;
     
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MNRead.getReplica
+     * @see https://purl.dataone.org/architecturev2/apis/MN_APIs.html#MNRead.getReplica
      */
     public InputStream getReplica(Identifier pid)
     throws InvalidToken, NotAuthorized, NotImplemented, ServiceFailure, NotFound,
@@ -108,7 +108,7 @@ public interface MNRead {
     
     /**
      * InputStream is the Java native version of D1's OctetStream
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_read.listObjects
+     * @see https://purl.dataone.org/architecturev2/apis/MN_APIs.html#MN_read.listObjects
      *
      */
     @Deprecated
@@ -118,7 +118,7 @@ public interface MNRead {
 
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_read.getSystemMetadata
+     * @see https://purl.dataone.org/architecturev2/apis/MN_APIs.html#MN_read.getSystemMetadata
      */
     @Deprecated
     public SystemMetadata getSystemMetadata(Session session, Identifier pid)
@@ -126,7 +126,7 @@ public interface MNRead {
 
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_read.describe
+     * @see https://purl.dataone.org/architecturev2/apis/MN_APIs.html#MN_read.describe
      */
     @Deprecated
     public DescribeResponse describe(Session session, Identifier pid)
@@ -134,7 +134,7 @@ public interface MNRead {
     
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_read.getChecksum
+     * @see https://purl.dataone.org/architecturev2/apis/MN_APIs.html#MN_read.getChecksum
      */
     @Deprecated
     public Checksum getChecksum(Session session, Identifier pid, String checksumAlgorithm)
@@ -142,7 +142,7 @@ public interface MNRead {
          NotFound;
 
     /** 
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_read.listObjects
+     * @see https://purl.dataone.org/architecturev2/apis/MN_APIs.html#MN_read.listObjects
      */
     @Deprecated
     public ObjectList listObjects(Session session, Date fromDate, 
@@ -151,14 +151,14 @@ public interface MNRead {
     throws InvalidRequest, InvalidToken, NotAuthorized, NotImplemented, ServiceFailure;
 
     /** 
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_read.synchronizationFailed
+     * @see https://purl.dataone.org/architecturev2/apis/MN_APIs.html#MN_read.synchronizationFailed
      */
     @Deprecated
     public boolean synchronizationFailed(Session session, SynchronizationFailed message)
     throws InvalidToken, NotAuthorized, NotImplemented, ServiceFailure;
     
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MNRead.getReplica
+     * @see https://purl.dataone.org/architecturev2/apis/MN_APIs.html#MNRead.getReplica
      */
 	@Deprecated
     public InputStream getReplica(Session session, Identifier pid)
