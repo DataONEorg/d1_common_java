@@ -42,21 +42,21 @@ import org.dataone.service.types.v1.Session;
 public interface MNAuthorization {
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_auth.isAuthorized
+     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/MN_APIs.html#MN_auth.isAuthorized
      */
     public boolean isAuthorized(Identifier pid, Permission action)
             throws ServiceFailure, InvalidRequest, InvalidToken, NotFound, 
                    NotAuthorized, NotImplemented;
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_auth.systemMetadataChanged
+     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/MN_APIs.html#MN_auth.systemMetadataChanged
      */
     public boolean systemMetadataChanged(Identifier pid, long serialVersion,
     	Date dateSystemMetadataLastModified)
     throws InvalidToken, ServiceFailure, NotAuthorized, NotImplemented, InvalidRequest;
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_auth.isAuthorized
+     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/MN_APIs.html#MN_auth.isAuthorized
      */
 	@Deprecated
     public boolean isAuthorized(Session session, Identifier pid, Permission action)
@@ -64,7 +64,7 @@ public interface MNAuthorization {
                    NotAuthorized, NotImplemented;
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_auth.systemMetadataChanged
+     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/MN_APIs.html#MN_auth.systemMetadataChanged
      */
 	@Deprecated
     public boolean systemMetadataChanged(Session session, Identifier pid, long serialVersion,

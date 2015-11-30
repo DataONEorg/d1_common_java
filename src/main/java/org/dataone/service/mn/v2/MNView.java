@@ -41,14 +41,14 @@ import org.dataone.service.types.v2.OptionList;
 public interface MNView 
 {   
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MNView.view
+     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/MN_APIs.html#MNView.view
      */
     public InputStream view(Session session, String theme, Identifier id)
         throws InvalidToken, ServiceFailure, NotAuthorized, InvalidRequest, 
         NotImplemented, NotFound;
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MNView.listViews
+     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/MN_APIs.html#MNView.listViews
      */
     public OptionList listViews(Session session)
         throws InvalidToken, ServiceFailure, NotAuthorized, InvalidRequest, NotImplemented;

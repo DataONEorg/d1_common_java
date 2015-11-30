@@ -60,31 +60,31 @@ public interface CNCore
 	
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CN_core.ping
+     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CN_core.ping
      */
     public Date ping() 
     throws NotImplemented, ServiceFailure, InsufficientResources;
 	
 	/**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.listFormats
+     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNCore.listFormats
      */
 	public ObjectFormatList listFormats()
         throws ServiceFailure, NotImplemented;
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.getFormat
+     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNCore.getFormat
      */
     public ObjectFormat getFormat(ObjectFormatIdentifier formatid)
         throws ServiceFailure, NotFound, NotImplemented, InvalidRequest;
     
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.getChecksumAlgorithms
+     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNCore.getChecksumAlgorithms
      */
      public ChecksumAlgorithmList listChecksumAlgorithms()
        throws ServiceFailure, NotImplemented;
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.getLogRecords
+     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNCore.getLogRecords
      */
     public Log getLogRecords(Date fromDate, Date toDate,
         Event event, String pidFilter, Integer start, Integer count) 
@@ -92,33 +92,33 @@ public interface CNCore
         NotAuthorized, NotImplemented, InsufficientResources;
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.listNodes
+     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNCore.listNodes
      */
     public NodeList listNodes() throws NotImplemented, ServiceFailure;
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.reserveIdentifier
+     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNCore.reserveIdentifier
      */
     public Identifier reserveIdentifier(Identifier pid)
     	throws InvalidToken, ServiceFailure,
             NotAuthorized, IdentifierNotUnique, NotImplemented, InvalidRequest;
     
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.generateIdentifier
+     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNCore.generateIdentifier
      */
     public Identifier generateIdentifier(String scheme, String fragment)
     	throws InvalidToken, ServiceFailure,
             NotAuthorized, NotImplemented, InvalidRequest;
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.hasReservation
+     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNCore.hasReservation
      */
     public boolean hasReservation(Subject subject, Identifier pid)
     	throws InvalidToken, ServiceFailure,  NotFound,
             NotAuthorized, NotImplemented, InvalidRequest;
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.create
+     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNCore.create
      */
     public Identifier create(Identifier pid, InputStream object,
             SystemMetadata sysmeta) throws InvalidToken, ServiceFailure,
@@ -127,14 +127,14 @@ public interface CNCore
             InvalidRequest;
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.registerSystemMetadata
+     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNCore.registerSystemMetadata
      */
      public Identifier registerSystemMetadata(Identifier pid,
         SystemMetadata sysmeta) throws NotImplemented, NotAuthorized,
         ServiceFailure, InvalidRequest, InvalidSystemMetadata, InvalidToken;
      
      /**
-      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.setObsoletedBy
+      * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNCore.setObsoletedBy
       */
      public boolean setObsoletedBy(Identifier pid,
    			Identifier obsoletedByPid, long serialVersion)
@@ -142,13 +142,13 @@ public interface CNCore
    			InvalidRequest, InvalidToken, VersionMismatch;
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.delete
+     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNCore.delete
      */
     public Identifier delete(Identifier pid)
     throws InvalidToken, ServiceFailure, NotAuthorized, NotFound, NotImplemented;
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.archive
+     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNCore.archive
      */
     public Identifier archive(Identifier pid)
     throws InvalidToken, ServiceFailure, NotAuthorized, NotFound, NotImplemented;
@@ -156,7 +156,7 @@ public interface CNCore
     ////
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.getLogRecords
+     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNCore.getLogRecords
      */
      @Deprecated
     public Log getLogRecords(Session session, Date fromDate, Date toDate,
@@ -165,7 +165,7 @@ public interface CNCore
         NotAuthorized, NotImplemented, InsufficientResources;
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.reserveIdentifier
+     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNCore.reserveIdentifier
      */
     @Deprecated
     public Identifier reserveIdentifier(Session session, Identifier pid)
@@ -173,7 +173,7 @@ public interface CNCore
             NotAuthorized, IdentifierNotUnique, NotImplemented, InvalidRequest;
     
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.generateIdentifier
+     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNCore.generateIdentifier
      */
     @Deprecated
     public Identifier generateIdentifier(Session session, String scheme, String fragment)
@@ -181,7 +181,7 @@ public interface CNCore
             NotAuthorized, NotImplemented, InvalidRequest;
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.hasReservation
+     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNCore.hasReservation
      */
     @Deprecated
     public boolean hasReservation(Session session, Subject subject, Identifier pid)
@@ -189,7 +189,7 @@ public interface CNCore
             NotAuthorized, NotImplemented, InvalidRequest;
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.create
+     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNCore.create
      */
     @Deprecated
     public Identifier create(Session session, Identifier pid, InputStream object,
@@ -199,7 +199,7 @@ public interface CNCore
             InvalidRequest;
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.registerSystemMetadata
+     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNCore.registerSystemMetadata
      */
     @Deprecated
      public Identifier registerSystemMetadata(Session session, Identifier pid,
@@ -207,7 +207,7 @@ public interface CNCore
         ServiceFailure, InvalidRequest, InvalidSystemMetadata, InvalidToken;
      
      /**
-      * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.setObsoletedBy
+      * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNCore.setObsoletedBy
       */
      @Deprecated
      public boolean setObsoletedBy(Session session, Identifier pid,
@@ -216,14 +216,14 @@ public interface CNCore
    			InvalidRequest, InvalidToken, VersionMismatch;
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.delete
+     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNCore.delete
      */
      @Deprecated
     public Identifier delete(Session session, Identifier pid)
     throws InvalidToken, ServiceFailure, InvalidRequest, NotAuthorized, NotFound, NotImplemented;
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNCore.archive
+     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNCore.archive
      */
      @Deprecated
     public Identifier archive(Session session, Identifier pid)

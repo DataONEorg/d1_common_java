@@ -14,7 +14,7 @@ import java.io.Serializable;
  and a variety of other properties designed for preservation and
  longevity. Some discussion on this is described in the `PID
  documentation`_ and in decision `ticket 577`_. .. _ticket 577: https://redmine.dataone.org/issues/577
- .. _PID documentation: http://mule1.dataone.org/ArchitectureDocs-current/design/PIDs.html
+ .. _PID documentation: https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/design/PIDs.html
 
  * 
  * Schema fragment(s) for this class:

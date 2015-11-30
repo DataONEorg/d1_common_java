@@ -44,7 +44,7 @@ import org.dataone.service.types.v1.AccessPolicy;
 public interface CNAuthorization {
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNAuthorization.setRightsHolder
+     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNAuthorization.setRightsHolder
      */
     public Identifier setRightsHolder(Identifier pid, Subject userId, 
          long serialVersion)
@@ -52,14 +52,14 @@ public interface CNAuthorization {
         NotImplemented, InvalidRequest, VersionMismatch;
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNAuthorization.isAuthorized
+     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNAuthorization.isAuthorized
      */
     public boolean isAuthorized(Identifier pid, Permission permission)
         throws ServiceFailure, InvalidToken, NotFound, NotAuthorized, 
         NotImplemented, InvalidRequest;
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNAuthorization.setAccessPolicy
+     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNAuthorization.setAccessPolicy
      */
     public boolean setAccessPolicy(Identifier pid, 
         AccessPolicy policy, long serialVersion) 
@@ -67,7 +67,7 @@ public interface CNAuthorization {
         ServiceFailure, InvalidRequest, VersionMismatch;
     
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNAuthorization.setRightsHolder
+     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNAuthorization.setRightsHolder
      */
     @Deprecated
     public Identifier setRightsHolder(Session session, Identifier pid, Subject userId, 
@@ -76,7 +76,7 @@ public interface CNAuthorization {
         NotImplemented, InvalidRequest, VersionMismatch;
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNAuthorization.isAuthorized
+     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNAuthorization.isAuthorized
      */
     @Deprecated
     public boolean isAuthorized(Session session, Identifier pid, Permission permission)
@@ -84,7 +84,7 @@ public interface CNAuthorization {
         NotImplemented, InvalidRequest;
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNAuthorization.setAccessPolicy
+     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNAuthorization.setAccessPolicy
      */
     @Deprecated
     public boolean setAccessPolicy(Session session, Identifier pid, 

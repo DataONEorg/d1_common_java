@@ -48,13 +48,13 @@ public interface MNCore {
 	
 	
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_core.ping
+     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/MN_APIs.html#MN_core.ping
      */
     public Date ping() 
     throws NotImplemented, ServiceFailure, InsufficientResources;
 
     /** 
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_core.getLogRecords
+     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/MN_APIs.html#MN_core.getLogRecords
      */
     public Log getLogRecords(Date fromDate, Date toDate, 
            Event event, String pidFilter, Integer start, Integer count) 
@@ -62,7 +62,7 @@ public interface MNCore {
 
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_core.getCapabilities
+     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/MN_APIs.html#MN_core.getCapabilities
      */
     public Node getCapabilities() 
     throws NotImplemented, ServiceFailure;
@@ -70,7 +70,7 @@ public interface MNCore {
     
 ////    
     /** 
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/MN_APIs.html#MN_core.getLogRecords
+     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/MN_APIs.html#MN_core.getLogRecords
      */
     @Deprecated
     public Log getLogRecords(Session session, Date fromDate, Date toDate, 

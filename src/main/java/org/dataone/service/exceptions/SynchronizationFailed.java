@@ -27,7 +27,7 @@ import java.util.TreeMap;
  * to a Member Node from a Coordinating Node when an attempt to synchronize
  * some object fails.
  * 
- * http://mule1.dataone.org/ArchitectureDocs-current/apis/Exceptions.html#Exceptions.SynchronizationFailed
+ * https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/Exceptions.html#Exceptions.SynchronizationFailed
  *   
  * @author Robert Nahf
  */

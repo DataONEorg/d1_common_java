@@ -46,7 +46,7 @@ import org.dataone.service.types.v1.Subject;
 public interface CNReplication {
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNReplication.setReplicationStatus
+     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNReplication.setReplicationStatus
      */
 	public boolean setReplicationStatus(Session session, Identifier pid, 
 		NodeReference nodeRef, ReplicationStatus status, BaseException failure) 
@@ -54,7 +54,7 @@ public interface CNReplication {
 		InvalidRequest, NotFound;
 
     /**
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNReplication.setReplicationPolicy
+     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNReplication.setReplicationPolicy
      * @deprecated use CNCore.updateSystemMetadata()
      */
     public boolean setReplicationPolicy(Session session, Identifier pid, 
@@ -63,21 +63,21 @@ public interface CNReplication {
         InvalidRequest, InvalidToken, VersionMismatch;
 
     /** 
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNReplication.isNodeAuthorized
+     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNReplication.isNodeAuthorized
      */
     public boolean isNodeAuthorized(Session session, Subject targetNodeSubject, Identifier pid)
         throws NotImplemented, NotAuthorized, InvalidToken, ServiceFailure, 
         NotFound, InvalidRequest;
 
     /** 
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNReplication.updateReplicationMetadata
+     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNReplication.updateReplicationMetadata
      */
     public boolean updateReplicationMetadata(Session session, Identifier pid, Replica replicaMetadata, long serialVersion)
         throws NotImplemented, NotAuthorized, ServiceFailure, 
         NotFound, InvalidRequest, InvalidToken, VersionMismatch;
     
     /** 
-     * @see http://mule1.dataone.org/ArchitectureDocs-current/apis/CN_APIs.html#CNReplication.deleteReplicationMetadata
+     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNReplication.deleteReplicationMetadata
      */
     public boolean deleteReplicationMetadata(Session session, Identifier pid, NodeReference nodeId, long serialVersion) 
   		throws InvalidToken, InvalidRequest, ServiceFailure, NotAuthorized, NotFound, NotImplemented, VersionMismatch;
