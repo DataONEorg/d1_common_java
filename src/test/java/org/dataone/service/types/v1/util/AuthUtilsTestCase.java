@@ -4,6 +4,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -23,6 +25,8 @@ import org.dataone.service.types.v1.Subject;
 import org.dataone.service.types.v1.SubjectInfo;
 import org.dataone.service.types.v1.SystemMetadata;
 import org.dataone.service.util.Constants;
+import org.dataone.service.util.TypeMarshaller;
+import org.jibx.runtime.JiBXException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -382,6 +386,27 @@ public class AuthUtilsTestCase {
 		assertTrue("subject list should contain groupC", subjectSet.contains(buildSubject("groupD")));
 	}
 	
+	@Test
+	public void testAuthorizedClientSubjects_RecursionInfiniteLoopTest_Live() 
+	        throws InstantiationException, IllegalAccessException, IOException, JiBXException {
+
+	    Session ses = new Session();
+	    InputStream is = this.getClass().getResourceAsStream("/org/dataone/service/samples/v1/loopedSubjectInfo.xml");
+	    SubjectInfo si = TypeMarshaller.unmarshalTypeFromStream(SubjectInfo.class, is);
+
+	    ses.setSubjectInfo(si);
+	    ses.setSubject(si.getPerson(0).getSubject());
+	    Set<Subject> subjectSet = AuthUtils.authorizedClientSubjects(ses);
+
+	    for (Subject s : subjectSet) {
+	        System.out.println(s.getValue());
+	    }
+	    assertTrue("subject list should contain New Group", subjectSet.contains(TypeFactory.buildSubject("CN=New Group,DC=dataone,DC=org")));
+//	    assertTrue("subject list should contain groupB", subjectSet.contains(buildSubject("groupB")));
+//	    assertTrue("subject list should contain groupC", subjectSet.contains(buildSubject("groupC")));
+//	    assertTrue("subject list should contain groupC", subjectSet.contains(buildSubject("groupD")));
+	}
+
 	
 	@Test
 	public void testIsAuthorized_AccessPolicy() 

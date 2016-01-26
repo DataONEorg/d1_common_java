@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<d1:subjectInfo xmlns:d1="http://ns.dataone.org/service/types/v1">
+  <person>
+    <subject>CN=Christopher Jones A12761,O=ProtectNetwork,C=US,DC=cilogon,DC=org</subject>
+    <givenName>Christopher</givenName>
+    <familyName>Jones</familyName>
+    <isMemberOf>CN=New Group,DC=dataone,DC=org</isMemberOf>
+    <equivalentIdentity>cn=Christopher Jones A2108,o=Google,c=US,dc=cilogon,dc=org</equivalentIdentity>
+    <verified>false</verified>
+  </person>
+  <person>
+    <subject>CN=Christopher Jones A2108,O=Google,C=US,DC=cilogon,DC=org</subject>
+    <givenName>Christopher</givenName>
+    <familyName>Jones</familyName>
+    <isMemberOf>CN=New Group,DC=dataone,DC=org</isMemberOf>
+    <equivalentIdentity>cn=Christopher Jones A12761,o=ProtectNetwork,c=US,dc=cilogon,dc=org</equivalentIdentity>
+    <verified>true</verified>
+  </person>
+  <group>
+    <subject>CN=New Group,DC=dataone,DC=org</subject>
+    <groupName>New Group</groupName>
+    <hasMember>CN=Lauren Walker A10489,O=Google,C=US,DC=cilogon,DC=org</hasMember>
+    <hasMember>CN=Christopher Jones A2108,O=Google,C=US,DC=cilogon,DC=org</hasMember>
+    <hasMember>CN=Christopher Jones A12761,O=ProtectNetwork,C=US,DC=cilogon,DC=org</hasMember>
+    <hasMember>CN=Christopher Jones A33626,O=University of California-Santa Barbara,C=US,DC=cilogon,DC=org</hasMember>
+    <hasMember>CN=Ben Leinfelder A10096,O=Google,C=US,DC=cilogon,DC=org</hasMember>
+    <hasMember>laurennwalker</hasMember>
+    <hasMember>CN=Lauren Walker A21971,O=Google,C=US,DC=cilogon,DC=org</hasMember>
+    <rightsHolder>CN=Lauren Walker A10489,O=Google,C=US,DC=cilogon,DC=org</rightsHolder>
+    <rightsHolder>CN=Ben Leinfelder A10096,O=Google,C=US,DC=cilogon,DC=org</rightsHolder>
+  </group>
+</d1:subjectInfo>
