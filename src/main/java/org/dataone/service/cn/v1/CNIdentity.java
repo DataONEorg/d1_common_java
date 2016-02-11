@@ -45,89 +45,89 @@ import org.dataone.service.types.v1.SubjectInfo;
 public interface CNIdentity {
 
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNIdentity.registerAccount
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNIdentity.registerAccount
      */
     public Subject registerAccount(Person person) 
         throws ServiceFailure, NotAuthorized, IdentifierNotUnique, InvalidCredentials, 
         NotImplemented, InvalidRequest, InvalidToken;
     
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNIdentity.updateAccount
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNIdentity.updateAccount
      */
     public Subject updateAccount(Person person) 
     	throws ServiceFailure, NotAuthorized, InvalidCredentials, 
         NotImplemented, InvalidRequest, InvalidToken, NotFound;
     
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNIdentity.verifyAccount
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNIdentity.verifyAccount
      */
     public boolean verifyAccount(Subject subject) 
         throws ServiceFailure, NotAuthorized, NotImplemented, InvalidToken, 
         InvalidRequest, NotFound;
 
     /** 
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNIdentity.getSubjectInfo
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNIdentity.getSubjectInfo
      */
     public SubjectInfo getSubjectInfo(Subject subject)
         throws ServiceFailure, NotAuthorized, NotImplemented, NotFound, InvalidToken;
   
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNIdentity.listSubjects
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNIdentity.listSubjects
      */
     public SubjectInfo listSubjects(String query, String status, Integer start, 
         Integer count) throws InvalidRequest, ServiceFailure, InvalidToken, NotAuthorized, 
         NotImplemented;
         
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNIdentity.mapIdentity
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNIdentity.mapIdentity
      */
     public boolean mapIdentity(Subject primarySubject, Subject secondarySubject) 
         throws ServiceFailure, InvalidToken, NotAuthorized, NotFound, 
         NotImplemented, InvalidRequest, IdentifierNotUnique;
     
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNIdentity.requestMapIdentity
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNIdentity.requestMapIdentity
      */
     public boolean requestMapIdentity(Subject subject) 
         throws ServiceFailure, InvalidToken, NotAuthorized, NotFound, 
         NotImplemented, InvalidRequest, IdentifierNotUnique;
     
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNIdentity.confirmMapIdentity
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNIdentity.confirmMapIdentity
      */
     public boolean confirmMapIdentity(Subject subject) 
         throws ServiceFailure, InvalidToken, NotAuthorized, NotFound, 
         NotImplemented;
     
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNIdentity.getPendingMapIdentity
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNIdentity.getPendingMapIdentity
      */
     public SubjectInfo getPendingMapIdentity(Subject subject) 
         throws ServiceFailure, InvalidToken, NotAuthorized, NotFound, 
         NotImplemented;
     
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNIdentity.denyMapIdentity
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNIdentity.denyMapIdentity
      */
     public boolean denyMapIdentity(Subject subject) 
         throws ServiceFailure, InvalidToken, NotAuthorized, NotFound, 
         NotImplemented;
     
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNIdentity.removeMapIdentity
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNIdentity.removeMapIdentity
      */
     public boolean removeMapIdentity(Subject subject) 
         throws ServiceFailure, InvalidToken, NotAuthorized, NotFound, 
         NotImplemented;
     
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNIdentity.createGroup
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNIdentity.createGroup
      */
     public Subject createGroup(Group group) 
         throws ServiceFailure, InvalidToken, NotAuthorized, NotImplemented, IdentifierNotUnique, InvalidRequest;
     
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNIdentity.updateGroup
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNIdentity.updateGroup
      */
     public boolean updateGroup(Group group) 
         throws ServiceFailure, InvalidToken, NotAuthorized, NotFound, NotImplemented, InvalidRequest;
@@ -135,7 +135,7 @@ public interface CNIdentity {
 ///////
     
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNIdentity.registerAccount
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNIdentity.registerAccount
      */
     @Deprecated
     public Subject registerAccount(Session session, Person person) 
@@ -143,7 +143,7 @@ public interface CNIdentity {
         NotImplemented, InvalidRequest, InvalidToken;
     
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNIdentity.updateAccount
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNIdentity.updateAccount
      */
     @Deprecated
     public Subject updateAccount(Session session, Person person) 
@@ -151,7 +151,7 @@ public interface CNIdentity {
         NotImplemented, InvalidRequest, InvalidToken, NotFound;
     
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNIdentity.verifyAccount
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNIdentity.verifyAccount
      */
     @Deprecated
     public boolean verifyAccount(Session session, Subject subject) 
@@ -159,14 +159,14 @@ public interface CNIdentity {
         InvalidRequest, NotFound;
 
     /** 
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNIdentity.getSubjectInfo
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNIdentity.getSubjectInfo
      */
     @Deprecated
     public SubjectInfo getSubjectInfo(Session session, Subject subject)
         throws ServiceFailure, NotAuthorized, NotImplemented, NotFound, InvalidToken;
   
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNIdentity.listSubjects
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNIdentity.listSubjects
      */
     @Deprecated
     public SubjectInfo listSubjects(Session session, String query, String status, Integer start, 
@@ -174,7 +174,7 @@ public interface CNIdentity {
         NotImplemented;
         
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNIdentity.mapIdentity
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNIdentity.mapIdentity
      */
     @Deprecated
     public boolean mapIdentity(Session session, Subject primarySubject, Subject secondarySubject) 
@@ -182,7 +182,7 @@ public interface CNIdentity {
         NotImplemented, InvalidRequest, IdentifierNotUnique;
     
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNIdentity.requestMapIdentity
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNIdentity.requestMapIdentity
      */
     @Deprecated
     public boolean requestMapIdentity(Session session, Subject subject) 
@@ -190,7 +190,7 @@ public interface CNIdentity {
         NotImplemented, InvalidRequest, IdentifierNotUnique;
     
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNIdentity.confirmMapIdentity
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNIdentity.confirmMapIdentity
      */
     @Deprecated
     public boolean confirmMapIdentity(Session session, Subject subject) 
@@ -198,7 +198,7 @@ public interface CNIdentity {
         NotImplemented;
     
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNIdentity.getPendingMapIdentity
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNIdentity.getPendingMapIdentity
      */
     @Deprecated
     public SubjectInfo getPendingMapIdentity(Session session, Subject subject) 
@@ -206,7 +206,7 @@ public interface CNIdentity {
         NotImplemented;
     
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNIdentity.denyMapIdentity
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNIdentity.denyMapIdentity
      */
     @Deprecated
     public boolean denyMapIdentity(Session session, Subject subject) 
@@ -214,7 +214,7 @@ public interface CNIdentity {
         NotImplemented;
     
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNIdentity.removeMapIdentity
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNIdentity.removeMapIdentity
      */
     @Deprecated
     public boolean removeMapIdentity(Session session, Subject subject) 
@@ -222,14 +222,14 @@ public interface CNIdentity {
         NotImplemented;
     
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNIdentity.createGroup
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNIdentity.createGroup
      */
     @Deprecated
     public Subject createGroup(Session session, Group group) 
         throws ServiceFailure, InvalidToken, NotAuthorized, NotImplemented, IdentifierNotUnique, InvalidRequest;
     
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNIdentity.updateGroup
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNIdentity.updateGroup
      */
     @Deprecated
     public boolean updateGroup(Session session, Group group) 
@@ -238,14 +238,14 @@ public interface CNIdentity {
     
 
 //    /**
-//     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNIdentity.isGroup
+//     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNIdentity.isGroup
 //     */
 //    public boolean isGroup(Subject subject) 
 //        throws ServiceFailure, InvalidToken, NotAuthorized, NotFound, 
 //        NotImplemented, InvalidRequest;
 //    
 //    /**
-//     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNIdentity.isPublic
+//     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNIdentity.isPublic
 //     */
 //    public boolean isPublic(Subject subject) 
 //        throws ServiceFailure, InvalidToken, NotAuthorized, NotFound, 

@@ -42,20 +42,20 @@ import org.dataone.service.types.v1_1.QueryEngineList;
 public interface MNQuery 
 {   
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/MN_APIs.html#MNQuery.query
+     * @see https://purl.dataone.org/architecturev2/apis/MN_APIs.html#MNQuery.query
      */
     public InputStream query(Session session, String queryEngine, String query)
         throws InvalidToken, ServiceFailure, NotAuthorized, InvalidRequest, 
         NotImplemented, NotFound;
 
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/MN_APIs.html#MNQuery.getQueryEngineDescription
+     * @see https://purl.dataone.org/architecturev2/apis/MN_APIs.html#MNQuery.getQueryEngineDescription
      */
     public QueryEngineDescription getQueryEngineDescription(Session session, String queryEngine)
         throws InvalidToken, ServiceFailure, NotAuthorized, NotImplemented, NotFound;
 
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/MN_APIs.html#MNQuery.listQueryEngines
+     * @see https://purl.dataone.org/architecturev2/apis/MN_APIs.html#MNQuery.listQueryEngines
      */
     public QueryEngineList listQueryEngines(Session session)
         throws InvalidToken, ServiceFailure, NotAuthorized, NotImplemented;

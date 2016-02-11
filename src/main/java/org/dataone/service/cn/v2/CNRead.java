@@ -52,40 +52,40 @@ public interface CNRead
 {
     /**
      * InputStream is the Java native version of D1's OctetStream
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNRead.get
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNRead.get
      */
     public InputStream get(Session session, Identifier id)
         throws InvalidToken, ServiceFailure, NotAuthorized, NotFound, NotImplemented;
 
     
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNRead.getSystemMetadata
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNRead.getSystemMetadata
      */
     public SystemMetadata getSystemMetadata(Session session, Identifier id)
         throws InvalidToken, ServiceFailure, NotAuthorized, NotFound, NotImplemented;
     
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/MN_APIs.html#MN_read.describe
+     * @see https://purl.dataone.org/architecturev2/apis/MN_APIs.html#MN_read.describe
      */
     public DescribeResponse describe(Session session, Identifier id)
     throws InvalidToken, NotAuthorized, NotImplemented, ServiceFailure, NotFound;
     
 
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNRead.resolve
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNRead.resolve
      */
     public ObjectLocationList resolve(Session session, Identifier id)
         throws InvalidToken, ServiceFailure, NotAuthorized, NotFound, NotImplemented;
     
     
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNRead.getChecksum
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNRead.getChecksum
      */
     public Checksum getChecksum(Session session, Identifier pid)
         throws InvalidToken, ServiceFailure, NotAuthorized, NotFound, NotImplemented;
     
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNRead.listObjects
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNRead.listObjects
      */
     public ObjectList listObjects(Session session, Date fromDate, 
             Date toDate, ObjectFormatIdentifier formatId, NodeReference nodeId, Identifier identifier,
@@ -93,27 +93,27 @@ public interface CNRead
     throws InvalidRequest, InvalidToken, NotAuthorized, NotImplemented, ServiceFailure;
     
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNRead.search
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNRead.search
      */
     public ObjectList search(Session session, String queryType, String query)
         throws InvalidToken, ServiceFailure, NotAuthorized, InvalidRequest, 
         NotImplemented;
     
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNRead.query
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNRead.query
      */
     public InputStream query(Session session, String queryEngine, String query)
         throws InvalidToken, ServiceFailure, NotAuthorized, InvalidRequest, 
         NotImplemented, NotFound;
 
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNRead.getQueryEngineDescription
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNRead.getQueryEngineDescription
      */
     public QueryEngineDescription getQueryEngineDescription(Session session, String queryEngine)
         throws InvalidToken, ServiceFailure, NotAuthorized, NotImplemented, NotFound;
 
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNRead.listQueryEngines
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNRead.listQueryEngines
      */
     public QueryEngineList listQueryEngines(Session session)
         throws InvalidToken, ServiceFailure, NotAuthorized, NotImplemented;

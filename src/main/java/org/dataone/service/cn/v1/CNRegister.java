@@ -42,14 +42,14 @@ import org.dataone.service.types.v1.NodeReference;
 public interface CNRegister {
 
     /** 
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNRegister.updateNodeCapabilities
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNRegister.updateNodeCapabilities
      */
     public boolean updateNodeCapabilities(NodeReference nodeid, 
         Node node) throws NotImplemented, NotAuthorized, 
         ServiceFailure, InvalidRequest, NotFound, InvalidToken;
 
     /** 
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNRegister.register
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNRegister.register
      */
     public NodeReference register(Node node)
         throws NotImplemented, NotAuthorized, ServiceFailure, InvalidRequest, 
@@ -57,7 +57,7 @@ public interface CNRegister {
 
     ////   
     /** 
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNRegister.updateNodeCapabilities
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNRegister.updateNodeCapabilities
      */
     @Deprecated
     public boolean updateNodeCapabilities(Session session, NodeReference nodeid, 
@@ -65,7 +65,7 @@ public interface CNRegister {
         ServiceFailure, InvalidRequest, NotFound, InvalidToken;
 
     /** 
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/CN_APIs.html#CNRegister.register
+     * @see https://purl.dataone.org/architecturev2/apis/CN_APIs.html#CNRegister.register
      */
     @Deprecated
     public NodeReference register(Session session, Node node)

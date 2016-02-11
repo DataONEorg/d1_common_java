@@ -40,7 +40,7 @@ import org.dataone.service.types.v1.Session;
 public interface MNAuthorization {
 
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/MN_APIs.html#MN_auth.isAuthorized
+     * @see https://purl.dataone.org/architecturev2/apis/MN_APIs.html#MN_auth.isAuthorized
      */
     public boolean isAuthorized(Session session, Identifier id, Permission action)
             throws ServiceFailure, InvalidRequest, InvalidToken, NotFound, 

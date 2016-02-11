@@ -42,7 +42,7 @@ import org.dataone.service.types.v1.Session;
 public interface MNPackage 
 {   
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/MN_APIs.html#MNPackage.getPackage
+     * @see https://purl.dataone.org/architecturev2/apis/MN_APIs.html#MNPackage.getPackage
      */
     public InputStream getPackage(Session session, ObjectFormatIdentifier packageType, Identifier id)
         throws InvalidToken, ServiceFailure, NotAuthorized, InvalidRequest, 

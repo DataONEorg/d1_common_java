@@ -46,7 +46,7 @@ import org.dataone.service.types.v2.SystemMetadata;
 public interface MNStorage {
 
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/MN_APIs.html#MN_storage.create
+     * @see https://purl.dataone.org/architecturev2/apis/MN_APIs.html#MN_storage.create
      */
     public Identifier create(Session session, Identifier pid, InputStream object, 
         SystemMetadata sysmeta) 
@@ -55,7 +55,7 @@ public interface MNStorage {
 
 
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/MN_APIs.html#MN_storage.update
+     * @see https://purl.dataone.org/architecturev2/apis/MN_APIs.html#MN_storage.update
      */
     public Identifier update(Session session, Identifier pid, InputStream object, 
         Identifier newPid, SystemMetadata sysmeta) 
@@ -64,27 +64,27 @@ public interface MNStorage {
         NotFound;
 
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/MN_APIs.html#MN_storage.updateSystemMetadata
+     * @see https://purl.dataone.org/architecturev2/apis/MN_APIs.html#MN_storage.updateSystemMetadata
      */
      public boolean updateSystemMetadata(Session session, Identifier pid,
         SystemMetadata sysmeta) throws NotImplemented, NotAuthorized, NotFound,
         ServiceFailure, InvalidRequest, InvalidSystemMetadata, InvalidToken;
     
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/MN_APIs.html#MN_storage.delete
+     * @see https://purl.dataone.org/architecturev2/apis/MN_APIs.html#MN_storage.delete
      */
     public Identifier delete(Session session, Identifier id)
     throws InvalidToken, ServiceFailure, NotAuthorized, NotFound, NotImplemented;
 
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/MN_APIs.html#MN_storage.archive
+     * @see https://purl.dataone.org/architecturev2/apis/MN_APIs.html#MN_storage.archive
      * @deprecated use updateSystemMetadata() to mark content as archived
      */
     public Identifier archive(Session session, Identifier id)
     throws InvalidToken, ServiceFailure, NotAuthorized, NotFound, NotImplemented;    
     
     /**
-     * @see https://jenkins-ucsb-1.dataone.org/job/API%20Documentation%20-%20trunk/ws/api-documentation/build/html/apis/MN_APIs.html#MNStorage.generateIdentifier
+     * @see https://purl.dataone.org/architecturev2/apis/MN_APIs.html#MNStorage.generateIdentifier
      */
     public Identifier generateIdentifier(Session session, String scheme, String fragment)
     	throws InvalidToken, ServiceFailure,
