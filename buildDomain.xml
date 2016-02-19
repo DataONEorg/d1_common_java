@@ -80,16 +80,16 @@
             <arg value="${basedir}/src/main/resources/org/dataone/service/resources/config/v1/jibxConfig.xml" />
             <arg value="-s" />
             <!-- the repository url should be used for development cycles -->
-            <arg value="https://repository.dataone.org/software/cicore/trunk/d1_schemas/" />
+<!--            <arg value="https://repository.dataone.org/software/cicore/trunk/d1_schemas/" />  -->
             <!-- the ns url should be used for production releases -->
-<!--            <arg value="http://ns.dataone.org/service/types" />  -->
+            <arg value="http://ns.dataone.org/service/types" /> 
             <arg value="-t"/>
             <arg value="${basedir}/src/main/java"/>
 
         	<!-- the last argument should be dataoneTypes.xsd for development cycles -->
-            <arg value="dataoneTypes.xsd" />
+<!--            <arg value="dataoneTypes.xsd" /> -->
             <!-- the last arguments should be v1 and v1.1 for production releases -->
-            <!-- <arg value="v1" /> -->
+             <arg value="v1" /> 
         </java>
     	
     	<java classname="org.jibx.schema.codegen.CodeGen" fork="yes"
@@ -110,16 +110,15 @@
     		
             <arg value="-s" />
             <!-- the repository url should be used for development cycles -->
-            <arg value="https://repository.dataone.org/software/cicore/trunk/d1_schemas/" />
+<!--            <arg value="https://repository.dataone.org/software/cicore/trunk/d1_schemas/" /> -->
             <!-- the ns url should be used for production releases -->
-			<!-- <arg value="http://ns.dataone.org/service/types" />  -->
+            <arg value="http://ns.dataone.org/service/types" />  
     		
             <arg value="-t"/>
             <arg value="${basedir}/src/main/java"/>
-			
-			<arg value="-v"/>
     		
-            <arg value="dataoneTypes_v1.1.xsd" />
+<!--            <arg value="dataoneTypes_v1.1.xsd" /> -->
+            <arg value="v1.1" />
             
         </java>
     	
@@ -144,17 +143,16 @@
     		
     			<arg value="-s" />
 	            <!-- the repository url should be used for development cycles -->
-	            <arg value="https://repository.dataone.org/software/cicore/trunk/d1_schemas/" />
+<!--	            <arg value="https://repository.dataone.org/software/cicore/trunk/d1_schemas/" /> -->
 	            <!-- the ns url should be used for production releases -->
-				<!-- <arg value="http://ns.dataone.org/service/types" />  -->
+                    <arg value="http://ns.dataone.org/service/types" />  
 	        
     			<arg value="-t"/>
 	            <arg value="${basedir}/src/main/java"/>
     		
-				<arg value="-v"/>
 
-	            <arg value="dataoneTypes_v2.0.xsd" />
-	            
+<!--	            <arg value="dataoneTypes_v2.0.xsd" /> -->
+	            <arg value="v2.0" />
 	        </java>
 
     </target>
