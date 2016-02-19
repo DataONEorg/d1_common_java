@@ -32,9 +32,12 @@
 	<!-- For development cycles, we will use dataoneTypes.xsd as the schema-set 
 		name, but For production releases we switch to an url that has v1 as the 
 		last segment of the uri path -->
-	<schema-set names="dataoneTypes_v2.0.xsd" prefix="d1_v2.0"
+	<schema-set names="v2.0" prefix="d1_v2.0"
 		namespaces="http://ns.dataone.org/service/types/v2.0" package="org.dataone.service.types.v2"
 		binding-file-name="binding_v2_0.xml">
+<!--	<schema-set names="dataoneTypes_v2.0.xsd" prefix="d1_v2.0"
+		namespaces="http://ns.dataone.org/service/types/v2.0" package="org.dataone.service.types.v2"
+		binding-file-name="binding_v2_0.xml"> -->
 		<schema-type type-name="dateTime" java-class="java.util.Date"
 			serializer="org.dataone.service.util.DateTimeMarshaller.serializeDateToUTC"
 			deserializer="org.dataone.service.util.DateTimeMarshaller.deserializeDateToUTC" />
@@ -42,7 +45,7 @@
 			serializer="org.dataone.service.util.BigIntegerMarshaller.serializeBigInteger"
 			deserializer="org.dataone.service.util.BigIntegerMarshaller.deserializeBigInteger" />
 			
-		<schema name="dataoneTypes_v2.0.xsd" includes="SystemMetadata Node NodeList OptionList ObjectFormat ObjectFormatList LogEntry Log Property MediaTypeProperty" >
+		<schema name="v2.0" includes="SystemMetadata Node NodeList OptionList ObjectFormat ObjectFormatList LogEntry Log Property MediaTypeProperty" >
 			<complexType name="Property">
                     <simpleContent>
                         <extension value-name="value" />
