@@ -99,7 +99,7 @@
             <!-- take out the placeholder -->
 <!-- need the placeholder element or else bad things happen when generating the classes it generated a class for the version so Identifier & Identifier1 no, i don't know why -->
 
-
+<!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
@@ -134,7 +134,7 @@
 
                 </dependencies>
             </plugin>
-
+-->
             <plugin>
                 <artifactId>maven-clean-plugin</artifactId>
                 <configuration>

@@ -24,7 +24,7 @@ import java.util.List;
  */
 public class AccessPolicy implements Serializable
 {
-    private static final long serialVersionUID = 10000000;
+    private static final long serialVersionUID = 10000001;
     private List<AccessRule> allowList = new ArrayList<AccessRule>();
 
     /** 
@@ -35,7 +35,18 @@ public class AccessPolicy implements Serializable
     public List<AccessRule> getAllowList() {
         return allowList;
     }
-
+    
+    /* Same as getAllowList, but for use with JibX Serializer
+       The method will produce a null return if an empty
+       allow rule array has been created, but nothing added
+       https://redmine.dataone.org/issues/7422
+    */
+    public List<AccessRule> grabAllowListNullIfEmpty() {
+        if (allowList != null && allowList.isEmpty()) {
+                return null;
+        }
+        return allowList;
+    }
     /** 
      * Set the list of 'allow' element items.
      * 

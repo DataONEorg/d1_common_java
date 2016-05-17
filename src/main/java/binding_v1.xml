@@ -9,7 +9,7 @@
     <value style="text" get-method="getValue" set-method="setValue"/>
   </mapping>
   <mapping abstract="true" type-name="d1:AccessPolicy" class="org.dataone.service.types.v1.AccessPolicy">
-    <collection get-method="getAllowList" set-method="setAllowList" create-type="java.util.ArrayList">
+    <collection get-method="grabAllowListNullIfEmpty" set-method="setAllowList" create-type="java.util.ArrayList">
       <structure map-as="d1:AccessRule" name="allow"/>
     </collection>
   </mapping>
@@ -17,10 +17,10 @@
     <structure map-as="d1:AccessPolicy"/>
   </mapping>
   <mapping abstract="true" type-name="d1:AccessRule" class="org.dataone.service.types.v1.AccessRule">
-    <collection get-method="getSubjectList" set-method="setSubjectList" create-type="java.util.ArrayList">
+    <collection get-method="grabSubjectListNullIfEmpty" set-method="setSubjectList" create-type="java.util.ArrayList">
       <structure map-as="d1:Subject" name="subject"/>
     </collection>
-    <collection get-method="getPermissionList" set-method="setPermissionList" create-type="java.util.ArrayList">
+    <collection get-method="grabPermissionListNullIfEmpty" set-method="setPermissionList" create-type="java.util.ArrayList">
       <value style="element" name="permission" type="org.dataone.service.types.v1.Permission" format="d1:Permission"/>
     </collection>
   </mapping>
@@ -92,7 +92,7 @@
     <structure map-as="d1:Synchronization" get-method="getSynchronization" set-method="setSynchronization" usage="optional" name="synchronization"/>
     <structure map-as="d1:NodeReplicationPolicy" get-method="getNodeReplicationPolicy" set-method="setNodeReplicationPolicy" usage="optional" name="nodeReplicationPolicy"/>
     <structure map-as="d1:Ping" get-method="getPing" set-method="setPing" usage="optional" name="ping"/>
-    <collection get-method="getSubjectList" set-method="setSubjectList" usage="optional" create-type="java.util.ArrayList">
+    <collection get-method="grabSubjectListNullIfEmpty" set-method="setSubjectList" usage="optional" create-type="java.util.ArrayList">
       <structure map-as="d1:Subject" name="subject"/>
     </collection>
     <collection get-method="getContactSubjectList" set-method="setContactSubjectList" create-type="java.util.ArrayList">
@@ -323,8 +323,8 @@
     <structure map-as="d1:Checksum" get-method="getChecksum" set-method="setChecksum" name="checksum"/>
     <structure map-as="d1:Subject" get-method="getSubmitter" set-method="setSubmitter" usage="optional" name="submitter"/>
     <structure map-as="d1:Subject" get-method="getRightsHolder" set-method="setRightsHolder" name="rightsHolder"/>
-    <structure map-as="d1:AccessPolicy" get-method="getAccessPolicy" set-method="setAccessPolicy" usage="optional" name="accessPolicy"/>
-    <structure map-as="d1:ReplicationPolicy" get-method="getReplicationPolicy" set-method="setReplicationPolicy" usage="optional" name="replicationPolicy"/>
+    <structure map-as="d1:AccessPolicy" get-method="grabAccessPolicyNullIfEmpty" set-method="setAccessPolicy" usage="optional" name="accessPolicy"/>
+    <structure map-as="d1:ReplicationPolicy" get-method="grabReplicationPolicyNullIfEmpty" set-method="setReplicationPolicy" usage="optional" name="replicationPolicy"/>
     <structure map-as="d1:Identifier" get-method="getObsoletes" set-method="setObsoletes" usage="optional" name="obsoletes"/>
     <structure map-as="d1:Identifier" get-method="getObsoletedBy" set-method="setObsoletedBy" usage="optional" name="obsoletedBy"/>
     <value style="element" name="archived" get-method="getArchived" set-method="setArchived" usage="optional"/>
@@ -332,7 +332,7 @@
     <value style="element" name="dateSysMetadataModified" get-method="getDateSysMetadataModified" set-method="setDateSysMetadataModified" usage="optional" serializer="org.dataone.service.util.DateTimeMarshaller.serializeDateToUTC" deserializer="org.dataone.service.util.DateTimeMarshaller.deserializeDateToUTC"/>
     <structure map-as="d1:NodeReference" get-method="getOriginMemberNode" set-method="setOriginMemberNode" usage="optional" name="originMemberNode"/>
     <structure map-as="d1:NodeReference" get-method="getAuthoritativeMemberNode" set-method="setAuthoritativeMemberNode" usage="optional" name="authoritativeMemberNode"/>
-    <collection get-method="getReplicaList" set-method="setReplicaList" usage="optional" create-type="java.util.ArrayList">
+    <collection get-method="grabReplicaListNullIfEmpty" set-method="setReplicaList" usage="optional" create-type="java.util.ArrayList">
       <structure map-as="d1:Replica" name="replica"/>
     </collection>
   </mapping>

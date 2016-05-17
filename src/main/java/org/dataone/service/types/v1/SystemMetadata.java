@@ -59,7 +59,7 @@ import java.util.List;
  */
 public class SystemMetadata implements Serializable
 {
-    private static final long serialVersionUID = 10000000;
+    private static final long serialVersionUID = 10000001;
     private BigInteger serialVersion;
     private Identifier identifier;
     private ObjectFormatIdentifier formatId;
@@ -335,7 +335,20 @@ public class SystemMetadata implements Serializable
     public AccessPolicy getAccessPolicy() {
         return accessPolicy;
     }
+    /* Same as getAccessPolicy, but for use with JibX Serializer
+       The method will produce a null return if an empty
+       access policy array has been created, but nothing added
+       https://redmine.dataone.org/issues/7422
+    */
+    public AccessPolicy grabAccessPolicyNullIfEmpty() {
+        if (accessPolicy != null) {
+            if ((accessPolicy.getAllowList() == null) || (accessPolicy.sizeAllowList() <= 0)) {
+                return null;
+            }
 
+        }
+        return accessPolicy;
+    }
     /** 
      * Set the 'accessPolicy' element value. The *accessPolicy* determines which
             :term:`Subjects` are allowed to make changes to an object in
@@ -368,7 +381,24 @@ public class SystemMetadata implements Serializable
     public ReplicationPolicy getReplicationPolicy() {
         return replicationPolicy;
     }
-
+    
+    /* for use when serializer in order to produce a null return
+       if the replicationPolicy has been created, but nothing added
+       https://redmine.dataone.org/issues/7422
+    */
+    public ReplicationPolicy grabReplicationPolicyNullIfEmpty() {
+        if (replicationPolicy != null) {
+            if ( (replicationPolicy.getReplicationAllowed() == null ) &&
+                 (replicationPolicy.getNumberReplicas() == null ) &&
+                 ( (replicationPolicy.getBlockedMemberNodeList() == null) ||
+                    (replicationPolicy.sizeBlockedMemberNodeList() <= 0) ) &&
+                 ( (replicationPolicy.getPreferredMemberNodeList() == null) ||
+                    (replicationPolicy.sizePreferredMemberNodeList() <= 0 ))) {
+                return null;
+            }
+        }
+        return replicationPolicy;
+    }
     /** 
      * Set the 'replicationPolicy' element value. A controlled list of policy choices that determine
             how many replicas should be maintained for a given object and any
@@ -592,7 +622,17 @@ public class SystemMetadata implements Serializable
     public List<Replica> getReplicaList() {
         return replicaList;
     }
+    /* for use when serializer in order to produce a null return
+       if the replica array has been created, but nothing added
+       https://redmine.dataone.org/issues/7422
+    */
+    public List<Replica> grabReplicaListNullIfEmpty() {
+        if ( (replicaList != null) && replicaList.isEmpty()) {
+            return null;
+        }
 
+        return replicaList;
+    }
     /** 
      * Set the list of 'replica' element items.  A container field used to repeatedly provide
             several metadata fields about each replica that exists in the

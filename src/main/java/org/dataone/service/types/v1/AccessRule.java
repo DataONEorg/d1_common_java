@@ -32,7 +32,7 @@ import java.util.List;
  */
 public class AccessRule implements Serializable
 {
-    private static final long serialVersionUID = 10000000;
+    private static final long serialVersionUID = 10000001;
     private List<Subject> subjectList = new ArrayList<Subject>();
     private List<Permission> permissionList = new ArrayList<Permission>();
 
@@ -44,7 +44,18 @@ public class AccessRule implements Serializable
     public List<Subject> getSubjectList() {
         return subjectList;
     }
-
+    
+    /* Same as getSubjectList, but for use with JibX Serializer
+       The method will produce a null return if an empty
+       subject array has been created, but nothing added
+       https://redmine.dataone.org/issues/7422
+    */
+        public List<Subject> grabSubjectListNullIfEmpty() {
+        if (subjectList != null && subjectList.isEmpty()) {
+                return null;
+        }
+        return subjectList;
+    }
     /** 
      * Set the list of 'subject' element items.
      * 
@@ -107,6 +118,17 @@ public class AccessRule implements Serializable
         return permissionList;
     }
 
+    /* Same as getPermissionList, but for use with JibX Serializer
+       The method will produce a null return if an empty
+       permission array has been created, but nothing added
+       https://redmine.dataone.org/issues/7422
+    */
+    public List<Permission> grabPermissionListNullIfEmpty() {
+        if (permissionList != null && permissionList.isEmpty()) {
+                return null;
+        }
+        return permissionList;
+    }
     /** 
      * Set the list of 'permission' element items.
      * 

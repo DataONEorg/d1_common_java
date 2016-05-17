@@ -26,7 +26,7 @@ import java.util.List;
 public class Node extends org.dataone.service.types.v1.Node implements
     Serializable
 {
-    private static final long serialVersionUID = 10000000;
+    private static final long serialVersionUID = 10000001;
     private List<Property> propertyList = new ArrayList<Property>();
 
     /** 

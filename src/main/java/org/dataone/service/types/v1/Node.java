@@ -34,7 +34,7 @@ import java.util.List;
  */
 public class Node implements Serializable
 {
-    private static final long serialVersionUID = 10000000;
+    private static final long serialVersionUID = 10000001;
     private NodeReference identifier;
     private String name;
     private String description;
@@ -261,7 +261,17 @@ public class Node implements Serializable
     public List<Subject> getSubjectList() {
         return subjectList;
     }
-
+    /* Same as getSubjectList, but for use with JibX Serializer
+       The method will produce a null return if an empty
+       subject array has been created, but nothing added
+       https://redmine.dataone.org/issues/7422
+    */
+        public List<Subject> grabSubjectListNullIfEmpty() {
+        if (subjectList != null && subjectList.isEmpty()) {
+                return null;
+        }
+        return subjectList;
+    }
     /** 
      * Set the list of 'subject' element items. The :term:`Subject` of this node, which can be
             repeated as needed. The *Node.subject* represents the identifier of
