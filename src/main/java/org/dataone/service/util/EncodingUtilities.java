@@ -80,7 +80,7 @@ import java.util.BitSet;
 
  http://www.java-forums.org/new-java/350-how-obtain-ascii-code-character.html
  http://stackoverflow.com/questions/1527856/how-can-i-iterate-through-the-unicode-codepoints-of-a-java-string
- http://mule1.dataone.org/ArchitectureDocs/GUIDs.html
+ http://purl.dataone.org/architecture/design/PIDs.html
  http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Character.html#unicode
  http://www.joelonsoftware.com/articles/Unicode.html
 
