@@ -8,11 +8,11 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 import java.util.LinkedList;
 
+import org.dataone.exceptions.MarshallingException;
 import org.dataone.service.types.v1.Event;
 import org.dataone.service.types.v2.Node;
 import org.dataone.service.types.v2.NodeList;
 import org.dataone.service.util.TypeMarshaller;
-import org.jibx.runtime.JiBXException;
 import org.junit.Test;
 
 public class TypeFactoryTestCase {
@@ -23,7 +23,7 @@ public class TypeFactoryTestCase {
     }
 
     @Test
-    public void testCloneV1Node() throws InstantiationException, IllegalAccessException, IOException, JiBXException {
+    public void testCloneV1Node() throws InstantiationException, IllegalAccessException, IOException, MarshallingException {
 
         InputStream is = this.getClass().getResourceAsStream("/org/dataone/service/samples/v2/mnNode1.xml");
         Node v2Node = TypeMarshaller.unmarshalTypeFromStream(Node.class, is);
@@ -52,7 +52,7 @@ public class TypeFactoryTestCase {
             fail("Test misconfiguration" + ex);
         } catch (IllegalAccessException ex) {
             fail("Test misconfiguration" +  ex);
-        } catch (JiBXException ex) {
+        } catch (MarshallingException ex) {
             fail("Test misconfiguration" +  ex);
         } catch (InvocationTargetException ex) {
             fail("Test misconfiguration" +  ex);
@@ -88,7 +88,7 @@ public class TypeFactoryTestCase {
             fail("Test misconfiguration" + ex);
         } catch (IllegalAccessException ex) {
             fail("Test misconfiguration" +  ex);
-        } catch (JiBXException ex) {
+        } catch (MarshallingException ex) {
             fail("Test misconfiguration" +  ex);
         } catch (InvocationTargetException ex) {
             fail("Test misconfiguration" +  ex);
@@ -112,7 +112,7 @@ public class TypeFactoryTestCase {
             fail("Test misconfiguration" + ex);
         } catch (IllegalAccessException ex) {
             fail("Test misconfiguration" +  ex);
-        } catch (JiBXException ex) {
+        } catch (MarshallingException ex) {
             fail("Test misconfiguration" +  ex);
         } catch (InvocationTargetException ex) {
                 fail("Test misconfiguration" +  ex);
@@ -164,7 +164,7 @@ public class TypeFactoryTestCase {
             fail("Test misconfiguration" + ex);
         } catch (IllegalAccessException ex) {
             fail("Test misconfiguration" +  ex);
-        } catch (JiBXException ex) {
+        } catch (MarshallingException ex) {
             fail("Test misconfiguration" +  ex);
         } catch (InvocationTargetException ex) {
                 fail("Test misconfiguration" +  ex);
@@ -174,7 +174,7 @@ public class TypeFactoryTestCase {
     }
     
     @Test
-    public void convertV2LogToV1Log_compatibleEvent() throws InstantiationException, IllegalAccessException, JiBXException, IOException {
+    public void convertV2LogToV1Log_compatibleEvent() throws InstantiationException, IllegalAccessException, MarshallingException, IOException {
         Log v2Log = new Log();
         v2Log.addLogEntry(new LogEntry());
         v2Log.getLogEntry(0).setDateLogged(new Date());
@@ -204,7 +204,7 @@ public class TypeFactoryTestCase {
 
     
     @Test
-    public void convertV2LogToV1Log_incompatibleEvent() throws InstantiationException, IllegalAccessException, JiBXException, IOException {
+    public void convertV2LogToV1Log_incompatibleEvent() throws InstantiationException, IllegalAccessException, MarshallingException, IOException {
         Log v2Log = new Log();
         v2Log.addLogEntry(new LogEntry());
         v2Log.getLogEntry(0).setDateLogged(new Date());
@@ -240,7 +240,7 @@ public class TypeFactoryTestCase {
     }
     
     @Test
-    public void convertV2LogToV1Log_emptyLog() throws InstantiationException, IllegalAccessException, JiBXException, IOException {
+    public void convertV2LogToV1Log_emptyLog() throws InstantiationException, IllegalAccessException, MarshallingException, IOException {
         Log v2Log = new Log();
         try {
             org.dataone.service.types.v1.Log v1Log = 
@@ -257,7 +257,7 @@ public class TypeFactoryTestCase {
     }
     
     @Test
-    public void convertV2LogToV1LogEntry_incompatibleEvent() throws InstantiationException, IllegalAccessException, JiBXException, IOException {
+    public void convertV2LogToV1LogEntry_incompatibleEvent() throws InstantiationException, IllegalAccessException, MarshallingException, IOException {
         LogEntry v2LogEntry = new LogEntry();
         v2LogEntry.setDateLogged(new Date());
         v2LogEntry.setEntryId("id1");
@@ -287,7 +287,7 @@ public class TypeFactoryTestCase {
     
     
     @Test
-    public void convertV1ToV2Log() throws InstantiationException, IllegalAccessException, JiBXException, IOException {
+    public void convertV1ToV2Log() throws InstantiationException, IllegalAccessException, MarshallingException, IOException {
         org.dataone.service.types.v1.Log v1Log = new org.dataone.service.types.v1.Log();
         v1Log.addLogEntry(new org.dataone.service.types.v1.LogEntry());
         v1Log.getLogEntry(0).setDateLogged(new Date());
@@ -315,7 +315,7 @@ public class TypeFactoryTestCase {
         
     
     @Test
-    public void convertV2ObjectFormatListToV1ObjectFormatList() throws InstantiationException, IllegalAccessException, JiBXException, IOException {
+    public void convertV2ObjectFormatListToV1ObjectFormatList() throws InstantiationException, IllegalAccessException, MarshallingException, IOException {
         ObjectFormatList v2FormatList = new ObjectFormatList();
         v2FormatList.addObjectFormat(new ObjectFormat());
         v2FormatList.getObjectFormat(0).setExtension("csv");

@@ -10,7 +10,6 @@ import java.lang.reflect.Method;
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -21,12 +20,10 @@ import org.apache.commons.lang.StringUtils;
 import org.dataone.service.exceptions.NotFound;
 import org.dataone.service.exceptions.ServiceFailure;
 import org.dataone.service.types.v1.Checksum;
-import org.dataone.service.types.v1.Event;
 import org.dataone.service.types.v1.Identifier;
 import org.dataone.service.types.v1.ObjectFormatIdentifier;
 import org.dataone.service.types.v1.Subject;
 import org.dataone.service.types.v1.util.ChecksumUtil;
-import org.jibx.runtime.JiBXException;
 
 
 
@@ -108,7 +105,7 @@ public class TypeFactory extends org.dataone.service.types.v1.TypeFactory {
      * @return an instance of destinationClass with all shared properties copied from the original instance
      * @throws InstantiationException
      * @throws IllegalAccessException
-     * @throws JiBXException
+     * @throws MarshallingException
      * @throws IOException
      * @throws InvocationTargetException
      * @throws NoSuchMethodException 

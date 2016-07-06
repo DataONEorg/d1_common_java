@@ -32,6 +32,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.io.IOUtils;
+import org.dataone.exceptions.MarshallingException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.dataone.service.types.v1.Node;
@@ -40,7 +41,6 @@ import org.dataone.service.types.v1.NodeReference;
 import org.dataone.service.types.v1.NodeState;
 import org.dataone.service.types.v1.NodeType;
 import org.dataone.service.util.TypeMarshaller;
-import org.jibx.runtime.JiBXException;
 import static org.junit.Assert.assertNotNull;
 import org.junit.Test;
 
@@ -85,7 +85,7 @@ public class NodelistUtilTestCase
     }
 
     @Test
-    public void testSelectNode_comparator() throws InstantiationException, IllegalAccessException, JiBXException, IOException {
+    public void testSelectNode_comparator() throws InstantiationException, IllegalAccessException, MarshallingException, IOException {
     	
         InputStream is = this.getClass().getResourceAsStream("/org/dataone/service/samples/v1/nodeListSample2.xml");   
         NodeList nodeList = TypeMarshaller.unmarshalTypeFromStream(NodeList.class, is);

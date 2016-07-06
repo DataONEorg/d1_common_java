@@ -36,7 +36,7 @@ public class AccessPolicy implements Serializable
         return allowList;
     }
     
-    /* Same as getAllowList, but for use with JibX Serializer
+    /* Same as getAllowList, but for use with Serializer
        The method will produce a null return if an empty
        allow rule array has been created, but nothing added
        https://redmine.dataone.org/issues/7422

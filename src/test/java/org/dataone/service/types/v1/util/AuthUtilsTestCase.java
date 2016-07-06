@@ -2,31 +2,23 @@ package org.dataone.service.types.v1.util;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Set;
 import java.util.TreeSet;
 
-
-import org.dataone.service.exceptions.InvalidSystemMetadata;
-import org.dataone.service.types.v1.TypeFactory;
+import org.dataone.exceptions.MarshallingException;
 import org.dataone.service.types.v1.Group;
-import org.dataone.service.types.v1.Node;
-import org.dataone.service.types.v1.NodeList;
-import org.dataone.service.types.v1.NodeReference;
 import org.dataone.service.types.v1.Permission;
 import org.dataone.service.types.v1.Person;
-import org.dataone.service.types.v1.Service;
-import org.dataone.service.types.v1.Services;
 import org.dataone.service.types.v1.Session;
 import org.dataone.service.types.v1.Subject;
 import org.dataone.service.types.v1.SubjectInfo;
 import org.dataone.service.types.v1.SystemMetadata;
+import org.dataone.service.types.v1.TypeFactory;
 import org.dataone.service.util.Constants;
 import org.dataone.service.util.TypeMarshaller;
-import org.jibx.runtime.JiBXException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -388,7 +380,7 @@ public class AuthUtilsTestCase {
 	
 	@Test
 	public void testAuthorizedClientSubjects_RecursionInfiniteLoopTest_Live() 
-	        throws InstantiationException, IllegalAccessException, IOException, JiBXException {
+	        throws InstantiationException, IllegalAccessException, IOException, MarshallingException {
 
 	    Session ses = new Session();
 	    InputStream is = this.getClass().getResourceAsStream("/org/dataone/service/samples/v1/loopedSubjectInfo.xml");

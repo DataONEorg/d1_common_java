@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 
+import org.dataone.exceptions.MarshallingException;
 import org.apache.log4j.Logger;
 import org.dataone.service.exceptions.NotFound;
 import org.dataone.service.exceptions.NotImplemented;
@@ -32,7 +33,6 @@ import org.dataone.service.types.v2.ObjectFormat;
 import org.dataone.service.types.v1.ObjectFormatIdentifier;
 import org.dataone.service.types.v2.ObjectFormatList;
 import org.dataone.service.util.TypeMarshaller;
-import org.jibx.runtime.JiBXException;
 
 public class ObjectFormatServiceImpl {
 
@@ -141,9 +141,9 @@ public class ObjectFormatServiceImpl {
     		getObjectFormatMap().put(objectFormat.getFormatId(), objectFormat);
     	}
 
-    } catch (JiBXException jibxe) {
+    } catch (MarshallingException e) {
     	String message = "The object format list could not be deserialized. " +
-    	"The error message was: " + jibxe.getMessage();
+    	"The error message was: " + e.getMessage();
     	logger.error(message);
     	throw new ServiceFailure("0000", message);
 

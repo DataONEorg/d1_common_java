@@ -32,6 +32,7 @@ import java.io.InputStream;
 import java.math.BigInteger;
 import java.util.Date;
 
+import org.dataone.exceptions.MarshallingException;
 import org.apache.log4j.Logger;
 import org.dataone.service.types.v1.Checksum;
 import org.dataone.service.types.v1.Identifier;
@@ -41,7 +42,6 @@ import org.dataone.service.types.v1.ObjectFormatIdentifier;
 import org.dataone.service.types.v1.ObjectList;
 import org.dataone.service.types.v1.Subject;
 import org.dataone.service.types.v1.SystemMetadata;
-import org.jibx.runtime.JiBXException;
 import org.junit.Test;
 
 
@@ -64,7 +64,7 @@ public class TypeMarshallerTestCase {
             fail("Test misconfiguration" + ex);
         } catch (IllegalAccessException ex) {
             fail("Test misconfiguration" +  ex);
-        } catch (JiBXException ex) {
+        } catch (MarshallingException ex) {
             fail("Test misconfiguration" +  ex);
         }
 
@@ -81,7 +81,7 @@ public class TypeMarshallerTestCase {
             fail("Test misconfiguration" + ex);
         } catch (IllegalAccessException ex) {
             fail("Test misconfiguration" +  ex);
-        } catch (JiBXException ex) {
+        } catch (MarshallingException ex) {
             fail("Test misconfiguration" +  ex);
         }
     }
@@ -99,7 +99,7 @@ public class TypeMarshallerTestCase {
             assertNotNull(xmlObjectList);
         } catch (IOException ex) {
             fail("Test misconfiguration" +  ex);
-        } catch (JiBXException ex) {
+        } catch (MarshallingException ex) {
             fail("Test misconfiguration" +  ex);
         }
     }
@@ -117,7 +117,7 @@ public class TypeMarshallerTestCase {
             fail("Test misconfiguration" + ex);
         } catch (IllegalAccessException ex) {
             fail("Test misconfiguration" +  ex);
-        } catch (JiBXException ex) {
+        } catch (MarshallingException ex) {
             fail("Test misconfiguration" +  ex);
         }
     }
@@ -139,7 +139,7 @@ public class TypeMarshallerTestCase {
             fail("Test misconfiguration" + ex);
         } catch (IllegalAccessException ex) {
             fail("Test misconfiguration" +  ex);
-        } catch (JiBXException ex) {
+        } catch (MarshallingException ex) {
             fail("Test misconfiguration" +  ex);
         }
 
@@ -189,7 +189,7 @@ public class TypeMarshallerTestCase {
 //            fail("Test misconfiguration" + ex);
 //        } catch (IllegalAccessException ex) {
 //            fail("Test misconfiguration" +  ex);
-        } catch (JiBXException ex) {
+        } catch (MarshallingException ex) {
             fail("Test misconfiguration" +  ex);
         }
 

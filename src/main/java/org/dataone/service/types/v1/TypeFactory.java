@@ -31,12 +31,12 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
 import org.apache.commons.io.input.CountingInputStream;
+import org.dataone.exceptions.MarshallingException;
 import org.apache.log4j.Logger;
 import org.dataone.service.exceptions.NotFound;
 import org.dataone.service.exceptions.ServiceFailure;
 import org.dataone.service.types.v1.util.ChecksumUtil;
 import org.dataone.service.util.TypeMarshaller;
-import org.jibx.runtime.JiBXException;
 
 
 /**
@@ -175,13 +175,13 @@ public class TypeFactory {
      * 
      * @param original
      * @return
-     * @throws JiBXException
+     * @throws MarshallingException
      * @throws IOException
      * @throws InstantiationException
      * @throws IllegalAccessException
      */
     @SuppressWarnings("unchecked")
-    public static <T> T clone(Object original) throws JiBXException, IOException, 
+    public static <T> T clone(Object original) throws MarshallingException, IOException, 
     InstantiationException, IllegalAccessException {
         if (original == null) return null;
         

@@ -29,6 +29,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Reader;
 
+import org.dataone.exceptions.MarshallingException;
 import org.apache.log4j.Logger;
 import org.jibx.runtime.BindingDirectory;
 import org.jibx.runtime.IBindingFactory;
@@ -47,7 +48,7 @@ public class TypeMarshaller {
     static Logger logger = Logger.getLogger(TypeMarshaller.class.getName());
 
     public static File marshalTypeToFile(Object typeObject, String filenamePath) 
-    throws JiBXException, FileNotFoundException, IOException 
+    throws MarshallingException, FileNotFoundException, IOException 
     {
     	FileOutputStream typeOutput = null;
     	File outputFile = new File(filenamePath);
@@ -69,7 +70,7 @@ public class TypeMarshaller {
     
     
     public static void marshalTypeToOutputStream(Object typeObject, OutputStream os) 
-    throws JiBXException, IOException 
+    throws MarshallingException, IOException 
     {
         marshalTypeToOutputStream(typeObject, os, null);
     }
@@ -80,19 +81,24 @@ public class TypeMarshaller {
      * @param typeObject
      * @param os
      * @param styleSheet
-     * @throws JiBXException
+     * @throws MarshallingException
      * @throws IOException
      */
     public static void marshalTypeToOutputStream(Object typeObject, OutputStream os, String styleSheet)
-    throws JiBXException, IOException 
+    throws MarshallingException, IOException 
     {
-        IBindingFactory bfact = BindingDirectory.getFactory(typeObject.getClass());
-        IMarshallingContext mctx = bfact.createMarshallingContext();
-        mctx.startDocument("UTF-8", null, os);
-        if (styleSheet != null) {
-        	mctx.getXmlWriter().writePI("xml-stylesheet", "type=\"text/xsl\" href=\"" + styleSheet + "\"");
+        try {
+            IBindingFactory bfact = BindingDirectory.getFactory(typeObject.getClass());
+
+            IMarshallingContext mctx = bfact.createMarshallingContext();
+            mctx.startDocument("UTF-8", null, os);
+            if (styleSheet != null) {
+                mctx.getXmlWriter().writePI("xml-stylesheet", "type=\"text/xsl\" href=\"" + styleSheet + "\"");
+            }
+            mctx.marshalDocument(typeObject);
+        } catch (JiBXException e) {
+            throw new MarshallingException(e);
         }
-        mctx.marshalDocument(typeObject);
     }
     
     
@@ -106,24 +112,26 @@ public class TypeMarshaller {
      * @throws IOException
      * @throws InstantiationException
      * @throws IllegalAccessException
-     * @throws JiBXException
+     * @throws MarshallingException
      */
     public static <T> T unmarshalTypeFromFile(Class<T> domainClass, String filenamePath) 
-    throws IOException, InstantiationException, IllegalAccessException, JiBXException 
+    throws IOException, InstantiationException, IllegalAccessException, MarshallingException 
     {
-    	Reader reader = null;
-    	try {
-    		IBindingFactory bfact = BindingDirectory.getFactory(domainClass);
-    		IUnmarshallingContext uctx = bfact.createUnmarshallingContext();
-    		reader = new FileReader(filenamePath);
-    		T domainObject = (T) uctx.unmarshalDocument(reader);
-    		return domainObject;
-    	} 
-    	finally {
-    		if (reader != null) {
-    			reader.close();
-    		}
-    	}
+        Reader reader = null;
+        try {
+            IBindingFactory bfact = BindingDirectory.getFactory(domainClass);
+            IUnmarshallingContext uctx = bfact.createUnmarshallingContext();
+            reader = new FileReader(filenamePath);
+            T domainObject = (T) uctx.unmarshalDocument(reader);
+            return domainObject;
+        } catch (JiBXException e) {
+            throw new MarshallingException(e);
+        }
+        finally {
+            if (reader != null) {
+                reader.close();
+            }
+        }
     }
 
     
@@ -137,25 +145,27 @@ public class TypeMarshaller {
      * @throws IOException
      * @throws InstantiationException
      * @throws IllegalAccessException
-     * @throws JiBXException
+     * @throws MarshallingException
      */
     public static <T> T unmarshalTypeFromFile(Class<T> domainClass, File file) 
-    throws IOException, InstantiationException, IllegalAccessException, JiBXException 
+    throws IOException, InstantiationException, IllegalAccessException, MarshallingException 
     {
-    	Reader reader = null;
-    	try {
-    		IBindingFactory bfact = BindingDirectory.getFactory(domainClass);
-    		IUnmarshallingContext uctx = bfact.createUnmarshallingContext();
-    		reader = new FileReader(file);
-    		T domainObject = (T) uctx.unmarshalDocument(reader);
+        Reader reader = null;
+        try {
+            IBindingFactory bfact = BindingDirectory.getFactory(domainClass);
+            IUnmarshallingContext uctx = bfact.createUnmarshallingContext();
+            reader = new FileReader(file);
+            T domainObject = (T) uctx.unmarshalDocument(reader);
 
-    		return domainObject;
-    	} 
-    	finally {
-    		if (reader != null) {
-    			reader.close();
-    		}
-    	}
+            return domainObject;
+        } catch (JiBXException e) {
+            throw new MarshallingException(e);
+        } 
+        finally {
+            if (reader != null) {
+                reader.close();
+            }
+        }
     }
     
     
@@ -169,24 +179,26 @@ public class TypeMarshaller {
      * @throws IOException
      * @throws InstantiationException
      * @throws IllegalAccessException
-     * @throws JiBXException
+     * @throws MarshallingException
      */
     public static <T> T unmarshalTypeFromStream(Class<T> domainClass, InputStream inputStream) 
-    throws IOException, InstantiationException, IllegalAccessException, JiBXException 
+    throws IOException, InstantiationException, IllegalAccessException, MarshallingException 
     {
         try {
-        	IBindingFactory bfact = BindingDirectory.getFactory(domainClass);
-        	IUnmarshallingContext uctx = bfact.createUnmarshallingContext();
-        	T domainObject = (T) uctx.unmarshalDocument(inputStream, null);
-
-        	return domainObject;
-        } 
+            IBindingFactory bfact = BindingDirectory.getFactory(domainClass);
+            IUnmarshallingContext uctx = bfact.createUnmarshallingContext();
+            T domainObject = (T) uctx.unmarshalDocument(inputStream, null);
+            return domainObject;
+            
+        } catch (JiBXException e) {
+            throw new MarshallingException(e);
+        }
         finally {
-        	if (inputStream != null) {
-        		inputStream.close();
-        	} else {
-        		throw new IOException("InputStream was null");
-        	}
+            if (inputStream != null) {
+                inputStream.close();
+            } else {
+                throw new IOException("InputStream was null");
+            }
         }
     }
 }

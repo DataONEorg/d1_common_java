@@ -23,7 +23,8 @@
 package org.dataone.service.util;
 
 import java.math.BigInteger;
-import org.jibx.runtime.JiBXException;
+
+import org.dataone.exceptions.MarshallingException;
 
 
 /**
@@ -40,14 +41,14 @@ public class BigIntegerMarshaller {
      *
      * @param bigInt
      * @return String
-     * @throws JiBXException
+     * @throws MarshallingException
      *
      */
-    public static String serializeBigInteger(BigInteger bigInt) throws JiBXException {
+    public static String serializeBigInteger(BigInteger bigInt) throws MarshallingException {
         if ((bigInt.compareTo(minLimit) >= 0) && (bigInt.compareTo(maxLimit) <= 0)) {
             return bigInt.toString();
         } else {
-            throw new JiBXException("unsignedLong must be greater than or equal to 0 and less than or equal to 18446744073709551615");
+            throw new MarshallingException("unsignedLong must be greater than or equal to 0 and less than or equal to 18446744073709551615");
         }
 
     }
@@ -59,17 +60,17 @@ public class BigIntegerMarshaller {
      * 
      * @param bigIntValue
      * @return BigInteger
-     * @throws JiBXException
+     * @throws MarshallingException
      */
-    public static BigInteger deserializeBigInteger(String bigIntValue) throws JiBXException {
+    public static BigInteger deserializeBigInteger(String bigIntValue) throws MarshallingException {
 
     	if (bigIntValue == null)
-    		throw new JiBXException("serialized value cannot be null");
+    		throw new MarshallingException("serialized value cannot be null");
     	BigInteger bigInt = new BigInteger(bigIntValue);
         if ((bigInt.compareTo(minLimit) >= 0) && (bigInt.compareTo(maxLimit) <= 0)) {
             return bigInt;
         } else {
-            throw new JiBXException("unsignedLong must be greater than or equal to 0 and less than or equal to 18446744073709551615");
+            throw new MarshallingException("unsignedLong must be greater than or equal to 0 and less than or equal to 18446744073709551615");
         }
     }
 }

@@ -23,7 +23,8 @@
 package org.dataone.service.util;
 
 import java.math.BigInteger;
-import org.jibx.runtime.JiBXException;
+
+import org.dataone.exceptions.MarshallingException;
 import org.junit.Test;
 import static org.junit.Assert.*;
 /**
@@ -38,14 +39,14 @@ public class BigIntegerMashallerTestCase {
         BigInteger someBigInteger = null;
         try {
             someBigInteger = BigIntegerMarshaller.deserializeBigInteger(someBigNumber);
-        } catch (JiBXException ex) {
+        } catch (MarshallingException ex) {
            ex.printStackTrace();
            fail(ex.getMessage());
         }
         String anotherBigNumber = "0";
         try {
             anotherBigNumber = BigIntegerMarshaller.serializeBigInteger(someBigInteger);
-        } catch (JiBXException ex) {
+        } catch (MarshallingException ex) {
            ex.printStackTrace();
            fail(ex.getMessage());
         }
@@ -59,7 +60,7 @@ public class BigIntegerMashallerTestCase {
         boolean failed = false;
         try {
             someBigInteger = BigIntegerMarshaller.deserializeBigInteger(someBigNumber);
-        } catch (JiBXException ex) {
+        } catch (MarshallingException ex) {
            assertTrue(ex.getMessage().contains("unsignedLong must be greater"));
            failed = true;
         }
@@ -70,7 +71,7 @@ public class BigIntegerMashallerTestCase {
 
         try {
             someBigNumber = BigIntegerMarshaller.serializeBigInteger(someBigInteger);
-        } catch (JiBXException ex) {
+        } catch (MarshallingException ex) {
            assertTrue(ex.getMessage().contains("unsignedLong must be greater"));
            failed = true;
         }
@@ -79,7 +80,7 @@ public class BigIntegerMashallerTestCase {
         String someNegativeNumber = "-1";
         try {
             someBigInteger = BigIntegerMarshaller.deserializeBigInteger(someNegativeNumber);
-        } catch (JiBXException ex) {
+        } catch (MarshallingException ex) {
            assertTrue(ex.getMessage().contains("unsignedLong must be greater"));
            failed = true;
         }
@@ -89,7 +90,7 @@ public class BigIntegerMashallerTestCase {
         someBigInteger = BigInteger.valueOf(-1L);
         try {
             someBigNumber = BigIntegerMarshaller.serializeBigInteger(someBigInteger);
-        } catch (JiBXException ex) {
+        } catch (MarshallingException ex) {
            assertTrue(ex.getMessage().contains("unsignedLong must be greater"));
            failed = true;
         }

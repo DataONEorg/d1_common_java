@@ -29,9 +29,10 @@ import javax.xml.validation.SchemaFactory;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
+
+import org.dataone.exceptions.MarshallingException;
 import org.apache.log4j.Logger;
 import org.dataone.service.util.TypeMarshaller;
-import org.jibx.runtime.JiBXException;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -171,7 +172,7 @@ public class SystemMetadataTestCase {
 
         assertFalse(hasXPath(sysMetaDom, "/d1:systemMetadata/accessPolicy"));
 
-            // the following tests result in expections from JibX 
+            // the following tests result in serialization exceptions 
         // add a blank accessRule to the accessPolicy's 
         // accessRule list
         boolean passed = false;
@@ -251,7 +252,7 @@ public class SystemMetadataTestCase {
 
     }
 
-    private InputStream typeToInputStream(Object type) throws JiBXException, IOException {
+    private InputStream typeToInputStream(Object type) throws MarshallingException, IOException {
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         TypeMarshaller.marshalTypeToOutputStream(type, os);
 

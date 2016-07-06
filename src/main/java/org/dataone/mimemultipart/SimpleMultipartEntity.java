@@ -30,13 +30,13 @@ import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.Vector;
 
+import org.dataone.exceptions.MarshallingException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.dataone.service.util.TypeMarshaller;
-import org.jibx.runtime.JiBXException;
 
 /**
  * @author berkley, nahf
@@ -121,10 +121,10 @@ public class SimpleMultipartEntity extends MultipartEntity
      * @param serializableD1Object - the dataone serializable object to add 
      * @param type - class of the serializable dataone datatype
      * @throws IOException 
-     * @throws JiBXException 
+     * @throws MarshallingException 
      */
     public void addFilePart(String name, Object serializableD1Object) 
-    throws IOException, JiBXException
+    throws IOException, MarshallingException
     {
     	// create temp file
     	File outputFile = generateTempFile();
@@ -145,7 +145,7 @@ public class SimpleMultipartEntity extends MultipartEntity
 
     @Deprecated
     public void addFilePart(String name, Object serializableD1Object, Class type) 
-    throws IOException, JiBXException
+    throws IOException, MarshallingException
     {
     	addFilePart(name, serializableD1Object);
     }

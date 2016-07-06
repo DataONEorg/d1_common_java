@@ -6,9 +6,9 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.commons.io.IOUtils;
+import org.dataone.exceptions.MarshallingException;
 import org.apache.commons.lang3.StringUtils;
 import org.dataone.service.util.TypeMarshaller;
-import org.jibx.runtime.JiBXException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -47,7 +47,7 @@ public class BooleanValueTest {
 		try {
 			TypeMarshaller.unmarshalTypeFromStream(SystemMetadata.class, is);
 			fail("Capitalized 'False' in boolean field throws exception");
-		} catch (JiBXException e) {
+		} catch (MarshallingException e) {
 			e.printStackTrace();
 		}
 		
@@ -63,7 +63,7 @@ public class BooleanValueTest {
 		try {
 			TypeMarshaller.unmarshalTypeFromStream(SystemMetadata.class, is);
 			
-		} catch (JiBXException e) {
+		} catch (MarshallingException e) {
 			fail("lowercase 'false' in boolean field should not throw exception: " + e.getMessage());
 		}
 	}

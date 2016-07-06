@@ -34,6 +34,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.commons.io.IOUtils;
+import org.dataone.exceptions.MarshallingException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.Header;
@@ -56,7 +57,6 @@ import org.dataone.service.exceptions.SynchronizationFailed;
 import org.dataone.service.exceptions.UnsupportedMetadataType;
 import org.dataone.service.exceptions.UnsupportedType;
 import org.dataone.service.exceptions.VersionMismatch;
-import org.jibx.runtime.JiBXException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -718,7 +718,7 @@ public class ExceptionHandler {
     {
         try {
             return TypeMarshaller.unmarshalTypeFromStream(domainClass, is);
-        } catch (JiBXException e) {
+        } catch (MarshallingException e) {
             throw new ServiceFailure("0",
                     "Could not deserialize the " + domainClass.getCanonicalName() + ": " + e.getMessage());
         } catch (IOException e) {

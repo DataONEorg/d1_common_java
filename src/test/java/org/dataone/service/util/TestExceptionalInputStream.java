@@ -31,8 +31,8 @@ import java.io.InputStream;
 import java.io.PushbackInputStream;
 
 import org.apache.commons.io.IOUtils;
+import org.dataone.exceptions.MarshallingException;
 import org.apache.tools.ant.filters.StringInputStream;
-import org.jibx.runtime.JiBXException;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -179,7 +179,7 @@ public class TestExceptionalInputStream {
 	
 	@Ignore("functionality not written yet")
 	@Test
-	public void testIsDataoneType() throws JiBXException, IOException {
+	public void testIsDataoneType() throws MarshallingException, IOException {
 //		Identifier id = new Identifier();
 //		id.setValue("foo");
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();

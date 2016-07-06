@@ -29,6 +29,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.dataone.exceptions.MarshallingException;
 import org.dataone.service.types.v2.Node;
 import org.dataone.service.types.v2.NodeList;
 import org.dataone.service.types.v1.NodeReference;
@@ -37,7 +38,6 @@ import org.dataone.service.types.v1.NodeType;
 import org.dataone.service.types.v1.Service;
 import org.dataone.service.types.v1.Subject;
 import org.dataone.service.util.TypeMarshaller;
-import org.jibx.runtime.JiBXException;
 
 /**
  *
@@ -76,10 +76,10 @@ public class NodelistUtil {
      * @exception InstantiationException
      * @exception IOException
      * @exception IllegalAccessException
-     * @exception JiBXException
+     * @exception MarshallingException
      */
     public static Map<String, String> mapNodeList(InputStream nodeListStream)
-            throws InstantiationException, IllegalAccessException, JiBXException, IOException {
+            throws InstantiationException, IllegalAccessException, MarshallingException, IOException {
         NodeList nodeList = TypeMarshaller.unmarshalTypeFromStream(NodeList.class, nodeListStream);
         return mapNodeList(nodeList);
         

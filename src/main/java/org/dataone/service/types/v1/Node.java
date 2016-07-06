@@ -261,7 +261,7 @@ public class Node implements Serializable
     public List<Subject> getSubjectList() {
         return subjectList;
     }
-    /* Same as getSubjectList, but for use with JibX Serializer
+    /* Same as getSubjectList, but for use with Serializer
        The method will produce a null return if an empty
        subject array has been created, but nothing added
        https://redmine.dataone.org/issues/7422

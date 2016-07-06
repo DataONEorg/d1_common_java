@@ -335,7 +335,7 @@ public class SystemMetadata implements Serializable
     public AccessPolicy getAccessPolicy() {
         return accessPolicy;
     }
-    /* Same as getAccessPolicy, but for use with JibX Serializer
+    /* Same as getAccessPolicy, but for use with Serializer
        The method will produce a null return if an empty
        access policy array has been created, but nothing added
        https://redmine.dataone.org/issues/7422
