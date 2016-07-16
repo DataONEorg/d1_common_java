@@ -2,7 +2,12 @@
 package org.dataone.service.types.v1;
 
 import java.io.Serializable;
-
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 /** 
  * The schedule on which :term:`synchronization` will run
  for a particular node. Syntax for each time slot follows the syntax
@@ -23,16 +28,34 @@ import java.io.Serializable;
  * &lt;/xs:complexType>
  * </pre>
  */
-public class Schedule implements Serializable
-{
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "Schedule")
+public class Schedule implements Serializable {
+
+    @XmlAttribute(name = "hour", required = true)
+    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
+    protected String hour;
+    @XmlAttribute(name = "mday", required = true)
+    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
+    protected String mday;
+    @XmlAttribute(name = "min", required = true)
+    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
+    protected String min;
+    @XmlAttribute(name = "mon", required = true)
+    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
+    protected String mon;
+    @XmlAttribute(name = "sec", required = true)
+    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
+    protected String sec;
+    @XmlAttribute(name = "wday", required = true)
+    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
+    protected String wday;
+    @XmlAttribute(name = "year", required = true)
+    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
+    protected String year;
+
     private static final long serialVersionUID = 10000000;
-    private String hour;
-    private String mday;
-    private String min;
-    private String mon;
-    private String sec;
-    private String wday;
-    private String year;
+
 
     /** 
      * Get the 'hour' attribute value.

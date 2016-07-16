@@ -4,7 +4,11 @@ package org.dataone.service.types.v1;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 /** 
  * The available Dataone Service APIs that are exposed on
  a Node. Without a restriction, all service methods are available to all
@@ -25,13 +29,24 @@ import java.util.List;
  * &lt;/xs:complexType>
  * </pre>
  */
-public class Service implements Serializable
-{
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "Service", propOrder = {
+    "restriction"
+})
+@XmlRootElement(name = "service")
+public class Service implements Serializable {
+
+    protected List<ServiceMethodRestriction> restriction = new ArrayList<ServiceMethodRestriction>();
+    @XmlAttribute(name = "name", required = true)
+    protected String name;
+    @XmlAttribute(name = "version", required = true)
+    protected String version;
+    @XmlAttribute(name = "available")
+    protected Boolean available;
+
     private static final long serialVersionUID = 10000000;
-    private List<ServiceMethodRestriction> restrictionList = new ArrayList<ServiceMethodRestriction>();
-    private String name;
-    private String version;
-    private Boolean available;
+    
+
 
     /** 
      * Get the list of 'restriction' element items. A list of method names and :term:`Subjects` with
@@ -40,7 +55,7 @@ public class Service implements Serializable
      * @return list
      */
     public List<ServiceMethodRestriction> getRestrictionList() {
-        return restrictionList;
+        return restriction;
     }
 
     /** 
@@ -50,7 +65,7 @@ public class Service implements Serializable
      * @param list
      */
     public void setRestrictionList(List<ServiceMethodRestriction> list) {
-        restrictionList = list;
+        restriction = list;
     }
 
     /** 
@@ -58,10 +73,10 @@ public class Service implements Serializable
      * @return count
      */
     public int sizeRestrictionList() {
-        if (restrictionList == null) {
-            restrictionList = new ArrayList<ServiceMethodRestriction>();
+        if (restriction == null) {
+            restriction = new ArrayList<ServiceMethodRestriction>();
         }
-        return restrictionList.size();
+        return restriction.size();
     }
 
     /** 
@@ -69,10 +84,10 @@ public class Service implements Serializable
      * @param item
      */
     public void addRestriction(ServiceMethodRestriction item) {
-        if (restrictionList == null) {
-            restrictionList = new ArrayList<ServiceMethodRestriction>();
+        if (restriction == null) {
+            restriction = new ArrayList<ServiceMethodRestriction>();
         }
-        restrictionList.add(item);
+        restriction.add(item);
     }
 
     /** 
@@ -81,20 +96,20 @@ public class Service implements Serializable
      * @param index
      */
     public ServiceMethodRestriction getRestriction(int index) {
-        if (restrictionList == null) {
-            restrictionList = new ArrayList<ServiceMethodRestriction>();
+        if (restriction == null) {
+            restriction = new ArrayList<ServiceMethodRestriction>();
         }
-        return restrictionList.get(index);
+        return restriction.get(index);
     }
 
     /** 
      * Remove all 'restriction' element items.
      */
     public void clearRestrictionList() {
-        if (restrictionList == null) {
-            restrictionList = new ArrayList<ServiceMethodRestriction>();
+        if (restriction == null) {
+            restriction = new ArrayList<ServiceMethodRestriction>();
         }
-        restrictionList.clear();
+        restriction.clear();
     }
 
     /** 

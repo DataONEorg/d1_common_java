@@ -4,7 +4,12 @@ package org.dataone.service.types.v2;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlValue;
 /** 
  * A list of options that indicate the possible values for 
  a DataONE service. Each option that can be validly sent to a service is
@@ -26,12 +31,21 @@ import java.util.List;
  * &lt;/xs:complexType>
  * </pre>
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "OptionList", propOrder = {
+    "option"
+})
+@XmlRootElement(name = "optionList")
 public class OptionList implements Serializable
 {
     private static final long serialVersionUID = 10000000;
-    private List<String> optionList = new ArrayList<String>();
-    private String key;
-    private String description;
+
+    protected List<String> option = new ArrayList<String>();
+    @XmlAttribute(name = "key", required = true)
+    protected String key;
+    @XmlAttribute(name = "description", required = true)
+    protected String description;
+ 
 
     /** 
      * Get the list of 'option' element items. The key to be used within an API call to a DataONE 
@@ -43,7 +57,7 @@ public class OptionList implements Serializable
      * @return list
      */
     public List<String> getOptionList() {
-        return optionList;
+        return option;
     }
 
     /** 
@@ -56,7 +70,7 @@ public class OptionList implements Serializable
      * @param list
      */
     public void setOptionList(List<String> list) {
-        optionList = list;
+        option = list;
     }
 
     /** 
@@ -64,10 +78,10 @@ public class OptionList implements Serializable
      * @return count
      */
     public int sizeOptionList() {
-        if (optionList == null) {
-            optionList = new ArrayList<String>();
+        if (option == null) {
+            option = new ArrayList<String>();
         }
-        return optionList.size();
+        return option.size();
     }
 
     /** 
@@ -75,10 +89,10 @@ public class OptionList implements Serializable
      * @param item
      */
     public void addOption(String item) {
-        if (optionList == null) {
-            optionList = new ArrayList<String>();
+        if (option == null) {
+            option = new ArrayList<String>();
         }
-        optionList.add(item);
+        option.add(item);
     }
 
     /** 
@@ -87,20 +101,20 @@ public class OptionList implements Serializable
      * @param index
      */
     public String getOption(int index) {
-        if (optionList == null) {
-            optionList = new ArrayList<String>();
+        if (option == null) {
+            option = new ArrayList<String>();
         }
-        return optionList.get(index);
+        return option.get(index);
     }
 
     /** 
      * Remove all 'option' element items.
      */
     public void clearOptionList() {
-        if (optionList == null) {
-            optionList = new ArrayList<String>();
+        if (option == null) {
+            option = new ArrayList<String>();
         }
-        optionList.clear();
+        option.clear();
     }
 
     /** 

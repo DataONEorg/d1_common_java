@@ -2,7 +2,11 @@
 package org.dataone.service.types.v1;
 
 import java.io.Serializable;
-
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 /** 
  * Information about the authenticated session for a
  service transaction. Session data is retrieved from the SSL client
@@ -24,11 +28,20 @@ import java.io.Serializable;
  * &lt;/xs:complexType>
  * </pre>
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "Session", propOrder = {
+    "subject",
+    "subjectInfo"
+})
+@XmlRootElement(name = "session")
 public class Session implements Serializable
 {
+    @XmlElement(required = true)
+    protected Subject subject;
+    protected SubjectInfo subjectInfo;
+    
     private static final long serialVersionUID = 10000000;
-    private Subject subject;
-    private SubjectInfo subjectInfo;
+
 
     /** 
      * Get the 'subject' element value.

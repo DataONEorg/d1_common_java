@@ -173,13 +173,13 @@
                         </goals>
                     </execution>
                 </executions>
-<!--                 <dependencies> -->
-<!--                   <dependency> -->
-<!--                     <groupId>org.apache.bcel</groupId> -->
-<!--                     <artifactId>bcel</artifactId> -->
-<!--                     <version>${org.apache.bcel.version}</version> -->
-<!--                  </dependency> -->
-<!--                </dependencies> -->
+                <dependencies>
+                  <dependency>
+                    <groupId>org.apache.bcel</groupId>
+                    <artifactId>bcel</artifactId>
+                    <version>${org.apache.bcel.version}</version>
+                 </dependency>
+               </dependencies>
             </plugin>
             <plugin>
                 <groupId>com.mycila.maven-license-plugin</groupId>
@@ -300,11 +300,11 @@
       </repository> -->
     </repositories>
     <dependencies>
-<!--         <dependency> -->
-<!--           <groupId>org.apache.bcel</groupId> -->
-<!--           <artifactId>bcel</artifactId> -->
-<!--           <version>${org.apache.bcel.version}</version> -->
-<!--         </dependency> -->
+        <dependency>
+          <groupId>org.apache.bcel</groupId>
+          <artifactId>bcel</artifactId>
+          <version>${org.apache.bcel.version}</version>
+        </dependency>
         <dependency>
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>
@@ -345,6 +345,12 @@
             <groupId>org.jibx</groupId>
             <artifactId>maven-jibx-plugin</artifactId>
             <version>${org.jibx.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
+        <dependency>
+          <groupId>javax.xml.bind</groupId>
+          <artifactId>jaxb-api</artifactId>
+          <version>2.2.3</version>
         </dependency>
         <dependency>
             <groupId>joda-time</groupId>

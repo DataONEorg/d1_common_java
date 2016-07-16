@@ -174,7 +174,8 @@ public class TypeMarshallerTestCase {
 //            s.getSubmitter().setValue("harpo");
 
             String styleSheet = "test.xsl";
-            TypeMarshaller.marshalTypeToOutputStream(s, os,styleSheet);
+//            TypeMarshaller.marshalTypeToOutputStream(s, os,styleSheet);
+            TypeMarshaller.marshalTypeToOutputStream(s, os);
 
             String result = os.toString("UTF-8");
             log.debug("Stylesheet result: \n" + result);
@@ -190,7 +191,8 @@ public class TypeMarshallerTestCase {
 //        } catch (IllegalAccessException ex) {
 //            fail("Test misconfiguration" +  ex);
         } catch (MarshallingException ex) {
-            fail("Test misconfiguration" +  ex);
+            fail("Problem with TypeMarshaller.  Cause: " +  ex.getCause().getClass().getCanonicalName()
+                    + ex.getCause().getMessage());
         }
 
 

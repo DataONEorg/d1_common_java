@@ -3,6 +3,12 @@ package org.dataone.service.types.v2;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlType;
 import org.dataone.service.types.v1.Identifier;
 import org.dataone.service.types.v1.NodeReference;
 import org.dataone.service.types.v1.Subject;
@@ -27,17 +33,40 @@ import org.dataone.service.types.v1.Subject;
  * &lt;/xs:complexType>
  * </pre>
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "LogEntry", propOrder = {
+    "entryId",
+    "identifier",
+    "ipAddress",
+    "userAgent",
+    "subject",
+    "event",
+    "dateLogged",
+    "nodeIdentifier"
+})
+@XmlRootElement(name = "logEntry")
 public class LogEntry implements Serializable
 {
     private static final long serialVersionUID = 10000000;
-    private String entryId;
-    private Identifier identifier;
-    private String ipAddress;
-    private String userAgent;
-    private Subject subject;
-    private String event;
-    private Date dateLogged;
-    private NodeReference nodeIdentifier;
+    
+    @XmlElement(required = true)
+    protected String entryId;
+    @XmlElement(required = true)
+    protected Identifier identifier;
+    @XmlElement(required = true)
+    protected String ipAddress;
+    @XmlElement(required = true)
+    protected String userAgent;
+    @XmlElement(required = true)
+    protected Subject subject;
+    @XmlElement(required = true)
+    protected String event;
+    @XmlElement(required = true)
+    @XmlSchemaType(name = "dateTime")
+    protected Date dateLogged;
+    @XmlElement(required = true)
+    protected NodeReference nodeIdentifier;
+
 
     /** 
      * Get the 'entryId' element value. A unique identifier for this log entry. The

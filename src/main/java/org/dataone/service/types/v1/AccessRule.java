@@ -4,6 +4,12 @@ package org.dataone.service.types.v1;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlType;
 
 /** 
  * A rule that is used to allow a :term:`subject` to
@@ -30,11 +36,21 @@ import java.util.List;
  * &lt;/xs:complexType>
  * </pre>
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "AccessRule", propOrder = {
+    "subject",
+    "permission"
+})
+@XmlRootElement(name = "accessRule")
 public class AccessRule implements Serializable
 {
+    @XmlElement(required = true)
+    protected List<Subject> subject = new ArrayList<Subject>();
+    @XmlElement(required = true)
+    @XmlSchemaType(name = "string")
+    protected List<Permission> permission = new ArrayList<Permission>();
+
     private static final long serialVersionUID = 10000001;
-    private List<Subject> subjectList = new ArrayList<Subject>();
-    private List<Permission> permissionList = new ArrayList<Permission>();
 
     /** 
      * Get the list of 'subject' element items.
@@ -42,7 +58,7 @@ public class AccessRule implements Serializable
      * @return list
      */
     public List<Subject> getSubjectList() {
-        return subjectList;
+        return subject;
     }
     
     /* Same as getSubjectList, but for use with Serializer
@@ -51,10 +67,10 @@ public class AccessRule implements Serializable
        https://redmine.dataone.org/issues/7422
     */
         public List<Subject> grabSubjectListNullIfEmpty() {
-        if (subjectList != null && subjectList.isEmpty()) {
+        if (subject != null && subject.isEmpty()) {
                 return null;
         }
-        return subjectList;
+        return subject;
     }
     /** 
      * Set the list of 'subject' element items.
@@ -62,7 +78,7 @@ public class AccessRule implements Serializable
      * @param list
      */
     public void setSubjectList(List<Subject> list) {
-        subjectList = list;
+        subject = list;
     }
 
     /** 
@@ -70,10 +86,10 @@ public class AccessRule implements Serializable
      * @return count
      */
     public int sizeSubjectList() {
-        if (subjectList == null) {
-            subjectList = new ArrayList<Subject>();
+        if (subject == null) {
+            subject = new ArrayList<Subject>();
         }
-        return subjectList.size();
+        return subject.size();
     }
 
     /** 
@@ -81,10 +97,10 @@ public class AccessRule implements Serializable
      * @param item
      */
     public void addSubject(Subject item) {
-        if (subjectList == null) {
-            subjectList = new ArrayList<Subject>();
+        if (subject == null) {
+            subject = new ArrayList<Subject>();
         }
-        subjectList.add(item);
+        subject.add(item);
     }
 
     /** 
@@ -93,20 +109,20 @@ public class AccessRule implements Serializable
      * @param index
      */
     public Subject getSubject(int index) {
-        if (subjectList == null) {
-            subjectList = new ArrayList<Subject>();
+        if (subject == null) {
+            subject = new ArrayList<Subject>();
         }
-        return subjectList.get(index);
+        return subject.get(index);
     }
 
     /** 
      * Remove all 'subject' element items.
      */
     public void clearSubjectList() {
-        if (subjectList == null) {
-            subjectList = new ArrayList<Subject>();
+        if (subject == null) {
+            subject = new ArrayList<Subject>();
         }
-        subjectList.clear();
+        subject.clear();
     }
 
     /** 
@@ -115,7 +131,7 @@ public class AccessRule implements Serializable
      * @return list
      */
     public List<Permission> getPermissionList() {
-        return permissionList;
+        return permission;
     }
 
     /* Same as getPermissionList, but for use with Serializer
@@ -124,10 +140,10 @@ public class AccessRule implements Serializable
        https://redmine.dataone.org/issues/7422
     */
     public List<Permission> grabPermissionListNullIfEmpty() {
-        if (permissionList != null && permissionList.isEmpty()) {
+        if (permission != null && permission.isEmpty()) {
                 return null;
         }
-        return permissionList;
+        return permission;
     }
     /** 
      * Set the list of 'permission' element items.
@@ -135,7 +151,7 @@ public class AccessRule implements Serializable
      * @param list
      */
     public void setPermissionList(List<Permission> list) {
-        permissionList = list;
+        permission = list;
     }
 
     /** 
@@ -143,10 +159,10 @@ public class AccessRule implements Serializable
      * @return count
      */
     public int sizePermissionList() {
-        if (permissionList == null) {
-            permissionList = new ArrayList<Permission>();
+        if (permission == null) {
+            permission = new ArrayList<Permission>();
         }
-        return permissionList.size();
+        return permission.size();
     }
 
     /** 
@@ -154,10 +170,10 @@ public class AccessRule implements Serializable
      * @param item
      */
     public void addPermission(Permission item) {
-        if (permissionList == null) {
-            permissionList = new ArrayList<Permission>();
+        if (permission == null) {
+            permission = new ArrayList<Permission>();
         }
-        permissionList.add(item);
+        permission.add(item);
     }
 
     /** 
@@ -166,19 +182,19 @@ public class AccessRule implements Serializable
      * @param index
      */
     public Permission getPermission(int index) {
-        if (permissionList == null) {
-            permissionList = new ArrayList<Permission>();
+        if (permission == null) {
+            permission = new ArrayList<Permission>();
         }
-        return permissionList.get(index);
+        return permission.get(index);
     }
 
     /** 
      * Remove all 'permission' element items.
      */
     public void clearPermissionList() {
-        if (permissionList == null) {
-            permissionList = new ArrayList<Permission>();
+        if (permission == null) {
+            permission = new ArrayList<Permission>();
         }
-        permissionList.clear();
+        permission.clear();
     }
 }

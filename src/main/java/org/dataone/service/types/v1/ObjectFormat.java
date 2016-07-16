@@ -2,7 +2,11 @@
 package org.dataone.service.types.v1;
 
 import java.io.Serializable;
-
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 /** 
  * One value from the DataONE Object Format Vocabulary
  which is returned by :func:`CNCore.getFormat()`.An *ObjectFormat* is the structure returned from the
@@ -22,12 +26,24 @@ import java.io.Serializable;
  * &lt;/xs:complexType>
  * </pre>
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "ObjectFormat", propOrder = {
+    "formatId",
+    "formatName",
+    "formatType"
+})
+@XmlRootElement(name = "objectFormat")
 public class ObjectFormat implements Serializable
 {
+    @XmlElement(required = true)
+    // TODO: make sure ObjectFormatIDentifier works
+    protected ObjectFormatIdentifier formatId;
+    @XmlElement(required = true)
+    protected String formatName;
+    @XmlElement(required = true)
+    protected String formatType;
+
     private static final long serialVersionUID = 10000000;
-    private ObjectFormatIdentifier formatId;
-    private String formatName;
-    private String formatType;
 
     /** 
      * Get the 'formatId' element value.  The unique identifier of the object format in the

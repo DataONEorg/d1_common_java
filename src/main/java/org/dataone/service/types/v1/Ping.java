@@ -3,7 +3,13 @@ package org.dataone.service.types.v1;
 
 import java.io.Serializable;
 import java.util.Date;
-
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlType;
+//import javax.xml.datatype.XMLGregorianCalendar;
 /** 
  * Store results from the :func:`MNCore.ping`
  method.
@@ -16,11 +22,19 @@ import java.util.Date;
  * &lt;/xs:complexType>
  * </pre>
  */
-public class Ping implements Serializable
-{
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "Ping")
+@XmlRootElement(name = "ping")
+public class Ping implements Serializable {
+
+    @XmlAttribute(name = "success")
+    protected Boolean success;
+    @XmlAttribute(name = "lastSuccess")
+    @XmlSchemaType(name = "dateTime")
+    protected Date lastSuccess;
+
     private static final long serialVersionUID = 10000000;
-    private Boolean success;
-    private Date lastSuccess;
+
 
     /** 
      * Get the 'success' attribute value. A boolean flag indicating *true* if the node was

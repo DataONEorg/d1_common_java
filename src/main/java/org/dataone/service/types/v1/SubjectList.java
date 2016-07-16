@@ -4,7 +4,11 @@ package org.dataone.service.types.v1;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlType;
 /** 
  *  A list of :term:`Subjects` used for identity/group
  management
@@ -18,10 +22,18 @@ import java.util.List;
  * &lt;/xs:complexType>
  * </pre>
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "SubjectList", propOrder = {
+    "subject"
+})
+@XmlSeeAlso({
+    ServiceMethodRestriction.class
+})
+@XmlRootElement(name = "subjectList")
 public class SubjectList implements Serializable
 {
     private static final long serialVersionUID = 10000000;
-    private List<Subject> subjectList = new ArrayList<Subject>();
+    private List<Subject> subject = new ArrayList<Subject>();
 
     /** 
      * Get the list of 'subject' element items.
@@ -29,7 +41,7 @@ public class SubjectList implements Serializable
      * @return list
      */
     public List<Subject> getSubjectList() {
-        return subjectList;
+        return subject;
     }
 
     /** 
@@ -38,7 +50,7 @@ public class SubjectList implements Serializable
      * @param list
      */
     public void setSubjectList(List<Subject> list) {
-        subjectList = list;
+        subject = list;
     }
 
     /** 
@@ -46,10 +58,10 @@ public class SubjectList implements Serializable
      * @return count
      */
     public int sizeSubjectList() {
-        if (subjectList == null) {
-            subjectList = new ArrayList<Subject>();
+        if (subject == null) {
+            subject = new ArrayList<Subject>();
         }
-        return subjectList.size();
+        return subject.size();
     }
 
     /** 
@@ -57,10 +69,10 @@ public class SubjectList implements Serializable
      * @param item
      */
     public void addSubject(Subject item) {
-        if (subjectList == null) {
-            subjectList = new ArrayList<Subject>();
+        if (subject == null) {
+            subject = new ArrayList<Subject>();
         }
-        subjectList.add(item);
+        subject.add(item);
     }
 
     /** 
@@ -69,19 +81,19 @@ public class SubjectList implements Serializable
      * @param index
      */
     public Subject getSubject(int index) {
-        if (subjectList == null) {
-            subjectList = new ArrayList<Subject>();
+        if (subject == null) {
+            subject = new ArrayList<Subject>();
         }
-        return subjectList.get(index);
+        return subject.get(index);
     }
 
     /** 
      * Remove all 'subject' element items.
      */
     public void clearSubjectList() {
-        if (subjectList == null) {
-            subjectList = new ArrayList<Subject>();
+        if (subject == null) {
+            subject = new ArrayList<Subject>();
         }
-        subjectList.clear();
+        subject.clear();
     }
 }

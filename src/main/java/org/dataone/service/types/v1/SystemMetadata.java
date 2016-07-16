@@ -6,6 +6,13 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /** 
  *  System metadata (often referred to as
@@ -57,26 +64,59 @@ import java.util.List;
  * &lt;/xs:complexType>
  * </pre>
  */
-public class SystemMetadata implements Serializable
-{
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "SystemMetadata", propOrder = {
+    "serialVersion",
+    "identifier",
+    "formatId",
+    "size",
+    "checksum",
+    "submitter",
+    "rightsHolder",
+    "accessPolicy",
+    "replicationPolicy",
+    "obsoletes",
+    "obsoletedBy",
+    "archived",
+    "dateUploaded",
+    "dateSysMetadataModified",
+    "originMemberNode",
+    "authoritativeMemberNode",
+    "replica"
+})
+@XmlRootElement( name = "systemMetadata" )
+public class SystemMetadata implements Serializable{
+
+    @XmlSchemaType(name = "unsignedLong")
+    protected BigInteger serialVersion;
+    @XmlElement(required = true)
+    protected Identifier identifier;
+    @XmlElement(required = true)
+    protected ObjectFormatIdentifier formatId;
+    @XmlElement(required = true)
+    @XmlSchemaType(name = "unsignedLong")
+    protected BigInteger size;
+    @XmlElement(required = true)
+    protected Checksum checksum;
+    protected Subject submitter;
+    @XmlElement(required = true)
+    protected Subject rightsHolder;
+    @XmlJavaTypeAdapter(org.dataone.service.util.AccessPolicyMarshallingAdapter.class)
+    protected AccessPolicy accessPolicy;
+    @XmlJavaTypeAdapter(org.dataone.service.util.ReplicationPolicyMarshallingAdapter.class)
+    protected ReplicationPolicy replicationPolicy;
+    protected Identifier obsoletes;
+    protected Identifier obsoletedBy;
+    protected Boolean archived;
+    @XmlSchemaType(name = "dateTime")
+    protected Date dateUploaded;
+    @XmlSchemaType(name = "dateTime")
+    protected Date dateSysMetadataModified;
+    protected NodeReference originMemberNode;
+    protected NodeReference authoritativeMemberNode;
+    protected List<Replica> replica = new ArrayList<Replica>();
+
     private static final long serialVersionUID = 10000001;
-    private BigInteger serialVersion;
-    private Identifier identifier;
-    private ObjectFormatIdentifier formatId;
-    private BigInteger size;
-    private Checksum checksum;
-    private Subject submitter;
-    private Subject rightsHolder;
-    private AccessPolicy accessPolicy;
-    private ReplicationPolicy replicationPolicy;
-    private Identifier obsoletes;
-    private Identifier obsoletedBy;
-    private Boolean archived;
-    private Date dateUploaded;
-    private Date dateSysMetadataModified;
-    private NodeReference originMemberNode;
-    private NodeReference authoritativeMemberNode;
-    private List<Replica> replicaList = new ArrayList<Replica>();
 
     /** 
      * Get the 'serialVersion' element value.  A serial number maintained by the coordinating node
@@ -620,18 +660,18 @@ public class SystemMetadata implements Serializable
      * @return list
      */
     public List<Replica> getReplicaList() {
-        return replicaList;
+        return replica;
     }
     /* for use when serializer in order to produce a null return
        if the replica array has been created, but nothing added
        https://redmine.dataone.org/issues/7422
     */
     public List<Replica> grabReplicaListNullIfEmpty() {
-        if ( (replicaList != null) && replicaList.isEmpty()) {
+        if ( (replica != null) && replica.isEmpty()) {
             return null;
         }
 
-        return replicaList;
+        return replica;
     }
     /** 
      * Set the list of 'replica' element items.  A container field used to repeatedly provide
@@ -643,7 +683,7 @@ public class SystemMetadata implements Serializable
      * @param list
      */
     public void setReplicaList(List<Replica> list) {
-        replicaList = list;
+        replica = list;
     }
 
     /** 
@@ -651,10 +691,10 @@ public class SystemMetadata implements Serializable
      * @return count
      */
     public int sizeReplicaList() {
-        if (replicaList == null) {
-            replicaList = new ArrayList<Replica>();
+        if (replica == null) {
+            replica = new ArrayList<Replica>();
         }
-        return replicaList.size();
+        return replica.size();
     }
 
     /** 
@@ -662,10 +702,10 @@ public class SystemMetadata implements Serializable
      * @param item
      */
     public void addReplica(Replica item) {
-        if (replicaList == null) {
-            replicaList = new ArrayList<Replica>();
+        if (replica == null) {
+            replica = new ArrayList<Replica>();
         }
-        replicaList.add(item);
+        replica.add(item);
     }
 
     /** 
@@ -674,19 +714,19 @@ public class SystemMetadata implements Serializable
      * @param index
      */
     public Replica getReplica(int index) {
-        if (replicaList == null) {
-            replicaList = new ArrayList<Replica>();
+        if (replica == null) {
+            replica = new ArrayList<Replica>();
         }
-        return replicaList.get(index);
+        return replica.get(index);
     }
 
     /** 
      * Remove all 'replica' element items.
      */
     public void clearReplicaList() {
-        if (replicaList == null) {
-            replicaList = new ArrayList<Replica>();
+        if (replica == null) {
+            replica = new ArrayList<Replica>();
         }
-        replicaList.clear();
+        replica.clear();
     }
 }

@@ -4,7 +4,11 @@ package org.dataone.service.types.v1_1;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 /** 
  * Describes a query engine that can be used to search content on the node. 
  Query engines may be general purpose or specialized for particular communities or domains.
@@ -22,14 +26,26 @@ import java.util.List;
  * &lt;/xs:complexType>
  * </pre>
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "QueryEngineDescription", namespace = "http://ns.dataone.org/service/types/v1.1", propOrder = {
+    "queryEngineVersion",
+    "querySchemaVersion",
+    "name",
+    "additionalInfo",
+    "queryField"
+})
+@XmlRootElement(name = "queryEngineDescription")
 public class QueryEngineDescription implements Serializable
 {
     private static final long serialVersionUID = 10000000;
-    private String queryEngineVersion;
-    private String querySchemaVersion;
-    private String name;
-    private List<String> additionalInfoList = new ArrayList<String>();
-    private List<QueryField> queryFieldList = new ArrayList<QueryField>();
+    
+    @XmlElement(required = true)
+    protected String queryEngineVersion;
+    protected String querySchemaVersion;
+    @XmlElement(required = true)
+    protected String name;
+    protected List<String> additionalInfo = new ArrayList<String>();
+    protected List<QueryField> queryField = new ArrayList<QueryField>();
 
     /** 
      * Get the 'queryEngineVersion' element value. The version of the underlying query engine. Used by clients to determine possible
@@ -99,7 +115,7 @@ public class QueryEngineDescription implements Serializable
      * @return list
      */
     public List<String> getAdditionalInfoList() {
-        return additionalInfoList;
+        return additionalInfo;
     }
 
     /** 
@@ -112,7 +128,7 @@ public class QueryEngineDescription implements Serializable
      * @param list
      */
     public void setAdditionalInfoList(List<String> list) {
-        additionalInfoList = list;
+        additionalInfo = list;
     }
 
     /** 
@@ -120,10 +136,10 @@ public class QueryEngineDescription implements Serializable
      * @return count
      */
     public int sizeAdditionalInfoList() {
-        if (additionalInfoList == null) {
-            additionalInfoList = new ArrayList<String>();
+        if (additionalInfo == null) {
+            additionalInfo = new ArrayList<String>();
         }
-        return additionalInfoList.size();
+        return additionalInfo.size();
     }
 
     /** 
@@ -131,10 +147,10 @@ public class QueryEngineDescription implements Serializable
      * @param item
      */
     public void addAdditionalInfo(String item) {
-        if (additionalInfoList == null) {
-            additionalInfoList = new ArrayList<String>();
+        if (additionalInfo == null) {
+            additionalInfo = new ArrayList<String>();
         }
-        additionalInfoList.add(item);
+        additionalInfo.add(item);
     }
 
     /** 
@@ -143,20 +159,20 @@ public class QueryEngineDescription implements Serializable
      * @param index
      */
     public String getAdditionalInfo(int index) {
-        if (additionalInfoList == null) {
-            additionalInfoList = new ArrayList<String>();
+        if (additionalInfo == null) {
+            additionalInfo = new ArrayList<String>();
         }
-        return additionalInfoList.get(index);
+        return additionalInfo.get(index);
     }
 
     /** 
      * Remove all 'additionalInfo' element items.
      */
     public void clearAdditionalInfoList() {
-        if (additionalInfoList == null) {
-            additionalInfoList = new ArrayList<String>();
+        if (additionalInfo == null) {
+            additionalInfo = new ArrayList<String>();
         }
-        additionalInfoList.clear();
+        additionalInfo.clear();
     }
 
     /** 
@@ -165,7 +181,7 @@ public class QueryEngineDescription implements Serializable
      * @return list
      */
     public List<QueryField> getQueryFieldList() {
-        return queryFieldList;
+        return queryField;
     }
 
     /** 
@@ -174,7 +190,7 @@ public class QueryEngineDescription implements Serializable
      * @param list
      */
     public void setQueryFieldList(List<QueryField> list) {
-        queryFieldList = list;
+        queryField = list;
     }
 
     /** 
@@ -182,10 +198,10 @@ public class QueryEngineDescription implements Serializable
      * @return count
      */
     public int sizeQueryFieldList() {
-        if (queryFieldList == null) {
-            queryFieldList = new ArrayList<QueryField>();
+        if (queryField == null) {
+            queryField = new ArrayList<QueryField>();
         }
-        return queryFieldList.size();
+        return queryField.size();
     }
 
     /** 
@@ -193,10 +209,10 @@ public class QueryEngineDescription implements Serializable
      * @param item
      */
     public void addQueryField(QueryField item) {
-        if (queryFieldList == null) {
-            queryFieldList = new ArrayList<QueryField>();
+        if (queryField == null) {
+            queryField = new ArrayList<QueryField>();
         }
-        queryFieldList.add(item);
+        queryField.add(item);
     }
 
     /** 
@@ -205,19 +221,19 @@ public class QueryEngineDescription implements Serializable
      * @param index
      */
     public QueryField getQueryField(int index) {
-        if (queryFieldList == null) {
-            queryFieldList = new ArrayList<QueryField>();
+        if (queryField == null) {
+            queryField = new ArrayList<QueryField>();
         }
-        return queryFieldList.get(index);
+        return queryField.get(index);
     }
 
     /** 
      * Remove all 'queryField' element items.
      */
     public void clearQueryFieldList() {
-        if (queryFieldList == null) {
-            queryFieldList = new ArrayList<QueryField>();
+        if (queryField == null) {
+            queryField = new ArrayList<QueryField>();
         }
-        queryFieldList.clear();
+        queryField.clear();
     }
 }

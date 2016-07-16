@@ -3,6 +3,12 @@ package org.dataone.service.types.v1;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlType;
 
 /** 
  * Configuration information for the process by which
@@ -24,12 +30,24 @@ import java.util.Date;
  * &lt;/xs:complexType>
  * </pre>
  */
-public class Synchronization implements Serializable
-{
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "Synchronization", propOrder = {
+    "schedule",
+    "lastHarvested",
+    "lastCompleteHarvest"
+})
+@XmlRootElement(name = "synchronization")
+public class Synchronization implements Serializable{
+
+    @XmlElement(required = true)
+    protected Schedule schedule;
+    @XmlSchemaType(name = "dateTime")
+    protected Date lastHarvested;
+    @XmlSchemaType(name = "dateTime")
+    protected Date lastCompleteHarvest;
+
     private static final long serialVersionUID = 10000000;
-    private Schedule schedule;
-    private Date lastHarvested;
-    private Date lastCompleteHarvest;
+
 
     /** 
      * Get the 'schedule' element value. An entry set by the Member Node indicating the

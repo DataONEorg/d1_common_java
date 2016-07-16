@@ -3,6 +3,13 @@ package org.dataone.service.types.v1;
 
 import java.io.Serializable;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlValue;
+
 /** 
  * Represents the value of a computed :term:`checksum`
  expressed as a hexadecimal formatted version of the message digest. Note
@@ -24,11 +31,19 @@ import java.io.Serializable;
  * &lt;/xs:complexType>
  * </pre>
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "Checksum", propOrder = {
+    "value"
+})
+@XmlRootElement(name = "checksum")
 public class Checksum implements Serializable
 {
+    @XmlValue
+    protected String value;
+    @XmlAttribute(name = "algorithm", required = true)
+    protected String algorithm;
+    
     private static final long serialVersionUID = 10000000;
-    private String value;
-    private String algorithm;
 
     /** 
      * Get the extension value.

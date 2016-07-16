@@ -4,6 +4,14 @@ package org.dataone.service.types.v1;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+
 
 /** 
  * A set of rules that specifies as a whole the allowable
@@ -22,10 +30,16 @@ import java.util.List;
  * &lt;/xs:complexType>
  * </pre>
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "AccessPolicy", propOrder = {
+    "allow"
+})
+@XmlRootElement(name = "accessPolicy")
 public class AccessPolicy implements Serializable
 {
-    private static final long serialVersionUID = 10000001;
-    private List<AccessRule> allowList = new ArrayList<AccessRule>();
+    @XmlElement(required = true)
+    @XmlJavaTypeAdapter(org.dataone.service.util.AccessRuleMarshallingAdapter.class)
+    protected List<AccessRule> allow = new ArrayList<AccessRule>();
 
     /** 
      * Get the list of 'allow' element items.
@@ -33,7 +47,7 @@ public class AccessPolicy implements Serializable
      * @return list
      */
     public List<AccessRule> getAllowList() {
-        return allowList;
+        return allow;
     }
     
     /* Same as getAllowList, but for use with Serializer
@@ -42,10 +56,10 @@ public class AccessPolicy implements Serializable
        https://redmine.dataone.org/issues/7422
     */
     public List<AccessRule> grabAllowListNullIfEmpty() {
-        if (allowList != null && allowList.isEmpty()) {
+        if (allow != null && allow.isEmpty()) {
                 return null;
         }
-        return allowList;
+        return allow;
     }
     /** 
      * Set the list of 'allow' element items.
@@ -53,7 +67,7 @@ public class AccessPolicy implements Serializable
      * @param list
      */
     public void setAllowList(List<AccessRule> list) {
-        allowList = list;
+        allow = list;
     }
 
     /** 
@@ -61,10 +75,10 @@ public class AccessPolicy implements Serializable
      * @return count
      */
     public int sizeAllowList() {
-        if (allowList == null) {
-            allowList = new ArrayList<AccessRule>();
+        if (allow == null) {
+            allow = new ArrayList<AccessRule>();
         }
-        return allowList.size();
+        return allow.size();
     }
 
     /** 
@@ -72,10 +86,10 @@ public class AccessPolicy implements Serializable
      * @param item
      */
     public void addAllow(AccessRule item) {
-        if (allowList == null) {
-            allowList = new ArrayList<AccessRule>();
+        if (allow == null) {
+            allow = new ArrayList<AccessRule>();
         }
-        allowList.add(item);
+        allow.add(item);
     }
 
     /** 
@@ -84,19 +98,19 @@ public class AccessPolicy implements Serializable
      * @param index
      */
     public AccessRule getAllow(int index) {
-        if (allowList == null) {
-            allowList = new ArrayList<AccessRule>();
+        if (allow == null) {
+            allow = new ArrayList<AccessRule>();
         }
-        return allowList.get(index);
+        return allow.get(index);
     }
 
     /** 
      * Remove all 'allow' element items.
      */
     public void clearAllowList() {
-        if (allowList == null) {
-            allowList = new ArrayList<AccessRule>();
+        if (allow == null) {
+            allow = new ArrayList<AccessRule>();
         }
-        allowList.clear();
+        allow.clear();
     }
 }

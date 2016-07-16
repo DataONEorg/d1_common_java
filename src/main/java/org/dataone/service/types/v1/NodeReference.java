@@ -3,6 +3,12 @@ package org.dataone.service.types.v1;
 
 import java.io.Serializable;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlValue;
+
 /** 
  * A unique identifier for a DataONE Node. The
  *NodeReference* must be unique across nodes, and must always be
@@ -18,10 +24,16 @@ import java.io.Serializable;
  * &lt;/xs:complexType>
  * </pre>
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "NodeReference", propOrder = {
+    "value"
+})
+@XmlRootElement(name = "nodeReference")
 public class NodeReference implements Serializable, Comparable
 {
     private static final long serialVersionUID = 10000000;
-    private String value;
+    @XmlValue
+    protected String value;
 
     /** 
      * Get the 'NodeReference' complexType value.

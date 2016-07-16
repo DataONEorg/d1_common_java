@@ -4,7 +4,11 @@ package org.dataone.service.types.v1;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 /** 
  * An ObjectFormatList is the structure returned from the
  :func:`CNCore.listFormats()` method of the CN REST interface. It
@@ -27,10 +31,16 @@ import java.util.List;
  * &lt;/xs:complexType>
  * </pre>
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "ObjectFormatList", propOrder = {
+    "objectFormat"
+})
+@XmlRootElement(name = "objectFormatList")
 public class ObjectFormatList extends Slice implements Serializable
 {
+    @XmlElement(required = true)
+    protected List<ObjectFormat> objectFormat = new ArrayList<ObjectFormat>();
     private static final long serialVersionUID = 10000000;
-    private List<ObjectFormat> objectFormatList = new ArrayList<ObjectFormat>();
 
     /** 
      * Get the list of 'objectFormat' element items.
@@ -38,7 +48,7 @@ public class ObjectFormatList extends Slice implements Serializable
      * @return list
      */
     public List<ObjectFormat> getObjectFormatList() {
-        return objectFormatList;
+        return objectFormat;
     }
 
     /** 
@@ -47,7 +57,7 @@ public class ObjectFormatList extends Slice implements Serializable
      * @param list
      */
     public void setObjectFormatList(List<ObjectFormat> list) {
-        objectFormatList = list;
+        objectFormat = list;
     }
 
     /** 
@@ -56,10 +66,10 @@ public class ObjectFormatList extends Slice implements Serializable
      */
     @Override
     public int getCount() {
-        if (objectFormatList == null) {
-            objectFormatList = new ArrayList<ObjectFormat>();
+        if (objectFormat == null) {
+            objectFormat = new ArrayList<ObjectFormat>();
         }
-        return objectFormatList.size();
+        return objectFormat.size();
     }
 
     /** 
@@ -67,10 +77,10 @@ public class ObjectFormatList extends Slice implements Serializable
      * @return count
      */
     public int sizeObjectFormatList() {
-        if (objectFormatList == null) {
-            objectFormatList = new ArrayList<ObjectFormat>();
+        if (objectFormat == null) {
+            objectFormat = new ArrayList<ObjectFormat>();
         }
-        return objectFormatList.size();
+        return objectFormat.size();
     }
 
     /** 
@@ -78,10 +88,10 @@ public class ObjectFormatList extends Slice implements Serializable
      * @param item
      */
     public void addObjectFormat(ObjectFormat item) {
-        if (objectFormatList == null) {
-            objectFormatList = new ArrayList<ObjectFormat>();
+        if (objectFormat == null) {
+            objectFormat = new ArrayList<ObjectFormat>();
         }
-        objectFormatList.add(item);
+        objectFormat.add(item);
     }
 
     /** 
@@ -90,19 +100,19 @@ public class ObjectFormatList extends Slice implements Serializable
      * @param index
      */
     public ObjectFormat getObjectFormat(int index) {
-        if (objectFormatList == null) {
-            objectFormatList = new ArrayList<ObjectFormat>();
+        if (objectFormat == null) {
+            objectFormat = new ArrayList<ObjectFormat>();
         }
-        return objectFormatList.get(index);
+        return objectFormat.get(index);
     }
 
     /** 
      * Remove all 'objectFormat' element items.
      */
     public void clearObjectFormatList() {
-        if (objectFormatList == null) {
-            objectFormatList = new ArrayList<ObjectFormat>();
+        if (objectFormat == null) {
+            objectFormat = new ArrayList<ObjectFormat>();
         }
-        objectFormatList.clear();
+        objectFormat.clear();
     }
 }

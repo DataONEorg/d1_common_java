@@ -5,7 +5,11 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
-
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlType;
 /** 
  * The overall replication policy for the node that
  expresses constraints on object size, total objects, source nodes, and
@@ -26,13 +30,25 @@ import java.util.List;
  * &lt;/xs:complexType>
  * </pre>
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "NodeReplicationPolicy", propOrder = {
+    "maxObjectSize",
+    "spaceAllocated",
+    "allowedNode",
+    "allowedObjectFormat"
+})
+@XmlRootElement(name = "nodeReplicationPolicy")
 public class NodeReplicationPolicy implements Serializable
 {
+    @XmlSchemaType(name = "unsignedLong")
+    protected BigInteger maxObjectSize;
+    @XmlSchemaType(name = "unsignedLong")
+    protected BigInteger spaceAllocated;
+    protected List<NodeReference> allowedNode = new ArrayList<NodeReference>();
+    // TODO: check if List<ObjectFormatIDentifier> works (jaxb generated had List<String>)
+    protected List<ObjectFormatIdentifier> allowedObjectFormat = new ArrayList<ObjectFormatIdentifier>();
+
     private static final long serialVersionUID = 10000000;
-    private BigInteger maxObjectSize;
-    private BigInteger spaceAllocated;
-    private List<NodeReference> allowedNodeList = new ArrayList<NodeReference>();
-    private List<ObjectFormatIdentifier> allowedObjectFormatList = new ArrayList<ObjectFormatIdentifier>();
 
     /** 
      * Get the 'maxObjectSize' element value. An optional statement of the maximum size in octets 
@@ -86,7 +102,7 @@ public class NodeReplicationPolicy implements Serializable
      * @return list
      */
     public List<NodeReference> getAllowedNodeList() {
-        return allowedNodeList;
+        return allowedNode;
     }
 
     /** 
@@ -97,7 +113,7 @@ public class NodeReplicationPolicy implements Serializable
      * @param list
      */
     public void setAllowedNodeList(List<NodeReference> list) {
-        allowedNodeList = list;
+        allowedNode = list;
     }
 
     /** 
@@ -105,10 +121,10 @@ public class NodeReplicationPolicy implements Serializable
      * @return count
      */
     public int sizeAllowedNodeList() {
-        if (allowedNodeList == null) {
-            allowedNodeList = new ArrayList<NodeReference>();
+        if (allowedNode == null) {
+            allowedNode = new ArrayList<NodeReference>();
         }
-        return allowedNodeList.size();
+        return allowedNode.size();
     }
 
     /** 
@@ -116,10 +132,10 @@ public class NodeReplicationPolicy implements Serializable
      * @param item
      */
     public void addAllowedNode(NodeReference item) {
-        if (allowedNodeList == null) {
-            allowedNodeList = new ArrayList<NodeReference>();
+        if (allowedNode == null) {
+            allowedNode = new ArrayList<NodeReference>();
         }
-        allowedNodeList.add(item);
+        allowedNode.add(item);
     }
 
     /** 
@@ -128,20 +144,20 @@ public class NodeReplicationPolicy implements Serializable
      * @param index
      */
     public NodeReference getAllowedNode(int index) {
-        if (allowedNodeList == null) {
-            allowedNodeList = new ArrayList<NodeReference>();
+        if (allowedNode == null) {
+            allowedNode = new ArrayList<NodeReference>();
         }
-        return allowedNodeList.get(index);
+        return allowedNode.get(index);
     }
 
     /** 
      * Remove all 'allowedNode' element items.
      */
     public void clearAllowedNodeList() {
-        if (allowedNodeList == null) {
-            allowedNodeList = new ArrayList<NodeReference>();
+        if (allowedNode == null) {
+            allowedNode = new ArrayList<NodeReference>();
         }
-        allowedNodeList.clear();
+        allowedNode.clear();
     }
 
     /** 
@@ -152,7 +168,7 @@ public class NodeReplicationPolicy implements Serializable
      * @return list
      */
     public List<ObjectFormatIdentifier> getAllowedObjectFormatList() {
-        return allowedObjectFormatList;
+        return allowedObjectFormat;
     }
 
     /** 
@@ -163,7 +179,7 @@ public class NodeReplicationPolicy implements Serializable
      * @param list
      */
     public void setAllowedObjectFormatList(List<ObjectFormatIdentifier> list) {
-        allowedObjectFormatList = list;
+        allowedObjectFormat = list;
     }
 
     /** 
@@ -171,10 +187,10 @@ public class NodeReplicationPolicy implements Serializable
      * @return count
      */
     public int sizeAllowedObjectFormatList() {
-        if (allowedObjectFormatList == null) {
-            allowedObjectFormatList = new ArrayList<ObjectFormatIdentifier>();
+        if (allowedObjectFormat == null) {
+            allowedObjectFormat = new ArrayList<ObjectFormatIdentifier>();
         }
-        return allowedObjectFormatList.size();
+        return allowedObjectFormat.size();
     }
 
     /** 
@@ -182,10 +198,10 @@ public class NodeReplicationPolicy implements Serializable
      * @param item
      */
     public void addAllowedObjectFormat(ObjectFormatIdentifier item) {
-        if (allowedObjectFormatList == null) {
-            allowedObjectFormatList = new ArrayList<ObjectFormatIdentifier>();
+        if (allowedObjectFormat == null) {
+            allowedObjectFormat = new ArrayList<ObjectFormatIdentifier>();
         }
-        allowedObjectFormatList.add(item);
+        allowedObjectFormat.add(item);
     }
 
     /** 
@@ -194,19 +210,19 @@ public class NodeReplicationPolicy implements Serializable
      * @param index
      */
     public ObjectFormatIdentifier getAllowedObjectFormat(int index) {
-        if (allowedObjectFormatList == null) {
-            allowedObjectFormatList = new ArrayList<ObjectFormatIdentifier>();
+        if (allowedObjectFormat == null) {
+            allowedObjectFormat = new ArrayList<ObjectFormatIdentifier>();
         }
-        return allowedObjectFormatList.get(index);
+        return allowedObjectFormat.get(index);
     }
 
     /** 
      * Remove all 'allowedObjectFormat' element items.
      */
     public void clearAllowedObjectFormatList() {
-        if (allowedObjectFormatList == null) {
-            allowedObjectFormatList = new ArrayList<ObjectFormatIdentifier>();
+        if (allowedObjectFormat == null) {
+            allowedObjectFormat = new ArrayList<ObjectFormatIdentifier>();
         }
-        allowedObjectFormatList.clear();
+        allowedObjectFormat.clear();
     }
 }

@@ -4,6 +4,13 @@ package org.dataone.service.types.v1;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlType;
+
 /** 
  * A single log entry as reported by a Member Node or
  Coordinating Node through the :func:`MNCore.getLogRecords` or
@@ -25,17 +32,41 @@ import java.util.Date;
  * &lt;/xs:complexType>
  * </pre>
  */
-public class LogEntry implements Serializable
-{
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "LogEntry", propOrder = {
+    "entryId",
+    "identifier",
+    "ipAddress",
+    "userAgent",
+    "subject",
+    "event",
+    "dateLogged",
+    "nodeIdentifier"
+})
+@XmlRootElement(name = "logEntry")
+public class LogEntry implements Serializable {
+
+    @XmlElement(required = true)
+    protected String entryId;
+    @XmlElement(required = true)
+    protected Identifier identifier;
+    @XmlElement(required = true)
+    protected String ipAddress;
+    @XmlElement(required = true)
+    protected String userAgent;
+    @XmlElement(required = true)
+    protected Subject subject;
+    @XmlElement(required = true)
+    @XmlSchemaType(name = "string")
+    protected Event event;
+    @XmlElement(required = true)
+    @XmlSchemaType(name = "dateTime")
+    protected Date dateLogged;
+    @XmlElement(required = true)
+    protected NodeReference nodeIdentifier;
+
     private static final long serialVersionUID = 10000000;
-    private String entryId;
-    private Identifier identifier;
-    private String ipAddress;
-    private String userAgent;
-    private Subject subject;
-    private Event event;
-    private Date dateLogged;
-    private NodeReference nodeIdentifier;
+
 
     /** 
      * Get the 'entryId' element value. A unique identifier for this log entry. The

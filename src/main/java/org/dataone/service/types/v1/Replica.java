@@ -3,7 +3,12 @@ package org.dataone.service.types.v1;
 
 import java.io.Serializable;
 import java.util.Date;
-
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlType;
 /** 
  * Replica information that describes the existence of a
  replica of some object managed by the DataONE infrastructure, and its 
@@ -20,12 +25,25 @@ import java.util.Date;
  * &lt;/xs:complexType>
  * </pre>
  */
-public class Replica implements Serializable
-{
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "Replica", propOrder = {
+    "replicaMemberNode",
+    "replicationStatus",
+    "replicaVerified"
+})
+@XmlRootElement(name = "replica")
+public class Replica implements Serializable {
+
+    @XmlElement(required = true)
+    protected NodeReference replicaMemberNode;
+    @XmlElement(required = true)
+    @XmlSchemaType(name = "string")
+    protected ReplicationStatus replicationStatus;
+    @XmlElement(required = true)
+    @XmlSchemaType(name = "dateTime")
+    protected Date replicaVerified;
+
     private static final long serialVersionUID = 10000000;
-    private NodeReference replicaMemberNode;
-    private ReplicationStatus replicationStatus;
-    private Date replicaVerified;
 
     /** 
      * Get the 'replicaMemberNode' element value. A reference to the Member Node that houses this

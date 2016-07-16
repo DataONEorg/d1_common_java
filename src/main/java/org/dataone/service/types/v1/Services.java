@@ -4,7 +4,11 @@ package org.dataone.service.types.v1;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 /** 
  * A list of services that are provided by a node. Used
  in Node descriptions so that Nodes can provide metadata about each
@@ -19,10 +23,18 @@ import java.util.List;
  * &lt;/xs:complexType>
  * </pre>
  */
-public class Services implements Serializable
-{
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "Services", propOrder = {
+    "service"
+})
+@XmlRootElement(name = "services")
+public class Services implements Serializable {
+
+    @XmlElement(required = true)
+    protected List<Service> service = new ArrayList<Service>();
+
     private static final long serialVersionUID = 10000000;
-    private List<Service> serviceList = new ArrayList<Service>();
+
 
     /** 
      * Get the list of 'service' element items.
@@ -30,7 +42,7 @@ public class Services implements Serializable
      * @return list
      */
     public List<Service> getServiceList() {
-        return serviceList;
+        return service;
     }
 
     /** 
@@ -39,7 +51,7 @@ public class Services implements Serializable
      * @param list
      */
     public void setServiceList(List<Service> list) {
-        serviceList = list;
+        service = list;
     }
 
     /** 
@@ -47,10 +59,10 @@ public class Services implements Serializable
      * @return count
      */
     public int sizeServiceList() {
-        if (serviceList == null) {
-            serviceList = new ArrayList<Service>();
+        if (service == null) {
+            service = new ArrayList<Service>();
         }
-        return serviceList.size();
+        return service.size();
     }
 
     /** 
@@ -58,10 +70,10 @@ public class Services implements Serializable
      * @param item
      */
     public void addService(Service item) {
-        if (serviceList == null) {
-            serviceList = new ArrayList<Service>();
+        if (service == null) {
+            service = new ArrayList<Service>();
         }
-        serviceList.add(item);
+        service.add(item);
     }
 
     /** 
@@ -70,19 +82,19 @@ public class Services implements Serializable
      * @param index
      */
     public Service getService(int index) {
-        if (serviceList == null) {
-            serviceList = new ArrayList<Service>();
+        if (service == null) {
+            service = new ArrayList<Service>();
         }
-        return serviceList.get(index);
+        return service.get(index);
     }
 
     /** 
      * Remove all 'service' element items.
      */
     public void clearServiceList() {
-        if (serviceList == null) {
-            serviceList = new ArrayList<Service>();
+        if (service == null) {
+            service = new ArrayList<Service>();
         }
-        serviceList.clear();
+        service.clear();
     }
 }

@@ -2,7 +2,12 @@
 package org.dataone.service.types.v2;
 
 import java.io.Serializable;
-
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlValue;
 /** 
  * Additional optional properties for MediaType as 
  described by IANA.
@@ -18,11 +23,20 @@ import java.io.Serializable;
  * &lt;/xs:complexType>
  * </pre>
  */
-public class MediaTypeProperty implements Serializable
-{
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "MediaTypeProperty", propOrder = {
+    "value"
+})
+@XmlRootElement(name = "mediaTypeProperty")
+public class MediaTypeProperty implements Serializable {
+
+    @XmlValue
+    protected String value;
+    @XmlAttribute(name = "name", required = true)
+    protected String name;
+
     private static final long serialVersionUID = 10000000;
-    private String value;
-    private String name;
+
 
     /** 
      * Get the extension value.

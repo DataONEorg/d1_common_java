@@ -4,7 +4,12 @@ package org.dataone.service.types.v1;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
-
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlType;
 /** 
  * Metadata about an object, representing a subset of the
  metadata found in :class:`Types.SystemMetadata`.
@@ -22,14 +27,31 @@ import java.util.Date;
  * &lt;/xs:complexType>
  * </pre>
  */
-public class ObjectInfo implements Serializable
-{
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "ObjectInfo", propOrder = {
+    "identifier",
+    "formatId",
+    "checksum",
+    "dateSysMetadataModified",
+    "size"
+})
+@XmlRootElement(name = "objectInfo")
+public class ObjectInfo implements Serializable {
+
+    @XmlElement(required = true)
+    protected Identifier identifier;
+    @XmlElement(required = true)
+    protected ObjectFormatIdentifier formatId;
+    @XmlElement(required = true)
+    protected Checksum checksum;
+    @XmlElement(required = true)
+    @XmlSchemaType(name = "dateTime")
+    protected Date dateSysMetadataModified;
+    @XmlElement(required = true)
+    @XmlSchemaType(name = "unsignedLong")
+    protected BigInteger size;
+
     private static final long serialVersionUID = 10000000;
-    private Identifier identifier;
-    private ObjectFormatIdentifier formatId;
-    private Checksum checksum;
-    private Date dateSysMetadataModified;
-    private BigInteger size;
 
     /** 
      * Get the 'identifier' element value.

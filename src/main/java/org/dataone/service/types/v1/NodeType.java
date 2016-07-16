@@ -3,6 +3,11 @@ package org.dataone.service.types.v1;
 
 import java.io.Serializable;
 
+import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlEnumValue;
+import javax.xml.bind.annotation.XmlType;
+
+
 /** 
  * The type of this node, which is either *mn* for
  Member Nodes, or *cn* for Coordinating Nodes.
@@ -18,12 +23,22 @@ import java.io.Serializable;
  * &lt;/xs:simpleType>
  * </pre>
  */
+@XmlType(name = "NodeType")
+@XmlEnum
 public enum NodeType implements Serializable {
-    MN("mn"), CN("cn"), MONITOR("Monitor");
-    private static final long serialVersionUID = 10000000;
+   
+    @XmlEnumValue("mn")
+    MN("mn"),
+    @XmlEnumValue("cn")
+    CN("cn"),
+    @XmlEnumValue("Monitor")
+    MONITOR("Monitor");
     private final String value;
+    
+    private static final long serialVersionUID = 10000000;
 
-    private NodeType(String value) {
+//    private 
+    NodeType(String value) {
         this.value = value;
     }
 
@@ -39,4 +54,19 @@ public enum NodeType implements Serializable {
         }
         return null;
     }
+
+    // FROM the JAXB generated classes
+//    public String value() {
+//        return value;
+//    }
+//
+//    public static NodeType fromValue(String v) {
+//        for (NodeType c: NodeType.values()) {
+//            if (c.value.equals(v)) {
+//                return c;
+//            }
+//        }
+//        throw new IllegalArgumentException(v);
+//    }
+
 }

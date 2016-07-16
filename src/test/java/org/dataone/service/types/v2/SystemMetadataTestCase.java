@@ -191,7 +191,7 @@ public class SystemMetadataTestCase {
         accessPolicy.addAllow(accessRule);
         try {
             sysMetaInputStream = typeToInputStream(sysMeta);
-        } catch (IllegalStateException ex) {
+        } catch (MarshallingException | IllegalStateException ex) {
             log.info("Passed with " + ex.getMessage());
             passed = true;
         }
@@ -204,7 +204,7 @@ public class SystemMetadataTestCase {
 
         try {
             sysMetaInputStream = typeToInputStream(sysMeta);
-        } catch (IOException e) {
+        } catch (MarshallingException | IOException e) {
             log.info("Passed with " + e.getMessage());
             passed = true;
         }
@@ -218,7 +218,7 @@ public class SystemMetadataTestCase {
 
         try {
             sysMetaInputStream = typeToInputStream(sysMeta);
-        } catch (IllegalStateException ex) {
+        } catch (MarshallingException | IllegalStateException ex) {
             log.info("Passed with " + ex.getMessage());
             passed = true;
         }
@@ -233,7 +233,7 @@ public class SystemMetadataTestCase {
         accessRule.addPermission(permission);
         try {
             sysMetaInputStream = typeToInputStream(sysMeta);
-        } catch (IllegalStateException ex) {
+        } catch (MarshallingException | IllegalStateException ex) {
             log.info("Passed with " + ex.getMessage());
             passed = true;
         }

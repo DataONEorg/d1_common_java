@@ -5,6 +5,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
 /** 
  * Schema fragment(s) for this class:
  * <pre>
@@ -21,16 +27,30 @@ import java.util.List;
  * &lt;/xs:complexType>
  * </pre>
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "QueryField", namespace = "http://ns.dataone.org/service/types/v1.1", propOrder = {
+    "name",
+    "description",
+    "type",
+    "searchable",
+    "returnable",
+    "sortable",
+    "multivalued"
+})
+@XmlRootElement( name = "queryField" )
 public class QueryField implements Serializable
 {
     private static final long serialVersionUID = 10000000;
-    private String name;
-    private List<String> descriptionList = new ArrayList<String>();
-    private String type;
-    private boolean searchable;
-    private boolean returnable;
-    private boolean sortable;
-    private Boolean multivalued;
+    
+    @XmlElement(required = true)
+    protected String name;
+    protected List<String> description = new ArrayList<String>();
+    @XmlElement(required = true)
+    protected String type;
+    protected boolean searchable;
+    protected boolean returnable;
+    protected boolean sortable;
+    protected Boolean multivalued;
 
     /** 
      * Get the 'name' element value. The name of the field as used programmatically when 
@@ -60,7 +80,7 @@ public class QueryField implements Serializable
      * @return list
      */
     public List<String> getDescriptionList() {
-        return descriptionList;
+        return description;
     }
 
     /** 
@@ -71,7 +91,7 @@ public class QueryField implements Serializable
      * @param list
      */
     public void setDescriptionList(List<String> list) {
-        descriptionList = list;
+        description = list;
     }
 
     /** 
@@ -79,10 +99,10 @@ public class QueryField implements Serializable
      * @return count
      */
     public int sizeDescriptionList() {
-        if (descriptionList == null) {
-            descriptionList = new ArrayList<String>();
+        if (description == null) {
+            description = new ArrayList<String>();
         }
-        return descriptionList.size();
+        return description.size();
     }
 
     /** 
@@ -90,10 +110,10 @@ public class QueryField implements Serializable
      * @param item
      */
     public void addDescription(String item) {
-        if (descriptionList == null) {
-            descriptionList = new ArrayList<String>();
+        if (description == null) {
+            description = new ArrayList<String>();
         }
-        descriptionList.add(item);
+        description.add(item);
     }
 
     /** 
@@ -102,20 +122,20 @@ public class QueryField implements Serializable
      * @param index
      */
     public String getDescription(int index) {
-        if (descriptionList == null) {
-            descriptionList = new ArrayList<String>();
+        if (description == null) {
+            description = new ArrayList<String>();
         }
-        return descriptionList.get(index);
+        return description.get(index);
     }
 
     /** 
      * Remove all 'description' element items.
      */
     public void clearDescriptionList() {
-        if (descriptionList == null) {
-            descriptionList = new ArrayList<String>();
+        if (description == null) {
+            description = new ArrayList<String>();
         }
-        descriptionList.clear();
+        description.clear();
     }
 
     /** 

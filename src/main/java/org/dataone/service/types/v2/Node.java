@@ -4,7 +4,10 @@ package org.dataone.service.types.v2;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 /** 
  * Extends the Version 1.x :class:`Types.Node` by adding 
  an optional unbounded parameter entry providing additional simple 
@@ -23,11 +26,16 @@ import java.util.List;
  * &lt;/xs:complexType>
  * </pre>
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "Node", propOrder = {
+    "property"
+})
+@XmlRootElement(name = "node")
 public class Node extends org.dataone.service.types.v1.Node implements
     Serializable
 {
     private static final long serialVersionUID = 10000001;
-    private List<Property> propertyList = new ArrayList<Property>();
+    protected List<Property> property = new ArrayList<Property>();
 
     /** 
      * Get the list of 'property' element items. Allows additional attributes be added to the 
@@ -36,7 +44,7 @@ public class Node extends org.dataone.service.types.v1.Node implements
      * @return list
      */
     public List<Property> getPropertyList() {
-        return propertyList;
+        return property;
     }
 
     /** 
@@ -46,7 +54,7 @@ public class Node extends org.dataone.service.types.v1.Node implements
      * @param list
      */
     public void setPropertyList(List<Property> list) {
-        propertyList = list;
+        property = list;
     }
 
     /** 
@@ -54,10 +62,10 @@ public class Node extends org.dataone.service.types.v1.Node implements
      * @return count
      */
     public int sizePropertyList() {
-        if (propertyList == null) {
-            propertyList = new ArrayList<Property>();
+        if (property == null) {
+            property = new ArrayList<Property>();
         }
-        return propertyList.size();
+        return property.size();
     }
 
     /** 
@@ -65,10 +73,10 @@ public class Node extends org.dataone.service.types.v1.Node implements
      * @param item
      */
     public void addProperty(Property item) {
-        if (propertyList == null) {
-            propertyList = new ArrayList<Property>();
+        if (property == null) {
+            property = new ArrayList<Property>();
         }
-        propertyList.add(item);
+        property.add(item);
     }
 
     /** 
@@ -77,19 +85,19 @@ public class Node extends org.dataone.service.types.v1.Node implements
      * @param index
      */
     public Property getProperty(int index) {
-        if (propertyList == null) {
-            propertyList = new ArrayList<Property>();
+        if (property == null) {
+            property = new ArrayList<Property>();
         }
-        return propertyList.get(index);
+        return property.get(index);
     }
 
     /** 
      * Remove all 'property' element items.
      */
     public void clearPropertyList() {
-        if (propertyList == null) {
-            propertyList = new ArrayList<Property>();
+        if (property == null) {
+            property = new ArrayList<Property>();
         }
-        propertyList.clear();
+        property.clear();
     }
 }

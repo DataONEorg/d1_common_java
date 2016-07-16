@@ -5,6 +5,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlType;
 /** 
  * A set of values that describe a member or coordinating
  node, its Internet location, and the services it supports. Several nodes
@@ -32,23 +39,47 @@ import java.util.List;
  * &lt;/xs:complexType>
  * </pre>
  */
-public class Node implements Serializable
-{
-    private static final long serialVersionUID = 10000001;
-    private NodeReference identifier;
-    private String name;
-    private String description;
-    private String baseURL;
-    private Services services;
-    private Synchronization synchronization;
-    private NodeReplicationPolicy nodeReplicationPolicy;
-    private Ping ping;
-    private List<Subject> subjectList = new ArrayList<Subject>();
-    private List<Subject> contactSubjectList = new ArrayList<Subject>();
-    private boolean replicate;
-    private boolean synchronize;
-    private NodeType type;
-    private NodeState state;
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "Node", propOrder = {
+    "identifier",
+    "name",
+    "description",
+    "baseURL",
+    "services",
+    "synchronization",
+    "nodeReplicationPolicy",
+    "ping",
+    "subject",
+    "contactSubject"
+})
+@XmlRootElement(name = "node")
+public class Node implements Serializable {
+
+    @XmlElement(required = true)
+    protected NodeReference identifier;
+    @XmlElement(required = true)
+    protected String name;
+    @XmlElement(required = true)
+    protected String description;
+    @XmlElement(required = true)
+    @XmlSchemaType(name = "anyURI")
+    protected String baseURL;
+    protected Services services;
+    protected Synchronization synchronization;
+    protected NodeReplicationPolicy nodeReplicationPolicy;
+    protected Ping ping;
+    protected List<Subject> subject = new ArrayList<Subject>();
+    @XmlElement(required = true)
+    protected List<Subject> contactSubject  = new ArrayList<Subject>();
+    @XmlAttribute(name = "replicate", required = true)
+    protected boolean replicate;
+    @XmlAttribute(name = "synchronize", required = true)
+    protected boolean synchronize;
+    @XmlAttribute(name = "type", required = true)
+    protected NodeType type;
+    @XmlAttribute(name = "state", required = true)
+    protected NodeState state;
+
 
     /** 
      * Get the 'identifier' element value. A unique identifier for the node of the form 
@@ -259,7 +290,7 @@ public class Node implements Serializable
      * @return list
      */
     public List<Subject> getSubjectList() {
-        return subjectList;
+        return subject;
     }
     /* Same as getSubjectList, but for use with Serializer
        The method will produce a null return if an empty
@@ -267,10 +298,10 @@ public class Node implements Serializable
        https://redmine.dataone.org/issues/7422
     */
         public List<Subject> grabSubjectListNullIfEmpty() {
-        if (subjectList != null && subjectList.isEmpty()) {
+        if (subject != null && subject.isEmpty()) {
                 return null;
         }
-        return subjectList;
+        return subject;
     }
     /** 
      * Set the list of 'subject' element items. The :term:`Subject` of this node, which can be
@@ -286,7 +317,7 @@ public class Node implements Serializable
      * @param list
      */
     public void setSubjectList(List<Subject> list) {
-        subjectList = list;
+        subject = list;
     }
 
     /** 
@@ -294,10 +325,10 @@ public class Node implements Serializable
      * @return count
      */
     public int sizeSubjectList() {
-        if (subjectList == null) {
-            subjectList = new ArrayList<Subject>();
+        if (subject == null) {
+            subject = new ArrayList<Subject>();
         }
-        return subjectList.size();
+        return subject.size();
     }
 
     /** 
@@ -305,10 +336,10 @@ public class Node implements Serializable
      * @param item
      */
     public void addSubject(Subject item) {
-        if (subjectList == null) {
-            subjectList = new ArrayList<Subject>();
+        if (subject == null) {
+            subject = new ArrayList<Subject>();
         }
-        subjectList.add(item);
+        subject.add(item);
     }
 
     /** 
@@ -317,20 +348,20 @@ public class Node implements Serializable
      * @param index
      */
     public Subject getSubject(int index) {
-        if (subjectList == null) {
-            subjectList = new ArrayList<Subject>();
+        if (subject == null) {
+            subject = new ArrayList<Subject>();
         }
-        return subjectList.get(index);
+        return subject.get(index);
     }
 
     /** 
      * Remove all 'subject' element items.
      */
     public void clearSubjectList() {
-        if (subjectList == null) {
-            subjectList = new ArrayList<Subject>();
+        if (subject == null) {
+            subject = new ArrayList<Subject>();
         }
-        subjectList.clear();
+        subject.clear();
     }
 
     /** 
@@ -350,7 +381,7 @@ public class Node implements Serializable
      * @return list
      */
     public List<Subject> getContactSubjectList() {
-        return contactSubjectList;
+        return contactSubject;
     }
 
     /** 
@@ -370,7 +401,7 @@ public class Node implements Serializable
      * @param list
      */
     public void setContactSubjectList(List<Subject> list) {
-        contactSubjectList = list;
+        contactSubject = list;
     }
 
     /** 
@@ -378,10 +409,10 @@ public class Node implements Serializable
      * @return count
      */
     public int sizeContactSubjectList() {
-        if (contactSubjectList == null) {
-            contactSubjectList = new ArrayList<Subject>();
+        if (contactSubject == null) {
+            contactSubject = new ArrayList<Subject>();
         }
-        return contactSubjectList.size();
+        return contactSubject.size();
     }
 
     /** 
@@ -389,10 +420,10 @@ public class Node implements Serializable
      * @param item
      */
     public void addContactSubject(Subject item) {
-        if (contactSubjectList == null) {
-            contactSubjectList = new ArrayList<Subject>();
+        if (contactSubject == null) {
+            contactSubject = new ArrayList<Subject>();
         }
-        contactSubjectList.add(item);
+        contactSubject.add(item);
     }
 
     /** 
@@ -401,20 +432,20 @@ public class Node implements Serializable
      * @param index
      */
     public Subject getContactSubject(int index) {
-        if (contactSubjectList == null) {
-            contactSubjectList = new ArrayList<Subject>();
+        if (contactSubject == null) {
+            contactSubject = new ArrayList<Subject>();
         }
-        return contactSubjectList.get(index);
+        return contactSubject.get(index);
     }
 
     /** 
      * Remove all 'contactSubject' element items.
      */
     public void clearContactSubjectList() {
-        if (contactSubjectList == null) {
-            contactSubjectList = new ArrayList<Subject>();
+        if (contactSubject == null) {
+            contactSubject = new ArrayList<Subject>();
         }
-        contactSubjectList.clear();
+        contactSubject.clear();
     }
 
     /** 

@@ -3,6 +3,11 @@ package org.dataone.service.types.v1;
 
 import java.io.Serializable;
 
+import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlEnumValue;
+import javax.xml.bind.annotation.XmlType;
+
+
 /** 
  * The controlled list of events that are logged, which
  will include *create*, *update*, *delete*, *read*, *replicate*,
@@ -24,14 +29,30 @@ import java.io.Serializable;
  * &lt;/xs:simpleType>
  * </pre>
  */
+@XmlType(name = "Event")
+@XmlEnum
 public enum Event implements Serializable {
-    CREATE("create"), READ("read"), UPDATE("update"), DELETE("delete"), REPLICATE(
-            "replicate"), SYNCHRONIZATION_FAILED("synchronization_failed"), REPLICATION_FAILED(
-            "replication_failed");
-    private static final long serialVersionUID = 10000000;
+
+    @XmlEnumValue("create")
+    CREATE("create"),
+    @XmlEnumValue("read")
+    READ("read"),
+    @XmlEnumValue("update")
+    UPDATE("update"),
+    @XmlEnumValue("delete")
+    DELETE("delete"),
+    @XmlEnumValue("replicate")
+    REPLICATE("replicate"),
+    @XmlEnumValue("synchronization_failed")
+    SYNCHRONIZATION_FAILED("synchronization_failed"),
+    @XmlEnumValue("replication_failed")
+    REPLICATION_FAILED("replication_failed");
     private final String value;
 
-    private Event(String value) {
+    private static final long serialVersionUID = 10000000;
+
+    // private 
+    Event(String value) {
         this.value = value;
     }
 
@@ -47,4 +68,17 @@ public enum Event implements Serializable {
         }
         return null;
     }
+    
+//    public String value() {
+//        return value;
+//    }
+//
+//    public static Event fromValue(String v) {
+//        for (Event c: Event.values()) {
+//            if (c.value.equals(v)) {
+//                return c;
+//            }
+//        }
+//        throw new IllegalArgumentException(v);
+//    }
 }

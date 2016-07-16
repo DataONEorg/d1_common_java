@@ -4,6 +4,11 @@ package org.dataone.service.types.v1;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 /** 
  * Represents a list of :term:`checksum`
@@ -18,10 +23,18 @@ import java.util.List;
  * &lt;/xs:complexType>
  * </pre>
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "ChecksumAlgorithmList", propOrder = {
+    "algorithm"
+})
+@XmlRootElement(name = "checksumAlgorithmList")
 public class ChecksumAlgorithmList implements Serializable
 {
+    @XmlElement(required = true)
+    protected List<String> algorithm = new ArrayList<String>();
+
     private static final long serialVersionUID = 10000000;
-    private List<String> algorithmList = new ArrayList<String>();
+
 
     /** 
      * Get the list of 'algorithm' element items.
@@ -29,7 +42,7 @@ public class ChecksumAlgorithmList implements Serializable
      * @return list
      */
     public List<String> getAlgorithmList() {
-        return algorithmList;
+        return algorithm;
     }
 
     /** 
@@ -38,7 +51,7 @@ public class ChecksumAlgorithmList implements Serializable
      * @param list
      */
     public void setAlgorithmList(List<String> list) {
-        algorithmList = list;
+        algorithm = list;
     }
 
     /** 
@@ -46,10 +59,10 @@ public class ChecksumAlgorithmList implements Serializable
      * @return count
      */
     public int sizeAlgorithmList() {
-        if (algorithmList == null) {
-            algorithmList = new ArrayList<String>();
+        if (algorithm == null) {
+            algorithm = new ArrayList<String>();
         }
-        return algorithmList.size();
+        return algorithm.size();
     }
 
     /** 
@@ -57,10 +70,10 @@ public class ChecksumAlgorithmList implements Serializable
      * @param item
      */
     public void addAlgorithm(String item) {
-        if (algorithmList == null) {
-            algorithmList = new ArrayList<String>();
+        if (algorithm == null) {
+            algorithm = new ArrayList<String>();
         }
-        algorithmList.add(item);
+        algorithm.add(item);
     }
 
     /** 
@@ -69,19 +82,19 @@ public class ChecksumAlgorithmList implements Serializable
      * @param index
      */
     public String getAlgorithm(int index) {
-        if (algorithmList == null) {
-            algorithmList = new ArrayList<String>();
+        if (algorithm == null) {
+            algorithm = new ArrayList<String>();
         }
-        return algorithmList.get(index);
+        return algorithm.get(index);
     }
 
     /** 
      * Remove all 'algorithm' element items.
      */
     public void clearAlgorithmList() {
-        if (algorithmList == null) {
-            algorithmList = new ArrayList<String>();
+        if (algorithm == null) {
+            algorithm = new ArrayList<String>();
         }
-        algorithmList.clear();
+        algorithm.clear();
     }
 }

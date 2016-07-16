@@ -2,7 +2,10 @@
 package org.dataone.service.types.v2;
 
 import java.io.Serializable;
-
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 /** 
  * Extends Version 1.x :class:`Types.ObjectFormat` by 
  adding :term:`mediaType` and :term:`extension` elements.
@@ -22,12 +25,20 @@ import java.io.Serializable;
  * &lt;/xs:complexType>
  * </pre>
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "ObjectFormat", propOrder = {
+    "mediaType",
+    "extension"
+})
+@XmlRootElement(name = "objectFormat")
 public class ObjectFormat extends org.dataone.service.types.v1.ObjectFormat
     implements Serializable
 {
+    protected MediaType mediaType;
+    protected String extension;
+    
     private static final long serialVersionUID = 10000000;
-    private MediaType mediaType;
-    private String extension;
+
 
     /** 
      * Get the 'mediaType' element value. The IANA Media Type for this object format.

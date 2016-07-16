@@ -5,6 +5,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
 /** 
  * *Person* represents metadata about a :term:`Principal`
  that is a person and that can be used by clients and nodes for
@@ -29,16 +35,31 @@ import java.util.List;
  * &lt;/xs:complexType>
  * </pre>
  */
-public class Person implements Serializable
-{
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "Person", propOrder = {
+    "subject",
+    "givenName",
+    "familyName",
+    "email",
+    "isMemberOf",
+    "equivalentIdentity",
+    "verified"
+})
+@XmlRootElement(name = "person")
+public class Person implements Serializable {
+
+    @XmlElement(required = true)
+    protected Subject subject;
+    @XmlElement(required = true)
+    protected List<String> givenName;
+    @XmlElement(required = true)
+    protected String familyName;
+    protected List<String> email = new ArrayList<String>();
+    protected List<Subject> isMemberOf = new ArrayList<Subject>();
+    protected List<Subject> equivalentIdentity = new ArrayList<Subject>();
+    protected Boolean verified;
+
     private static final long serialVersionUID = 10000000;
-    private Subject subject;
-    private List<String> givenNameList = new ArrayList<String>();
-    private String familyName;
-    private List<String> emailList = new ArrayList<String>();
-    private List<Subject> isMemberOfList = new ArrayList<Subject>();
-    private List<Subject> equivalentIdentityList = new ArrayList<Subject>();
-    private Boolean verified;
 
     /** 
      * Get the 'subject' element value. The unique, immutable identifier for the
@@ -67,7 +88,7 @@ public class Person implements Serializable
      * @return list
      */
     public List<String> getGivenNameList() {
-        return givenNameList;
+        return givenName;
     }
 
     /** 
@@ -77,7 +98,7 @@ public class Person implements Serializable
      * @param list
      */
     public void setGivenNameList(List<String> list) {
-        givenNameList = list;
+        givenName = list;
     }
 
     /** 
@@ -85,10 +106,10 @@ public class Person implements Serializable
      * @return count
      */
     public int sizeGivenNameList() {
-        if (givenNameList == null) {
-            givenNameList = new ArrayList<String>();
+        if (givenName == null) {
+            givenName = new ArrayList<String>();
         }
-        return givenNameList.size();
+        return givenName.size();
     }
 
     /** 
@@ -96,10 +117,10 @@ public class Person implements Serializable
      * @param item
      */
     public void addGivenName(String item) {
-        if (givenNameList == null) {
-            givenNameList = new ArrayList<String>();
+        if (givenName == null) {
+            givenName = new ArrayList<String>();
         }
-        givenNameList.add(item);
+        givenName.add(item);
     }
 
     /** 
@@ -108,20 +129,20 @@ public class Person implements Serializable
      * @param index
      */
     public String getGivenName(int index) {
-        if (givenNameList == null) {
-            givenNameList = new ArrayList<String>();
+        if (givenName == null) {
+            givenName = new ArrayList<String>();
         }
-        return givenNameList.get(index);
+        return givenName.get(index);
     }
 
     /** 
      * Remove all 'givenName' element items.
      */
     public void clearGivenNameList() {
-        if (givenNameList == null) {
-            givenNameList = new ArrayList<String>();
+        if (givenName == null) {
+            givenName = new ArrayList<String>();
         }
-        givenNameList.clear();
+        givenName.clear();
     }
 
     /** 
@@ -149,7 +170,7 @@ public class Person implements Serializable
      * @return list
      */
     public List<String> getEmailList() {
-        return emailList;
+        return email;
     }
 
     /** 
@@ -159,7 +180,7 @@ public class Person implements Serializable
      * @param list
      */
     public void setEmailList(List<String> list) {
-        emailList = list;
+        email = list;
     }
 
     /** 
@@ -167,10 +188,10 @@ public class Person implements Serializable
      * @return count
      */
     public int sizeEmailList() {
-        if (emailList == null) {
-            emailList = new ArrayList<String>();
+        if (email == null) {
+            email = new ArrayList<String>();
         }
-        return emailList.size();
+        return email.size();
     }
 
     /** 
@@ -178,10 +199,10 @@ public class Person implements Serializable
      * @param item
      */
     public void addEmail(String item) {
-        if (emailList == null) {
-            emailList = new ArrayList<String>();
+        if (email == null) {
+            email = new ArrayList<String>();
         }
-        emailList.add(item);
+        email.add(item);
     }
 
     /** 
@@ -190,20 +211,20 @@ public class Person implements Serializable
      * @param index
      */
     public String getEmail(int index) {
-        if (emailList == null) {
-            emailList = new ArrayList<String>();
+        if (email == null) {
+            email = new ArrayList<String>();
         }
-        return emailList.get(index);
+        return email.get(index);
     }
 
     /** 
      * Remove all 'email' element items.
      */
     public void clearEmailList() {
-        if (emailList == null) {
-            emailList = new ArrayList<String>();
+        if (email == null) {
+            email = new ArrayList<String>();
         }
-        emailList.clear();
+        email.clear();
     }
 
     /** 
@@ -215,7 +236,7 @@ public class Person implements Serializable
      * @return list
      */
     public List<Subject> getIsMemberOfList() {
-        return isMemberOfList;
+        return isMemberOf;
     }
 
     /** 
@@ -227,7 +248,7 @@ public class Person implements Serializable
      * @param list
      */
     public void setIsMemberOfList(List<Subject> list) {
-        isMemberOfList = list;
+        isMemberOf = list;
     }
 
     /** 
@@ -235,10 +256,10 @@ public class Person implements Serializable
      * @return count
      */
     public int sizeIsMemberOfList() {
-        if (isMemberOfList == null) {
-            isMemberOfList = new ArrayList<Subject>();
+        if (isMemberOf == null) {
+            isMemberOf = new ArrayList<Subject>();
         }
-        return isMemberOfList.size();
+        return isMemberOf.size();
     }
 
     /** 
@@ -246,10 +267,10 @@ public class Person implements Serializable
      * @param item
      */
     public void addIsMemberOf(Subject item) {
-        if (isMemberOfList == null) {
-            isMemberOfList = new ArrayList<Subject>();
+        if (isMemberOf == null) {
+            isMemberOf = new ArrayList<Subject>();
         }
-        isMemberOfList.add(item);
+        isMemberOf.add(item);
     }
 
     /** 
@@ -258,20 +279,20 @@ public class Person implements Serializable
      * @param index
      */
     public Subject getIsMemberOf(int index) {
-        if (isMemberOfList == null) {
-            isMemberOfList = new ArrayList<Subject>();
+        if (isMemberOf == null) {
+            isMemberOf = new ArrayList<Subject>();
         }
-        return isMemberOfList.get(index);
+        return isMemberOf.get(index);
     }
 
     /** 
      * Remove all 'isMemberOf' element items.
      */
     public void clearIsMemberOfList() {
-        if (isMemberOfList == null) {
-            isMemberOfList = new ArrayList<Subject>();
+        if (isMemberOf == null) {
+            isMemberOf = new ArrayList<Subject>();
         }
-        isMemberOfList.clear();
+        isMemberOf.clear();
     }
 
     /** 
@@ -283,7 +304,7 @@ public class Person implements Serializable
      * @return list
      */
     public List<Subject> getEquivalentIdentityList() {
-        return equivalentIdentityList;
+        return equivalentIdentity;
     }
 
     /** 
@@ -295,7 +316,7 @@ public class Person implements Serializable
      * @param list
      */
     public void setEquivalentIdentityList(List<Subject> list) {
-        equivalentIdentityList = list;
+        equivalentIdentity = list;
     }
 
     /** 
@@ -303,10 +324,10 @@ public class Person implements Serializable
      * @return count
      */
     public int sizeEquivalentIdentityList() {
-        if (equivalentIdentityList == null) {
-            equivalentIdentityList = new ArrayList<Subject>();
+        if (equivalentIdentity == null) {
+            equivalentIdentity = new ArrayList<Subject>();
         }
-        return equivalentIdentityList.size();
+        return equivalentIdentity.size();
     }
 
     /** 
@@ -314,10 +335,10 @@ public class Person implements Serializable
      * @param item
      */
     public void addEquivalentIdentity(Subject item) {
-        if (equivalentIdentityList == null) {
-            equivalentIdentityList = new ArrayList<Subject>();
+        if (equivalentIdentity == null) {
+            equivalentIdentity = new ArrayList<Subject>();
         }
-        equivalentIdentityList.add(item);
+        equivalentIdentity.add(item);
     }
 
     /** 
@@ -326,20 +347,20 @@ public class Person implements Serializable
      * @param index
      */
     public Subject getEquivalentIdentity(int index) {
-        if (equivalentIdentityList == null) {
-            equivalentIdentityList = new ArrayList<Subject>();
+        if (equivalentIdentity == null) {
+            equivalentIdentity = new ArrayList<Subject>();
         }
-        return equivalentIdentityList.get(index);
+        return equivalentIdentity.get(index);
     }
 
     /** 
      * Remove all 'equivalentIdentity' element items.
      */
     public void clearEquivalentIdentityList() {
-        if (equivalentIdentityList == null) {
-            equivalentIdentityList = new ArrayList<Subject>();
+        if (equivalentIdentity == null) {
+            equivalentIdentity = new ArrayList<Subject>();
         }
-        equivalentIdentityList.clear();
+        equivalentIdentity.clear();
     }
 
     /** 

@@ -3,6 +3,11 @@ package org.dataone.service.types.v2;
 
 import java.io.Serializable;
 import org.dataone.service.types.v1.Identifier;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
 
 /** 
  * System metadata in DataONE APIs version 2.0 extends
@@ -27,13 +32,22 @@ import org.dataone.service.types.v1.Identifier;
  * &lt;/xs:complexType>
  * </pre>
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "SystemMetadata", propOrder = {
+    "seriesId",
+    "mediaType",
+    "fileName"
+})
+@XmlRootElement( name = "systemMetadata")
 public class SystemMetadata extends org.dataone.service.types.v1.SystemMetadata
     implements Serializable
 {
     private static final long serialVersionUID = 10000001;
-    private Identifier seriesId;
-    private MediaType mediaType;
-    private String fileName;
+
+    protected Identifier seriesId;
+    protected MediaType mediaType;
+    protected String fileName;
+
 
     /** 
      * Get the 'seriesId' element value. The :term:`seriesId` is an optional, unique

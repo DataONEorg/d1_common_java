@@ -3,6 +3,10 @@ package org.dataone.service.types.v1;
 
 import java.io.Serializable;
 
+import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlEnumValue;
+import javax.xml.bind.annotation.XmlType;
+
 /** 
  * An enumerated string value indicating the current
  state of a replica of an object. When an object identified needs to be
@@ -31,13 +35,27 @@ import java.io.Serializable;
  * &lt;/xs:simpleType>
  * </pre>
  */
+@XmlType(name = "ReplicationStatus")
+@XmlEnum
 public enum ReplicationStatus implements Serializable {
-    QUEUED("queued"), REQUESTED("requested"), COMPLETED("completed"), FAILED(
-            "failed"), INVALIDATED("invalidated");
-    private static final long serialVersionUID = 10000000;
-    private final String value;
 
-    private ReplicationStatus(String value) {
+    @XmlEnumValue("queued")
+    QUEUED("queued"),
+    @XmlEnumValue("requested")
+    REQUESTED("requested"),
+    @XmlEnumValue("completed")
+    COMPLETED("completed"),
+    @XmlEnumValue("failed")
+    FAILED("failed"),
+    @XmlEnumValue("invalidated")
+    INVALIDATED("invalidated");
+    private final String value;
+    
+    private static final long serialVersionUID = 10000000;
+
+
+    // private 
+    ReplicationStatus(String value) {
         this.value = value;
     }
 
@@ -53,4 +71,17 @@ public enum ReplicationStatus implements Serializable {
         }
         return null;
     }
+    
+//    public String value() {
+//        return value;
+//    }
+//
+//    public static ReplicationStatus fromValue(String v) {
+//        for (ReplicationStatus c: ReplicationStatus.values()) {
+//            if (c.value.equals(v)) {
+//                return c;
+//            }
+//        }
+//        throw new IllegalArgumentException(v);
+//    }
 }

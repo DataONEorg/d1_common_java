@@ -3,6 +3,10 @@ package org.dataone.service.types.v1;
 
 import java.io.Serializable;
 
+import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlEnumValue;
+import javax.xml.bind.annotation.XmlType;
+
 /** 
  * An indicator of the current node accessibility. Nodes
  that are marked *down* are inaccessible for service operations, those
@@ -20,12 +24,24 @@ import java.io.Serializable;
  * &lt;/xs:simpleType>
  * </pre>
  */
+
+@XmlType(name = "NodeState")
+@XmlEnum
 public enum NodeState implements Serializable {
-    UP("up"), DOWN("down"), UNKNOWN("unknown");
-    private static final long serialVersionUID = 10000000;
+
+    @XmlEnumValue("up")
+    UP("up"),
+    @XmlEnumValue("down")
+    DOWN("down"),
+    @XmlEnumValue("unknown")
+    UNKNOWN("unknown");
     private final String value;
 
-    private NodeState(String value) {
+    private static final long serialVersionUID = 10000000;
+
+
+    // private 
+    NodeState(String value) {
         this.value = value;
     }
 
@@ -41,4 +57,17 @@ public enum NodeState implements Serializable {
         }
         return null;
     }
+    
+//    public String value() {
+//    return value;
+//    }
+//
+//    public static NodeState fromValue(String v) {
+//        for (NodeState c: NodeState.values()) {
+//            if (c.value.equals(v)) {
+//                return c;
+//            }
+//        }
+//        throw new IllegalArgumentException(v);
+//    }
 }

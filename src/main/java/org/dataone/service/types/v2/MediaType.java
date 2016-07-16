@@ -4,7 +4,11 @@ package org.dataone.service.types.v2;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 /** 
  * Value drawn from the value space of IANA Media Types (
  http://www.iana.org/assignments/media-types/media-types.xhtml ). When 
@@ -28,11 +32,19 @@ import java.util.List;
  * &lt;/xs:complexType>
  * </pre>
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "MediaType", propOrder = {
+    "property"
+})
+@XmlRootElement(name = "mediaType")
 public class MediaType implements Serializable
 {
     private static final long serialVersionUID = 10000000;
-    private List<MediaTypeProperty> propertyList = new ArrayList<MediaTypeProperty>();
-    private String name;
+    
+    protected List<MediaTypeProperty> property = new ArrayList<MediaTypeProperty>();
+    @XmlAttribute(name = "name", required = true)
+    protected String name;
+
 
     /** 
      * Get the list of 'property' element items. Media-type parameter(s) as specified by the 
@@ -42,7 +54,7 @@ public class MediaType implements Serializable
      * @return list
      */
     public List<MediaTypeProperty> getPropertyList() {
-        return propertyList;
+        return property;
     }
 
     /** 
@@ -53,7 +65,7 @@ public class MediaType implements Serializable
      * @param list
      */
     public void setPropertyList(List<MediaTypeProperty> list) {
-        propertyList = list;
+        property = list;
     }
 
     /** 
@@ -61,10 +73,10 @@ public class MediaType implements Serializable
      * @return count
      */
     public int sizePropertyList() {
-        if (propertyList == null) {
-            propertyList = new ArrayList<MediaTypeProperty>();
+        if (property == null) {
+            property = new ArrayList<MediaTypeProperty>();
         }
-        return propertyList.size();
+        return property.size();
     }
 
     /** 
@@ -72,10 +84,10 @@ public class MediaType implements Serializable
      * @param item
      */
     public void addProperty(MediaTypeProperty item) {
-        if (propertyList == null) {
-            propertyList = new ArrayList<MediaTypeProperty>();
+        if (property == null) {
+            property = new ArrayList<MediaTypeProperty>();
         }
-        propertyList.add(item);
+        property.add(item);
     }
 
     /** 
@@ -84,20 +96,20 @@ public class MediaType implements Serializable
      * @param index
      */
     public MediaTypeProperty getProperty(int index) {
-        if (propertyList == null) {
-            propertyList = new ArrayList<MediaTypeProperty>();
+        if (property == null) {
+            property = new ArrayList<MediaTypeProperty>();
         }
-        return propertyList.get(index);
+        return property.get(index);
     }
 
     /** 
      * Remove all 'property' element items.
      */
     public void clearPropertyList() {
-        if (propertyList == null) {
-            propertyList = new ArrayList<MediaTypeProperty>();
+        if (property == null) {
+            property = new ArrayList<MediaTypeProperty>();
         }
-        propertyList.clear();
+        property.clear();
     }
 
     /** 

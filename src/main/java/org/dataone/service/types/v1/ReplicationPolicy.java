@@ -4,7 +4,11 @@ package org.dataone.service.types.v1;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 /** 
  * The *ReplicationPolicy* for an object defines if
  replication should be attempted for this object, and if so, how many
@@ -24,13 +28,23 @@ import java.util.List;
  * &lt;/xs:complexType>
  * </pre>
  */
-public class ReplicationPolicy implements Serializable
-{
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "ReplicationPolicy", propOrder = {
+    "preferredMemberNode",
+    "blockedMemberNode"
+})
+@XmlRootElement(name = "replicationPolicy")
+public class ReplicationPolicy implements Serializable {
+
+    protected List<NodeReference> preferredMemberNode = new ArrayList<NodeReference>();
+    protected List<NodeReference> blockedMemberNode = new ArrayList<NodeReference>();
+    @XmlAttribute(name = "replicationAllowed")
+    protected Boolean replicationAllowed;
+    @XmlAttribute(name = "numberReplicas")
+    protected Integer numberReplicas;
+
     private static final long serialVersionUID = 10000000;
-    private List<NodeReference> preferredMemberNodeList = new ArrayList<NodeReference>();
-    private List<NodeReference> blockedMemberNodeList = new ArrayList<NodeReference>();
-    private Boolean replicationAllowed;
-    private Integer numberReplicas;
+
 
     /** 
      * Get the list of 'preferredMemberNode' element items. Preferred Nodes are utilized over other nodes as
@@ -43,7 +57,7 @@ public class ReplicationPolicy implements Serializable
      * @return list
      */
     public List<NodeReference> getPreferredMemberNodeList() {
-        return preferredMemberNodeList;
+        return preferredMemberNode;
     }
 
     /** 
@@ -57,7 +71,7 @@ public class ReplicationPolicy implements Serializable
      * @param list
      */
     public void setPreferredMemberNodeList(List<NodeReference> list) {
-        preferredMemberNodeList = list;
+        preferredMemberNode = list;
     }
 
     /** 
@@ -65,10 +79,10 @@ public class ReplicationPolicy implements Serializable
      * @return count
      */
     public int sizePreferredMemberNodeList() {
-        if (preferredMemberNodeList == null) {
-            preferredMemberNodeList = new ArrayList<NodeReference>();
+        if (preferredMemberNode == null) {
+            preferredMemberNode = new ArrayList<NodeReference>();
         }
-        return preferredMemberNodeList.size();
+        return preferredMemberNode.size();
     }
 
     /** 
@@ -76,10 +90,10 @@ public class ReplicationPolicy implements Serializable
      * @param item
      */
     public void addPreferredMemberNode(NodeReference item) {
-        if (preferredMemberNodeList == null) {
-            preferredMemberNodeList = new ArrayList<NodeReference>();
+        if (preferredMemberNode == null) {
+            preferredMemberNode = new ArrayList<NodeReference>();
         }
-        preferredMemberNodeList.add(item);
+        preferredMemberNode.add(item);
     }
 
     /** 
@@ -88,20 +102,20 @@ public class ReplicationPolicy implements Serializable
      * @param index
      */
     public NodeReference getPreferredMemberNode(int index) {
-        if (preferredMemberNodeList == null) {
-            preferredMemberNodeList = new ArrayList<NodeReference>();
+        if (preferredMemberNode == null) {
+            preferredMemberNode = new ArrayList<NodeReference>();
         }
-        return preferredMemberNodeList.get(index);
+        return preferredMemberNode.get(index);
     }
 
     /** 
      * Remove all 'preferredMemberNode' element items.
      */
     public void clearPreferredMemberNodeList() {
-        if (preferredMemberNodeList == null) {
-            preferredMemberNodeList = new ArrayList<NodeReference>();
+        if (preferredMemberNode == null) {
+            preferredMemberNode = new ArrayList<NodeReference>();
         }
-        preferredMemberNodeList.clear();
+        preferredMemberNode.clear();
     }
 
     /** 
@@ -113,7 +127,7 @@ public class ReplicationPolicy implements Serializable
      * @return list
      */
     public List<NodeReference> getBlockedMemberNodeList() {
-        return blockedMemberNodeList;
+        return blockedMemberNode;
     }
 
     /** 
@@ -125,7 +139,7 @@ public class ReplicationPolicy implements Serializable
      * @param list
      */
     public void setBlockedMemberNodeList(List<NodeReference> list) {
-        blockedMemberNodeList = list;
+        blockedMemberNode = list;
     }
 
     /** 
@@ -133,10 +147,10 @@ public class ReplicationPolicy implements Serializable
      * @return count
      */
     public int sizeBlockedMemberNodeList() {
-        if (blockedMemberNodeList == null) {
-            blockedMemberNodeList = new ArrayList<NodeReference>();
+        if (blockedMemberNode == null) {
+            blockedMemberNode = new ArrayList<NodeReference>();
         }
-        return blockedMemberNodeList.size();
+        return blockedMemberNode.size();
     }
 
     /** 
@@ -144,10 +158,10 @@ public class ReplicationPolicy implements Serializable
      * @param item
      */
     public void addBlockedMemberNode(NodeReference item) {
-        if (blockedMemberNodeList == null) {
-            blockedMemberNodeList = new ArrayList<NodeReference>();
+        if (blockedMemberNode == null) {
+            blockedMemberNode = new ArrayList<NodeReference>();
         }
-        blockedMemberNodeList.add(item);
+        blockedMemberNode.add(item);
     }
 
     /** 
@@ -156,20 +170,20 @@ public class ReplicationPolicy implements Serializable
      * @param index
      */
     public NodeReference getBlockedMemberNode(int index) {
-        if (blockedMemberNodeList == null) {
-            blockedMemberNodeList = new ArrayList<NodeReference>();
+        if (blockedMemberNode == null) {
+            blockedMemberNode = new ArrayList<NodeReference>();
         }
-        return blockedMemberNodeList.get(index);
+        return blockedMemberNode.get(index);
     }
 
     /** 
      * Remove all 'blockedMemberNode' element items.
      */
     public void clearBlockedMemberNodeList() {
-        if (blockedMemberNodeList == null) {
-            blockedMemberNodeList = new ArrayList<NodeReference>();
+        if (blockedMemberNode == null) {
+            blockedMemberNode = new ArrayList<NodeReference>();
         }
-        blockedMemberNodeList.clear();
+        blockedMemberNode.clear();
     }
 
     /** 

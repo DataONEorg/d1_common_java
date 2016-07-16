@@ -5,6 +5,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
 /** 
  * Represents a collection of :class:`Types.LogEntry`
  elements, used to transfer log information between DataONE
@@ -23,10 +28,16 @@ import java.util.List;
  * &lt;/xs:complexType>
  * </pre>
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "Log", propOrder = {
+    "logEntry"
+})
+@XmlRootElement(name = "log")
 public class Log extends Slice implements Serializable
 {
+    protected List<LogEntry> logEntry = new ArrayList<LogEntry>();
     private static final long serialVersionUID = 10000000;
-    private List<LogEntry> logEntryList = new ArrayList<LogEntry>();
+
 
     /** 
      * Get the list of 'logEntry' element items.
@@ -34,7 +45,7 @@ public class Log extends Slice implements Serializable
      * @return list
      */
     public List<LogEntry> getLogEntryList() {
-        return logEntryList;
+        return logEntry;
     }
 
     /** 
@@ -43,7 +54,7 @@ public class Log extends Slice implements Serializable
      * @param list
      */
     public void setLogEntryList(List<LogEntry> list) {
-        logEntryList = list;
+        logEntry = list;
     }
 
     /** 
@@ -52,10 +63,10 @@ public class Log extends Slice implements Serializable
      */
     @Override
     public int getCount() {
-        if (logEntryList == null) {
-            logEntryList = new ArrayList<LogEntry>();
+        if (logEntry == null) {
+            logEntry = new ArrayList<LogEntry>();
         }
-        return logEntryList.size();
+        return logEntry.size();
     }
 
     /** 
@@ -63,10 +74,10 @@ public class Log extends Slice implements Serializable
      * @return count
      */
     public int sizeLogEntryList() {
-        if (logEntryList == null) {
-            logEntryList = new ArrayList<LogEntry>();
+        if (logEntry == null) {
+            logEntry = new ArrayList<LogEntry>();
         }
-        return logEntryList.size();
+        return logEntry.size();
     }
 
     /** 
@@ -74,10 +85,10 @@ public class Log extends Slice implements Serializable
      * @param item
      */
     public void addLogEntry(LogEntry item) {
-        if (logEntryList == null) {
-            logEntryList = new ArrayList<LogEntry>();
+        if (logEntry == null) {
+            logEntry = new ArrayList<LogEntry>();
         }
-        logEntryList.add(item);
+        logEntry.add(item);
     }
 
     /** 
@@ -86,19 +97,19 @@ public class Log extends Slice implements Serializable
      * @param index
      */
     public LogEntry getLogEntry(int index) {
-        if (logEntryList == null) {
-            logEntryList = new ArrayList<LogEntry>();
+        if (logEntry == null) {
+            logEntry = new ArrayList<LogEntry>();
         }
-        return logEntryList.get(index);
+        return logEntry.get(index);
     }
 
     /** 
      * Remove all 'logEntry' element items.
      */
     public void clearLogEntryList() {
-        if (logEntryList == null) {
-            logEntryList = new ArrayList<LogEntry>();
+        if (logEntry == null) {
+            logEntry = new ArrayList<LogEntry>();
         }
-        logEntryList.clear();
+        logEntry.clear();
     }
 }

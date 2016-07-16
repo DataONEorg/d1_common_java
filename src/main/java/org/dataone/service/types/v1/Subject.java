@@ -3,6 +3,11 @@ package org.dataone.service.types.v1;
 
 import java.io.Serializable;
 import javax.security.auth.x500.X500Principal;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlValue;
 
 /** 
  * An identifier for a Person (user), Group,
@@ -22,10 +27,16 @@ import javax.security.auth.x500.X500Principal;
  * &lt;/xs:complexType>
  * </pre>
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "Subject", propOrder = {
+    "value"
+})
+@XmlRootElement( name = "subject" )
 public class Subject implements Serializable, Comparable
 {
     private static final long serialVersionUID = 10000000;
-    private String value;
+    @XmlValue
+    protected String value;
 
     /** 
      * Get the 'Subject' complexType value.

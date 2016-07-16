@@ -4,7 +4,11 @@ package org.dataone.service.types.v1;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 /** 
  * An *ObjectLocationList* is the structure returned from
  the :func:`CNRead.resolve` method of the CN REST interface. It provides
@@ -21,11 +25,19 @@ import java.util.List;
  * &lt;/xs:complexType>
  * </pre>
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "ObjectLocationList", propOrder = {
+    "identifier",
+    "objectLocation"
+})
+@XmlRootElement(name = "objectLocationList")
 public class ObjectLocationList implements Serializable
 {
+    @XmlElement(required = true)
+    protected Identifier identifier;
+    protected List<ObjectLocation> objectLocation = new ArrayList<ObjectLocation>();
+    
     private static final long serialVersionUID = 10000000;
-    private Identifier identifier;
-    private List<ObjectLocation> objectLocationList = new ArrayList<ObjectLocation>();
 
     /** 
      * Get the 'identifier' element value. The :term:`identifier` of the object being
@@ -54,7 +66,7 @@ public class ObjectLocationList implements Serializable
      * @return list
      */
     public List<ObjectLocation> getObjectLocationList() {
-        return objectLocationList;
+        return objectLocation;
     }
 
     /** 
@@ -64,7 +76,7 @@ public class ObjectLocationList implements Serializable
      * @param list
      */
     public void setObjectLocationList(List<ObjectLocation> list) {
-        objectLocationList = list;
+        objectLocation = list;
     }
 
     /** 
@@ -72,10 +84,10 @@ public class ObjectLocationList implements Serializable
      * @return count
      */
     public int sizeObjectLocationList() {
-        if (objectLocationList == null) {
-            objectLocationList = new ArrayList<ObjectLocation>();
+        if (objectLocation == null) {
+            objectLocation = new ArrayList<ObjectLocation>();
         }
-        return objectLocationList.size();
+        return objectLocation.size();
     }
 
     /** 
@@ -83,10 +95,10 @@ public class ObjectLocationList implements Serializable
      * @param item
      */
     public void addObjectLocation(ObjectLocation item) {
-        if (objectLocationList == null) {
-            objectLocationList = new ArrayList<ObjectLocation>();
+        if (objectLocation == null) {
+            objectLocation = new ArrayList<ObjectLocation>();
         }
-        objectLocationList.add(item);
+        objectLocation.add(item);
     }
 
     /** 
@@ -95,19 +107,19 @@ public class ObjectLocationList implements Serializable
      * @param index
      */
     public ObjectLocation getObjectLocation(int index) {
-        if (objectLocationList == null) {
-            objectLocationList = new ArrayList<ObjectLocation>();
+        if (objectLocation == null) {
+            objectLocation = new ArrayList<ObjectLocation>();
         }
-        return objectLocationList.get(index);
+        return objectLocation.get(index);
     }
 
     /** 
      * Remove all 'objectLocation' element items.
      */
     public void clearObjectLocationList() {
-        if (objectLocationList == null) {
-            objectLocationList = new ArrayList<ObjectLocation>();
+        if (objectLocation == null) {
+            objectLocation = new ArrayList<ObjectLocation>();
         }
-        objectLocationList.clear();
+        objectLocation.clear();
     }
 }

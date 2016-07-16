@@ -4,7 +4,12 @@ package org.dataone.service.types.v1;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlType;
 /** 
  * Portion of an :class:`Types.ObjectLocationList`
  indicating the node from which the object can be retrieved. The
@@ -26,14 +31,32 @@ import java.util.List;
  * &lt;/xs:complexType>
  * </pre>
  */
-public class ObjectLocation implements Serializable
-{
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "ObjectLocation", propOrder = {
+    "nodeIdentifier",
+    "baseURL",
+    "version",
+    "url",
+    "preference"
+})
+@XmlRootElement(name = "objectLocation")
+public class ObjectLocation implements Serializable {
+
+    @XmlElement(required = true)
+    protected NodeReference nodeIdentifier;
+    @XmlElement(required = true)
+    @XmlSchemaType(name = "anyURI")
+    protected String baseURL;
+    @XmlElement(required = true)
+    protected List<String> version  = new ArrayList<String>();
+    @XmlElement(required = true)
+    @XmlSchemaType(name = "anyURI")
+    protected String url;
+    protected Integer preference;
+
     private static final long serialVersionUID = 10000000;
-    private NodeReference nodeIdentifier;
-    private String baseURL;
-    private List<String> versionList = new ArrayList<String>();
-    private String url;
-    private Integer preference;
+
+
 
     /** 
      * Get the 'nodeIdentifier' element value. Identifier of the :class:`Types.Node` (the same
@@ -95,7 +118,7 @@ public class ObjectLocation implements Serializable
      * @return list
      */
     public List<String> getVersionList() {
-        return versionList;
+        return version;
     }
 
     /** 
@@ -108,7 +131,7 @@ public class ObjectLocation implements Serializable
      * @param list
      */
     public void setVersionList(List<String> list) {
-        versionList = list;
+        version = list;
     }
 
     /** 
@@ -116,10 +139,10 @@ public class ObjectLocation implements Serializable
      * @return count
      */
     public int sizeVersionList() {
-        if (versionList == null) {
-            versionList = new ArrayList<String>();
+        if (version == null) {
+            version = new ArrayList<String>();
         }
-        return versionList.size();
+        return version.size();
     }
 
     /** 
@@ -127,10 +150,10 @@ public class ObjectLocation implements Serializable
      * @param item
      */
     public void addVersion(String item) {
-        if (versionList == null) {
-            versionList = new ArrayList<String>();
+        if (version == null) {
+            version = new ArrayList<String>();
         }
-        versionList.add(item);
+        version.add(item);
     }
 
     /** 
@@ -139,20 +162,20 @@ public class ObjectLocation implements Serializable
      * @param index
      */
     public String getVersion(int index) {
-        if (versionList == null) {
-            versionList = new ArrayList<String>();
+        if (version == null) {
+            version = new ArrayList<String>();
         }
-        return versionList.get(index);
+        return version.get(index);
     }
 
     /** 
      * Remove all 'version' element items.
      */
     public void clearVersionList() {
-        if (versionList == null) {
-            versionList = new ArrayList<String>();
+        if (version == null) {
+            version = new ArrayList<String>();
         }
-        versionList.clear();
+        version.clear();
     }
 
     /** 

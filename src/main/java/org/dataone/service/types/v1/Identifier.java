@@ -3,6 +3,12 @@ package org.dataone.service.types.v1;
 
 import java.io.Serializable;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlValue;
+
 /** 
  * An :term:`identifier` (:term:`PID`) in the DataONE
  system that is used to uniquely and globally identify an object.
@@ -26,10 +32,17 @@ import java.io.Serializable;
  * &lt;/xs:complexType>
  * </pre>
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "Identifier", propOrder = {
+    "value"
+})
+@XmlRootElement( name = "identifier" )
 public class Identifier implements Serializable, Comparable
 {
     private static final long serialVersionUID = 10000000;
-    private String value;
+
+    @XmlValue
+    protected String value;
 
     /** 
      * Get the 'Identifier' complexType value.

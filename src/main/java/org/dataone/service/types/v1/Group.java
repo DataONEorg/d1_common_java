@@ -5,6 +5,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 /** 
  * Group represents metadata about a :term:`Subject` that
  represents a collection of other Subjects. Groups provide a convenient
@@ -24,13 +29,26 @@ import java.util.List;
  * &lt;/xs:complexType>
  * </pre>
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "Group", propOrder = {
+    "subject",
+    "groupName",
+    "hasMember",
+    "rightsHolder"
+})
+@XmlRootElement(name = "group")
 public class Group implements Serializable
 {
+    @XmlElement(required = true)
+    protected Subject subject;
+    @XmlElement(required = true)
+    protected String groupName;
+    protected List<Subject> hasMember = new ArrayList<Subject>();
+    @XmlElement(required = true)
+    protected List<Subject> rightsHolder = new ArrayList<Subject>();
+
     private static final long serialVersionUID = 10000000;
-    private Subject subject;
-    private String groupName;
-    private List<Subject> hasMemberList = new ArrayList<Subject>();
-    private List<Subject> rightsHolderList = new ArrayList<Subject>();
+
 
     /** 
      * Get the 'subject' element value. The unique, immutable identifier of the
@@ -82,7 +100,7 @@ public class Group implements Serializable
      * @return list
      */
     public List<Subject> getHasMemberList() {
-        return hasMemberList;
+        return hasMember;
     }
 
     /** 
@@ -93,7 +111,7 @@ public class Group implements Serializable
      * @param list
      */
     public void setHasMemberList(List<Subject> list) {
-        hasMemberList = list;
+        hasMember = list;
     }
 
     /** 
@@ -101,10 +119,10 @@ public class Group implements Serializable
      * @return count
      */
     public int sizeHasMemberList() {
-        if (hasMemberList == null) {
-            hasMemberList = new ArrayList<Subject>();
+        if (hasMember == null) {
+            hasMember = new ArrayList<Subject>();
         }
-        return hasMemberList.size();
+        return hasMember.size();
     }
 
     /** 
@@ -112,10 +130,10 @@ public class Group implements Serializable
      * @param item
      */
     public void addHasMember(Subject item) {
-        if (hasMemberList == null) {
-            hasMemberList = new ArrayList<Subject>();
+        if (hasMember == null) {
+            hasMember = new ArrayList<Subject>();
         }
-        hasMemberList.add(item);
+        hasMember.add(item);
     }
 
     /** 
@@ -124,20 +142,20 @@ public class Group implements Serializable
      * @param index
      */
     public Subject getHasMember(int index) {
-        if (hasMemberList == null) {
-            hasMemberList = new ArrayList<Subject>();
+        if (hasMember == null) {
+            hasMember = new ArrayList<Subject>();
         }
-        return hasMemberList.get(index);
+        return hasMember.get(index);
     }
 
     /** 
      * Remove all 'hasMember' element items.
      */
     public void clearHasMemberList() {
-        if (hasMemberList == null) {
-            hasMemberList = new ArrayList<Subject>();
+        if (hasMember == null) {
+            hasMember = new ArrayList<Subject>();
         }
-        hasMemberList.clear();
+        hasMember.clear();
     }
 
     /** 
@@ -152,7 +170,7 @@ public class Group implements Serializable
      * @return list
      */
     public List<Subject> getRightsHolderList() {
-        return rightsHolderList;
+        return rightsHolder;
     }
 
     /** 
@@ -167,7 +185,7 @@ public class Group implements Serializable
      * @param list
      */
     public void setRightsHolderList(List<Subject> list) {
-        rightsHolderList = list;
+        rightsHolder = list;
     }
 
     /** 
@@ -175,10 +193,10 @@ public class Group implements Serializable
      * @return count
      */
     public int sizeRightsHolderList() {
-        if (rightsHolderList == null) {
-            rightsHolderList = new ArrayList<Subject>();
+        if (rightsHolder == null) {
+            rightsHolder = new ArrayList<Subject>();
         }
-        return rightsHolderList.size();
+        return rightsHolder.size();
     }
 
     /** 
@@ -186,10 +204,10 @@ public class Group implements Serializable
      * @param item
      */
     public void addRightsHolder(Subject item) {
-        if (rightsHolderList == null) {
-            rightsHolderList = new ArrayList<Subject>();
+        if (rightsHolder == null) {
+            rightsHolder = new ArrayList<Subject>();
         }
-        rightsHolderList.add(item);
+        rightsHolder.add(item);
     }
 
     /** 
@@ -198,19 +216,19 @@ public class Group implements Serializable
      * @param index
      */
     public Subject getRightsHolder(int index) {
-        if (rightsHolderList == null) {
-            rightsHolderList = new ArrayList<Subject>();
+        if (rightsHolder == null) {
+            rightsHolder = new ArrayList<Subject>();
         }
-        return rightsHolderList.get(index);
+        return rightsHolder.get(index);
     }
 
     /** 
      * Remove all 'rightsHolder' element items.
      */
     public void clearRightsHolderList() {
-        if (rightsHolderList == null) {
-            rightsHolderList = new ArrayList<Subject>();
+        if (rightsHolder == null) {
+            rightsHolder = new ArrayList<Subject>();
         }
-        rightsHolderList.clear();
+        rightsHolder.clear();
     }
 }

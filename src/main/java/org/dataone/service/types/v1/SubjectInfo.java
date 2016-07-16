@@ -4,7 +4,10 @@ package org.dataone.service.types.v1;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 /** 
  * A list of :term:`Subjects`, including both
  :class:`Types.Person` and :class:`Types.Group` entries returned from
@@ -21,11 +24,18 @@ import java.util.List;
  * &lt;/xs:complexType>
  * </pre>
  */
-public class SubjectInfo implements Serializable
-{
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "SubjectInfo", propOrder = {
+    "person",
+    "group"
+})
+@XmlRootElement( name = "subjectInfo" )
+public class SubjectInfo implements Serializable {
+
+    protected List<Person> person = new ArrayList<Person>();
+    protected List<Group> group = new ArrayList<Group>();
+
     private static final long serialVersionUID = 10000000;
-    private List<Person> personList = new ArrayList<Person>();
-    private List<Group> groupList = new ArrayList<Group>();
 
     /** 
      * Get the list of 'person' element items.
@@ -33,7 +43,7 @@ public class SubjectInfo implements Serializable
      * @return list
      */
     public List<Person> getPersonList() {
-        return personList;
+        return person;
     }
 
     /** 
@@ -42,7 +52,7 @@ public class SubjectInfo implements Serializable
      * @param list
      */
     public void setPersonList(List<Person> list) {
-        personList = list;
+        person = list;
     }
 
     /** 
@@ -50,10 +60,10 @@ public class SubjectInfo implements Serializable
      * @return count
      */
     public int sizePersonList() {
-        if (personList == null) {
-            personList = new ArrayList<Person>();
+        if (person == null) {
+            person = new ArrayList<Person>();
         }
-        return personList.size();
+        return person.size();
     }
 
     /** 
@@ -61,10 +71,10 @@ public class SubjectInfo implements Serializable
      * @param item
      */
     public void addPerson(Person item) {
-        if (personList == null) {
-            personList = new ArrayList<Person>();
+        if (person == null) {
+            person = new ArrayList<Person>();
         }
-        personList.add(item);
+        person.add(item);
     }
 
     /** 
@@ -73,20 +83,20 @@ public class SubjectInfo implements Serializable
      * @param index
      */
     public Person getPerson(int index) {
-        if (personList == null) {
-            personList = new ArrayList<Person>();
+        if (person == null) {
+            person = new ArrayList<Person>();
         }
-        return personList.get(index);
+        return person.get(index);
     }
 
     /** 
      * Remove all 'person' element items.
      */
     public void clearPersonList() {
-        if (personList == null) {
-            personList = new ArrayList<Person>();
+        if (person == null) {
+            person = new ArrayList<Person>();
         }
-        personList.clear();
+        person.clear();
     }
 
     /** 
@@ -95,7 +105,7 @@ public class SubjectInfo implements Serializable
      * @return list
      */
     public List<Group> getGroupList() {
-        return groupList;
+        return group;
     }
 
     /** 
@@ -104,7 +114,7 @@ public class SubjectInfo implements Serializable
      * @param list
      */
     public void setGroupList(List<Group> list) {
-        groupList = list;
+        group = list;
     }
 
     /** 
@@ -112,10 +122,10 @@ public class SubjectInfo implements Serializable
      * @return count
      */
     public int sizeGroupList() {
-        if (groupList == null) {
-            groupList = new ArrayList<Group>();
+        if (group == null) {
+            group = new ArrayList<Group>();
         }
-        return groupList.size();
+        return group.size();
     }
 
     /** 
@@ -123,10 +133,10 @@ public class SubjectInfo implements Serializable
      * @param item
      */
     public void addGroup(Group item) {
-        if (groupList == null) {
-            groupList = new ArrayList<Group>();
+        if (group == null) {
+            group = new ArrayList<Group>();
         }
-        groupList.add(item);
+        group.add(item);
     }
 
     /** 
@@ -135,19 +145,19 @@ public class SubjectInfo implements Serializable
      * @param index
      */
     public Group getGroup(int index) {
-        if (groupList == null) {
-            groupList = new ArrayList<Group>();
+        if (group == null) {
+            group = new ArrayList<Group>();
         }
-        return groupList.get(index);
+        return group.get(index);
     }
 
     /** 
      * Remove all 'group' element items.
      */
     public void clearGroupList() {
-        if (groupList == null) {
-            groupList = new ArrayList<Group>();
+        if (group == null) {
+            group = new ArrayList<Group>();
         }
-        groupList.clear();
+        group.clear();
     }
 }

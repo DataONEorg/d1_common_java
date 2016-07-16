@@ -4,7 +4,11 @@ package org.dataone.service.types.v2;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 /** 
  *  A list of :class:`v2_0.Types.Node` entries returned by
  :func:`CNCore.listNodes()`.
@@ -20,10 +24,17 @@ import java.util.List;
  * &lt;/xs:complexType>
  * </pre>
  */
-public class NodeList implements Serializable
-{
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "NodeList", propOrder = {
+    "node"
+})
+@XmlRootElement(name = "nodeList")
+public class NodeList implements Serializable {
+
+    @XmlElement(required = true)
+    protected List<Node> node = new ArrayList<Node>();
+
     private static final long serialVersionUID = 10000000;
-    private List<Node> nodeList = new ArrayList<Node>();
 
     /** 
      * Get the list of 'node' element items.
@@ -31,7 +42,7 @@ public class NodeList implements Serializable
      * @return list
      */
     public List<Node> getNodeList() {
-        return nodeList;
+        return node;
     }
 
     /** 
@@ -40,7 +51,7 @@ public class NodeList implements Serializable
      * @param list
      */
     public void setNodeList(List<Node> list) {
-        nodeList = list;
+        node = list;
     }
 
     /** 
@@ -48,10 +59,10 @@ public class NodeList implements Serializable
      * @return count
      */
     public int sizeNodeList() {
-        if (nodeList == null) {
-            nodeList = new ArrayList<Node>();
+        if (node == null) {
+            node = new ArrayList<Node>();
         }
-        return nodeList.size();
+        return node.size();
     }
 
     /** 
@@ -59,10 +70,10 @@ public class NodeList implements Serializable
      * @param item
      */
     public void addNode(Node item) {
-        if (nodeList == null) {
-            nodeList = new ArrayList<Node>();
+        if (node == null) {
+            node = new ArrayList<Node>();
         }
-        nodeList.add(item);
+        node.add(item);
     }
 
     /** 
@@ -71,19 +82,19 @@ public class NodeList implements Serializable
      * @param index
      */
     public Node getNode(int index) {
-        if (nodeList == null) {
-            nodeList = new ArrayList<Node>();
+        if (node == null) {
+            node = new ArrayList<Node>();
         }
-        return nodeList.get(index);
+        return node.get(index);
     }
 
     /** 
      * Remove all 'node' element items.
      */
     public void clearNodeList() {
-        if (nodeList == null) {
-            nodeList = new ArrayList<Node>();
+        if (node == null) {
+            node = new ArrayList<Node>();
         }
-        nodeList.clear();
+        node.clear();
     }
 }

@@ -160,7 +160,8 @@ public class SystemMetadataTestCase {
          } catch (Exception ex) {
          log.error(ex, ex);
          } */
-        assertFalse(hasXPath(sysMetaDom, "/d1:systemMetadata/accessPolicy"));
+        assertFalse("Should not be able to find 'accessPolicy' in serialized systemMetadata",
+                hasXPath(sysMetaDom, "/d1:systemMetadata/accessPolicy"));
 
         // add an empty array of access rules
         // the serialized result should not
@@ -180,7 +181,7 @@ public class SystemMetadataTestCase {
         accessPolicy.addAllow(accessRule);
         try {
             sysMetaInputStream = typeToInputStream(sysMeta);
-        } catch (IllegalStateException ex) {
+        } catch (MarshallingException | IllegalStateException ex) {
             log.info("Passed with " + ex.getMessage());
             passed = true;
         }
@@ -193,7 +194,7 @@ public class SystemMetadataTestCase {
 
         try {
             sysMetaInputStream = typeToInputStream(sysMeta);
-        } catch (IOException e) {
+        } catch (MarshallingException | IOException e) {
             log.info("Passed with " + e.getMessage());
             passed = true;
         }
@@ -207,7 +208,7 @@ public class SystemMetadataTestCase {
 
         try {
             sysMetaInputStream = typeToInputStream(sysMeta);
-        } catch (IllegalStateException ex) {
+        } catch (MarshallingException  | IllegalStateException ex) {
             log.info("Passed with " + ex.getMessage());
             passed = true;
         }
@@ -222,7 +223,7 @@ public class SystemMetadataTestCase {
         accessRule.addPermission(permission);
         try {
             sysMetaInputStream = typeToInputStream(sysMeta);
-        } catch (IllegalStateException ex) {
+        } catch (MarshallingException | IllegalStateException ex) {
             log.info("Passed with " + ex.getMessage());
             passed = true;
         }
@@ -237,7 +238,8 @@ public class SystemMetadataTestCase {
         sysMeta.setReplicationPolicy(replicationPolicy);
         InputStream sysMetaInputStream = typeToInputStream(sysMeta);
         Document sysMetaDom = domParser.parse(sysMetaInputStream);
-        assertFalse(hasXPath(sysMetaDom, "/d1:systemMetadata/replicationPolicy"));
+        assertFalse("Should not find replication policy elements",
+                hasXPath(sysMetaDom, "/d1:systemMetadata/replicationPolicy"));
 
     }
 
@@ -248,7 +250,8 @@ public class SystemMetadataTestCase {
         sysMeta.setReplicationPolicy(replicationPolicy);
         InputStream sysMetaInputStream = typeToInputStream(sysMeta);
         Document sysMetaDom = domParser.parse(sysMetaInputStream);
-        assertFalse(hasXPath(sysMetaDom, "/d1:systemMetadata/replicationPolicy"));
+        assertFalse("Should not find replication policy elements",
+                hasXPath(sysMetaDom, "/d1:systemMetadata/replicationPolicy"));
 
     }
 

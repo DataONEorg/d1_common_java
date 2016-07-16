@@ -4,6 +4,10 @@ package org.dataone.service.types.v1;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 /** 
  * A list of object locations (nodes) from which the
@@ -22,10 +26,15 @@ import java.util.List;
  * &lt;/xs:complexType>
  * </pre>
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "ObjectList", propOrder = {
+    "objectInfo"
+})
+@XmlRootElement( name = "objectList")
 public class ObjectList extends Slice implements Serializable
 {
     private static final long serialVersionUID = 10000000;
-    private List<ObjectInfo> objectInfoList = new ArrayList<ObjectInfo>();
+    private List<ObjectInfo> objectInfo = new ArrayList<ObjectInfo>();
 
     /** 
      * Get the list of 'objectInfo' element items.
@@ -33,7 +42,7 @@ public class ObjectList extends Slice implements Serializable
      * @return list
      */
     public List<ObjectInfo> getObjectInfoList() {
-        return objectInfoList;
+        return objectInfo;
     }
 
     /** 
@@ -42,7 +51,7 @@ public class ObjectList extends Slice implements Serializable
      * @param list
      */
     public void setObjectInfoList(List<ObjectInfo> list) {
-        objectInfoList = list;
+        objectInfo = list;
     }
 
     /** 
@@ -51,10 +60,10 @@ public class ObjectList extends Slice implements Serializable
      */
     @Override
     public int getCount() {
-        if (objectInfoList == null) {
-            objectInfoList = new ArrayList<ObjectInfo>();
+        if (objectInfo == null) {
+            objectInfo = new ArrayList<ObjectInfo>();
         }
-        return objectInfoList.size();
+        return objectInfo.size();
     }
 
     /** 
@@ -62,10 +71,10 @@ public class ObjectList extends Slice implements Serializable
      * @return count
      */
     public int sizeObjectInfoList() {
-        if (objectInfoList == null) {
-            objectInfoList = new ArrayList<ObjectInfo>();
+        if (objectInfo == null) {
+            objectInfo = new ArrayList<ObjectInfo>();
         }
-        return objectInfoList.size();
+        return objectInfo.size();
     }
 
     /** 
@@ -73,10 +82,10 @@ public class ObjectList extends Slice implements Serializable
      * @param item
      */
     public void addObjectInfo(ObjectInfo item) {
-        if (objectInfoList == null) {
-            objectInfoList = new ArrayList<ObjectInfo>();
+        if (objectInfo == null) {
+            objectInfo = new ArrayList<ObjectInfo>();
         }
-        objectInfoList.add(item);
+        objectInfo.add(item);
     }
 
     /** 
@@ -85,19 +94,19 @@ public class ObjectList extends Slice implements Serializable
      * @param index
      */
     public ObjectInfo getObjectInfo(int index) {
-        if (objectInfoList == null) {
-            objectInfoList = new ArrayList<ObjectInfo>();
+        if (objectInfo == null) {
+            objectInfo = new ArrayList<ObjectInfo>();
         }
-        return objectInfoList.get(index);
+        return objectInfo.get(index);
     }
 
     /** 
      * Remove all 'objectInfo' element items.
      */
     public void clearObjectInfoList() {
-        if (objectInfoList == null) {
-            objectInfoList = new ArrayList<ObjectInfo>();
+        if (objectInfo == null) {
+            objectInfo = new ArrayList<ObjectInfo>();
         }
-        objectInfoList.clear();
+        objectInfo.clear();
     }
 }

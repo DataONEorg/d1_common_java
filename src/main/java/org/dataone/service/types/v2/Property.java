@@ -2,7 +2,12 @@
 package org.dataone.service.types.v2;
 
 import java.io.Serializable;
-
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlValue;
 /** 
  * Additional Property elements can be included to 
  describe the Node in more detail. Some properties will come from 
@@ -21,12 +26,22 @@ import java.io.Serializable;
  * &lt;/xs:complexType>
  * </pre>
  */
-public class Property implements Serializable
-{
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "Property", propOrder = {
+    "value"
+})
+@XmlRootElement(name = "property")
+public class Property implements Serializable {
+
+    @XmlValue
+    protected String value;
+    @XmlAttribute(name = "key", required = true)
+    protected String key;
+    @XmlAttribute(name = "type")
+    protected String type;
+
     private static final long serialVersionUID = 10000000;
-    private String value;
-    private String key;
-    private String type;
+
 
     /** 
      * Get the extension value.

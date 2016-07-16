@@ -3,6 +3,11 @@ package org.dataone.service.types.v1;
 
 import java.io.Serializable;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlType;
 /** 
  * An abstract type used as a common base for other types
  that need to include *count*, *start*, and *total* attributes to
@@ -19,12 +24,23 @@ import java.io.Serializable;
  * &lt;/xs:complexType>
  * </pre>
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "Slice")
+@XmlSeeAlso({
+    Log.class,
+    ObjectFormatList.class,
+    ObjectList.class
+})
 public class Slice implements Serializable
 {
+    @XmlAttribute(name = "count", required = true)
+    protected int count;
+    @XmlAttribute(name = "start", required = true)
+    protected int start;
+    @XmlAttribute(name = "total", required = true)
+    protected int total;
+    
     private static final long serialVersionUID = 10000000;
-    private int count;
-    private int start;
-    private int total;
 
     /** 
      * Get the 'count' attribute value. The number of entries in the

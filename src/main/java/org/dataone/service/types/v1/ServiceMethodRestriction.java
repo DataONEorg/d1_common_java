@@ -2,7 +2,11 @@
 package org.dataone.service.types.v1;
 
 import java.io.Serializable;
-
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 /** 
  * Describes an optional restriction policy for a given
  method. If this element exists for a service method, its use is
@@ -21,11 +25,16 @@ import java.io.Serializable;
  * &lt;/xs:complexType>
  * </pre>
  */
-public class ServiceMethodRestriction extends SubjectList implements
-    Serializable
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "ServiceMethodRestriction")
+@XmlRootElement(name = "serviceMethodRestriction")
+public class ServiceMethodRestriction extends SubjectList implements Serializable
 {
+
+    @XmlAttribute(name = "methodName", required = true)
+    protected String methodName;
+
     private static final long serialVersionUID = 10000000;
-    private String methodName;
 
     /** 
      * Get the 'methodName' attribute value. The formal name of the method in this *Service*

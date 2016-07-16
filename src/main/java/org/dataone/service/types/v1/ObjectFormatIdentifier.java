@@ -3,6 +3,12 @@ package org.dataone.service.types.v1;
 
 import java.io.Serializable;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlValue;
+
 /** 
  * A string used to identify an instance of
  :class:`Types.ObjectFormat` and MUST be unique within an instance of
@@ -15,10 +21,17 @@ import java.io.Serializable;
  * &lt;/xs:simpleType>
  * </pre>
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "ObjectFormatIdentifier", propOrder = {
+    "value"
+})
+@XmlRootElement( name = "objectFormatIdentifier" )
 public class ObjectFormatIdentifier implements Serializable, Comparable
 {
     private static final long serialVersionUID = 10000000;
-    private String value;
+ 
+    @XmlValue
+    protected String value;
 
     /** 
      * Get the 'ObjectFormatIdentifier' simpleType value.
