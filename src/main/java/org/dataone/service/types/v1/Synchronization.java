@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /** 
  * Configuration information for the process by which
@@ -42,8 +43,10 @@ public class Synchronization implements Serializable{
     @XmlElement(required = true)
     protected Schedule schedule;
     @XmlSchemaType(name = "dateTime")
+    @XmlJavaTypeAdapter(org.dataone.service.util.DateMarshallingAdapter.class)
     protected Date lastHarvested;
     @XmlSchemaType(name = "dateTime")
+    @XmlJavaTypeAdapter(org.dataone.service.util.DateMarshallingAdapter.class)
     protected Date lastCompleteHarvest;
 
     private static final long serialVersionUID = 10000000;

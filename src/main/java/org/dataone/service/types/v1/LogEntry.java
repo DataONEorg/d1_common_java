@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /** 
  * A single log entry as reported by a Member Node or
@@ -61,6 +62,7 @@ public class LogEntry implements Serializable {
     protected Event event;
     @XmlElement(required = true)
     @XmlSchemaType(name = "dateTime")
+    @XmlJavaTypeAdapter(org.dataone.service.util.DateMarshallingAdapter.class)
     protected Date dateLogged;
     @XmlElement(required = true)
     protected NodeReference nodeIdentifier;

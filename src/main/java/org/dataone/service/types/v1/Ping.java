@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 //import javax.xml.datatype.XMLGregorianCalendar;
 /** 
  * Store results from the :func:`MNCore.ping`
@@ -31,6 +32,7 @@ public class Ping implements Serializable {
     protected Boolean success;
     @XmlAttribute(name = "lastSuccess")
     @XmlSchemaType(name = "dateTime")
+    @XmlJavaTypeAdapter(org.dataone.service.util.DateMarshallingAdapter.class)
     protected Date lastSuccess;
 
     private static final long serialVersionUID = 10000000;

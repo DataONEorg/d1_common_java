@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 /** 
  * Replica information that describes the existence of a
  replica of some object managed by the DataONE infrastructure, and its 
@@ -40,6 +41,7 @@ public class Replica implements Serializable {
     @XmlSchemaType(name = "string")
     protected ReplicationStatus replicationStatus;
     @XmlElement(required = true)
+    @XmlJavaTypeAdapter(org.dataone.service.util.DateMarshallingAdapter.class)
     @XmlSchemaType(name = "dateTime")
     protected Date replicaVerified;
 

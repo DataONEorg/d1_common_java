@@ -109,8 +109,10 @@ public class SystemMetadata implements Serializable{
     protected Identifier obsoletedBy;
     protected Boolean archived;
     @XmlSchemaType(name = "dateTime")
+    @XmlJavaTypeAdapter(org.dataone.service.util.DateMarshallingAdapter.class)
     protected Date dateUploaded;
     @XmlSchemaType(name = "dateTime")
+    @XmlJavaTypeAdapter(org.dataone.service.util.DateMarshallingAdapter.class)
     protected Date dateSysMetadataModified;
     protected NodeReference originMemberNode;
     protected NodeReference authoritativeMemberNode;

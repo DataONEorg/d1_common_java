@@ -22,6 +22,7 @@
 
 package org.dataone.service.util;
 
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -29,10 +30,19 @@ import static org.junit.Assert.fail;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.xml.bind.JAXBException;
 
 import org.dataone.exceptions.MarshallingException;
+import org.apache.commons.io.output.NullOutputStream;
 import org.apache.log4j.Logger;
 import org.dataone.service.types.v1.Checksum;
 import org.dataone.service.types.v1.Identifier;
@@ -67,9 +77,292 @@ public class TypeMarshallerTestCase {
         } catch (MarshallingException ex) {
             fail("Test misconfiguration" +  ex);
         }
+    }
+    
+    @Test
+    public void multithreadingMarshallerTest() throws InterruptedException {
+        
+        final String[] marshallerIds =  new String[10];
+        final String[] unmarshallerIds =  new String[10];
+        
+        Thread thread1 = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    marshallerIds[1] = TypeMarshaller.getJAXBMarshaller(org.dataone.service.types.v1.Identifier.class).toString();
+                    unmarshallerIds[1] = TypeMarshaller.getJAXBUnmarshaller(org.dataone.service.types.v1.Identifier.class).toString();
+                } catch (JAXBException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        };
+        Thread thread2 = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    marshallerIds[2] = TypeMarshaller.getJAXBMarshaller(org.dataone.service.types.v1.Identifier.class).toString();
+                    unmarshallerIds[2] = TypeMarshaller.getJAXBUnmarshaller(org.dataone.service.types.v1.Identifier.class).toString();
+                } catch (JAXBException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        };
+        Thread thread3 = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    marshallerIds[3] =  TypeMarshaller.getJAXBMarshaller(org.dataone.service.types.v1.Identifier.class).toString();
+                    unmarshallerIds[3] = TypeMarshaller.getJAXBUnmarshaller(org.dataone.service.types.v1.Identifier.class).toString();
+                } catch (JAXBException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        };
+        Thread thread4 = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    marshallerIds[4] =  TypeMarshaller.getJAXBMarshaller(org.dataone.service.types.v1.Identifier.class).toString();
+                    unmarshallerIds[4] = TypeMarshaller.getJAXBUnmarshaller(org.dataone.service.types.v1.Identifier.class).toString();
+                } catch (JAXBException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        };
 
+        Thread thread5 = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    marshallerIds[5] =  TypeMarshaller.getJAXBMarshaller(org.dataone.service.types.v1.Identifier.class).toString();
+                    unmarshallerIds[5] = TypeMarshaller.getJAXBUnmarshaller(org.dataone.service.types.v1.Identifier.class).toString();
+                } catch (JAXBException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        };
+        Thread thread6 = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    marshallerIds[6] =  TypeMarshaller.getJAXBMarshaller(org.dataone.service.types.v1.Identifier.class).toString();
+                    unmarshallerIds[6] = TypeMarshaller.getJAXBUnmarshaller(org.dataone.service.types.v1.Identifier.class).toString();
+                } catch (JAXBException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        Thread thread7 = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    marshallerIds[7] = TypeMarshaller.getJAXBMarshaller(org.dataone.service.types.v1.Identifier.class).toString();
+                    unmarshallerIds[7] = TypeMarshaller.getJAXBUnmarshaller(org.dataone.service.types.v1.Identifier.class).toString();
+                } catch (JAXBException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        };
+        Thread thread8 = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    marshallerIds[8] = TypeMarshaller.getJAXBMarshaller(org.dataone.service.types.v1.Identifier.class).toString();
+                    unmarshallerIds[8] = TypeMarshaller.getJAXBUnmarshaller(org.dataone.service.types.v1.Identifier.class).toString();
+                } catch (JAXBException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        };
+        Thread thread9 = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    marshallerIds[9] = TypeMarshaller.getJAXBMarshaller(org.dataone.service.types.v1.Identifier.class).toString();
+                    unmarshallerIds[9] = TypeMarshaller.getJAXBUnmarshaller(org.dataone.service.types.v1.Identifier.class).toString();
+                } catch (JAXBException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        };
+        Thread thread0 = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    marshallerIds[0] = TypeMarshaller.getJAXBMarshaller(org.dataone.service.types.v1.Identifier.class).toString();
+                    unmarshallerIds[0] = TypeMarshaller.getJAXBUnmarshaller(org.dataone.service.types.v1.Identifier.class).toString();
+                } catch (JAXBException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        };
+
+
+        thread1.start();
+        thread2.start();
+        thread3.start();
+        thread4.start();
+        thread5.start();
+        thread6.start();
+        thread7.start();
+        thread8.start();
+        thread9.start();
+        thread0.start();
+
+        thread1.join(); //wait for thread 1 to terminate
+        thread2.join(); //wait for thread 2 to terminate
+        thread3.join(); //wait for thread 1 to terminate
+        thread4.join(); //wait for thread 2 to terminate
+        thread5.join(); //wait for thread 1 to terminate
+        thread6.join(); //wait for thread 2 to terminate
+        thread7.join(); //wait for thread 1 to terminate
+        thread8.join(); //wait for thread 2 to terminate
+        thread9.join(); //wait for thread 1 to terminate
+        thread0.join(); //wait for thread 2 to terminate
+        
+        Set<String> bothSet = new HashSet<>();
+        Set<String> marshallerSet = new HashSet<>();
+        for (int i=0; i<10; i++) {
+            marshallerSet.add(marshallerIds[i]);
+            bothSet.add(marshallerIds[i]);
+            System.out.println(marshallerIds[i]);
+        }
+        assertEquals("Should have 10 distinct marshallers.", 10,  marshallerSet.size());
+        
+        Set<String> unmarshallerSet = new HashSet<>();
+        for (int i=0; i<10; i++) {
+            unmarshallerSet.add(unmarshallerIds[i]);
+            bothSet.add(unmarshallerIds[i]);
+            System.out.println(unmarshallerIds[i]);
+        }
+        assertEquals("Should have 10 distinct unmarshallers.", 10, unmarshallerSet.size());
+        assertEquals("Should have 20 overall marshallers/unmarshallers.", 20,  bothSet.size());
+    }
+
+    
+    @Test
+    public void deserializeSerializeSysMeta_performanceTest() {
+        for (int i = 1; i <=2; i++) {
+            Date start = null;
+            Date mid = null;
+            Date end = null;
+            try {
+                InputStream is = this.getClass().getResourceAsStream("/org/dataone/service/samples/v1/systemMetadataSample1.xml");
+                start = new Date();
+                SystemMetadata symeta = TypeMarshaller.unmarshalTypeFromStream(SystemMetadata.class, is);
+                mid = new Date();
+                OutputStream os = new NullOutputStream();
+                TypeMarshaller.marshalTypeToOutputStream(symeta, os);
+                end = new Date();
+            } catch (IOException ex) {
+                fail("Test misconfiguration" +  ex);
+            } catch (InstantiationException ex) {
+                fail("Test misconfiguration" + ex);
+            } catch (IllegalAccessException ex) {
+                fail("Test misconfiguration" +  ex);
+            } catch (MarshallingException ex) {
+                fail("Test misconfiguration" +  ex);
+            } finally {
+                if (mid == null) 
+                    mid = new Date();
+                if (end == null)
+                    end = new Date();
+                System.out.println("");
+                System.out.printf("Unmarshalling: elapsed time (ms) %d\n", mid.getTime() - start.getTime());
+                System.out.printf("Marshalling: elapsed time (ms) %d\n", end.getTime() - mid.getTime());
+                System.out.printf("Total: elapsed time (ms) %d\n", end.getTime() - start.getTime());
+            }
+        }
+    }
+    
+    @Test
+    public void deserializeSerializeObjectList_performanceTest() {
+        List<Long> uTimes = new ArrayList<>();
+        List<Long> mTimes = new ArrayList<>();
+        for (int i = 1; i <=50; i++) {
+            Date start = null;
+            Date mid = null;
+            Date end = null;
+            
+            try {
+                InputStream is = this.getClass().getResourceAsStream("/org/dataone/service/samples/v2/objectList7000.xml");
+                start = new Date();
+                ObjectList ol = TypeMarshaller.unmarshalTypeFromStream(ObjectList.class, is);
+                mid = new Date();
+                OutputStream os = new NullOutputStream();
+                TypeMarshaller.marshalTypeToOutputStream(ol, os);
+                end = new Date();
+            } catch (IOException ex) {
+                fail("Test misconfiguration" +  ex);
+            } catch (InstantiationException ex) {
+                fail("Test misconfiguration" + ex);
+            } catch (IllegalAccessException ex) {
+                fail("Test misconfiguration" +  ex);
+            } catch (MarshallingException ex) {
+                fail("Test misconfiguration" +  ex);
+            } finally {
+                if (mid == null) 
+                    mid = new Date();
+                if (end == null)
+                    end = new Date();
+            }
+            
+            System.out.println("");
+
+            long uTime = mid.getTime() - start.getTime();
+            long mTime = end.getTime() - mid.getTime();
+            System.out.printf("%d\t%d\t%d\n", i, uTime, mTime);
+            uTimes.add(uTime);
+            mTimes.add(mTime);
+        }
+        System.out.println("===================================");
+        System.out.println("index\tunmarsh\tmarsh");
+        System.out.println("===================================");
+        System.out.printf("count\t%d\t%d\n", uTimes.size(),mTimes.size());
+        System.out.printf("sum\t%d\t%d\n", sumOfLongs(uTimes), sumOfLongs(mTimes));
+        System.out.printf("mean\t%d\t%d\n", sumOfLongs(uTimes)/uTimes.size(), sumOfLongs(mTimes)/mTimes.size());
+        System.out.printf("median\t%d\t%d\n", medianOfLongs(uTimes), medianOfLongs(mTimes));
 
     }
+
+    private long sumOfLongs(List<Long> elements) {
+        long sum = 0;
+        for (Long l : elements) {
+            sum += l;
+        }
+        return sum;
+    }
+    
+    private long medianOfLongs(List<Long> elements) {
+        int count = elements.size();
+        if (count == 1)
+            return elements.get(0);
+        
+        long median = 0;
+        int halfcount = count / 2;
+        Long[] longs = elements.toArray(new Long[0]);
+        Arrays.sort(longs);
+
+        if (count % 2 == 0) {
+            return (longs[halfcount] + longs[halfcount+1]) / 2;
+        } else {
+            return longs[halfcount];
+        }
+    }
+    
+    
+    
     @Test
     public void deserializeNode() {
         try {

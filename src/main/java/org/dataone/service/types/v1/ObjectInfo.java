@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 /** 
  * Metadata about an object, representing a subset of the
  metadata found in :class:`Types.SystemMetadata`.
@@ -46,6 +47,7 @@ public class ObjectInfo implements Serializable {
     protected Checksum checksum;
     @XmlElement(required = true)
     @XmlSchemaType(name = "dateTime")
+    @XmlJavaTypeAdapter(org.dataone.service.util.DateMarshallingAdapter.class)
     protected Date dateSysMetadataModified;
     @XmlElement(required = true)
     @XmlSchemaType(name = "unsignedLong")
