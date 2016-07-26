@@ -287,7 +287,7 @@
             </snapshots>
         </repository>
         <!--  the apache snapshots repo is here only for the BCEL workaround -->
-<!--         <repository>
+         <repository>
          <id>apache.snapshots</id>
          <url>https://repository.apache.org/content/repositories/snapshots</url>
          <snapshots>
@@ -297,7 +297,7 @@
          <releases>
             <enabled>false</enabled>
          </releases>
-      </repository> -->
+      </repository>
     </repositories>
     <dependencies>
         <dependency>
