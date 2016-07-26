@@ -173,13 +173,13 @@
                         </goals>
                     </execution>
                 </executions>
-                <dependencies>
-                  <dependency>
-                    <groupId>org.apache.bcel</groupId>
-                    <artifactId>bcel</artifactId>
-                    <version>${org.apache.bcel.version}</version>
-                 </dependency>
-               </dependencies>
+<!--                 <dependencies> -->
+<!--                   <dependency> -->
+<!--                     <groupId>org.apache.bcel</groupId> -->
+<!--                     <artifactId>bcel</artifactId> -->
+<!--                     <version>${org.apache.bcel.version}</version> -->
+<!--                  </dependency> -->
+<!--                </dependencies> -->
             </plugin>
             <plugin>
                 <groupId>com.mycila.maven-license-plugin</groupId>
@@ -287,7 +287,7 @@
             </snapshots>
         </repository>
         <!--  the apache snapshots repo is here only for the BCEL workaround -->
-         <repository>
+<!--         <repository>
          <id>apache.snapshots</id>
          <url>https://repository.apache.org/content/repositories/snapshots</url>
          <snapshots>
@@ -297,14 +297,14 @@
          <releases>
             <enabled>false</enabled>
          </releases>
-      </repository>
+      </repository> -->
     </repositories>
     <dependencies>
-        <dependency>
-          <groupId>org.apache.bcel</groupId>
-          <artifactId>bcel</artifactId>
-          <version>${org.apache.bcel.version}</version>
-        </dependency>
+<!--         <dependency> -->
+<!--           <groupId>org.apache.bcel</groupId> -->
+<!--           <artifactId>bcel</artifactId> -->
+<!--           <version>${org.apache.bcel.version}</version> -->
+<!--         </dependency> -->
         <dependency>
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>
