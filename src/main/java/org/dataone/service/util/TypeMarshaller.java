@@ -38,11 +38,7 @@ import javax.xml.bind.Unmarshaller;
 
 import org.dataone.exceptions.MarshallingException;
 import org.apache.log4j.Logger;
-import org.jibx.runtime.BindingDirectory;
-import org.jibx.runtime.IBindingFactory;
-import org.jibx.runtime.IMarshallingContext;
-import org.jibx.runtime.IUnmarshallingContext;
-import org.jibx.runtime.JiBXException;
+
 
 /**
  * The standard class used to marshal and unmarshal datatypes to and from input
@@ -58,13 +54,7 @@ public class TypeMarshaller {
 
     static Logger logger = Logger.getLogger(TypeMarshaller.class.getName());
 
-    static final private Boolean USE_JIBX = false;
-    static final private Boolean CACHE_CONTEXT = true;
-    static final private Boolean CACHE_MARSHALLERS = false;
-    
     static final protected Map<Class,JAXBContext> jaxbContextMap = new HashMap<>();
-    static final protected Map<Class,ThreadLocal<Unmarshaller>> jaxbUnmarshallerMap = new HashMap<>();
-    static final protected Map<Class,ThreadLocal<Marshaller>> jaxbMarshallerMap = new HashMap<>();
 
     /**
      * A method to manage JAXB data type contexts, as they are expensive to build
@@ -75,55 +65,13 @@ public class TypeMarshaller {
      * @throws JAXBException
      */
     protected static synchronized JAXBContext getJAXBContext(Class clazz) throws JAXBException {
-        if (CACHE_CONTEXT) {
-            if (! jaxbContextMap.containsKey(clazz) ) {
-                jaxbContextMap.put(clazz,JAXBContext.newInstance( clazz ));
-            }
-            return jaxbContextMap.get(clazz);
-        } else {
-            System.out.print("c");
-            return JAXBContext.newInstance( clazz);
+        if (! jaxbContextMap.containsKey(clazz) ) {
+            jaxbContextMap.put(clazz,JAXBContext.newInstance( clazz ));
         }
+        return jaxbContextMap.get(clazz);
     }
     
-    protected static synchronized Unmarshaller getJAXBUnmarshaller(Class clazz) throws JAXBException {
-        if (CACHE_MARSHALLERS) {
-            if (! jaxbUnmarshallerMap.containsKey(clazz))  {
-                ThreadLocal<Unmarshaller> tlUnmarshaller = new ThreadLocal<>();
-                tlUnmarshaller.set(getJAXBContext(clazz).createUnmarshaller());
-                jaxbUnmarshallerMap.put(clazz,tlUnmarshaller);
-            }
-            else if (jaxbUnmarshallerMap.get(clazz).get() == null) {
-                // have a ThreadLocal, but this thread doesn't have a legit value yet
-                jaxbUnmarshallerMap.get(clazz).set(getJAXBContext(clazz).createUnmarshaller());
-            }
-            return jaxbUnmarshallerMap.get(clazz).get();
-        } else {
-            System.out.print("u");
-            return getJAXBContext(clazz).createUnmarshaller();
-        }
-    }
-    
-    protected static synchronized Marshaller getJAXBMarshaller(Class clazz) throws JAXBException {
-        if (CACHE_MARSHALLERS) {
-            if (! jaxbMarshallerMap.containsKey(clazz)) {
-                ThreadLocal<Marshaller> tlMarshaller = new ThreadLocal<>();
-                tlMarshaller.set(getJAXBContext(clazz).createMarshaller());
-                jaxbMarshallerMap.put(clazz,tlMarshaller);
-            }
-            else if (jaxbMarshallerMap.get(clazz).get() == null) {
-                // have a ThreadLocal, but this thread doesn't have a legit value yet
-                jaxbMarshallerMap.get(clazz).set(getJAXBContext(clazz).createMarshaller());
-            }
-            return jaxbMarshallerMap.get(clazz).get();
-        } else {
-            System.out.print("m");
-            return getJAXBContext(clazz).createMarshaller();
-        }
-    }
-    
-    
-    
+
     public static File marshalTypeToFile(Object typeObject, String filenamePath) 
     throws MarshallingException, FileNotFoundException, IOException 
     {
@@ -164,33 +112,18 @@ public class TypeMarshaller {
     public static void marshalTypeToOutputStream(Object typeObject, OutputStream os, String styleSheet)
     throws MarshallingException, IOException 
     {
-        if (USE_JIBX) {
-            try {
-                IBindingFactory bfact = BindingDirectory.getFactory(typeObject.getClass());
-
-                IMarshallingContext mctx = bfact.createMarshallingContext();
-                mctx.startDocument("UTF-8", null, os);
-                if (styleSheet != null) {
-                    mctx.getXmlWriter().writePI("xml-stylesheet", "type=\"text/xsl\" href=\"" + styleSheet + "\"");
-                }
-                mctx.marshalDocument(typeObject);
-            } catch (JiBXException e) {
-                throw new MarshallingException(e);
-            } 
-        } else {
-            try {
-                Marshaller jaxbMarshaller = TypeMarshaller.getJAXBMarshaller(typeObject.getClass());//.createMarshaller();
-//                jaxbMarshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, "dataoneTypes.xsd");
-                jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-                if (styleSheet != null) {
-                    jaxbMarshaller.setProperty("com.sun.xml.internal.bind.xmlHeaders",  
-                            String.format("<?xml-stylesheet type=\"text/xsl\" href=\"%s\" ?>", styleSheet));
-                }
-                jaxbMarshaller.marshal( typeObject, os );
-                
-            } catch (JAXBException e) {
-                throw new MarshallingException(e.getMessage(),e);
+        try {
+            Marshaller jaxbMarshaller = TypeMarshaller.getJAXBContext(typeObject.getClass()).createMarshaller();
+            //                jaxbMarshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, "dataoneTypes.xsd");
+            jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            if (styleSheet != null) {
+                jaxbMarshaller.setProperty("com.sun.xml.internal.bind.xmlHeaders",  
+                        String.format("<?xml-stylesheet type=\"text/xsl\" href=\"%s\" ?>", styleSheet));
             }
+            jaxbMarshaller.marshal( typeObject, os );
+
+        } catch (JAXBException e) {
+            throw new MarshallingException(e.getMessage(),e);
         }
     }
     
@@ -210,30 +143,11 @@ public class TypeMarshaller {
     public static <T> T unmarshalTypeFromFile(Class<T> domainClass, File file) 
     throws IOException, InstantiationException, IllegalAccessException, MarshallingException 
     {
-        if (USE_JIBX) {
-            Reader reader = null;
-        
-            try {
-                IBindingFactory bfact = BindingDirectory.getFactory(domainClass);
-                IUnmarshallingContext uctx = bfact.createUnmarshallingContext();
-                reader = new FileReader(file);
-                T domainObject = (T) uctx.unmarshalDocument(reader);
-                return domainObject;
-            } catch (JiBXException e) {
-                throw new MarshallingException(e);
-            }
-            finally {
-                if (reader != null) {
-                    reader.close();
-                }
-            }
-        } else {
-            try {
-                Unmarshaller jaxbUnmarshaller = TypeMarshaller.getJAXBUnmarshaller(domainClass);
-                return (T) jaxbUnmarshaller.unmarshal(file); 
-            } catch (JAXBException e) {
-                throw new MarshallingException(e.getMessage(),e);
-            }
+        try {
+            Unmarshaller jaxbUnmarshaller = TypeMarshaller.getJAXBContext(domainClass).createUnmarshaller();
+            return (T) jaxbUnmarshaller.unmarshal(file); 
+        } catch (JAXBException e) {
+            throw new MarshallingException(e.getMessage(),e);
         }
     }
 
@@ -272,30 +186,11 @@ public class TypeMarshaller {
     public static <T> T unmarshalTypeFromStream(Class<T> domainClass, InputStream inputStream) 
     throws IOException, InstantiationException, IllegalAccessException, MarshallingException 
     {
-        if (USE_JIBX) {
-            try {
-                IBindingFactory bfact = BindingDirectory.getFactory(domainClass);
-                IUnmarshallingContext uctx = bfact.createUnmarshallingContext();
-                T domainObject = (T) uctx.unmarshalDocument(inputStream, null);
-                return domainObject;
-
-            } catch (JiBXException e) {
-                throw new MarshallingException(e);
-            }
-            finally {
-                if (inputStream != null) {
-                    inputStream.close();
-                } else {
-                    throw new IOException("InputStream was null");
-                }
-            }
-        } else {
-            try {
-                Unmarshaller jaxbUnmarshaller = TypeMarshaller.getJAXBUnmarshaller(domainClass);
-                return (T) jaxbUnmarshaller.unmarshal(inputStream);
-            } catch (JAXBException e) {
-                throw new MarshallingException(e.getMessage(),e);
-            }
+        try {
+            Unmarshaller jaxbUnmarshaller = TypeMarshaller.getJAXBContext(domainClass).createUnmarshaller();
+            return (T) jaxbUnmarshaller.unmarshal(inputStream);
+        } catch (JAXBException e) {
+            throw new MarshallingException(e.getMessage(),e);
         }
     }
 }

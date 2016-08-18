@@ -8,10 +8,7 @@
     <url>http://dataone.org</url>
     <description>DataONE Common Code with Service Interface Definitions</description>
     <properties>
-        <org.jibx.version>1.2.5</org.jibx.version>
-        <d1_jibx_extensions.version>2.2.0-SNAPSHOT</d1_jibx_extensions.version>
         <d1_test_resources.version>2.3.0-SNAPSHOT</d1_test_resources.version>
-        <org.apache.bcel.version>6.0-SNAPSHOT</org.apache.bcel.version>
     </properties>
     <build>
         <directory>target</directory>
@@ -97,50 +94,7 @@
 			  </executions>
 			</plugin>
 
-            <!-- take out the placeholder -->
-<!-- need the placeholder element or else bad things happen when generating the classes it generated a class for the version so Identifier & Identifier1 no, i don't know why -->
 
-<!--
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>ant-generate-jibx</id>
-                        <phase>generate-sources</phase>
-                        <configuration>
-                            <tasks>
-                                <property name="compile_classpath" refid="maven.compile.classpath"/>
-                                <property name="runtime_classpath" refid="maven.runtime.classpath"/>
-                                <ant antfile="buildDomain.xml" target="codegen"/>
-                            </tasks>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
-
-                </executions>
-                <dependencies>
-                    <dependency>
-                       <groupId>org.apache.bcel</groupId>
-                       <artifactId>bcel</artifactId>
-                       <version>6.0-SNAPSHOT</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>ant</groupId>
-                        <artifactId>ant-nodeps</artifactId>
-                        <version>1.6.5</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.apache.ant</groupId>
-                        <artifactId>ant-apache-oro</artifactId>
-                        <version>1.8.4</version>
-                    </dependency>
-
-                </dependencies>
-            </plugin>
--->
             <plugin>
                 <artifactId>maven-clean-plugin</artifactId>
                 <configuration>
@@ -157,29 +111,6 @@
                         </fileset>
                     </filesets>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.jibx</groupId>
-                <artifactId>maven-jibx-plugin</artifactId>
-                <version>${org.jibx.version}</version>
-                <configuration>
-                    <schemaBindingDirectory>src/main/java</schemaBindingDirectory>
-                    <verbose>false</verbose>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>bind</goal>
-                        </goals>
-                    </execution>
-                </executions>
-<!--                 <dependencies> -->
-<!--                   <dependency> -->
-<!--                     <groupId>org.apache.bcel</groupId> -->
-<!--                     <artifactId>bcel</artifactId> -->
-<!--                     <version>${org.apache.bcel.version}</version> -->
-<!--                  </dependency> -->
-<!--                </dependencies> -->
             </plugin>
             <plugin>
                 <groupId>com.mycila.maven-license-plugin</groupId>
@@ -237,23 +168,11 @@
         								<execute/>
         							</action>
         						</pluginExecution>
-        						<pluginExecution>
-        							<pluginExecutionFilter>
-        								<groupId>org.jibx</groupId>
-        								<artifactId>
-        									maven-jibx-plugin
-        								</artifactId>
-        								<versionRange>
-        									[1.2.4,)
-        								</versionRange>
-        								<goals>
-        									<goal>bind</goal>
-        								</goals>
-        							</pluginExecutionFilter>
-        							<action>
-        								<execute/>
-        							</action>
-        						</pluginExecution>
+<!--         						<pluginExecution> -->
+<!--         							<action> -->
+<!--         								<execute/> -->
+<!--         							</action> -->
+<!--         						</pluginExecution> -->
         					</pluginExecutions>
         				</lifecycleMappingMetadata>
         			</configuration>
@@ -273,10 +192,6 @@
             </snapshots>
         </repository>
         <repository>
-            <id>Jibx Maven Repository</id>
-            <url>http://jibx.sourceforge.net/maven/</url>
-        </repository>
-        <repository>
             <id>dataone.org</id>
             <url>http://maven.dataone.org/</url>
             <releases>
@@ -286,65 +201,14 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
-        <!--  the apache snapshots repo is here only for the BCEL workaround -->
-<!--         <repository>
-         <id>apache.snapshots</id>
-         <url>https://repository.apache.org/content/repositories/snapshots</url>
-         <snapshots>
-            <enabled>true</enabled>
-            <updatePolicy>always</updatePolicy>
-         </snapshots>
-         <releases>
-            <enabled>false</enabled>
-         </releases>
-      </repository> -->
     </repositories>
     <dependencies>
-<!--         <dependency> -->
-<!--           <groupId>org.apache.bcel</groupId> -->
-<!--           <artifactId>bcel</artifactId> -->
-<!--           <version>${org.apache.bcel.version}</version> -->
-<!--         </dependency> -->
         <dependency>
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>
             <version>1.4.1</version>
             <type>jar</type>
             <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jibx</groupId>
-            <artifactId>jibx-bind</artifactId>
-            <version>${org.jibx.version}</version>
-	    <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jibx</groupId>
-            <artifactId>jibx-extras</artifactId>
-            <version>${org.jibx.version}</version>
-	    <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jibx</groupId>
-            <artifactId>jibx-run</artifactId>
-            <version>${org.jibx.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jibx</groupId>
-            <artifactId>jibx-schema</artifactId>
-            <version>${org.jibx.version}</version>
-	    <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jibx</groupId>
-            <artifactId>jibx-tools</artifactId>
-            <version>${org.jibx.version}</version>
-	    <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jibx</groupId>
-            <artifactId>maven-jibx-plugin</artifactId>
-            <version>${org.jibx.version}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
         <dependency>
@@ -452,13 +316,6 @@
             <version>1.6.1</version>
         </dependency>
 -->
-        <dependency>
-            <groupId>org.dataone</groupId>
-            <artifactId>d1_jibx_extensions</artifactId>
-            <version>${d1_jibx_extensions.version}</version>
-            <type>jar</type>
-            <scope>compile</scope>
-        </dependency>
         <dependency>
             <groupId>org.dataone</groupId>
             <artifactId>d1_test_resources</artifactId>

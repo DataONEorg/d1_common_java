@@ -51,10 +51,7 @@ import javax.xml.validation.Validator;
 
 import org.apache.log4j.Logger;
 import org.dataone.service.types.v2.util.ObjectFormatServiceImpl;
-import org.jibx.runtime.BindingDirectory;
-import org.jibx.runtime.IBindingFactory;
-import org.jibx.runtime.IMarshallingContext;
-import org.jibx.runtime.IUnmarshallingContext;
+import org.dataone.service.util.TypeMarshaller;
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.xml.sax.ErrorHandler;
@@ -356,23 +353,19 @@ public class TypeSamplesTestCase {
         originalReplica.setReplicaVerified(new Date());
 
         systemMetadata.addReplica(originalReplica);
-        IBindingFactory bfact =
-                BindingDirectory.getFactory(org.dataone.service.types.v1.SystemMetadata.class);
 
-        IMarshallingContext mctx = bfact.createMarshallingContext();
         ByteArrayOutputStream testSytemMetadataOutput = new ByteArrayOutputStream();
 
-        mctx.marshalDocument(systemMetadata, "UTF-8", null, testSytemMetadataOutput);
+        TypeMarshaller.marshalTypeToOutputStream(systemMetadata,  testSytemMetadataOutput);
 
         //       InputStream inputStream = this.getClass().getResourceAsStream(xmlDocument);
 
         logger.info(testSytemMetadataOutput.toString());
         ByteArrayInputStream testSystemMetadataInput = new ByteArrayInputStream(testSytemMetadataOutput.toByteArray());
 
-        //       BindingDirectory.getFactory("binding", "org.dataone.service.types");
-        IUnmarshallingContext uctx = bfact.createUnmarshallingContext();
 
-        systemMetadata = (SystemMetadata) uctx.unmarshalDocument(testSystemMetadataInput, null);
+
+        systemMetadata =  TypeMarshaller.unmarshalTypeFromStream(SystemMetadata.class, testSystemMetadataInput);
         assertTrue(systemMetadata != null);
         assertTrue(systemMetadata.getIdentifier().getValue().equalsIgnoreCase("ABC432"));
         testSystemMetadataInput.reset();
@@ -382,17 +375,12 @@ public class TypeSamplesTestCase {
     public boolean testSystemMetadataMarshalling(String externalSystemMetadata) throws Exception {
         logger.info("Starting testing of testSystemMetadataMarshalling");
         SystemMetadata systemMetadata = new SystemMetadata();
-        IBindingFactory bfact =
-                BindingDirectory.getFactory(org.dataone.service.types.v1.SystemMetadata.class);
-
-        IMarshallingContext mctx = bfact.createMarshallingContext();
-        IUnmarshallingContext uctx = bfact.createUnmarshallingContext();
 
         InputStream inputStream = this.getClass().getResourceAsStream(externalSystemMetadata);
         try {
-            systemMetadata = (SystemMetadata) uctx.unmarshalDocument(inputStream, null);
+            systemMetadata = TypeMarshaller.unmarshalTypeFromStream(SystemMetadata.class, inputStream);
             ByteArrayOutputStream testSytemMetadataOutput = new ByteArrayOutputStream();
-            mctx.marshalDocument(systemMetadata, "UTF-8", null, testSytemMetadataOutput);
+            TypeMarshaller.marshalTypeToOutputStream(systemMetadata,testSytemMetadataOutput);
             logger.info(testSytemMetadataOutput.toString());
             assertTrue(validateExamples(systemMetadataSchemaLocation, new ByteArrayInputStream(testSytemMetadataOutput.toByteArray())));
 
@@ -459,27 +447,19 @@ public class TypeSamplesTestCase {
         objectList.addObjectInfo(objectInfo3);
 
 
-        IBindingFactory bfact =
-                BindingDirectory.getFactory(org.dataone.service.types.v1.ObjectList.class);
-
-        IMarshallingContext mctx = bfact.createMarshallingContext();
         ByteArrayOutputStream testObjectListOutput = new ByteArrayOutputStream();
-
-        mctx.marshalDocument(objectList, "UTF-8", null, testObjectListOutput);
+        TypeMarshaller.marshalTypeToOutputStream(objectList, testObjectListOutput);
 
         //       InputStream inputStream = this.getClass().getResourceAsStream(xmlDocument);
 
 
         ByteArrayInputStream testObjectListInput = new ByteArrayInputStream(testObjectListOutput.toByteArray());
-
-        //       BindingDirectory.getFactory("binding", "org.dataone.service.types");
-        IUnmarshallingContext uctx = bfact.createUnmarshallingContext();
-
-        objectList = (ObjectList) uctx.unmarshalDocument(testObjectListInput, null);
+        
+        objectList = TypeMarshaller.unmarshalTypeFromStream(ObjectList.class, testObjectListInput);
 
         InputStream inputStream = this.getClass().getResourceAsStream(externalObjectList);
         try {
-            objectList = (ObjectList) uctx.unmarshalDocument(inputStream, null);
+            objectList = TypeMarshaller.unmarshalTypeFromStream(ObjectList.class, inputStream);
 
         } finally {
             inputStream.close();
@@ -490,7 +470,7 @@ public class TypeSamplesTestCase {
 
         // validate deserialized resource stream
         testObjectListOutput.reset();
-        mctx.marshalDocument(objectList, "UTF-8", null, testObjectListOutput);
+        TypeMarshaller.marshalTypeToOutputStream(objectList, testObjectListOutput);
         testObjectListInput = new ByteArrayInputStream(testObjectListOutput.toByteArray());
         assertTrue(validateExamples(systemObjectListSchemaLocation, testObjectListInput));
         return true;
@@ -513,20 +493,17 @@ public class TypeSamplesTestCase {
         person.setVerified(Boolean.TRUE);
         subjectInfo.addPerson(person);
 
-        IBindingFactory bfact =
-                BindingDirectory.getFactory(org.dataone.service.types.v1.SubjectInfo.class);
 
-        IMarshallingContext mctx = bfact.createMarshallingContext();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-        mctx.marshalDocument(subjectInfo, "UTF-8", null, baos);
+        TypeMarshaller.marshalTypeToOutputStream(subjectInfo,  baos);
 
         logger.info(baos.toString());
         ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
 
-        IUnmarshallingContext uctx = bfact.createUnmarshallingContext();
 
-        subjectInfo = (SubjectInfo) uctx.unmarshalDocument(bais, null);
+
+        subjectInfo = (SubjectInfo) TypeMarshaller.unmarshalTypeFromStream(SubjectInfo.class, bais);
         assertTrue(subjectInfo != null);
         assertTrue(subjectInfo.getPerson(0).getSubject().getValue().equals(subjectValue));
         bais.reset();
@@ -586,26 +563,22 @@ public class TypeSamplesTestCase {
         logEntry2.setUserAgent("Mozilla/4.0 (compatible; MSIE 6.0; Update a; AOL 6.0; Windows 98)");
         log.addLogEntry(logEntry2);
 
-        IBindingFactory bfact =
-                BindingDirectory.getFactory(org.dataone.service.types.v1.Log.class);
 
-        IMarshallingContext mctx = bfact.createMarshallingContext();
         ByteArrayOutputStream testLogOutput = new ByteArrayOutputStream();
 
-        mctx.marshalDocument(log, "UTF-8", null, testLogOutput);
+        TypeMarshaller.marshalTypeToOutputStream(log,  testLogOutput);
 
         //       InputStream inputStream = this.getClass().getResourceAsStream(xmlDocument);
 
 
         ByteArrayInputStream testLogInput = new ByteArrayInputStream(testLogOutput.toByteArray());
 
-        IUnmarshallingContext uctx = bfact.createUnmarshallingContext();
 
-        log = (Log) uctx.unmarshalDocument(testLogInput, null);
+        log = (Log) TypeMarshaller.unmarshalTypeFromStream(Log.class, testLogInput);
 
         InputStream inputStream = this.getClass().getResourceAsStream(externalLoggingObjects);
         try {
-            log = (Log) uctx.unmarshalDocument(inputStream, null);
+            log = (Log) TypeMarshaller.unmarshalTypeFromStream(Log.class, inputStream);
 
         } finally {
             inputStream.close();
@@ -616,7 +589,7 @@ public class TypeSamplesTestCase {
 
         // validate deserialized resource stream
         testLogOutput.reset();
-        mctx.marshalDocument(log, "UTF-8", null, testLogOutput);
+        TypeMarshaller.marshalTypeToOutputStream(log,  testLogOutput);
         testLogInput = new ByteArrayInputStream(testLogOutput.toByteArray());
         assertTrue(validateExamples(systemLoggingSchemaLocation, testLogInput));
         return true;
@@ -657,13 +630,11 @@ public class TypeSamplesTestCase {
         contactSubject.setValue("cn=who,dc=where,dc=there");
         sq1dMNNode.addContactSubject(contactSubject);
         nodeList.addNode(sq1dMNNode);
-        IBindingFactory bfact =
-                BindingDirectory.getFactory(org.dataone.service.types.v1.NodeList.class);
 
-        IMarshallingContext mctx = bfact.createMarshallingContext();
+
         ByteArrayOutputStream testOutput = new ByteArrayOutputStream();
 
-        mctx.marshalDocument(nodeList, "UTF-8", null, testOutput);
+        TypeMarshaller.marshalTypeToOutputStream(nodeList,  testOutput);
 
         //       InputStream inputStream = this.getClass().getResourceAsStream(xmlDocument);
 
@@ -673,13 +644,13 @@ public class TypeSamplesTestCase {
         ByteArrayInputStream testInput = new ByteArrayInputStream(nodeRegistryTestOutput);
 
         //       BindingDirectory.getFactory("binding", "org.dataone.service.types");
-        IUnmarshallingContext uctx = bfact.createUnmarshallingContext();
 
-        nodeList = (NodeList) uctx.unmarshalDocument(testInput, null);
+
+        nodeList = TypeMarshaller.unmarshalTypeFromStream(NodeList.class, testInput);
 
         InputStream inputStream = this.getClass().getResourceAsStream(externalObjectList);
         try {
-            nodeList = (NodeList) uctx.unmarshalDocument(inputStream, null);
+            nodeList = TypeMarshaller.unmarshalTypeFromStream(NodeList.class, inputStream);
 
         } finally {
             inputStream.close();
@@ -690,7 +661,7 @@ public class TypeSamplesTestCase {
 
         // validate deserialized resource stream
         testOutput.reset();
-        mctx.marshalDocument(nodeList, "UTF-8", null, testOutput);
+        TypeMarshaller.marshalTypeToOutputStream(nodeList,  testOutput);
         testInput = new ByteArrayInputStream(testOutput.toByteArray());
         assertTrue(validateExamples(systemNodeRegistrySchemaLocation, testInput));
         return true;
@@ -700,13 +671,10 @@ public class TypeSamplesTestCase {
         Identifier id = new Identifier();
         id.setValue("ABC123");
 
-        IBindingFactory bfact =
-                BindingDirectory.getFactory(org.dataone.service.types.v1.Identifier.class);
 
-        IMarshallingContext mctx = bfact.createMarshallingContext();
         ByteArrayOutputStream testOutput = new ByteArrayOutputStream();
 
-        mctx.marshalDocument(id, "UTF-8", null, testOutput);
+        TypeMarshaller.marshalTypeToOutputStream(id,  testOutput);
 
         //       InputStream inputStream = this.getClass().getResourceAsStream(xmlDocument);
 
@@ -715,13 +683,12 @@ public class TypeSamplesTestCase {
         logger.info(identifierStringOutput);
         ByteArrayInputStream testInput = new ByteArrayInputStream(identifierTestOutput);
 
-        IUnmarshallingContext uctx = bfact.createUnmarshallingContext();
 
-        id = (Identifier) uctx.unmarshalDocument(testInput, null);
+        id = TypeMarshaller.unmarshalTypeFromStream(Identifier.class, testInput);
 
         InputStream inputStream = this.getClass().getResourceAsStream(identifierDoc);
         try {
-            id = (Identifier) uctx.unmarshalDocument(inputStream, null);
+            id = TypeMarshaller.unmarshalTypeFromStream(Identifier.class, inputStream);
 
         } finally {
             inputStream.close();
@@ -732,7 +699,7 @@ public class TypeSamplesTestCase {
 
         // validate deserialized resource stream
         testOutput.reset();
-        mctx.marshalDocument(id, "UTF-8", null, testOutput);
+        TypeMarshaller.marshalTypeToOutputStream(id,  testOutput);
         testInput = new ByteArrayInputStream(testOutput.toByteArray());
         assertTrue(validateExamples(systemIdentifierSchemaLocation, testInput));
         return true;
@@ -744,13 +711,9 @@ public class TypeSamplesTestCase {
         checksum.setAlgorithm("SHA-1");
 
 
-        IBindingFactory bfact =
-                BindingDirectory.getFactory(org.dataone.service.types.v1.Checksum.class);
-
-        IMarshallingContext mctx = bfact.createMarshallingContext();
         ByteArrayOutputStream testOutput = new ByteArrayOutputStream();
 
-        mctx.marshalDocument(checksum, "UTF-8", null, testOutput);
+        TypeMarshaller.marshalTypeToOutputStream(checksum,  testOutput);
 
         //       InputStream inputStream = this.getClass().getResourceAsStream(xmlDocument);
 
@@ -759,13 +722,11 @@ public class TypeSamplesTestCase {
         logger.info(checksumStringOutput);
         ByteArrayInputStream testInput = new ByteArrayInputStream(checksumTestOutput);
 
-        IUnmarshallingContext uctx = bfact.createUnmarshallingContext();
-
-        checksum = (Checksum) uctx.unmarshalDocument(testInput, null);
+        checksum = (Checksum) TypeMarshaller.unmarshalTypeFromStream(Checksum.class, testInput);
 
         InputStream inputStream = this.getClass().getResourceAsStream(checksumDoc);
         try {
-            checksum = (Checksum) uctx.unmarshalDocument(inputStream, null);
+            checksum = (Checksum) TypeMarshaller.unmarshalTypeFromStream(Checksum.class, inputStream);
 
         } finally {
             inputStream.close();
@@ -776,7 +737,7 @@ public class TypeSamplesTestCase {
 
         // validate deserialized resource stream
         testOutput.reset();
-        mctx.marshalDocument(checksum, "UTF-8", null, testOutput);
+        TypeMarshaller.marshalTypeToOutputStream(checksum,  testOutput);
         testInput = new ByteArrayInputStream(testOutput.toByteArray());
         assertTrue(validateExamples(systemChecksumSchemaLocation, testInput));
         return true;
