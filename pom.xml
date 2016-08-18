@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.dataone</groupId>
     <artifactId>d1_common_java</artifactId>
@@ -71,7 +72,7 @@
                     </archive>
                 </configuration>
                 <executions>
-                	<!-- make a test resources jar -->
+                    <!-- make a test resources jar -->
                     <execution>
                         <goals>
                             <goal>test-jar</goal>
@@ -80,21 +81,19 @@
                 </executions>
             </plugin>
             <plugin>
-			  <groupId>org.apache.maven.plugins</groupId>
-			  <artifactId>maven-source-plugin</artifactId>
-			  <version>2.2.1</version>
-			  <executions>
-			    <execution>
-			      <id>attach-sources</id>
-			      <phase>package</phase>
-			      <goals>
-			        <goal>jar-no-fork</goal>
-			      </goals>
-			    </execution>
-			  </executions>
-			</plugin>
-
-
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <artifactId>maven-clean-plugin</artifactId>
                 <configuration>
@@ -120,26 +119,24 @@
                 </configuration>
             </plugin>
             <plugin>
-               <artifactId>maven-javadoc-plugin</artifactId>
-			  <version>2.9</version>
-			  <executions>
-			    <execution>
-			      <id>resource-bundles</id>
-			      <phase>package</phase>
-			      <goals>
-				  <!-- produce source artifact for main project sources -->
-					<goal>resource-bundle</goal>
-			      </goals>
-			    </execution>
-			  </executions>
-			  <configuration>
-<!-- 			    <additionalparam>-noqualifier org.dataone.*:java.lang.*</additionalparam>  -->
-			    <detectOfflineLinks>false</detectOfflineLinks>
-			  </configuration>
-			</plugin>
-            
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9</version>
+                <executions>
+                    <execution>
+                        <id>resource-bundles</id>
+                        <phase>package</phase>
+                        <goals>
+                            <!-- produce source artifact for main project sources -->
+                            <goal>resource-bundle</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!-- <additionalparam>-noqualifier org.dataone.*:java.lang.*</additionalparam> -->
+                    <detectOfflineLinks>false</detectOfflineLinks>
+                </configuration>
+            </plugin>
         </plugins>
-        
     </build>
     <repositories>
         <repository>
@@ -173,9 +170,9 @@
         </dependency>
         <!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
         <dependency>
-          <groupId>javax.xml.bind</groupId>
-          <artifactId>jaxb-api</artifactId>
-          <version>2.2.3</version>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.2.3</version>
         </dependency>
         <dependency>
             <groupId>joda-time</groupId>
@@ -216,53 +213,43 @@
             <type>maven-plugin</type>
             <scope>compile</scope>
         </dependency>
-        
         <dependency>
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
             <version>1.3.1</version>
         </dependency>
-
-        
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpmime</artifactId>
             <version>4.3.3</version>
         </dependency>
-        
-        
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-collections4</artifactId>
             <version>4.0</version>
         </dependency>
-        
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.3.2</version>
         </dependency>
-        
         <dependency>
             <groupId>commons-configuration</groupId>
             <artifactId>commons-configuration</artifactId>
             <version>1.7</version>
-            <!--  later versions changes getList() to return List<Object> instead of List<String>
-                  so users will need to us getStringArray instead  (refactor) -->
+            <!-- later versions changes getList() to return List<Object> 
+                instead of List<String> so users will need to us getStringArray instead (refactor) -->
         </dependency>
-        
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.4</version>
         </dependency>
-        
         <dependency>
             <groupId>commons-beanutils</groupId>
             <artifactId>commons-beanutils</artifactId>
             <version>1.9.2</version>
         </dependency>
-
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
@@ -270,13 +257,11 @@
             <type>jar</type>
             <scope>provided</scope>
         </dependency>
-<!--
-        <dependency>
-            <groupId>qdox</groupId>
-            <artifactId>qdox</artifactId>
-            <version>1.6.1</version>
-        </dependency>
--->
+<!--        <dependency> 
+            <groupId>qdox</groupId> 
+            <artifactId>qdox</artifactId> 
+            <version>1.6.1</version> 
+        </dependency> -->
         <dependency>
             <groupId>org.dataone</groupId>
             <artifactId>d1_test_resources</artifactId>
@@ -292,10 +277,10 @@
         </license>
     </licenses>
     <scm>
-      <url>https://repository.dataone.org/software/cicore</url>
-      <connection>scm:svn:https://repository.dataone.org/software/cicore</connection>
-      <developerConnection>scm:svn:https://repository.dataone.org/software/cicore</developerConnection>
-      <tag>HEAD</tag>
+        <url>https://repository.dataone.org/software/cicore</url>
+        <connection>scm:svn:https://repository.dataone.org/software/cicore</connection>
+        <developerConnection>scm:svn:https://repository.dataone.org/software/cicore</developerConnection>
+        <tag>HEAD</tag>
     </scm>
     <reporting>
         <plugins>
