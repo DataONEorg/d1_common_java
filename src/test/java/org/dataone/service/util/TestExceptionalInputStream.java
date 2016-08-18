@@ -25,6 +25,7 @@ package org.dataone.service.util;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,7 +33,6 @@ import java.io.PushbackInputStream;
 
 import org.apache.commons.io.IOUtils;
 import org.dataone.exceptions.MarshallingException;
-import org.apache.tools.ant.filters.StringInputStream;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -43,7 +43,7 @@ public class TestExceptionalInputStream {
 	@Test
 	public void testNotException() throws IOException {
 		String startingInput = "this is not a dataone error, but not a dataone type, so should be treated as exception";
-		InputStream is = new StringInputStream(startingInput);
+		InputStream is = new ByteArrayInputStream(startingInput.getBytes("UTF-8"));
 		ExceptionalInputStream eis = new ExceptionalInputStream(is);
 		if (!eis.isException()) {
 			fail("should not have gotten here");
@@ -64,7 +64,7 @@ public class TestExceptionalInputStream {
 	public void testMultiplePushbacks() throws IOException {
 		String startingInput84 = "this is not an error.  Not at all.  Just a very long, boring nonsense statement.";
 		
-		InputStream is = new StringInputStream(startingInput84);
+		InputStream is = new ByteArrayInputStream(startingInput84.getBytes("UTF-8"));
 		// should be 84 (divisible by 4)
 		int strlength = startingInput84.length();
 		PushbackInputStream pbis = new PushbackInputStream(is,strlength + 4);
@@ -105,7 +105,7 @@ public class TestExceptionalInputStream {
 	public void testMultiplePushPulls() throws IOException {
 		String startingInput84 = "this is not an error.  Not at all.  Just a very long, boring nonsense statement.";
 		
-		InputStream is = new StringInputStream(startingInput84);
+		InputStream is = new ByteArrayInputStream(startingInput84.getBytes("UTF-8"));
 		// should be 84 (divisible by 4)
 		int strlength = startingInput84.length();
 		PushbackInputStream pbis = new PushbackInputStream(is,strlength + 4);
@@ -150,7 +150,7 @@ public class TestExceptionalInputStream {
 		"    hint: http://cn.dataone.org/cn/resolve/123XYZ\n" +
 		"  </traceInformation>\n" +	
 		"</error>";
-		InputStream is = new StringInputStream(startingInput);
+		InputStream is = new ByteArrayInputStream(startingInput.getBytes("UTF-8"));
 		ExceptionalInputStream eis = new ExceptionalInputStream(is);
 		if (!eis.isException()) {
 			fail("should not have gotten here");
@@ -167,7 +167,7 @@ public class TestExceptionalInputStream {
 	@Test
 	public void testEmptyStream() throws IOException {
 		String startingInput = "";
-		InputStream is = new StringInputStream(startingInput);
+		InputStream is = new ByteArrayInputStream(startingInput.getBytes("UTF-8"));
 		ExceptionalInputStream eis = new ExceptionalInputStream(is);
 		if (eis.isException()) {
 			fail("should not have gotten here");

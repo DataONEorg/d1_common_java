@@ -45,7 +45,6 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicHttpResponse;
 import org.apache.http.message.BasicStatusLine;
-import org.apache.tools.ant.filters.StringInputStream;
 import org.dataone.service.exceptions.AuthenticationTimeout;
 import org.dataone.service.exceptions.BaseException;
 import org.dataone.service.exceptions.IdentifierNotUnique;
@@ -72,18 +71,18 @@ import org.xml.sax.SAXException;
  */
 public class ExceptionHandlerTestCase {
 
-	static StringInputStream jsonErrorStream;
+	static InputStream jsonErrorStream;
 	
     @Before
     public void setUpBeforeClass() throws Exception {
         NotFound nfe = new NotFound("12345", "some generic description");
-        jsonErrorStream = new StringInputStream(nfe.serialize(BaseException.FMT_JSON));
+        jsonErrorStream = new ByteArrayInputStream(nfe.serialize(BaseException.FMT_JSON).getBytes("UTF-8"));
     }
 
     @Test
-    public void testFilterErrors_IS_nonErrors() {
+    public void testFilterErrors_IS_nonErrors() throws UnsupportedEncodingException {
         String nonErrorString = "fa la la la la";
-        StringInputStream nonErrorStream = new StringInputStream(nonErrorString);
+        InputStream nonErrorStream = new ByteArrayInputStream(nonErrorString.getBytes("UTF-8"));
         try {
             InputStream is = ExceptionHandler.filterErrors(nonErrorStream, false, "text");
             assertEquals(nonErrorString, IOUtils.toString(is));
@@ -98,11 +97,11 @@ public class ExceptionHandlerTestCase {
     }
 
     @Test
-    public void testFilterErrors_IS_xmlError() {
+    public void testFilterErrors_IS_xmlError() throws UnsupportedEncodingException {
         String setDetailCode = "12345";
         String setDescription = "some generic description";
         NotFound nfe = new NotFound(setDetailCode, setDescription);
-        StringInputStream xmlErrorStream = new StringInputStream(nfe.serialize(BaseException.FMT_XML));
+        InputStream xmlErrorStream = new ByteArrayInputStream(nfe.serialize(BaseException.FMT_XML).getBytes("UTF-8"));
         try {
             InputStream is = ExceptionHandler.filterErrors(xmlErrorStream, true, "xml");
             fail("should throw exception");
@@ -120,11 +119,11 @@ public class ExceptionHandlerTestCase {
 
     @Ignore("still needs work")
     @Test
-    public void testFilterErrors_IS_jsonError() {
+    public void testFilterErrors_IS_jsonError() throws UnsupportedEncodingException {
         String setDetailCode = "12345";
         String setDescription = "some generic description";
         NotFound nfe = new NotFound(setDetailCode, setDescription);
-        StringInputStream xmlErrorStream = new StringInputStream(nfe.serialize(BaseException.FMT_JSON));
+        InputStream xmlErrorStream = new ByteArrayInputStream(nfe.serialize(BaseException.FMT_JSON).getBytes("UTF-8"));
         try {
             InputStream is = ExceptionHandler.filterErrors(xmlErrorStream, true, "json");
             fail("should throw exception");
@@ -263,14 +262,14 @@ public class ExceptionHandlerTestCase {
     }
 
     @Test
-    public void testDeserializeAndThrowException() {
+    public void testDeserializeAndThrowException() throws UnsupportedEncodingException {
 
         Integer errorCode = new Integer(404);
         String errorReason = "Not Found";
         String contentType = "xml";
         String setDescription = "a description";
         NotFound nfe = new NotFound("123", setDescription);
-        StringInputStream xmlErrorStream = new StringInputStream(nfe.serialize(BaseException.FMT_XML));
+        InputStream xmlErrorStream = new ByteArrayInputStream(nfe.serialize(BaseException.FMT_XML).getBytes("UTF-8"));
         try {
             ExceptionHandler.deserializeAndThrowException(xmlErrorStream, contentType, errorCode, errorReason);
             fail("should throw exception");

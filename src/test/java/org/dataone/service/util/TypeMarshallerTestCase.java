@@ -109,7 +109,6 @@ public class TypeMarshallerTestCase {
                     mid = new Date();
                 if (end == null)
                     end = new Date();
-                System.out.println("");
                 System.out.printf("Unmarshalling: elapsed time (ms) %d\n", mid.getTime() - start.getTime());
                 System.out.printf("Marshalling: elapsed time (ms) %d\n", end.getTime() - mid.getTime());
                 System.out.printf("Total: elapsed time (ms) %d\n", end.getTime() - start.getTime());
@@ -148,12 +147,9 @@ public class TypeMarshallerTestCase {
                 if (end == null)
                     end = new Date();
             }
-            
-            System.out.println("");
-
             long uTime = mid.getTime() - start.getTime();
             long mTime = end.getTime() - mid.getTime();
-            System.out.printf("%d\t%d\t%d\n", i, uTime, mTime);
+//            System.out.printf("%d\t%d\t%d\n", i, uTime, mTime);
             uTimes.add(uTime);
             mTimes.add(mTime);
         }
