@@ -63,6 +63,13 @@ public class NodeReference implements Serializable, Comparable
         if (other == null || other.getClass() != this.getClass())
             return false;
         NodeReference otherNodeReference = (NodeReference) other;
+        if (value == null) {
+            if (otherNodeReference.getValue() == null) {
+                return true;
+            } else {
+                return false;
+            }
+        }
         return value.equals(otherNodeReference.getValue());
     }
 
@@ -72,6 +79,7 @@ public class NodeReference implements Serializable, Comparable
      */
     @Override
     public int hashCode() {
+        if (value == null) return 0;
         return value.hashCode();
     }
 

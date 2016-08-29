@@ -69,6 +69,13 @@ public class Subject implements Serializable, Comparable
         Subject otherSubject = (Subject) other;
         String standardizedOtherSubject = standardizeDN(otherSubject.getValue());
         String standardizedSubject = standardizeDN(value);
+        if (standardizedSubject == null) {
+            if (standardizedOtherSubject == null) {
+                return true;
+            } else {
+                return false;
+            }
+        }
         return standardizedSubject.equals(standardizedOtherSubject);
     }
 
@@ -78,6 +85,7 @@ public class Subject implements Serializable, Comparable
      */
     @Override
     public int hashCode() {
+        if (value == null) return 0;
         String standardizedSubject = standardizeDN(value);
         return standardizedSubject.hashCode();
     }

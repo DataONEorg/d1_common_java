@@ -61,6 +61,13 @@ public class ObjectFormatIdentifier implements Serializable, Comparable
         if (other == null || other.getClass() != this.getClass())
             return false;
         ObjectFormatIdentifier otherObjectFormatIdentifier = (ObjectFormatIdentifier) other;
+        if (value == null) {
+            if (otherObjectFormatIdentifier.getValue() == null) {
+                return true;
+            } else {
+                return false;
+            }
+        }
         return value.equals(otherObjectFormatIdentifier.getValue());
     }
 
@@ -70,6 +77,7 @@ public class ObjectFormatIdentifier implements Serializable, Comparable
      */
     @Override
     public int hashCode() {
+        if (value == null) return 0;
         return value.hashCode();
     }
 
