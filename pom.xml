@@ -10,6 +10,7 @@
     <description>DataONE Common Code with Service Interface Definitions</description>
     <properties>
         <d1_test_resources.version>2.3.0-SNAPSHOT</d1_test_resources.version>
+        <compiler.target.version>1.7</compiler.target.version>
     </properties>
     <build>
         <directory>target</directory>
@@ -39,7 +40,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <source>1.7</source>
-                    <target>1.7</target>
+                    <target>${compiler.target.version}</target>
                 </configuration>
             </plugin>
             <plugin>
