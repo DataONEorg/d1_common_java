@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "QueryEngineList", namespace = "http://ns.dataone.org/service/types/v1.1", propOrder = {
     "queryEngine"
 })
-@XmlRootElement(name = "querhEngineList")
+@XmlRootElement(name = "queryEngineList")
 public class QueryEngineList implements Serializable
 {
     private static final long serialVersionUID = 10000000;
