@@ -37,6 +37,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.junit.Ignore;
 import org.junit.Test;
 
 
@@ -106,6 +107,7 @@ public class TestSimpleMultipartEntity {
 		return httpClient.execute(req);
 	}
 	
+	@Ignore
 	@Test
 	public void echoTestAddParamPart() throws ClientProtocolException, IOException 
 	{	
@@ -123,6 +125,7 @@ public class TestSimpleMultipartEntity {
 		assertTrue("message parsed",echoed.contains("request.REQUEST[ testTwo ] = flip-flap-flop"));
 	}
 	
+	@Ignore
 	@Test
 	public void echoTestAddFilePart_File() throws ClientProtocolException, IOException 
 	{
@@ -147,6 +150,7 @@ public class TestSimpleMultipartEntity {
 		assertTrue("message parsed",echoed.contains("request.FILES=<MultiValueDict: {u'testTwo': [<InMemoryUploadedFile: mmp.output."));
 	}
 	
+	@Ignore
 	@Test
 	public void echoTestAddFilePart_Stream() throws ClientProtocolException, IOException 
 	{
@@ -165,6 +169,7 @@ public class TestSimpleMultipartEntity {
 		assertTrue("message parsed",echoed.contains("request.FILES=<MultiValueDict: {u'testTwo': [<InMemoryUploadedFile: mmp.output."));
 	}
 	
+	@Ignore
 	@Test
 	public void echoTestAddFilePart_String() throws ClientProtocolException, IOException 
 	{
