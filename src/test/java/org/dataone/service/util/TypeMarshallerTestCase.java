@@ -39,8 +39,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBException;
+import javax.xml.transform.Source;
+import javax.xml.transform.stream.StreamSource;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
 
+import org.dataone.configuration.Settings;
 import org.dataone.exceptions.MarshallingException;
 import org.apache.commons.io.output.NullOutputStream;
 import org.apache.log4j.Logger;
@@ -53,6 +59,7 @@ import org.dataone.service.types.v1.ObjectList;
 import org.dataone.service.types.v1.Subject;
 import org.dataone.service.types.v1.SystemMetadata;
 import org.junit.Test;
+import org.xml.sax.SAXException;
 
 
 /**
@@ -314,7 +321,31 @@ public class TypeMarshallerTestCase {
             fail("Problem with TypeMarshaller.  Cause: " +  ex.getCause().getClass().getCanonicalName()
                     + ex.getCause().getMessage());
         }
-
-
     }
+    
+    @Test
+    public void testMarshallingShouldDoSchemaValidation() throws InstantiationException, IllegalAccessException, IOException, MarshallingException, SAXException {
+        
+        InputStream is = this.getClass().getResourceAsStream("systemMetadata-invalid_schema.xml");
+        org.dataone.service.types.v1.SystemMetadata sysMeta = 
+                TypeMarshaller.unmarshalTypeFromStream(org.dataone.service.types.v1.SystemMetadata.class, is);
+        try {
+            TypeMarshaller.marshalTypeToOutputStream(sysMeta, new ByteArrayOutputStream());
+        } catch (MarshallingException e) {
+            // should throw exception
+        }
+     }
+    
+    @Test
+    public void testValidateSchema() throws InstantiationException, IllegalAccessException, IOException, MarshallingException {
+        
+        InputStream is = this.getClass().getResourceAsStream("systemMetadata-invalid_schema.xml");
+        org.dataone.service.types.v1.SystemMetadata sysMeta = 
+                TypeMarshaller.unmarshalTypeFromStream(org.dataone.service.types.v1.SystemMetadata.class, is);
+        try {
+            TypeMarshaller.validateAgainstSchema(sysMeta);
+        } catch (MarshallingException e) {
+            // should throw exception
+        }
+     }
 }
