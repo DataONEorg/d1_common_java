@@ -35,7 +35,10 @@ import junit.framework.TestSuite;
 public class BaseExceptionTest extends TestCase
 {
 	private static Log log = LogFactory.getLog(BaseExceptionTest.class);
-	private String msg = "The specified object does not exist on this node.";
+	private static String idString = "doi:10.6067:XCV843017_meta&v=1482951215073";
+	private static String xmlEncodedIdString = "doi:10.6067:XCV843017_meta&amp;v=1482951215073";
+    private static String msg = String.format("The specified object (%s) does not exist on this node.",idString);
+    private static String xmlMsg = String.format("The specified object (%s) does not exist on this node.", xmlEncodedIdString);
     private TreeMap<String, String> trace = new TreeMap<String, String>();
     private BaseException e = null;
     
@@ -62,7 +65,7 @@ public class BaseExceptionTest extends TestCase
         trace.put("identifier", "123XYZ");
         trace.put("nodeId", "3cp0");
         trace.put("method", "mn.get");
-        e = new BaseException(404, "14001", "myD", "c3p0", msg, trace);
+        e = new BaseException(404, "14001", idString, "c3p0", msg, trace);
         assertNotNull(e);    
     }
     
@@ -78,9 +81,10 @@ public class BaseExceptionTest extends TestCase
         assertTrue(xml.indexOf("<error") != -1);
         assertTrue(xml.indexOf("\"404\"") != -1);
         assertTrue(xml.indexOf("\"14001\"") != -1);
-        assertTrue(xml.indexOf(msg) != -1);
+        System.out.println(xmlMsg);
+        assertTrue(xml.indexOf(xmlMsg) != -1);
         assertTrue(xml.indexOf("identifier") != -1);
-        assertTrue(xml.indexOf("pid=\"myD\"") != -1);
+        assertTrue(xml.indexOf(String.format("identifier=\"%s\"",xmlEncodedIdString)) != -1);
         assertTrue(xml.indexOf("123XYZ") != -1);
         assertTrue(xml.indexOf("method") != -1);
         assertTrue(xml.indexOf("mn.get") != -1);
@@ -99,7 +103,7 @@ public class BaseExceptionTest extends TestCase
         assertTrue(json.indexOf("'detailCode': 14001") != -1);
         assertTrue(json.indexOf(msg) != -1);
         assertTrue(json.indexOf("'identifier': '123XYZ'") != -1);
-        assertTrue(json.indexOf("'pid': 'myD'")!= -1);
+        assertTrue(json.indexOf(String.format("'identifier': '%s'",idString))!= -1);
         assertTrue(json.indexOf("'method': 'mn.get'") != -1);
     }
     
@@ -117,7 +121,7 @@ public class BaseExceptionTest extends TestCase
         assertTrue(html.indexOf("14001") != -1);
         assertTrue(html.indexOf(msg) != -1);
         assertTrue(html.indexOf("identifier") != -1);
-        assertTrue(html.indexOf("pid") != -1);
+        assertTrue(html.indexOf("identifier") != -1);
         assertTrue(html.indexOf("123XYZ") != -1);
         assertTrue(html.indexOf("method") != -1);
         assertTrue(html.indexOf("mn.get") != -1);

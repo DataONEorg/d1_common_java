@@ -119,7 +119,7 @@ public class BaseException extends Exception {
     		String nodeIdString, String description, 
     		TreeMap<String, String> trace_information) {
         this(code, detail_code, description);
-        this.setPid(pidString);
+        this.setIdentifier(pidString);
         if (nodeIdString != null) {
         	this.setNodeId(nodeIdString);
         	
@@ -143,7 +143,7 @@ public class BaseException extends Exception {
     protected BaseException(int code, String detail_code, String pidString, String description, 
             TreeMap<String, String> trace_information) {
         this(code, detail_code, description);
-        this.setPid(pidString);
+        this.setIdentifier(pidString);
         if (trace_information == null)
         	this.trace_information = new TreeMap<String, String>();
         else 
@@ -194,12 +194,30 @@ public class BaseException extends Exception {
         return detail_code;
     }
 
+    /**
+     * @deprecated  As of release 2.4, replaced by {@link #getIdentifier()}
+     * @since 2017-01-13
+     */
+    @Deprecated
     public String getPid() {
     	return pidString;
     }
     
+    /**
+     * @deprecated  As of release 2.4, replaced by {@link #setIdentifier()}
+     * @since 2017-01-13
+     */
+    @Deprecated
     public void setPid(String p) {
     	this.pidString = p;
+    }
+    
+    public String getIdentifier() {
+        return pidString;
+    }
+    
+    public void setIdentifier(String p) {
+        this.pidString = p;
     }
     
     /** 
@@ -295,8 +313,8 @@ public class BaseException extends Exception {
         errorNode.setAttribute("name", getName());
         errorNode.setAttribute("detailCode", getDetail_code());
         errorNode.setAttribute("errorCode", Integer.toString(getCode()));
-        if (getPid() != null)
-        	errorNode.setAttribute("pid", getPid());
+        if (getIdentifier() != null)
+        	errorNode.setAttribute("identifier", getIdentifier());
         if (getNodeId() != null)
         	errorNode.setAttribute("nodeId", getNodeId());
         Element description = dom.createElement("description");
@@ -329,15 +347,17 @@ public class BaseException extends Exception {
     	return  c.substring(c.lastIndexOf(".")+1);
     }
     
-    /** Serialize the exception in JSON format.
-     * TODO: Implement JSON serialization 
+    /** 
+     * Serialize the exception in JSON format.
      */
     private String serializeJSON() {
         StringBuffer sb = new StringBuffer();
         sb.append("{'errorCode': ").append(getCode()).append(",\n");
         sb.append(" 'detailCode': ").append(getDetail_code()).append(",\n");
-        if (getPid() != null)
-        	sb.append(" 'pid': '").append(getPid()).append("',\n");
+        if (getIdentifier() != null)
+        	sb.append(" 'identifier': '").append(getIdentifier()).append("',\n");
+        if (getNodeId() != null)
+            sb.append(" 'nodeId': '").append(getNodeId()).append("',\n");
         sb.append(" 'description': '").append(getDescription()).append("',\n");
         sb.append(" 'traceInformation': {\n");
         for (String key : this.getTraceKeySet()) {
@@ -349,8 +369,8 @@ public class BaseException extends Exception {
         return sb.toString();
     }
     
-    /** Serialize the exception in HTML format.
-     * TODO: Implement HTML serialization
+    /** 
+     * Serialize the exception in HTML format.
      */
     private String serializeHTML() {
         StringBuffer sb = new StringBuffer();
@@ -359,7 +379,8 @@ public class BaseException extends Exception {
         sb.append("    <dl>\n");
         sb.append("      <dt>Code</dt><dd class='errorCode'>").append(getCode()).append("</dd>\n");
         sb.append("      <dt>Detail Code</dt><dd class='detailCode'>").append(getDetail_code()).append("</dd>\n");
-        sb.append("      <dt>PID</dt><dd class='pid'>").append(getPid()).append("</dd>\n");
+        sb.append("      <dt>Identifier</dt><dd class='identifier'>").append(getIdentifier()).append("</dd>\n");
+        sb.append("      <dt>NodeId</dt><dd class='nodeid'>").append(getNodeId()).append("</dd>\n");
         sb.append("    </dl>\n");
         sb.append("  </p>\n");
         sb.append("  <p class='description'>").append(getDescription()).append("</p>\n");

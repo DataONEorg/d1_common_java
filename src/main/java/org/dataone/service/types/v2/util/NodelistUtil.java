@@ -149,10 +149,10 @@ public class NodelistUtil {
     
     /**
      * Finds the nodes in the NodeList that match the provided NodeType. 
-     * A set is returned to allow set logic with other select methods.
+     * A set is always returned (even if empty) to allow set logic with other select methods.
      * @param nodeList - the dataONE NodeList to search in for matching nodes
      * @param nodeType - if null, returns all nodes, otherwise
-     * @return a set of Nodes that match the criteria
+     * @return a set of Nodes that match the criteria.
      */
     public static Set<Node> selectNodes(NodeList nodeList, NodeType nodeType) 
     {
