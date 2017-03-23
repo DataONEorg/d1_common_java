@@ -9,7 +9,7 @@
     <url>http://dataone.org</url>
     <description>DataONE Common Code with Service Interface Definitions</description>
     <properties>
-        <d1_test_resources.version>2.3.0-SNAPSHOT</d1_test_resources.version>
+        <d1_test_resources.version>2.4.0-SNAPSHOT</d1_test_resources.version>
         <compiler.target.version>1.7</compiler.target.version>
     </properties>
     <build>
