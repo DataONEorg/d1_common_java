@@ -596,7 +596,10 @@ public class ExceptionHandler {
         if (root.hasAttribute("name")) {
             name = root.getAttribute("name");
         }
-        if (root.hasAttribute("pid")) {
+        //since the attribute pid is obsoleted since 2.4. We will handle identifier first.
+        if (root.hasAttribute("identifier")) {
+            pid = root.getAttribute("identifier");
+        } else if (root.hasAttribute("pid")) {
             pid = root.getAttribute("pid");
         }
         if (root.hasAttribute("nodeId")) {
