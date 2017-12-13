@@ -61,6 +61,7 @@ import org.dataone.service.exceptions.ServiceFailure;
 import org.dataone.service.exceptions.SynchronizationFailed;
 import org.dataone.service.exceptions.UnsupportedMetadataType;
 import org.dataone.service.exceptions.UnsupportedType;
+import org.dataone.service.exceptions.VersionMismatch;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -692,5 +693,25 @@ public class ExceptionHandlerTestCase {
             success = true;
         }
         assertTrue(success);
+    }
+    
+    @Test
+    public void testHtmlPrettyPrinting() {
+        InputStream responseBody = this.getClass().getResourceAsStream("htmlResponseBody.html");
+        
+        try {
+            ExceptionHandler.deserializeAndThrowException(responseBody, "html", 404, "reason");
+        } catch (AuthenticationTimeout | IdentifierNotUnique
+                | InsufficientResources | InvalidCredentials | InvalidRequest
+                | InvalidSystemMetadata | InvalidToken | NotAuthorized
+                | NotFound | NotImplemented | ServiceFailure
+                | UnsupportedMetadataType | UnsupportedType
+                | SynchronizationFailed | VersionMismatch e) {
+            System.out.println(e.getDescription());
+        }
+        
+        
+        
+        
     }
 }

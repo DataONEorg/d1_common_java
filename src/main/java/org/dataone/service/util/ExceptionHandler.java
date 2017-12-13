@@ -28,12 +28,14 @@ import java.net.HttpURLConnection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.regex.Pattern;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.commons.io.IOUtils;
+import org.dataone.configuration.Settings;
 import org.dataone.exceptions.MarshallingException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -71,6 +73,12 @@ public class ExceptionHandler {
 
     protected static Log log = LogFactory.getLog(ExceptionHandler.class);
 
+    static final Pattern headPattern = Pattern.compile("<head>.*?</head>",Pattern.DOTALL);
+    static final Pattern scriptPattern = Pattern.compile("<script>.*?</script>",Pattern.DOTALL);
+    static final Pattern whiteSpacePattern = Pattern.compile("^\\s*$\\n",Pattern.MULTILINE);
+    static final Pattern xmlTagPattern = Pattern.compile("<.*?>");
+    
+    static final boolean limitHtml = Settings.getConfiguration().getBoolean("dataone.execptionHandler.limitOriginalReponseInMessage",true);
 
     public static InputStream filterErrors(HttpResponse res)
             throws AuthenticationTimeout, IdentifierNotUnique, InsufficientResources,
@@ -420,10 +428,23 @@ public class ExceptionHandler {
     private static void deserializeHtmlAndThrowException(InputStream errorStream, String defaultMessage) 
     throws ServiceFailure {
         try {
-            throw new ServiceFailure("-1", defaultMessage + "parser for deserializing HTML not written yet.  Providing message body:\n" + IOUtils.toString(errorStream));
-        } catch (IOException e1) {
+            String rawHtml = IOUtils.toString(errorStream);
+            
+            String finalHtml = rawHtml;
+//            long t0 = System.currentTimeMillis();
+            if (limitHtml) {
+                String headlessHtml = headPattern.matcher(rawHtml).replaceAll("");
+                String scriptlessHtml = scriptPattern.matcher(headlessHtml).replaceAll(""); 
+                String taglessHtml = xmlTagPattern.matcher(scriptlessHtml).replaceAll("");
+                finalHtml = whiteSpacePattern.matcher(taglessHtml).replaceAll("");
+            }
+//            System.out.println("timing: " + (System.currentTimeMillis() - t0));
+            throw new ServiceFailure("-1", defaultMessage + "parser for deserializing HTML not written yet.  Providing stripped-down html message body starting next line:\n" + finalHtml);
+        } 
+        catch (IOException e1) {
             throw new ServiceFailure("-1", defaultMessage + "errorStream could not be reset/reread" + e1.getMessage());
-        } finally {
+        } 
+        finally {
             IOUtils.closeQuietly(errorStream);
         }
     }
