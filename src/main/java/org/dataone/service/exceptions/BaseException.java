@@ -71,7 +71,7 @@ public class BaseException extends Exception {
     public final static int FMT_HTML = 2;
     private DocumentBuilder documentBuilder = null;
     private Transformer transformer = null;
-    private StringWriter strWtr = new StringWriter();
+//    private StringWriter strWtr = new StringWriter();
 
     /**
      * Construct a BaseException with the given code, detail code, and description.
@@ -397,7 +397,7 @@ public class BaseException extends Exception {
     private String domToString(Document document) throws Exception {
         String result = null;
         if (document != null) {
-            StreamResult strResult = new StreamResult(strWtr);
+            StreamResult strResult = new StreamResult(new StringWriter());
             transformer.transform(new DOMSource(document.getDocumentElement()), strResult);
             result = strResult.getWriter().toString();
         }

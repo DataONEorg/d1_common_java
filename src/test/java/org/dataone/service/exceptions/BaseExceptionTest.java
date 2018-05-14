@@ -76,6 +76,10 @@ public class BaseExceptionTest extends TestCase
     {   
         String xml = e.serialize(BaseException.FMT_XML);
         log.info(xml);
+        String xml2 = e.serialize(BaseException.FMT_XML);
+        log.info(xml2);
+        String xml3 = e.serialize(BaseException.FMT_XML);
+        log.info(xml3);
         
         assertNotNull(xml);
         assertTrue(xml.indexOf("<error") != -1);
