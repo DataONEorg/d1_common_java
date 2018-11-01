@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -444,5 +445,32 @@ public class AuthUtilsTestCase {
 	
 		assertTrue("testRightsHolder should be able to change the object", AuthUtils.isAuthorized(subjectSet, Permission.CHANGE_PERMISSION, sysmeta));
 	}
+	
+	@Test
+    public void testFindPersonsSubjects() throws Exception {
+        SubjectInfo subjectInfoPerson = TypeMarshaller.unmarshalTypeFromStream(SubjectInfo.class, getClass().getClassLoader().getResourceAsStream("test-files/subject-info-person.xml"));
+        Set<Subject> returnSubjects = new HashSet<Subject>();
+        Subject targetPerson = new Subject();
+        targetPerson.setValue("CN=Matt Jones A729,O=Google,C=US,DC=cilogon,DC=org");
+        AuthUtils.findPersonsSubjects(returnSubjects, subjectInfoPerson, targetPerson);
+        /*for (Subject subject : returnSubjects) {
+            System.out.println("The subject is "+subject.getValue());
+        }*/
+        assertTrue("testFindPersonSubjects - the size of returned subjects should be 12 rather than "+returnSubjects.size(), returnSubjects.size()==12);
+        
+        //pass a group subject to this method. TODO now it only returns the group subject back. We need to think more about the groups.
+        SubjectInfo subjectInfoGroup = TypeMarshaller.unmarshalTypeFromStream(SubjectInfo.class, getClass().getClassLoader().getResourceAsStream("test-files/subject-info-group.xml"));
+        Set<Subject>returnSubjects2 = new HashSet<Subject>();
+        Subject targetGroup = new Subject();
+        targetGroup.setValue("CN=dataone-coredev,DC=dataone,DC=org");
+        AuthUtils.findPersonsSubjects(returnSubjects2, subjectInfoGroup, targetGroup);
+        /*for (Subject subject : returnSubjects2) {
+            System.out.println("the subject equals?"+subject.equals(targetGroup));
+            System.out.println("The subject is "+subject.getValue());
+        }*/
+        assertTrue("testFindPersonSubjects - the size of returned subjects should be 1 rather than "+returnSubjects2.size(), returnSubjects2.size()==1);
+	
+        
+    }
 	
 }
