@@ -168,7 +168,70 @@ public class AuthUtils {
 		}
 	}
 	
+	/**
+	 * Look for the equivalent authorization subjects for a given subject which can be either a person or a group.
+	 * For a given person subject, it will returns the person itself, all equivalent identities and all groups (include the child groups)
+	 * that itself and equivalent identities belong to.
+	 * For a given group subject, it will returns the group itself and its recursive all ancestor groups.
+	 * @param subjectInfo  the subject info for the given subject. 
+	 * @param targetSubject  the subject needs to be looked
+	 * @return the set of equivalent authorization subjects
+	 */
+	public static Set<Subject> findEquivalentSubjects(SubjectInfo subjectInfo, Subject targetSubject) {
+	    Set<Subject> subjects = new HashSet<Subject>();
+	    //first to try if this is a person 
+	    AuthUtils.findPersonsSubjects(subjects, subjectInfo, targetSubject);
+	    if(subjects.isEmpty() || subjects.size() == 1) {
+	        //the return subjects from looking persons is o or 1. This means it can be group or a person without any groups.
+	        //let's try the group
+	        findEquivalentSubjectsForGroup(subjects, subjectInfo, targetSubject);
+	    }
+	    return subjects;
+	}
 	
+	/**
+	 * Find all subjects which can be authorized as same as the given group subject (target). It is equivalent 
+	 * to the findPersonsSubjects method except that the target is a group subject.
+	 * For a given group subject, its all equivalent subjects are itself and its recursive all ancestor groups.
+	 * For example, group a is the parent group b, b is the parent group c and c is the parent of group d. If the given group project is c,
+	 * the foundSubjects should be c, b and a. 
+	 * @param foundSubjects the set which holds all subjects which can be authorized as same as the given group subject (target). It likes
+	 *                       the return value in the method.
+	 * @param subjectInfo the subject info object for the given group subject. 
+	 * @param targetGrouupSubject the group subject needs to be looked
+	 */
+	private static void findEquivalentSubjectsForGroup(Set<Subject> foundSubjects, SubjectInfo subjectInfo, Subject targetGroupSubject) {
+	    if (targetGroupSubject != null && targetGroupSubject.getValue() != null && !targetGroupSubject.getValue().trim().equals("")) {
+        	    //first, add it self
+        	    foundSubjects.add(targetGroupSubject);
+        	    // setting this up for subsequent searches in the loop
+            List<Group> groupList = null;
+        	    if(subjectInfo != null) {
+        	        groupList = subjectInfo.getGroupList();
+        	        if (groupList != null) {
+        	            for(Group group : groupList) {
+        	                if(group != null && group.getHasMemberList() != null && group.getSubject() != null) {
+        	                    for(Subject subject : group.getHasMemberList()) {
+        	                        if(subject.getValue() != null && subject.getValue().equals(targetGroupSubject.getValue())) {
+        	                            //find the target group is in the hasMemberList. We need to put the parent group into the vector
+        	                            if(foundSubjects.contains(group.getSubject())) {
+        	                                //this means it is circular group. We should break the loop
+        	                                //System.out.println("in the loop, we need to break it =======================");
+        	                                return;
+        	                            } else {
+        	                                foundSubjects.add(group.getSubject());
+        	                                //recursive to find the parent groups
+        	                                findEquivalentSubjectsForGroup(foundSubjects, subjectInfo, group.getSubject());
+        	                            }
+        	                        }
+        	                    }
+        	                }
+        	            }
+        	        }
+        	    }
+	    }
+	    
+	}
 	
 	/**
 	 *

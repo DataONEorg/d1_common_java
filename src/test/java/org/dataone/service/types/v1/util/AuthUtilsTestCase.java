@@ -447,6 +447,89 @@ public class AuthUtilsTestCase {
 	}
 	
 	@Test
+    public void testFindEquivalentSubjects() throws Exception {
+        SubjectInfo subjectInfoPerson = TypeMarshaller.unmarshalTypeFromStream(SubjectInfo.class, getClass().getClassLoader().getResourceAsStream("test-files/subject-info-person.xml"));
+        Set<Subject> returnSubjects = new HashSet<Subject>();
+        Subject targetPerson = new Subject();
+        targetPerson.setValue("CN=Matt Jones A729,O=Google,C=US,DC=cilogon,DC=org");
+        returnSubjects= AuthUtils.findEquivalentSubjects(subjectInfoPerson, targetPerson);
+        /*for (Subject subject : returnSubjects) {
+            System.out.println("The subject is "+subject.getValue());
+        }*/
+        assertTrue("testFindPersonSubjects - the size of returned subjects should be 12 rather than "+returnSubjects.size(), returnSubjects.size()==12);
+        
+        
+        SubjectInfo subjectInfoPerson_2 = TypeMarshaller.unmarshalTypeFromStream(SubjectInfo.class, getClass().getClassLoader().getResourceAsStream("test-files/subject-info-person-without-group.xml"));
+        Set<Subject> returnSubjects_2 = new HashSet<Subject>();
+        Subject targetPerson_2 = new Subject();
+        targetPerson_2.setValue("CN=test-person-4,DC=dataone,DC=org");
+        returnSubjects_2 = AuthUtils.findEquivalentSubjects(subjectInfoPerson_2, targetPerson_2);
+        assertTrue("testFindPersonSubjects - the size of returned subjects should be 1 rather than "+returnSubjects_2.size(), returnSubjects_2.size()==1);
+        assertTrue("The subject should be CN=test-person-4,DC=dataone,DC=org", returnSubjects_2.contains(targetPerson_2));
+        
+        //pass a group subject to this method. TODO now it only returns the group subject back. We need to think more about the groups.
+        SubjectInfo subjectInfoGroup = TypeMarshaller.unmarshalTypeFromStream(SubjectInfo.class, getClass().getClassLoader().getResourceAsStream("test-files/subject-info-group.xml"));
+        Set<Subject>returnSubjects2 = new HashSet<Subject>();
+        Subject targetGroup = new Subject();
+        targetGroup.setValue("CN=dataone-coredev,DC=dataone,DC=org");
+        returnSubjects2 = AuthUtils.findEquivalentSubjects(subjectInfoGroup, targetGroup);
+        /*for (Subject subject : returnSubjects2) {
+            System.out.println("the subject equals?"+subject.equals(targetGroup));
+            System.out.println("The subject is "+subject.getValue());
+        }*/
+        assertTrue("testFindPersonSubjects - the size of returned subjects should be 1 rather than "+returnSubjects2.size(), returnSubjects2.size()==1);
+        
+        
+        SubjectInfo subjectInfoGroup3 = TypeMarshaller.unmarshalTypeFromStream(SubjectInfo.class, getClass().getClassLoader().getResourceAsStream("test-files/subject-info-circular-group-1.xml"));
+        Set<Subject>returnSubjects3 = new HashSet<Subject>();
+        Subject targetGroup3 = new Subject();
+        targetGroup3.setValue("CN=test-group-2,DC=dataone,DC=org");
+        returnSubjects3 = AuthUtils.findEquivalentSubjects(subjectInfoGroup3, targetGroup3);
+        /*for (Subject subject : returnSubjects3) {
+        System.out.println("the subject equals?"+subject.equals(targetGroup));
+        System.out.println("The subject is "+subject.getValue());
+        }*/
+        assertTrue("testFindPersonSubjects - the size of returned subjects should be 2 rather than "+returnSubjects3.size(), returnSubjects3.size()==2);
+        
+        SubjectInfo subjectInfoGroup4 = TypeMarshaller.unmarshalTypeFromStream(SubjectInfo.class, getClass().getClassLoader().getResourceAsStream("test-files/subject-info-circular-group-2.xml"));
+        Set<Subject>returnSubjects4 = new HashSet<Subject>();
+        Subject targetGroup4 = new Subject();
+        targetGroup4.setValue("CN=test-group-3,DC=dataone,DC=org");
+        returnSubjects4 = AuthUtils.findEquivalentSubjects(subjectInfoGroup4, targetGroup4);
+        assertTrue("testFindPersonSubjects - the size of returned subjects should be 1 rather than "+returnSubjects4.size(), returnSubjects4.size()==1);
+        
+        SubjectInfo subjectInfoGroup5 = TypeMarshaller.unmarshalTypeFromStream(SubjectInfo.class, getClass().getClassLoader().getResourceAsStream("test-files/subject-info-circular-group-3.xml"));
+        Set<Subject>returnSubjects5 = new HashSet<Subject>();
+        Subject targetGroup5 = new Subject();
+        targetGroup5.setValue("CN=test-group-3,DC=dataone,DC=org");
+        returnSubjects5 = AuthUtils.findEquivalentSubjects(subjectInfoGroup5, targetGroup5);
+        assertTrue("testFindPersonSubjects - the size of returned subjects should be 1 rather than "+returnSubjects5.size(), returnSubjects5.size()==3);
+        
+        SubjectInfo subjectInfoGroup6 = TypeMarshaller.unmarshalTypeFromStream(SubjectInfo.class, getClass().getClassLoader().getResourceAsStream("test-files/subject-info-group-nested-2.xml"));
+        Set<Subject>returnSubjects6 = new HashSet<Subject>();
+        Subject targetGroup6 = new Subject();
+        targetGroup6.setValue("CN=test-group-1,DC=dataone,DC=org");
+        returnSubjects6 = AuthUtils.findEquivalentSubjects(subjectInfoGroup6, targetGroup6);
+        assertTrue("testFindPersonSubjects - the size of returned subjects should be 1 rather than "+returnSubjects6.size(), returnSubjects6.size()==1);
+        
+        
+        SubjectInfo subjectInfoGroup7 = TypeMarshaller.unmarshalTypeFromStream(SubjectInfo.class, getClass().getClassLoader().getResourceAsStream("test-files/subject-info-group-nested-2.xml"));
+        Set<Subject>returnSubjects7 = new HashSet<Subject>();
+        Subject targetGroup7 = new Subject();
+        targetGroup7.setValue("CN=test-group-2,DC=dataone,DC=org");
+        returnSubjects7 = AuthUtils.findEquivalentSubjects(subjectInfoGroup7, targetGroup7);
+        assertTrue("testFindPersonSubjects - the size of returned subjects should be 2 rather than "+returnSubjects7.size(), returnSubjects7.size()==2);
+        
+        SubjectInfo subjectInfoGroup8 = TypeMarshaller.unmarshalTypeFromStream(SubjectInfo.class, getClass().getClassLoader().getResourceAsStream("test-files/subject-info-group-nested-2.xml"));
+        Set<Subject>returnSubjects8 = new HashSet<Subject>();
+        Subject targetGroup8 = new Subject();
+        targetGroup8.setValue("CN=test-group-3,DC=dataone,DC=org");
+        returnSubjects8 = AuthUtils.findEquivalentSubjects(subjectInfoGroup8, targetGroup8);
+        assertTrue("testFindPersonSubjects - the size of returned subjects should be 3 rather than "+returnSubjects8.size(), returnSubjects8.size()==3);
+        
+    }
+	
+	@Test
     public void testFindPersonsSubjects() throws Exception {
         SubjectInfo subjectInfoPerson = TypeMarshaller.unmarshalTypeFromStream(SubjectInfo.class, getClass().getClassLoader().getResourceAsStream("test-files/subject-info-person.xml"));
         Set<Subject> returnSubjects = new HashSet<Subject>();
@@ -457,6 +540,14 @@ public class AuthUtilsTestCase {
             System.out.println("The subject is "+subject.getValue());
         }*/
         assertTrue("testFindPersonSubjects - the size of returned subjects should be 12 rather than "+returnSubjects.size(), returnSubjects.size()==12);
+        
+        
+        SubjectInfo subjectInfoPerson_2 = TypeMarshaller.unmarshalTypeFromStream(SubjectInfo.class, getClass().getClassLoader().getResourceAsStream("test-files/subject-info-person-without-group.xml"));
+        Set<Subject> returnSubjects_2 = new HashSet<Subject>();
+        Subject targetPerson_2 = new Subject();
+        targetPerson_2.setValue("CN=test-person-4,DC=dataone,DC=org");
+        AuthUtils.findPersonsSubjects(returnSubjects_2, subjectInfoPerson_2, targetPerson_2);
+        assertTrue("testFindPersonSubjects - the size of returned subjects should be 1 rather than "+returnSubjects_2.size(), returnSubjects_2.size()==1);
         
         //pass a group subject to this method. TODO now it only returns the group subject back. We need to think more about the groups.
         SubjectInfo subjectInfoGroup = TypeMarshaller.unmarshalTypeFromStream(SubjectInfo.class, getClass().getClassLoader().getResourceAsStream("test-files/subject-info-group.xml"));
@@ -469,7 +560,35 @@ public class AuthUtilsTestCase {
             System.out.println("The subject is "+subject.getValue());
         }*/
         assertTrue("testFindPersonSubjects - the size of returned subjects should be 1 rather than "+returnSubjects2.size(), returnSubjects2.size()==1);
-	
+        
+        
+        SubjectInfo subjectInfoGroup3 = TypeMarshaller.unmarshalTypeFromStream(SubjectInfo.class, getClass().getClassLoader().getResourceAsStream("test-files/subject-info-circular-group-1.xml"));
+        Set<Subject>returnSubjects3 = new HashSet<Subject>();
+        Subject targetGroup3 = new Subject();
+        targetGroup3.setValue("CN=test-group-2,DC=dataone,DC=org");
+        AuthUtils.findPersonsSubjects(returnSubjects3, subjectInfoGroup3, targetGroup3);
+        assertTrue("testFindPersonSubjects - the size of returned subjects should be 1 rather than "+returnSubjects3.size(), returnSubjects3.size()==1);
+        
+        SubjectInfo subjectInfoGroup4 = TypeMarshaller.unmarshalTypeFromStream(SubjectInfo.class, getClass().getClassLoader().getResourceAsStream("test-files/subject-info-circular-group-2.xml"));
+        Set<Subject>returnSubjects4 = new HashSet<Subject>();
+        Subject targetGroup4 = new Subject();
+        targetGroup4.setValue("CN=test-group-3,DC=dataone,DC=org");
+        AuthUtils.findPersonsSubjects(returnSubjects4, subjectInfoGroup4, targetGroup4);
+        assertTrue("testFindPersonSubjects - the size of returned subjects should be 1 rather than "+returnSubjects4.size(), returnSubjects4.size()==1);
+        
+        SubjectInfo subjectInfoGroup5 = TypeMarshaller.unmarshalTypeFromStream(SubjectInfo.class, getClass().getClassLoader().getResourceAsStream("test-files/subject-info-circular-group-3.xml"));
+        Set<Subject>returnSubjects5 = new HashSet<Subject>();
+        Subject targetGroup5 = new Subject();
+        targetGroup5.setValue("CN=test-group-1,DC=dataone,DC=org");
+        AuthUtils.findPersonsSubjects(returnSubjects5, subjectInfoGroup5, targetGroup5);
+        assertTrue("testFindPersonSubjects - the size of returned subjects should be 1 rather than "+returnSubjects5.size(), returnSubjects5.size()==1);
+        
+        SubjectInfo subjectInfoGroup6 = TypeMarshaller.unmarshalTypeFromStream(SubjectInfo.class, getClass().getClassLoader().getResourceAsStream("test-files/subject-info-group-nested-2.xml"));
+        Set<Subject>returnSubjects6 = new HashSet<Subject>();
+        Subject targetGroup6 = new Subject();
+        targetGroup6.setValue("CN=test-group-1,DC=dataone,DC=org");
+        AuthUtils.findPersonsSubjects(returnSubjects6, subjectInfoGroup6, targetGroup6);
+        assertTrue("testFindPersonSubjects - the size of returned subjects should be 1 rather than "+returnSubjects6.size(), returnSubjects6.size()==1);
         
     }
 	

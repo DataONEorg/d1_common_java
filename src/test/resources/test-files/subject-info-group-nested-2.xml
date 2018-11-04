@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:subjectInfo xmlns:ns2="http://ns.dataone.org/service/types/v1">
+  <person>
+    <subject>CN=test-person-1,DC=dataone,DC=org</subject>
+    <givenName>aGivenName</givenName>
+    <familyName>aFamily</familyName>
+    <isMemberOf>CN=test-group-1,DC=dataone,DC=org</isMemberOf>
+    <verified>false</verified>
+  </person>
+  <group>
+    <subject>CN=test-group-1,DC=dataone,DC=org</subject>
+    <groupName>CN=test-group-1,DC=dataone,DC=org</groupName>
+    <hasMember>CN=test-person-1,DC=dataone,DC=org</hasMember>
+    <hasMember>CN=test-group-2,DC=dataone,DC=org</hasMember>
+    <rightsHolder>CN=test-person-1,DC=dataone,DC=org</rightsHolder>
+  </group>
+  <group>
+    <subject>CN=test-group-2,DC=dataone,DC=org</subject>
+    <groupName>CN=test-group-2,DC=dataone,DC=org</groupName>
+    <hasMember>CN=test-person-2,DC=dataone,DC=org</hasMember>
+    <hasMember>CN=test-group-3,DC=dataone,DC=org</hasMember>
+    <rightsHolder>CN=test-person-2,DC=dataone,DC=org</rightsHolder>
+  </group>
+  <group>
+		<subject>CN=test-group-3,DC=dataone,DC=org</subject>
+		<groupName>CN=test-group-3,DC=dataone,DC=org</groupName>
+		<hasMember>CN=test-person-3,DC=dataone,DC=org</hasMember>
+		<rightsHolder>CN=test-person-3,DC=dataone,DC=org</rightsHolder>
+	</group>
+</ns2:subjectInfo>
