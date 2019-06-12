@@ -35,14 +35,14 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.commons.io.IOUtils;
-import org.dataone.configuration.Settings;
-import org.dataone.exceptions.MarshallingException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.Header;
 import org.apache.http.HttpException;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
+import org.dataone.configuration.Settings;
+import org.dataone.exceptions.MarshallingException;
 import org.dataone.service.exceptions.AuthenticationTimeout;
 import org.dataone.service.exceptions.BaseException;
 import org.dataone.service.exceptions.IdentifierNotUnique;
@@ -90,31 +90,54 @@ public class ExceptionHandler {
     	return filterErrors(res,false);
     }
     
-    public static InputStream filterErrors(HttpResponse res, boolean allowRedirect)
+    /**
+     * This method maps an HttpResponse onto an InputStream by consuming the 
+     * response headers and throwing an exception when appropriate.
+     * 
+     * @param response
+     * @param allowRedirects - if true, does not throw exceptions for status codes of 3xx 
+     * @return the inputstream of the response content.
+     * 
+     * @throws AuthenticationTimeout
+     * @throws IdentifierNotUnique
+     * @throws InsufficientResources
+     * @throws InvalidCredentials
+     * @throws InvalidRequest
+     * @throws InvalidSystemMetadata
+     * @throws InvalidToken
+     * @throws NotAuthorized
+     * @throws NotFound
+     * @throws NotImplemented
+     * @throws ServiceFailure
+     * @throws UnsupportedMetadataType
+     * @throws UnsupportedType
+     * @throws VersionMismatch
+     * @throws IllegalStateException
+     * @throws IOException
+     * @throws HttpException
+     * @throws SynchronizationFailed
+     */
+    public static InputStream filterErrors(HttpResponse response, boolean allowRedirects)
             throws AuthenticationTimeout, IdentifierNotUnique, InsufficientResources,
             InvalidCredentials, InvalidRequest, InvalidSystemMetadata, InvalidToken,
             NotAuthorized, NotFound, NotImplemented, ServiceFailure,
             UnsupportedMetadataType, UnsupportedType, VersionMismatch,
             IllegalStateException, IOException, HttpException, SynchronizationFailed {
 
-    	int code = res.getStatusLine().getStatusCode();
+        int code = response.getStatusLine().getStatusCode();
         log.info("response httpCode: " + code);
-        // cannot read from an input stream twice.
-//        if (log.isDebugEnabled()) {
-//        	log.debug(IOUtils.toString(res.getEntity().getContent()));
-//        }
         
         if (code == HttpURLConnection.HTTP_OK) {
         	// fall through
         } 
-        else if (allowRedirect && code == HttpURLConnection.HTTP_SEE_OTHER) {
+        else if (allowRedirects && code >= 300 && code < 400) {
         	// fall through
         }
         else {
             // error, so throw exception
-            deserializeAndThrowException(res);
+            deserializeAndThrowException(response);
         }
-        return res.getEntity().getContent();
+        return response.getEntity().getContent();
     }
 
     
@@ -697,7 +720,7 @@ public class ExceptionHandler {
      */
 
     private static void getTraceValue(Element e, TreeMap<String, String> trace_information) {
-        String text = "";
+
         NodeList nl = e.getElementsByTagName("traceInformation");
         if (nl != null && nl.getLength() > 0) {
             Element el = (Element) nl.item(0);

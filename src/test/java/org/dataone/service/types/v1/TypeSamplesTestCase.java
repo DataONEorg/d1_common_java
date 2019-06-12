@@ -50,6 +50,7 @@ import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 
 import org.apache.log4j.Logger;
+import org.dataone.exceptions.MarshallingException;
 import org.dataone.service.types.v2.util.ObjectFormatServiceImpl;
 import org.dataone.service.util.TypeMarshaller;
 import org.junit.Test;
@@ -177,6 +178,20 @@ public class TypeSamplesTestCase {
 
     }
 
+    
+    @Test
+    public void serializeReplica() throws MarshallingException, IOException {
+        Replica r = new Replica();
+        r.setReplicaMemberNode(TypeFactory.buildNodeReference("urn:node:mnTestFOO"));
+        r.setReplicationStatus(ReplicationStatus.COMPLETED);
+        r.setReplicaVerified(new Date());
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        TypeMarshaller.marshalTypeToOutputStream(r, baos);
+       
+        System.out.println(baos.toString());
+    }
+    
+    
     private boolean validateExamples(String xsdUrlString, InputStream xmlInputStream) throws Exception, SAXException, IOException, ParserConfigurationException {
         DocumentBuilder parser;
         // create a SchemaFactory capable of understanding WXS schemas
