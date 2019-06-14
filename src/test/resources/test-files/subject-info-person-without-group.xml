@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:subjectInfo xmlns:ns2="http://ns.dataone.org/service/types/v1">
+  <person>
+    <subject>CN=test-person-4,DC=dataone,DC=org</subject>
+    <givenName>aGivenName4</givenName>
+    <familyName>aFamily4</familyName>
+    <verified>false</verified>
+  </person>
+</ns2:subjectInfo>

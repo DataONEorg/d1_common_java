@@ -32,6 +32,13 @@
     <mediaType name="text/xml"/>
     <extension>xml</extension>
   </objectFormat>
+    <objectFormat>
+    <formatId>eml://ecoinformatics.org/eml-2.2.0</formatId>
+    <formatName>Ecological Metadata Language, version 2.2.0</formatName>
+    <formatType>METADATA</formatType>
+    <mediaType name="text/xml"/>
+    <extension>xml</extension>
+  </objectFormat>
   <objectFormat>
     <!-- http://downloads.esri.com/support/whitepapers/ao_/GeospatialMetadataProfile_J8709_3-03.pdf -->
     <formatId>http://www.esri.com/metadata/esriprof80.dtd</formatId>
