@@ -281,12 +281,23 @@
             <url>LICENSE.txt</url>
         </license>
     </licenses>
-    <scm>
-        <url>https://repository.dataone.org/software/cicore</url>
-        <connection>scm:svn:https://repository.dataone.org/software/cicore</connection>
-        <developerConnection>scm:svn:https://repository.dataone.org/software/cicore</developerConnection>
-        <tag>HEAD</tag>
+   <scm>
+      <url>https://github.com/DataONEorg/d1_common_java</url>
+      <connection>scm:git:ssh://github.com:DataONEorg/d1_common_java.git</connection>
+      <developerConnection>scm:git:ssh://git@github.com:DataONEorg/d1_common_java.git</developerConnection>
+      <tag>HEAD</tag>
     </scm>
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+    <repository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+  </distributionManagement>    
+
     <reporting>
         <plugins>
             <plugin>
