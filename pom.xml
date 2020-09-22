@@ -139,28 +139,15 @@
             </plugin>
         </plugins>
     </build>
-    <repositories>
-        <repository>
-            <id>sonatype.org</id>
-            <url>https://repository.sonatype.org/content/shadows/centralm1</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>dataone.org</id>
-            <url>http://maven.dataone.org/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
+<repositories>
+    <!-- Added to get the Atmosphere 1.1.0-SNAPSHOT, can be removed when 1.1.0 is released -->
+    <repository>
+        <id>oss.sonatype.org-snapshot</id>
+        <url>http://oss.sonatype.org/content/repositories/snapshots</url>
+        <releases><enabled>false</enabled></releases>
+        <snapshots><enabled>true</enabled></snapshots>
+    </repository>
+</repositories>
     <dependencies>
         <dependency>
             <groupId>javax.mail</groupId>
