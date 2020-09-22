@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.dataone</groupId>
     <artifactId>d1_common_java</artifactId>
@@ -133,21 +132,25 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <!-- <additionalparam>-noqualifier org.dataone.*:java.lang.*</additionalparam> -->
+                    <!-- <additionalparam>-noqualifier org.dataone.*:java.lang.*</additionalparam>-->
                     <detectOfflineLinks>false</detectOfflineLinks>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-<repositories>
-    <!-- Added to get the Atmosphere 1.1.0-SNAPSHOT, can be removed when 1.1.0 is released -->
-    <repository>
-        <id>oss.sonatype.org-snapshot</id>
-        <url>http://oss.sonatype.org/content/repositories/snapshots</url>
-        <releases><enabled>false</enabled></releases>
-        <snapshots><enabled>true</enabled></snapshots>
-    </repository>
-</repositories>
+    <repositories>
+        <!-- Added to get the Atmosphere 1.1.0-SNAPSHOT, can be removed when 1.1.0 is released -->
+        <repository>
+            <id>oss.sonatype.org-snapshot</id>
+            <url>http://oss.sonatype.org/content/repositories/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
     <dependencies>
         <dependency>
             <groupId>javax.mail</groupId>
@@ -174,16 +177,16 @@
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
         </dependency>
-<!--         <dependency> -->
-<!--             <groupId>org.apache.logging.log4j</groupId> -->
-<!--             <artifactId>log4j-api</artifactId> -->
-<!--             <version>2.6.2</version> -->
-<!--         </dependency> -->
-<!--         <dependency> -->
-<!--             <groupId>org.apache.logging.log4j</groupId> -->
-<!--             <artifactId>log4j-core</artifactId> -->
-<!--             <version>2.6.2</version> -->
-<!--         </dependency> -->
+        <!--         <dependency>-->
+        <!--             <groupId>org.apache.logging.log4j</groupId>-->
+        <!--             <artifactId>log4j-api</artifactId>-->
+        <!--             <version>2.6.2</version>-->
+        <!--         </dependency>-->
+        <!--         <dependency>-->
+        <!--             <groupId>org.apache.logging.log4j</groupId>-->
+        <!--             <artifactId>log4j-core</artifactId>-->
+        <!--             <version>2.6.2</version>-->
+        <!--         </dependency>-->
         <dependency>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
@@ -242,8 +245,7 @@
             <groupId>commons-configuration</groupId>
             <artifactId>commons-configuration</artifactId>
             <version>1.7</version>
-            <!-- later versions changes getList() to return List<Object> 
-                instead of List<String> so users will need to us getStringArray instead (refactor) -->
+            <!-- later versions changes getList() to return List<Object>instead of List<String>so users will need to us getStringArray instead (refactor) -->
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
@@ -262,11 +264,7 @@
             <type>jar</type>
             <scope>provided</scope>
         </dependency>
-<!--        <dependency> 
-            <groupId>qdox</groupId> 
-            <artifactId>qdox</artifactId> 
-            <version>1.6.1</version> 
-        </dependency> -->
+        <!--        <dependency><groupId>qdox</groupId><artifactId>qdox</artifactId><version>1.6.1</version></dependency>-->
         <dependency>
             <groupId>org.dataone</groupId>
             <artifactId>d1_test_resources</artifactId>
@@ -281,23 +279,22 @@
             <url>LICENSE.txt</url>
         </license>
     </licenses>
-   <scm>
-      <url>https://github.com/DataONEorg/d1_common_java</url>
-      <connection>scm:git:ssh://github.com:DataONEorg/d1_common_java.git</connection>
-      <developerConnection>scm:git:ssh://git@github.com:DataONEorg/d1_common_java.git</developerConnection>
-      <tag>HEAD</tag>
+    <scm>
+        <url>https://github.com/DataONEorg/d1_common_java</url>
+        <connection>scm:git:ssh://github.com:DataONEorg/d1_common_java.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com:DataONEorg/d1_common_java.git</developerConnection>
+        <tag>HEAD</tag>
     </scm>
-  <distributionManagement>
-    <snapshotRepository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-    </snapshotRepository>
-    <repository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-    </repository>
-  </distributionManagement>    
-
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
     <reporting>
         <plugins>
             <plugin>
