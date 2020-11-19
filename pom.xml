@@ -139,6 +139,15 @@
                             <goal>resource-bundle</goal>
                         </goals>
                     </execution>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration> <!-- TODO: fix docs. Disable checking -->
+                            <additionalparam>-Xdoclint:none</additionalparam>
+                        </configuration>
+                    </execution>
                 </executions>
                 <configuration>
                     <!-- <additionalparam>-noqualifier org.dataone.*:java.lang.*</additionalparam> -->
