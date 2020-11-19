@@ -12,6 +12,14 @@
         <d1_test_resources.version>2.3.0</d1_test_resources.version>
         <compiler.target.version>1.7</compiler.target.version>
     </properties>
+  <developers>
+    <developer>
+      <name>DataONE</name>
+      <email>developers@dataone.org</email>
+      <organization>DataONE</organization>
+      <organizationUrl>https://dataone.org/</organizationUrl>
+    </developer>
+  </developers>
     <build>
         <directory>target</directory>
         <sourceDirectory>src/main/java</sourceDirectory>
@@ -148,7 +156,26 @@
               <autoReleaseAfterClose>true</autoReleaseAfterClose>
             </configuration>
           </plugin>
-
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.6</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+                <configuration>
+                  <gpgArguments>
+                    <arg>--pinentry-mode</arg>
+                    <arg>loopback</arg>
+                  </gpgArguments>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
         </plugins>
     </build>
 <repositories>
