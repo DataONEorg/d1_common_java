@@ -1,7 +1,8 @@
 DataONE Java Service API
 ------------------------
 
-[![Build Status](https://travis-ci.org/DataONEorg/d1_common_java.svg?branch=master)](https://travis-ci.org/DataONEorg/d1_common_java)
+![Java Build SNAPSHOT and push to Maven Central](https://github.com/DataONEorg/d1_common_java/workflows/Java%20Build%20SNAPSHOT%20and%20push%20to%20Maven%20Central/badge.svg) ![Publish package on release](https://github.com/DataONEorg/d1_common_java/workflows/Publish%20package%20on%20release/badge.svg)
+
 
 This service-api library encapsulates the DataONE service programming
 interface as a set of Java classes that can be implemented by both client
