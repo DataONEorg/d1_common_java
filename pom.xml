@@ -10,6 +10,7 @@
   <description>DataONE Common Code with Service Interface Definitions</description>
   <properties>
     <d1_test_resources.version>2.3.1</d1_test_resources.version>
+    <d1_format_ids.revision>v1.23</d1_format_ids.revision>
     <compiler.target.version>1.7</compiler.target.version>
   </properties>
   <developers>
@@ -50,6 +51,74 @@
           <source>1.7</source>
           <target>${compiler.target.version}</target>
         </configuration>
+      </plugin>
+      <plugin>
+        <!-- https://github.com/maven-download-plugin/maven-download-plugin -->
+        <groupId>com.googlecode.maven-download-plugin</groupId>
+        <artifactId>download-maven-plugin</artifactId>
+        <version>1.6.0</version>
+        <executions>
+          <execution>
+            <id>install-format-ids</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>wget</goal>
+            </goals>
+            <configuration>
+              <url>https://raw.githubusercontent.com/DataONEorg/object-formats/${d1_format_ids.revision}/objectFormatListV2.xml</url>
+              <unpack>false</unpack>
+              <outputDirectory>${project.basedir}/src/main/resources/org/dataone/service/resources/config/v2</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <!-- Move the downloaded object format list to the expected location -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>validate</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <tasks>
+                <move file="${project.basedir}/src/main/resources/org/dataone/service/resources/config/v2/objectFormatListV2.xml"
+                      tofile="${project.basedir}/src/main/resources/org/dataone/service/resources/config/v2/objectFormatList.xml"/>
+              </tasks>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>xml-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>validate</phase>
+            <goals>
+              <goal>transform</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <transformationSets>
+            <transformationSet>
+              <dir>${project.basedir}/src/main/resources/org/dataone/service/resources/config/v2/</dir>
+              <includes>objectFormatList.xml</includes>
+              <outputDir>${project.basedir}/src/main/resources/org/dataone/service/resources/config/v1/</outputDir>
+              <stylesheet>${project.basedir}/objectFormatListv2-to-v1.xsl</stylesheet>
+            </transformationSet>
+          </transformationSets>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>net.sf.saxon</groupId>
+            <artifactId>Saxon-HE</artifactId>
+            <version>10.3</version>
+          </dependency>
+        </dependencies>
       </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
