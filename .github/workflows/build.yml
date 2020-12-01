@@ -20,6 +20,7 @@ jobs:
           server-password: MAVEN_PASSWORD
           gpg-private-key: ${{ secrets.OSSRH_GPG_SECRET_KEY}}
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
+
       - name: Cache Maven packages
         uses: actions/cache@v2
         with:

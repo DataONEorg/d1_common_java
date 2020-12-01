@@ -1,15 +1,14 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.dataone</groupId>
     <artifactId>d1_common_java</artifactId>
     <packaging>jar</packaging>
-    <version>2.3.0</version>
+    <version>2.4.0-SNAPSHOT</version>
     <name>DataONE_Common_Java</name>
     <url>http://dataone.org</url>
     <description>DataONE Common Code with Service Interface Definitions</description>
     <properties>
-        <d1_test_resources.version>2.3.0</d1_test_resources.version>
+        <d1_test_resources.version>2.3.1</d1_test_resources.version>
         <compiler.target.version>1.7</compiler.target.version>
     </properties>
   <developers>
@@ -89,6 +88,7 @@
                     </execution>
                 </executions>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
@@ -150,7 +150,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <!-- <additionalparam>-noqualifier org.dataone.*:java.lang.*</additionalparam> -->
+                    <!-- <additionalparam>-noqualifier org.dataone.*:java.lang.*</additionalparam>-->
                     <detectOfflineLinks>false</detectOfflineLinks>
                 </configuration>
             </plugin>
@@ -213,7 +213,7 @@
         <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
-            <version>2.1</version>
+            <version>2.9.9</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/log4j/log4j -->
         <!--  NOTE: this is the old logging API, upgrade to org.apache.logging.log4j when possible -->
@@ -222,16 +222,16 @@
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
         </dependency>
-<!--         <dependency> -->
-<!--             <groupId>org.apache.logging.log4j</groupId> -->
-<!--             <artifactId>log4j-api</artifactId> -->
-<!--             <version>2.6.2</version> -->
-<!--         </dependency> -->
-<!--         <dependency> -->
-<!--             <groupId>org.apache.logging.log4j</groupId> -->
-<!--             <artifactId>log4j-core</artifactId> -->
-<!--             <version>2.6.2</version> -->
-<!--         </dependency> -->
+        <!--         <dependency>-->
+        <!--             <groupId>org.apache.logging.log4j</groupId>-->
+        <!--             <artifactId>log4j-api</artifactId>-->
+        <!--             <version>2.6.2</version>-->
+        <!--         </dependency>-->
+        <!--         <dependency>-->
+        <!--             <groupId>org.apache.logging.log4j</groupId>-->
+        <!--             <artifactId>log4j-core</artifactId>-->
+        <!--             <version>2.6.2</version>-->
+        <!--         </dependency>-->
         <dependency>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
@@ -290,8 +290,7 @@
             <groupId>commons-configuration</groupId>
             <artifactId>commons-configuration</artifactId>
             <version>1.7</version>
-            <!-- later versions changes getList() to return List<Object> 
-                instead of List<String> so users will need to us getStringArray instead (refactor) -->
+            <!-- later versions changes getList() to return List<Object>instead of List<String>so users will need to us getStringArray instead (refactor) -->
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
@@ -305,16 +304,12 @@
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
             <type>jar</type>
             <scope>provided</scope>
         </dependency>
-<!--        <dependency> 
-            <groupId>qdox</groupId> 
-            <artifactId>qdox</artifactId> 
-            <version>1.6.1</version> 
-        </dependency> -->
+        <!--        <dependency><groupId>qdox</groupId><artifactId>qdox</artifactId><version>1.6.1</version></dependency>-->
         <dependency>
             <groupId>org.dataone</groupId>
             <artifactId>d1_test_resources</artifactId>
@@ -329,23 +324,22 @@
             <url>LICENSE.txt</url>
         </license>
     </licenses>
-   <scm>
-      <url>https://github.com/DataONEorg/d1_common_java</url>
-      <connection>scm:git:ssh://github.com:DataONEorg/d1_common_java.git</connection>
-      <developerConnection>scm:git:ssh://git@github.com:DataONEorg/d1_common_java.git</developerConnection>
-      <tag>HEAD</tag>
+    <scm>
+        <url>https://github.com/DataONEorg/d1_common_java</url>
+        <connection>scm:git:ssh://github.com:DataONEorg/d1_common_java.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com:DataONEorg/d1_common_java.git</developerConnection>
+        <tag>HEAD</tag>
     </scm>
-  <distributionManagement>
-    <snapshotRepository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-    </snapshotRepository>
-    <repository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-    </repository>
-  </distributionManagement>    
-
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
     <reporting>
         <plugins>
             <plugin>

@@ -28,19 +28,21 @@ import java.net.HttpURLConnection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.regex.Pattern;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.commons.io.IOUtils;
-import org.dataone.exceptions.MarshallingException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.Header;
 import org.apache.http.HttpException;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
+import org.dataone.configuration.Settings;
+import org.dataone.exceptions.MarshallingException;
 import org.dataone.service.exceptions.AuthenticationTimeout;
 import org.dataone.service.exceptions.BaseException;
 import org.dataone.service.exceptions.IdentifierNotUnique;
@@ -71,6 +73,12 @@ public class ExceptionHandler {
 
     protected static Log log = LogFactory.getLog(ExceptionHandler.class);
 
+    static final Pattern headPattern = Pattern.compile("<head>.*?</head>",Pattern.DOTALL);
+    static final Pattern scriptPattern = Pattern.compile("<script>.*?</script>",Pattern.DOTALL);
+    static final Pattern whiteSpacePattern = Pattern.compile("^\\s*$\\n",Pattern.MULTILINE);
+    static final Pattern xmlTagPattern = Pattern.compile("<.*?>");
+    
+    static final boolean limitHtml = Settings.getConfiguration().getBoolean("dataone.execptionHandler.limitOriginalReponseInMessage",true);
 
     public static InputStream filterErrors(HttpResponse res)
             throws AuthenticationTimeout, IdentifierNotUnique, InsufficientResources,
@@ -82,31 +90,54 @@ public class ExceptionHandler {
     	return filterErrors(res,false);
     }
     
-    public static InputStream filterErrors(HttpResponse res, boolean allowRedirect)
+    /**
+     * This method maps an HttpResponse onto an InputStream by consuming the 
+     * response headers and throwing an exception when appropriate.
+     * 
+     * @param response
+     * @param allowRedirects - if true, does not throw exceptions for status codes of 3xx 
+     * @return the inputstream of the response content.
+     * 
+     * @throws AuthenticationTimeout
+     * @throws IdentifierNotUnique
+     * @throws InsufficientResources
+     * @throws InvalidCredentials
+     * @throws InvalidRequest
+     * @throws InvalidSystemMetadata
+     * @throws InvalidToken
+     * @throws NotAuthorized
+     * @throws NotFound
+     * @throws NotImplemented
+     * @throws ServiceFailure
+     * @throws UnsupportedMetadataType
+     * @throws UnsupportedType
+     * @throws VersionMismatch
+     * @throws IllegalStateException
+     * @throws IOException
+     * @throws HttpException
+     * @throws SynchronizationFailed
+     */
+    public static InputStream filterErrors(HttpResponse response, boolean allowRedirects)
             throws AuthenticationTimeout, IdentifierNotUnique, InsufficientResources,
             InvalidCredentials, InvalidRequest, InvalidSystemMetadata, InvalidToken,
             NotAuthorized, NotFound, NotImplemented, ServiceFailure,
             UnsupportedMetadataType, UnsupportedType, VersionMismatch,
             IllegalStateException, IOException, HttpException, SynchronizationFailed {
 
-    	int code = res.getStatusLine().getStatusCode();
+        int code = response.getStatusLine().getStatusCode();
         log.info("response httpCode: " + code);
-        // cannot read from an input stream twice.
-//        if (log.isDebugEnabled()) {
-//        	log.debug(IOUtils.toString(res.getEntity().getContent()));
-//        }
         
         if (code == HttpURLConnection.HTTP_OK) {
         	// fall through
         } 
-        else if (allowRedirect && code == HttpURLConnection.HTTP_SEE_OTHER) {
+        else if (allowRedirects && code >= 300 && code < 400) {
         	// fall through
         }
         else {
             // error, so throw exception
-            deserializeAndThrowException(res);
+            deserializeAndThrowException(response);
         }
-        return res.getEntity().getContent();
+        return response.getEntity().getContent();
     }
 
     
@@ -420,10 +451,23 @@ public class ExceptionHandler {
     private static void deserializeHtmlAndThrowException(InputStream errorStream, String defaultMessage) 
     throws ServiceFailure {
         try {
-            throw new ServiceFailure("-1", defaultMessage + "parser for deserializing HTML not written yet.  Providing message body:\n" + IOUtils.toString(errorStream));
-        } catch (IOException e1) {
+            String rawHtml = IOUtils.toString(errorStream);
+            
+            String finalHtml = rawHtml;
+//            long t0 = System.currentTimeMillis();
+            if (limitHtml) {
+                String headlessHtml = headPattern.matcher(rawHtml).replaceAll("");
+                String scriptlessHtml = scriptPattern.matcher(headlessHtml).replaceAll(""); 
+                String taglessHtml = xmlTagPattern.matcher(scriptlessHtml).replaceAll("");
+                finalHtml = whiteSpacePattern.matcher(taglessHtml).replaceAll("");
+            }
+//            System.out.println("timing: " + (System.currentTimeMillis() - t0));
+            throw new ServiceFailure("-1", defaultMessage + "parser for deserializing HTML not written yet.  Providing stripped-down html message body starting next line:\n" + finalHtml);
+        } 
+        catch (IOException e1) {
             throw new ServiceFailure("-1", defaultMessage + "errorStream could not be reset/reread" + e1.getMessage());
-        } finally {
+        } 
+        finally {
             IOUtils.closeQuietly(errorStream);
         }
     }
@@ -596,7 +640,10 @@ public class ExceptionHandler {
         if (root.hasAttribute("name")) {
             name = root.getAttribute("name");
         }
-        if (root.hasAttribute("pid")) {
+        //since the attribute pid is obsoleted since 2.4. We will handle identifier first.
+        if (root.hasAttribute("identifier")) {
+            pid = root.getAttribute("identifier");
+        } else if (root.hasAttribute("pid")) {
             pid = root.getAttribute("pid");
         }
         if (root.hasAttribute("nodeId")) {
@@ -673,7 +720,7 @@ public class ExceptionHandler {
      */
 
     private static void getTraceValue(Element e, TreeMap<String, String> trace_information) {
-        String text = "";
+
         NodeList nl = e.getElementsByTagName("traceInformation");
         if (nl != null && nl.getLength() > 0) {
             Element el = (Element) nl.item(0);

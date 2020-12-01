@@ -30,6 +30,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.TreeMap;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -60,6 +61,7 @@ import org.dataone.service.exceptions.ServiceFailure;
 import org.dataone.service.exceptions.SynchronizationFailed;
 import org.dataone.service.exceptions.UnsupportedMetadataType;
 import org.dataone.service.exceptions.UnsupportedType;
+import org.dataone.service.exceptions.VersionMismatch;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -624,16 +626,25 @@ public class ExceptionHandlerTestCase {
             NotImplemented, ServiceFailure, UnsupportedMetadataType, UnsupportedType,
             BaseException {
         boolean success = false;
+        String errorReason = "SynchronizationFailed";
+        String detailCode = "1000";
+        String pidString ="pidString";
+        String description = "SynchronizationFailedTest";
         try {
             Integer errorCode = new Integer(500);
-            String errorReason = "SynchronizationFailed";
-            SynchronizationFailed exceptTest = new SynchronizationFailed("100", "test IdentifierNotUnique");
+            TreeMap<String, String> trace_information = new TreeMap<String, String>();
+            trace_information.put("cause",errorReason);
+            SynchronizationFailed exceptTest = new SynchronizationFailed(detailCode, description, pidString,trace_information);
             String exceptTestSerial = exceptTest.serialize(BaseException.FMT_XML);
             ByteArrayInputStream inputStream = new ByteArrayInputStream(exceptTestSerial.getBytes());
 
             ExceptionHandler.deserializeAndThrowException(inputStream, "text/xml", errorCode, errorReason);
         } catch (SynchronizationFailed ex) {
             success = true;
+            assertTrue(ex.getIdentifier().equals(pidString));
+            assertTrue(ex.getPid().equals(pidString));
+            assertTrue(ex.getDescription().equals(description));
+            assertTrue(ex.getDetail_code().equals(detailCode));
         }
         assertTrue(success);
     }
@@ -682,5 +693,25 @@ public class ExceptionHandlerTestCase {
             success = true;
         }
         assertTrue(success);
+    }
+    
+    @Test
+    public void testHtmlPrettyPrinting() {
+        InputStream responseBody = this.getClass().getResourceAsStream("htmlResponseBody.html");
+        
+        try {
+            ExceptionHandler.deserializeAndThrowException(responseBody, "html", 404, "reason");
+        } catch (AuthenticationTimeout | IdentifierNotUnique
+                | InsufficientResources | InvalidCredentials | InvalidRequest
+                | InvalidSystemMetadata | InvalidToken | NotAuthorized
+                | NotFound | NotImplemented | ServiceFailure
+                | UnsupportedMetadataType | UnsupportedType
+                | SynchronizationFailed | VersionMismatch e) {
+            System.out.println(e.getDescription());
+        }
+        
+        
+        
+        
     }
 }

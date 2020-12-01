@@ -106,11 +106,13 @@ public class Settings {
 						config = factory.getConfiguration();
 		    			configuration.addConfiguration(config);
 					} catch (ConfigurationException e) {
-						log.error("Problem loading configuration: " + configURL, e);
+					    log.error(String.format("%s while loading config file %s. Message: %s", 
+		                        e.getClass().getCanonicalName(), configResourceName, e.getMessage()));
 					}
 	        	}
 			} catch (IOException e) {
-				log.error("No configuration resources found for: " + configResourceName, e);
+				log.error(String.format("IOException (%s) while loading config file %s. Message: %s",
+						e.getClass().getCanonicalName(), configResourceName, e.getMessage()));
 			}	
     		
         }
