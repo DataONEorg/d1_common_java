@@ -3,12 +3,13 @@ name: Publish package on release
 # Build and publish to maven central
 on:
   workflow_dispatch:  
-  push:
-    tags: 
-      - "v*"  
-  release:
-    types: 
-      - created
+  # Disable auto publish on release. Trigger manually only.
+  #push:
+  #  tags: 
+  #    - "v*"  
+  #release:
+  #  types: 
+  #    - created
   # Temporary, for inital push to sonatype
   #push: 
   #  branches:
