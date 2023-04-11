@@ -2,9 +2,14 @@ name: Publish package on release
 # Triggered when a new release is created
 # Build and publish to maven central
 on:
-  release:
-    types: 
-      - created
+  workflow_dispatch:  
+  # Disable auto publish on release. Trigger manually only.
+  #push:
+  #  tags: 
+  #    - "v*"  
+  #release:
+  #  types: 
+  #    - created
   # Temporary, for inital push to sonatype
   #push: 
   #  branches:
