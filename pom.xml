@@ -6,12 +6,12 @@
   <packaging>jar</packaging>
   <version>2.4.3-SNAPSHOT</version>
   <name>DataONE_Common_Java</name>
-  <url>http://dataone.org</url>
+  <url>https://dataone.org</url>
   <description>DataONE Common Code with Service Interface Definitions</description>
   <properties>
     <d1_test_resources.version>2.3.1</d1_test_resources.version>
     <d1_format_ids.revision>v1.23</d1_format_ids.revision>
-    <compiler.target.version>1.7</compiler.target.version>
+    <compiler.target.version>1.8</compiler.target.version>
   </properties>
   <developers>
     <developer>
@@ -48,12 +48,12 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
-          <source>1.7</source>
+          <source>1.8</source>
           <target>${compiler.target.version}</target>
         </configuration>
       </plugin>
+      <!--
       <plugin>
-        <!-- https://github.com/maven-download-plugin/maven-download-plugin -->
         <groupId>com.googlecode.maven-download-plugin</groupId>
         <artifactId>download-maven-plugin</artifactId>
         <version>1.6.0</version>
@@ -73,7 +73,6 @@
         </executions>
       </plugin>
       <plugin>
-        <!-- Move the downloaded object format list to the expected location -->
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-antrun-plugin</artifactId>
         <executions>
@@ -120,110 +119,7 @@
           </dependency>
         </dependencies>
       </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>buildnumber-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <phase>validate</phase>
-            <goals>
-              <goal>create</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <doCheck>false</doCheck>
-          <doUpdate>false</doUpdate>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <configuration>
-          <archive>
-            <manifestEntries>
-              <D1-version>${project.version}</D1-version>
-              <D1-SCM-Revision>${buildNumber}</D1-SCM-Revision>
-              <D1-SCM-Branch>${scmBranch}</D1-SCM-Branch>
-              <D1-Build-TimeStamp>${timestamp}</D1-Build-TimeStamp>
-            </manifestEntries>
-          </archive>
-        </configuration>
-        <executions>
-          <!-- make a test resources jar -->
-          <execution>
-            <goals>
-              <goal>test-jar</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-source-plugin</artifactId>
-        <version>2.2.1</version>
-        <executions>
-          <execution>
-            <id>attach-sources</id>
-            <phase>package</phase>
-            <goals>
-              <goal>jar-no-fork</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <artifactId>maven-clean-plugin</artifactId>
-        <configuration>
-          <excludeDefaultDirectories>true</excludeDefaultDirectories>
-          <filesets>
-            <fileset>
-              <directory>${project.build.directory}</directory>
-              <excludes>
-                <exclude>**/*.jar</exclude>
-                <exclude>**/.*</exclude>
-                <exclude>**/.svn/*</exclude>
-              </excludes>
-              <followSymlinks>false</followSymlinks>
-            </fileset>
-          </filesets>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>com.mycila.maven-license-plugin</groupId>
-        <artifactId>maven-license-plugin</artifactId>
-        <configuration>
-          <header>src/license-header.txt</header>
-        </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.9</version>
-        <executions>
-          <execution>
-            <id>resource-bundles</id>
-            <phase>package</phase>
-            <goals>
-              <!-- produce source artifact for main project sources -->
-              <goal>resource-bundle</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>attach-javadocs</id>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-            <configuration>
-              <!-- TODO: fix docs. Disable checking -->
-              <additionalparam>-Xdoclint:none</additionalparam>
-            </configuration>
-          </execution>
-        </executions>
-        <configuration>
-          <!-- <additionalparam>-noqualifier org.dataone.*:java.lang.*</additionalparam>-->
-          <detectOfflineLinks>false</detectOfflineLinks>
-        </configuration>
-      </plugin>
+      -->
       <plugin>
         <groupId>org.sonatype.plugins</groupId>
         <artifactId>nexus-staging-maven-plugin</artifactId>
@@ -261,7 +157,7 @@
     <!-- Added to get the Atmosphere 1.1.0-SNAPSHOT, can be removed when 1.1.0 is released -->
     <repository>
       <id>oss.sonatype.org-snapshot</id>
-      <url>http://oss.sonatype.org/content/repositories/snapshots</url>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
       <releases>
         <enabled>false</enabled>
       </releases>
@@ -278,11 +174,17 @@
       <type>jar</type>
       <scope>compile</scope>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
+    <!-- API, java.xml.bind module -->
     <dependency>
-      <groupId>javax.xml.bind</groupId>
-      <artifactId>jaxb-api</artifactId>
-      <version>2.2.3</version>
+      <groupId>jakarta.xml.bind</groupId>
+      <artifactId>jakarta.xml.bind-api</artifactId>
+      <version>2.3.2</version>
+    </dependency>
+    <!-- Runtime, com.sun.xml.bind module -->
+    <dependency>
+      <groupId>org.glassfish.jaxb</groupId>
+      <artifactId>jaxb-runtime</artifactId>
+      <version>2.3.2</version>
     </dependency>
     <dependency>
       <groupId>joda-time</groupId>
@@ -332,13 +234,6 @@
           <artifactId>commons-lang</artifactId>
         </exclusion>
       </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-clean-plugin</artifactId>
-      <version>2.4.1</version>
-      <type>maven-plugin</type>
-      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>commons-fileupload</groupId>
