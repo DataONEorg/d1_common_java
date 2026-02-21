@@ -11,7 +11,7 @@
   <properties>
     <d1_test_resources.version>2.3.1</d1_test_resources.version>
     <d1_format_ids.revision>v1.23</d1_format_ids.revision>
-    <compiler.target.version>1.8</compiler.target.version>
+    <maven.compiler.release>25</maven.compiler.release>
   </properties>
   <developers>
     <developer>
@@ -47,10 +47,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>1.8</source>
-          <target>${compiler.target.version}</target>
-        </configuration>
       </plugin>
       <!--
       <plugin>
