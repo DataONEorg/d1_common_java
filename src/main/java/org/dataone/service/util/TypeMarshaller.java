@@ -46,34 +46,34 @@ import org.dataone.exceptions.MarshallingException;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-
 /**
  * The standard class used to marshal and unmarshal datatypes to and from input
  * and output streams and file structures.
  * 
- * This class maintains static global state of expensive-to-create JAXB contexts.
+ * This class maintains static global state of expensive-to-create JAXB
+ * contexts.
  * 
- * Schema validation is performed by default upon marshalling, using either the packaged
- * DataONE schemas, or if set, from the list of schemas indicated by marshalling.d1.schema.urls
+ * Schema validation is performed by default upon marshalling, using either the
+ * packaged
+ * DataONE schemas, or if set, from the list of schemas indicated by
+ * marshalling.d1.schema.urls
  * (Can only be reset with restart of the runtime).
  * 
- * Validation by default can be disabled with the configuration property 
+ * Validation by default can be disabled with the configuration property
  * 'marshalling.d1.schema.validation=false'
- * 
- * 
- * 
- * @author rwaltz
  */
 public class TypeMarshaller {
 
     static Logger logger = Logger.getLogger(TypeMarshaller.class.getName());
 
-    static final protected Map<Class,JAXBContext> jaxbContextMap = new HashMap<>();
-    
-    static final protected boolean USE_SCHEMA_VALIDATION = 
-            Settings.getConfiguration().getBoolean("marshalling.d1.schema.validation", /* default */ true);
-    
-    /** The java representation of the DataONE schemas used to validate unmarshalling */
+    static final protected Map<Class, JAXBContext> jaxbContextMap = new HashMap<>();
+
+    static final protected boolean USE_SCHEMA_VALIDATION = Settings.getConfiguration()
+            .getBoolean("marshalling.d1.schema.validation", /* default */ true);
+
+    /**
+     * The java representation of the DataONE schemas used to validate unmarshalling
+     */
     static final protected Schema D1_SCHEMAS;
     static {
         // initialization of D1_SCHEMAS
@@ -84,62 +84,63 @@ public class TypeMarshaller {
         if (schemaUrls == null || schemaUrls.length == 0) {
             // load the ones from the jar
             schemas = new StreamSource[] {
-                    new StreamSource( TypeMarshaller.class.getResourceAsStream("dataoneTypes.xsd") ),
-                    new StreamSource( TypeMarshaller.class.getResourceAsStream("dataoneTypes_v1.1.xsd")),
-                    new StreamSource( TypeMarshaller.class.getResourceAsStream("dataoneTypes_v2.0.xsd")),
-                    new StreamSource( TypeMarshaller.class.getResourceAsStream("dataoneErrors.xsd"))
+                    new StreamSource(TypeMarshaller.class.getResourceAsStream("dataoneTypes.xsd")),
+                    new StreamSource(TypeMarshaller.class.getResourceAsStream("dataoneTypes_v1.1.xsd")),
+                    new StreamSource(TypeMarshaller.class.getResourceAsStream("dataoneTypes_v2.0.xsd")),
+                    new StreamSource(TypeMarshaller.class.getResourceAsStream("dataoneErrors.xsd"))
             };
-        } 
-        else {
+        } else {
             schemas = new StreamSource[schemaUrls.length];
-            for (int i=0; i<schemaUrls.length; i++) {
+            for (int i = 0; i < schemaUrls.length; i++) {
                 String url = schemaUrls[i];
                 logger.debug("Adding schema location: " + url);
 
                 try {
                     schemas[i] = new StreamSource((new URL(url)).openStream());
                 } catch (IOException e) {
-                    throw new Error("Failed to initialize TypeMarshaller with the (DataONE) schemas!! IOException from: " + url,e);
+                    throw new Error(
+                            "Failed to initialize TypeMarshaller with the (DataONE) schemas!! IOException from: " + url,
+                            e);
                 }
             }
-        } 
+        }
 
         // build a new in memory schema from the individual ones
         SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
         try {
-            D1_SCHEMAS =  schemaFactory.newSchema(schemas);
+            D1_SCHEMAS = schemaFactory.newSchema(schemas);
         } catch (SAXException e) {
             throw new Error("Failed to initialize TypeMarshaller with the DataONE schemas!!", e);
         } finally {
-            for (StreamSource s: schemas) {
+            for (StreamSource s : schemas) {
                 IOUtils.closeQuietly(s.getInputStream());
             }
         }
     }
 
-    
     /**
      * A method to manage JAXB data type contexts, as they are expensive to build
-     * and destroy.  Contexts are thread safe, while the Marshallers and Unmarshallers
+     * and destroy. Contexts are thread safe, while the Marshallers and
+     * Unmarshallers
      * built from these are not (and therefore not maintained).
+     * 
      * @param clazz - the class of the context needed
      * @return the JAXBContext for the class
      * @throws JAXBException
      */
     protected static synchronized JAXBContext getJAXBContext(Class clazz) throws JAXBException {
-        if (! jaxbContextMap.containsKey(clazz) ) {
-            jaxbContextMap.put(clazz,JAXBContext.newInstance( clazz ));
+        if (!jaxbContextMap.containsKey(clazz)) {
+            jaxbContextMap.put(clazz, JAXBContext.newInstance(clazz));
         }
         return jaxbContextMap.get(clazz);
     }
-    
 
     /**
      * A method to validate DataONE types against the schemas registered with the
-     * TypeMarshaller.  It delegates validation to the underlying SAX parse, but is 
-     * more efficient than marshalTypeTo... methods in this class, because it does 
+     * TypeMarshaller. It delegates validation to the underlying SAX parse, but is
+     * more efficient than marshalTypeTo... methods in this class, because it does
      * not create output streams, or generate any XML.
-     *  
+     * 
      * @param typeObject
      * @throws MarshallingException
      * @since 2.3.0
@@ -149,53 +150,51 @@ public class TypeMarshaller {
         try {
             Marshaller jaxbMarshaller = TypeMarshaller.getJAXBContext(typeObject.getClass()).createMarshaller();
             jaxbMarshaller.setSchema(D1_SCHEMAS);
-            jaxbMarshaller.marshal( typeObject, new DefaultHandler());
-        } 
-        catch (JAXBException e) {
+            jaxbMarshaller.marshal(typeObject, new DefaultHandler());
+        } catch (JAXBException e) {
             throw new MarshallingException(e);
         }
     }
-    
-    
+
     /**
      * Marshalls the typeObject to the provided file.
      * Schema validation occurs by default.
+     * 
      * @param typeObject
      * @param filenamePath
      * @throws MarshallingException
      * @throws IOException
      * @throws FileNotFoundException
      */
-    public static File marshalTypeToFile(Object typeObject, String filenamePath) 
-    throws MarshallingException, FileNotFoundException, IOException 
-    {
-    	FileOutputStream typeOutput = null;
-    	File outputFile = new File(filenamePath);
-    	typeOutput = new FileOutputStream(outputFile);
-    	
-    	try {
-    		marshalTypeToOutputStream(typeObject, typeOutput);
-    	} 
-    	finally {
-    		if (typeOutput != null)
-    			try {
-    				typeOutput.close();
-    			} catch (IOException ex) {
-    				logger.error(ex.getMessage(), ex);
-    			}
+    public static File marshalTypeToFile(Object typeObject, String filenamePath)
+            throws MarshallingException, FileNotFoundException, IOException {
+        FileOutputStream typeOutput = null;
+        File outputFile = new File(filenamePath);
+        typeOutput = new FileOutputStream(outputFile);
+
+        try {
+            marshalTypeToOutputStream(typeObject, typeOutput);
+        } finally {
+            if (typeOutput != null)
+                try {
+                    typeOutput.close();
+                } catch (IOException ex) {
+                    logger.error(ex.getMessage(), ex);
+                }
         }
         return outputFile;
     }
-    
+
     /**
      * Marshalls the typeObject to the provided outputStream.
      * Schema validation occurs by default.
-     * Does not close the outputstream. 
+     * Does not close the outputstream.
+     * 
      * @param typeObject
      * @param os
      * @throws MarshallingException
      * @throws IOException
-     */    
+     */
     public static void marshalTypeToOutputStream(Object typeObject, OutputStream os)
             throws MarshallingException, IOException {
         try {
@@ -210,23 +209,27 @@ public class TypeMarshaller {
             throw new MarshallingException(e.getMessage(), e);
         }
     }
-    
+
     /**
      * Marshalls the typeObject to the provided outputStream.
      * Schema validation occurs by default.
-     * Does not close the outputstream. 
+     * Does not close the outputstream.
+     * 
      * @param typeObject
      * @param os
      * @param styleSheet
      * @throws MarshallingException
      * @throws IOException
-     * @deprecated - the stylesheet parameter is not supported and will be ignored.  It is recommended to use XSLT processing on the output of this method, rather than trying to inject a stylesheet declaration into the marshalled XML.  
+     * @deprecated - the stylesheet parameter is not supported and will be ignored.
+     *             It is recommended to use XSLT processing on the output of this
+     *             method, rather than trying to inject a stylesheet declaration
+     *             into the marshalled XML.
      */
     public static void marshalTypeToOutputStream(Object typeObject, OutputStream os, String styleSheet)
             throws MarshallingException, IOException {
         marshalTypeToOutputStream(typeObject, os);
-    }    
-    
+    }
+
     /**
      * Unmarshals the contents of the filenamePath into the specified domainClass.
      * 
@@ -239,19 +242,17 @@ public class TypeMarshaller {
      * @throws IllegalAccessException
      * @throws MarshallingException
      */
-    public static <T> T unmarshalTypeFromFile(Class<T> domainClass, File file) 
-    throws IOException, InstantiationException, IllegalAccessException, MarshallingException 
-    {
+    public static <T> T unmarshalTypeFromFile(Class<T> domainClass, File file)
+            throws IOException, InstantiationException, IllegalAccessException, MarshallingException {
         try {
             Unmarshaller jaxbUnmarshaller = TypeMarshaller.getJAXBContext(domainClass).createUnmarshaller();
-            return (T) jaxbUnmarshaller.unmarshal(file); 
+            return (T) jaxbUnmarshaller.unmarshal(file);
         } catch (JAXBException e) {
-            throw new MarshallingException(e.getMessage(),e);
+            throw new MarshallingException(e.getMessage(), e);
         }
     }
 
-    
-     /**
+    /**
      * Unmarshalls the contents of file parameter to the specified domainClass
      * 
      * @param <T>
@@ -263,16 +264,15 @@ public class TypeMarshaller {
      * @throws IllegalAccessException
      * @throws MarshallingException
      */
-    public static <T> T unmarshalTypeFromFile(Class<T> domainClass, String filenamePath) 
-    throws IOException, InstantiationException, IllegalAccessException, MarshallingException 
-    {
+    public static <T> T unmarshalTypeFromFile(Class<T> domainClass, String filenamePath)
+            throws IOException, InstantiationException, IllegalAccessException, MarshallingException {
         return TypeMarshaller.unmarshalTypeFromFile(domainClass, new File(filenamePath));
     }
-    
-    
+
     /**
      * Unmarshals the inputStream to the specified domainClass
      * and unequivocally closes the passed in InputStream .
+     * 
      * @param <T>
      * @param domainClass
      * @param inputStream
@@ -282,14 +282,13 @@ public class TypeMarshaller {
      * @throws IllegalAccessException
      * @throws MarshallingException
      */
-    public static <T> T unmarshalTypeFromStream(Class<T> domainClass, InputStream inputStream) 
-    throws IOException, InstantiationException, IllegalAccessException, MarshallingException 
-    {
+    public static <T> T unmarshalTypeFromStream(Class<T> domainClass, InputStream inputStream)
+            throws IOException, InstantiationException, IllegalAccessException, MarshallingException {
         try {
             Unmarshaller jaxbUnmarshaller = TypeMarshaller.getJAXBContext(domainClass).createUnmarshaller();
             return (T) jaxbUnmarshaller.unmarshal(inputStream);
         } catch (JAXBException e) {
-            throw new MarshallingException(e.getMessage(),e);
+            throw new MarshallingException(e.getMessage(), e);
         } finally {
             IOUtils.closeQuietly(inputStream);
         }

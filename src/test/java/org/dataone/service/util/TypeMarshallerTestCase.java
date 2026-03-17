@@ -61,42 +61,40 @@ import org.dataone.service.types.v1.SystemMetadata;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
-
 /**
  *
  * @author waltz
  */
 public class TypeMarshallerTestCase {
-	
-	private static Logger log = Logger.getLogger(TypeMarshallerTestCase.class);
+
+    private static Logger log = Logger.getLogger(TypeMarshallerTestCase.class);
 
     @Test
     public void deserializeSystemMetadata() {
         try {
-            InputStream is = this.getClass().getResourceAsStream("/org/dataone/service/samples/v1/systemMetadataSample1.xml");
+            InputStream is = this.getClass()
+                    .getResourceAsStream("/org/dataone/service/samples/v1/systemMetadataSample1.xml");
             TypeMarshaller.unmarshalTypeFromStream(SystemMetadata.class, is);
         } catch (IOException ex) {
-            fail("Test misconfiguration" +  ex);
+            fail("Test misconfiguration" + ex);
         } catch (InstantiationException ex) {
             fail("Test misconfiguration" + ex);
         } catch (IllegalAccessException ex) {
-            fail("Test misconfiguration" +  ex);
+            fail("Test misconfiguration" + ex);
         } catch (MarshallingException ex) {
-            fail("Test misconfiguration" +  ex);
+            fail("Test misconfiguration" + ex);
         }
     }
-    
 
-
-    
     @Test
     public void deserializeSerializeSysMeta_performanceTest() {
-        for (int i = 1; i <=2; i++) {
+        for (int i = 1; i <= 2; i++) {
             Date start = null;
             Date mid = null;
             Date end = null;
             try {
-                InputStream is = this.getClass().getResourceAsStream("/org/dataone/service/samples/v1/systemMetadataSample1.xml");
+                InputStream is = this.getClass()
+                        .getResourceAsStream("/org/dataone/service/samples/v1/systemMetadataSample1.xml");
                 start = new Date();
                 SystemMetadata symeta = TypeMarshaller.unmarshalTypeFromStream(SystemMetadata.class, is);
                 mid = new Date();
@@ -104,15 +102,15 @@ public class TypeMarshallerTestCase {
                 TypeMarshaller.marshalTypeToOutputStream(symeta, os);
                 end = new Date();
             } catch (IOException ex) {
-                fail("Test misconfiguration" +  ex);
+                fail("Test misconfiguration" + ex);
             } catch (InstantiationException ex) {
                 fail("Test misconfiguration" + ex);
             } catch (IllegalAccessException ex) {
-                fail("Test misconfiguration" +  ex);
+                fail("Test misconfiguration" + ex);
             } catch (MarshallingException ex) {
-                fail("Test misconfiguration" +  ex);
+                fail("Test misconfiguration" + ex);
             } finally {
-                if (mid == null) 
+                if (mid == null)
                     mid = new Date();
                 if (end == null)
                     end = new Date();
@@ -122,18 +120,19 @@ public class TypeMarshallerTestCase {
             }
         }
     }
-    
+
     @Test
     public void deserializeSerializeObjectList_performanceTest() {
         List<Long> uTimes = new ArrayList<>();
         List<Long> mTimes = new ArrayList<>();
-        for (int i = 1; i <=50; i++) {
+        for (int i = 1; i <= 50; i++) {
             Date start = null;
             Date mid = null;
             Date end = null;
-            
+
             try {
-                InputStream is = this.getClass().getResourceAsStream("/org/dataone/service/samples/v2/objectList7000.xml");
+                InputStream is = this.getClass()
+                        .getResourceAsStream("/org/dataone/service/samples/v2/objectList7000.xml");
                 start = new Date();
                 ObjectList ol = TypeMarshaller.unmarshalTypeFromStream(ObjectList.class, is);
                 mid = new Date();
@@ -141,31 +140,31 @@ public class TypeMarshallerTestCase {
                 TypeMarshaller.marshalTypeToOutputStream(ol, os);
                 end = new Date();
             } catch (IOException ex) {
-                fail("Test misconfiguration" +  ex);
+                fail("Test misconfiguration" + ex);
             } catch (InstantiationException ex) {
                 fail("Test misconfiguration" + ex);
             } catch (IllegalAccessException ex) {
-                fail("Test misconfiguration" +  ex);
+                fail("Test misconfiguration" + ex);
             } catch (MarshallingException ex) {
-                fail("Test misconfiguration" +  ex);
+                fail("Test misconfiguration" + ex);
             } finally {
-                if (mid == null) 
+                if (mid == null)
                     mid = new Date();
                 if (end == null)
                     end = new Date();
             }
             long uTime = mid.getTime() - start.getTime();
             long mTime = end.getTime() - mid.getTime();
-//            System.out.printf("%d\t%d\t%d\n", i, uTime, mTime);
+            // System.out.printf("%d\t%d\t%d\n", i, uTime, mTime);
             uTimes.add(uTime);
             mTimes.add(mTime);
         }
         System.out.println("===================================");
         System.out.println("index\tunmarsh\tmarsh");
         System.out.println("===================================");
-        System.out.printf("count\t%d\t%d\n", uTimes.size(),mTimes.size());
+        System.out.printf("count\t%d\t%d\n", uTimes.size(), mTimes.size());
         System.out.printf("sum\t%d\t%d\n", sumOfLongs(uTimes), sumOfLongs(mTimes));
-        System.out.printf("mean\t%d\t%d\n", sumOfLongs(uTimes)/uTimes.size(), sumOfLongs(mTimes)/mTimes.size());
+        System.out.printf("mean\t%d\t%d\n", sumOfLongs(uTimes) / uTimes.size(), sumOfLongs(mTimes) / mTimes.size());
         System.out.printf("median\t%d\t%d\n", medianOfLongs(uTimes), medianOfLongs(mTimes));
 
     }
@@ -177,43 +176,40 @@ public class TypeMarshallerTestCase {
         }
         return sum;
     }
-    
+
     private long medianOfLongs(List<Long> elements) {
         int count = elements.size();
         if (count == 1)
             return elements.get(0);
-        
+
         long median = 0;
         int halfcount = count / 2;
         Long[] longs = elements.toArray(new Long[0]);
         Arrays.sort(longs);
 
         if (count % 2 == 0) {
-            return (longs[halfcount] + longs[halfcount+1]) / 2;
+            return (longs[halfcount] + longs[halfcount + 1]) / 2;
         } else {
             return longs[halfcount];
         }
     }
-    
-    
-    
+
     @Test
     public void deserializeNode() {
         try {
             InputStream is = this.getClass().getResourceAsStream("/org/dataone/service/samples/v1/mnNode1.xml");
             TypeMarshaller.unmarshalTypeFromStream(Node.class, is);
         } catch (IOException ex) {
-            fail("Test misconfiguration" +  ex);
+            fail("Test misconfiguration" + ex);
         } catch (InstantiationException ex) {
             fail("Test misconfiguration" + ex);
         } catch (IllegalAccessException ex) {
-            fail("Test misconfiguration" +  ex);
+            fail("Test misconfiguration" + ex);
         } catch (MarshallingException ex) {
-            fail("Test misconfiguration" +  ex);
+            fail("Test misconfiguration" + ex);
         }
     }
 
-    
     @Test
     public void serializeEmptyObjectList() {
         ObjectList objectList = new ObjectList();
@@ -225,52 +221,52 @@ public class TypeMarshallerTestCase {
             String xmlObjectList = os.toString();
             assertNotNull(xmlObjectList);
         } catch (IOException ex) {
-            fail("Test misconfiguration" +  ex);
+            fail("Test misconfiguration" + ex);
         } catch (MarshallingException ex) {
-            fail("Test misconfiguration" +  ex);
+            fail("Test misconfiguration" + ex);
         }
     }
 
     @Test
     public void deserializeEmptyObjectListSize() {
         try {
-            InputStream is = this.getClass().getResourceAsStream("/org/dataone/service/samples/v1/objectListSample2.xml");
+            InputStream is = this.getClass()
+                    .getResourceAsStream("/org/dataone/service/samples/v1/objectListSample2.xml");
             ObjectList objectList = TypeMarshaller.unmarshalTypeFromStream(ObjectList.class, is);
             assertNotNull(objectList);
             assertNotNull(objectList.sizeObjectInfoList());
         } catch (IOException ex) {
-            fail("Test misconfiguration" +  ex);
+            fail("Test misconfiguration" + ex);
         } catch (InstantiationException ex) {
             fail("Test misconfiguration" + ex);
         } catch (IllegalAccessException ex) {
-            fail("Test misconfiguration" +  ex);
+            fail("Test misconfiguration" + ex);
         } catch (MarshallingException ex) {
-            fail("Test misconfiguration" +  ex);
+            fail("Test misconfiguration" + ex);
         }
     }
-    
+
     @Test
     public void serializeNodeStylesheet() {
         try {
             InputStream is = this.getClass().getResourceAsStream("/org/dataone/service/samples/v1/mnNode1.xml");
             Node node = TypeMarshaller.unmarshalTypeFromStream(Node.class, is);
-            //String styleSheet = "test.xsl";
+            // String styleSheet = "test.xsl";
             ByteArrayOutputStream os = new ByteArrayOutputStream();
-			TypeMarshaller.marshalTypeToOutputStream(node, os);
-			String result = os.toString("UTF-8");
+            TypeMarshaller.marshalTypeToOutputStream(node, os);
+            String result = os.toString("UTF-8");
             assertTrue(result.length() > 0);
         } catch (IOException ex) {
-            fail("Test misconfiguration" +  ex);
+            fail("Test misconfiguration" + ex);
         } catch (InstantiationException ex) {
             fail("Test misconfiguration" + ex);
         } catch (IllegalAccessException ex) {
-            fail("Test misconfiguration" +  ex);
+            fail("Test misconfiguration" + ex);
         } catch (MarshallingException ex) {
-            fail("Test misconfiguration" +  ex);
+            fail("Test misconfiguration" + ex);
         }
     }
-    
-    
+
     @Test
     public void serializeSystemMetadata() {
         try {
@@ -294,11 +290,11 @@ public class TypeMarshallerTestCase {
             s.getRightsHolder().setValue("groucho");
             s.setSerialVersion(BigInteger.ONE);
             s.setSize(new BigInteger("9"));
-//            s.setSubmitter(new Subject());
-//            s.getSubmitter().setValue("harpo");
+            // s.setSubmitter(new Subject());
+            // s.getSubmitter().setValue("harpo");
 
             String styleSheet = "test.xsl";
-//            TypeMarshaller.marshalTypeToOutputStream(s, os,styleSheet);
+            // TypeMarshaller.marshalTypeToOutputStream(s, os,styleSheet);
             TypeMarshaller.marshalTypeToOutputStream(s, os);
 
             String result = os.toString("UTF-8");
@@ -307,42 +303,44 @@ public class TypeMarshallerTestCase {
             os.close();
             ByteArrayOutputStream os2 = new ByteArrayOutputStream();
             TypeMarshaller.marshalTypeToOutputStream(s, os2);
-            
+
         } catch (IOException ex) {
-            fail("Test misconfiguration" +  ex);
-//        } catch (InstantiationException ex) {
-//            fail("Test misconfiguration" + ex);
-//        } catch (IllegalAccessException ex) {
-//            fail("Test misconfiguration" +  ex);
+            fail("Test misconfiguration" + ex);
+            // } catch (InstantiationException ex) {
+            // fail("Test misconfiguration" + ex);
+            // } catch (IllegalAccessException ex) {
+            // fail("Test misconfiguration" + ex);
         } catch (MarshallingException ex) {
-            fail("Problem with TypeMarshaller.  Cause: " +  ex.getCause().getClass().getCanonicalName()
+            fail("Problem with TypeMarshaller.  Cause: " + ex.getCause().getClass().getCanonicalName()
                     + ex.getCause().getMessage());
         }
     }
-    
+
     @Test
-    public void testMarshallingShouldDoSchemaValidation() throws InstantiationException, IllegalAccessException, IOException, MarshallingException, SAXException {
-        
+    public void testMarshallingShouldDoSchemaValidation()
+            throws InstantiationException, IllegalAccessException, IOException, MarshallingException, SAXException {
+
         InputStream is = this.getClass().getResourceAsStream("systemMetadata-invalid_schema.xml");
-        org.dataone.service.types.v1.SystemMetadata sysMeta = 
-                TypeMarshaller.unmarshalTypeFromStream(org.dataone.service.types.v1.SystemMetadata.class, is);
+        org.dataone.service.types.v1.SystemMetadata sysMeta = TypeMarshaller
+                .unmarshalTypeFromStream(org.dataone.service.types.v1.SystemMetadata.class, is);
         try {
             TypeMarshaller.marshalTypeToOutputStream(sysMeta, new ByteArrayOutputStream());
         } catch (MarshallingException e) {
             // should throw exception
         }
-     }
-    
+    }
+
     @Test
-    public void testValidateSchema() throws InstantiationException, IllegalAccessException, IOException, MarshallingException {
-        
+    public void testValidateSchema()
+            throws InstantiationException, IllegalAccessException, IOException, MarshallingException {
+
         InputStream is = this.getClass().getResourceAsStream("systemMetadata-invalid_schema.xml");
-        org.dataone.service.types.v1.SystemMetadata sysMeta = 
-                TypeMarshaller.unmarshalTypeFromStream(org.dataone.service.types.v1.SystemMetadata.class, is);
+        org.dataone.service.types.v1.SystemMetadata sysMeta = TypeMarshaller
+                .unmarshalTypeFromStream(org.dataone.service.types.v1.SystemMetadata.class, is);
         try {
             TypeMarshaller.validateAgainstSchema(sysMeta);
         } catch (MarshallingException e) {
             // should throw exception
         }
-     }
+    }
 }
