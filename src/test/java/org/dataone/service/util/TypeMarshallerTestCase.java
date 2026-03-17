@@ -35,18 +35,8 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-import javax.xml.XMLConstants;
-import javax.xml.bind.JAXBException;
-import javax.xml.transform.Source;
-import javax.xml.transform.stream.StreamSource;
-import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
-
-import org.dataone.configuration.Settings;
 import org.dataone.exceptions.MarshallingException;
 import org.apache.commons.io.output.NullOutputStream;
 import org.apache.log4j.Logger;
