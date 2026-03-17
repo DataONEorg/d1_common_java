@@ -174,7 +174,7 @@ public class TypeMarshaller {
     	typeOutput = new FileOutputStream(outputFile);
     	
     	try {
-    		marshalTypeToOutputStream(typeObject, typeOutput, null);
+    		marshalTypeToOutputStream(typeObject, typeOutput);
     	} 
     	finally {
     		if (typeOutput != null)
@@ -196,10 +196,19 @@ public class TypeMarshaller {
      * @throws MarshallingException
      * @throws IOException
      */    
-    public static void marshalTypeToOutputStream(Object typeObject, OutputStream os) 
-    throws MarshallingException, IOException 
-    {
-        marshalTypeToOutputStream(typeObject, os, null);
+    public static void marshalTypeToOutputStream(Object typeObject, OutputStream os)
+            throws MarshallingException, IOException {
+        try {
+            Marshaller jaxbMarshaller = TypeMarshaller.getJAXBContext(typeObject.getClass()).createMarshaller();
+            jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            if (TypeMarshaller.USE_SCHEMA_VALIDATION)
+                jaxbMarshaller.setSchema(D1_SCHEMAS);
+
+            jaxbMarshaller.marshal(typeObject, os);
+
+        } catch (JAXBException e) {
+            throw new MarshallingException(e.getMessage(), e);
+        }
     }
     
     /**
@@ -211,28 +220,12 @@ public class TypeMarshaller {
      * @param styleSheet
      * @throws MarshallingException
      * @throws IOException
+     * @deprecated - the stylesheet parameter is not supported and will be ignored.  It is recommended to use XSLT processing on the output of this method, rather than trying to inject a stylesheet declaration into the marshalled XML.  
      */
     public static void marshalTypeToOutputStream(Object typeObject, OutputStream os, String styleSheet)
-    throws MarshallingException, IOException 
-    {
-        try {
-            Marshaller jaxbMarshaller = TypeMarshaller.getJAXBContext(typeObject.getClass()).createMarshaller();
-            //                jaxbMarshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, "dataoneTypes.xsd");
-            jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-            if (styleSheet != null) {
-                jaxbMarshaller.setProperty("com.sun.xml.internal.bind.xmlHeaders",  
-                        String.format("<?xml-stylesheet type=\"text/xsl\" href=\"%s\" ?>", styleSheet));
-            }
-            if (TypeMarshaller.USE_SCHEMA_VALIDATION)
-                jaxbMarshaller.setSchema(D1_SCHEMAS);
-            
-            jaxbMarshaller.marshal( typeObject, os );
-
-        } catch (JAXBException e) {
-            throw new MarshallingException(e.getMessage(),e);
-        }
-    }
-    
+            throws MarshallingException, IOException {
+        marshalTypeToOutputStream(typeObject, os);
+    }    
     
     /**
      * Unmarshals the contents of the filenamePath into the specified domainClass.
