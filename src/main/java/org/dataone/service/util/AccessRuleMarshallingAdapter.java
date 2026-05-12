@@ -2,7 +2,6 @@ package org.dataone.service.util;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
-import org.dataone.service.types.v1.AccessPolicy;
 import org.dataone.service.types.v1.AccessRule;
 
 public class AccessRuleMarshallingAdapter extends XmlAdapter<AccessRule, AccessRule> {
