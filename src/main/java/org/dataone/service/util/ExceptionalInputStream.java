@@ -58,15 +58,15 @@ public class ExceptionalInputStream extends PushbackInputStream {
 			byte[] b = new byte[lookAheadBytes];
 			int totalRead = read(b,0,5);
 			if (totalRead <1) {
-				isException = new Boolean(false);
+				isException = Boolean.FALSE;
 				return isException.booleanValue();
 			}
 			
 			String readString = new String(b,"UTF-8");
 			if (readString.startsWith(D1_XML_ERROR)) {
-				isException = new Boolean(true);
+				isException = Boolean.TRUE;
 			} else {
-				isException = new Boolean(true);
+				isException = Boolean.TRUE;
 				int newlyRead = 0;
 				while (newlyRead != -1 && bracketCount < 2 && totalRead < lookAheadBytes - lookAheadIncrement) {
 					newlyRead = read(b,totalRead,lookAheadIncrement);
@@ -74,7 +74,7 @@ public class ExceptionalInputStream extends PushbackInputStream {
 						totalRead += newlyRead;
 						readString = new String(b,"UTF-8");
 						if (readString.contains(D1_TYPE_INDICATOR)) {
-							isException = new Boolean(false);
+							isException = Boolean.FALSE;
 							break;
 						}
 						if (readString.contains(">")) {

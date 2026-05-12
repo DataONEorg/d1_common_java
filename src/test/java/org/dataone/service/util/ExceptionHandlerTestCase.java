@@ -29,6 +29,7 @@ import static org.junit.Assert.fail;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.io.UnsupportedEncodingException;
 import java.util.TreeMap;
 
@@ -87,7 +88,7 @@ public class ExceptionHandlerTestCase {
         InputStream nonErrorStream = new ByteArrayInputStream(nonErrorString.getBytes("UTF-8"));
         try {
             InputStream is = ExceptionHandler.filterErrors(nonErrorStream, false, "text");
-            assertEquals(nonErrorString, IOUtils.toString(is));
+            assertEquals(nonErrorString, IOUtils.toString(is, StandardCharsets.UTF_8));
 
         } catch (BaseException be) {
             fail("shouldn't throw exception");
@@ -194,7 +195,7 @@ public class ExceptionHandlerTestCase {
         } catch (NotFound e) {
             assertEquals(setDetailCode, e.getDetail_code());
             assertEquals(setDescription, e.getDescription());
-            assertEquals(setPID, e.getPid());
+            assertEquals(setPID, e.getIdentifier());
         } catch (BaseException e) {
             fail("shouldn't throw this exception: " + e.getClass().getSimpleName());
         } catch (IllegalStateException e) {
@@ -266,7 +267,7 @@ public class ExceptionHandlerTestCase {
     @Test
     public void testDeserializeAndThrowException() throws UnsupportedEncodingException {
 
-        Integer errorCode = new Integer(404);
+        Integer errorCode = Integer.valueOf(404);
         String errorReason = "Not Found";
         String contentType = "xml";
         String setDescription = "a description";
@@ -354,7 +355,7 @@ public class ExceptionHandlerTestCase {
             BaseException {
         boolean success = false;
         try {
-            Integer errorCode = new Integer(408);
+            Integer errorCode = Integer.valueOf(408);
             String errorReason = "AuthenticationTimeout";
             AuthenticationTimeout authTimeout = new AuthenticationTimeout("100", "test AuthenticationTimeout");
             String exceptTestSerial = authTimeout.serialize(BaseException.FMT_XML);
@@ -375,7 +376,7 @@ public class ExceptionHandlerTestCase {
             BaseException {
         boolean success = false;
         try {
-            Integer errorCode = new Integer(409);
+            Integer errorCode = Integer.valueOf(409);
             String errorReason = "IdentifierNotUnique";
             IdentifierNotUnique exceptTest = new IdentifierNotUnique("100", "test IdentifierNotUnique");
             String exceptTestSerial = exceptTest.serialize(BaseException.FMT_XML);
@@ -396,7 +397,7 @@ public class ExceptionHandlerTestCase {
             BaseException {
         boolean success = false;
         try {
-            Integer errorCode = new Integer(413);
+            Integer errorCode = Integer.valueOf(413);
             String errorReason = "InsufficientResources";
             InsufficientResources exceptTest = new InsufficientResources("100", "test IdentifierNotUnique");
             String exceptTestSerial = exceptTest.serialize(BaseException.FMT_XML);
@@ -417,7 +418,7 @@ public class ExceptionHandlerTestCase {
             BaseException {
         boolean success = false;
         try {
-            Integer errorCode = new Integer(401);
+            Integer errorCode = Integer.valueOf(401);
             String errorReason = "InvalidCredentials";
             InvalidCredentials exceptTest = new InvalidCredentials("100", "test IdentifierNotUnique");
             String exceptTestSerial = exceptTest.serialize(BaseException.FMT_XML);
@@ -438,7 +439,7 @@ public class ExceptionHandlerTestCase {
             BaseException {
         boolean success = false;
         try {
-            Integer errorCode = new Integer(400);
+            Integer errorCode = Integer.valueOf(400);
             String errorReason = "InvalidRequest";
             InvalidRequest exceptTest = new InvalidRequest("100", "test IdentifierNotUnique");
             String exceptTestSerial = exceptTest.serialize(BaseException.FMT_XML);
@@ -459,7 +460,7 @@ public class ExceptionHandlerTestCase {
             BaseException {
         boolean success = false;
         try {
-            Integer errorCode = new Integer(400);
+            Integer errorCode = Integer.valueOf(400);
             String errorReason = "InvalidSystemMetadata";
             InvalidSystemMetadata exceptTest = new InvalidSystemMetadata("100", "test IdentifierNotUnique");
             String exceptTestSerial = exceptTest.serialize(BaseException.FMT_XML);
@@ -480,7 +481,7 @@ public class ExceptionHandlerTestCase {
             BaseException {
         boolean success = false;
         try {
-            Integer errorCode = new Integer(401);
+            Integer errorCode = Integer.valueOf(401);
             String errorReason = "InvalidToken";
             InvalidToken exceptTest = new InvalidToken("100", "test IdentifierNotUnique");
             String exceptTestSerial = exceptTest.serialize(BaseException.FMT_XML);
@@ -501,7 +502,7 @@ public class ExceptionHandlerTestCase {
             BaseException {
         boolean success = false;
         try {
-            Integer errorCode = new Integer(401);
+            Integer errorCode = Integer.valueOf(401);
             String errorReason = "NotAuthorized";
             NotAuthorized exceptTest = new NotAuthorized("100", "test Not Authorized");
             String exceptTestSerial = exceptTest.serialize(BaseException.FMT_XML);
@@ -522,7 +523,7 @@ public class ExceptionHandlerTestCase {
             BaseException {
         boolean success = false;
         try {
-            Integer errorCode = new Integer(404);
+            Integer errorCode = Integer.valueOf(404);
             String errorReason = "NotFound";
             NotFound exceptTest = new NotFound("100", "test IdentifierNotUnique");
             String exceptTestSerial = exceptTest.serialize(BaseException.FMT_XML);
@@ -543,7 +544,7 @@ public class ExceptionHandlerTestCase {
             BaseException {
         boolean success = false;
         try {
-            Integer errorCode = new Integer(501);
+            Integer errorCode = Integer.valueOf(501);
             String errorReason = "NotImplemented";
             NotImplemented exceptTest = new NotImplemented("100", "test IdentifierNotUnique");
             String exceptTestSerial = exceptTest.serialize(BaseException.FMT_XML);
@@ -564,7 +565,7 @@ public class ExceptionHandlerTestCase {
             BaseException {
         boolean success = false;
         try {
-            Integer errorCode = new Integer(500);
+            Integer errorCode = Integer.valueOf(500);
             String errorReason = "ServiceFailure";
             ServiceFailure exceptTest = new ServiceFailure("100", "test IdentifierNotUnique");
             String exceptTestSerial = exceptTest.serialize(BaseException.FMT_XML);
@@ -585,7 +586,7 @@ public class ExceptionHandlerTestCase {
             BaseException {
         boolean success = false;
         try {
-            Integer errorCode = new Integer(400);
+            Integer errorCode = Integer.valueOf(400);
             String errorReason = "UnsupportedMetadataType";
             UnsupportedMetadataType exceptTest = new UnsupportedMetadataType("100", "test IdentifierNotUnique");
             String exceptTestSerial = exceptTest.serialize(BaseException.FMT_XML);
@@ -606,7 +607,7 @@ public class ExceptionHandlerTestCase {
             BaseException {
         boolean success = false;
         try {
-            Integer errorCode = new Integer(400);
+            Integer errorCode = Integer.valueOf(400);
             String errorReason = "UnsupportedType";
             UnsupportedType exceptTest = new UnsupportedType("100", "test IdentifierNotUnique");
             String exceptTestSerial = exceptTest.serialize(BaseException.FMT_XML);
@@ -631,7 +632,7 @@ public class ExceptionHandlerTestCase {
         String pidString ="pidString";
         String description = "SynchronizationFailedTest";
         try {
-            Integer errorCode = new Integer(500);
+            Integer errorCode = Integer.valueOf(500);
             TreeMap<String, String> trace_information = new TreeMap<String, String>();
             trace_information.put("cause",errorReason);
             SynchronizationFailed exceptTest = new SynchronizationFailed(detailCode, description, pidString,trace_information);
@@ -642,7 +643,7 @@ public class ExceptionHandlerTestCase {
         } catch (SynchronizationFailed ex) {
             success = true;
             assertTrue(ex.getIdentifier().equals(pidString));
-            assertTrue(ex.getPid().equals(pidString));
+            assertTrue(ex.getIdentifier().equals(pidString));
             assertTrue(ex.getDescription().equals(description));
             assertTrue(ex.getDetail_code().equals(detailCode));
         }
@@ -660,7 +661,7 @@ public class ExceptionHandlerTestCase {
 //            int code = 0;
 //            String detail_code = null;
 //            String description = null;
-            Integer errorCode = new Integer(404);
+            Integer errorCode = Integer.valueOf(404);
             String errorReason = "NotFound";
             String exceptTestSerial = "<?xml version='1.0' encoding='UTF-8'?><error name='JUNK' errorCode='404' detailCode='-1'><description></description></error>";
             ByteArrayInputStream inputStream = new ByteArrayInputStream(exceptTestSerial.getBytes());
@@ -683,7 +684,7 @@ public class ExceptionHandlerTestCase {
 //            int code = 0;
 //            String detail_code = null;
 //            String description = null;
-            Integer errorCode = new Integer(404);
+            Integer errorCode = Integer.valueOf(404);
             String errorReason = "NotFound";
             String exceptTestSerial = "<?xml version='1.0' encoding='UTF-8'?><error errorCode='404' detailCode='-1'><description></description></error>";
             ByteArrayInputStream inputStream = new ByteArrayInputStream(exceptTestSerial.getBytes());

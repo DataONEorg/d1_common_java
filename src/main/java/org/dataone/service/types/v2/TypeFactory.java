@@ -131,7 +131,7 @@ public class TypeFactory extends org.dataone.service.types.v1.TypeFactory {
                     original.toString()));
         }
         
-        T destInstance = destinationClass.newInstance();
+        T destInstance = destinationClass.getDeclaredConstructor().newInstance();
 
         Map<String,String> propMap = BeanUtils.describe(original);
         if (logger.isDebugEnabled()) 
@@ -201,7 +201,7 @@ public class TypeFactory extends org.dataone.service.types.v1.TypeFactory {
                     if (origType == boolean.class)
                         readMethodName = readMethodName.replaceFirst("get", "is");
                     
-                    Method m = original.getClass().getMethod(readMethodName, (Class<?>[])null);
+                    original.getClass().getMethod(readMethodName, (Class<?>[])null);
                     if (destType == origType) 
                         BeanUtils.copyProperty(destInstance, propName,
                                 PropertyUtils.getSimpleProperty(original, propName));

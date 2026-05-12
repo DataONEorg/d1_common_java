@@ -26,7 +26,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.URL;
+import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -97,7 +97,7 @@ public class TypeMarshaller {
                 logger.debug("Adding schema location: " + url);
 
                 try {
-                    schemas[i] = new StreamSource((new URL(url)).openStream());
+                    schemas[i] = new StreamSource(URI.create(url).toURL().openStream());
                 } catch (IOException e) {
                     throw new Error(
                             "Failed to initialize TypeMarshaller with the (DataONE) schemas!! IOException from: " + url,

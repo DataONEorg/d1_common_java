@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
 import java.math.BigInteger;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -186,7 +187,7 @@ public class TypeSamplesTestCase {
         Document document;
         Schema schema;
         Source schemaFile;
-        URL xsdUrl = new URL(xsdUrlString);
+        URL xsdUrl = URI.create(xsdUrlString).toURL();
 
         URLConnection xsdUrlConnection = xsdUrl.openConnection();
         InputStream xsdUrlStream = xsdUrlConnection.getInputStream();

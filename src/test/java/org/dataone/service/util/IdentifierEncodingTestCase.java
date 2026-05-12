@@ -22,7 +22,6 @@
 
 package org.dataone.service.util;
 
-import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.junit.Assert.*;
 
 import java.io.InputStream;
@@ -238,9 +237,9 @@ public class IdentifierEncodingTestCase
 		logger.info(" * * * * * * * testing Decoding Error 1 * * * * * * ");
 		logger.info("String to decode: testMalformedEscape-%3X");
 		try {
-			String s = EncodingUtilities.decodeString("testMalformedEscape-%3X");
+			EncodingUtilities.decodeString("testMalformedEscape-%3X");
 		} catch (IllegalArgumentException iae) {
-			assertThat("Malformed hex error caught",iae, instanceOf(IllegalArgumentException.class));
+			assertTrue("Malformed hex error caught", iae instanceof IllegalArgumentException);
 			logger.info("caught the error (bad hex character)");
 			return;
 		}
@@ -253,9 +252,9 @@ public class IdentifierEncodingTestCase
 		logger.info(" * * * * * * * testing Decoding Error 2 * * * * * * ");
 		logger.info("String to decode: testMalformedEscape-%3");
 		try {
-			String s = EncodingUtilities.decodeString("testMalformedEscape-%3");
+			EncodingUtilities.decodeString("testMalformedEscape-%3");
 		} catch (IllegalArgumentException iae) {
-			assertThat("Malformed hex error caught",iae, instanceOf(IllegalArgumentException.class));
+			assertTrue("Malformed hex error caught", iae instanceof IllegalArgumentException);
 			logger.info("caught the error (truncated hex pattern)");
 			return;
 		}
@@ -269,9 +268,9 @@ public class IdentifierEncodingTestCase
 		logger.info(" * * * * * * * testing Decoding Error 3 * * * * * * ");
 		logger.info("String to decode: testMalformedEscape-%");
 		try {
-			String s = EncodingUtilities.decodeString("testMalformedEscape-%");
+			EncodingUtilities.decodeString("testMalformedEscape-%");
 		} catch (IllegalArgumentException iae) {
-			assertThat("Malformed hex error caught",iae, instanceOf(IllegalArgumentException.class));
+			assertTrue("Malformed hex error caught", iae instanceof IllegalArgumentException);
 			logger.info("caught the error (truncated hex pattern)");
 			return;
 		}

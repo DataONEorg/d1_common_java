@@ -27,6 +27,7 @@ import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.Set;
 
@@ -64,13 +65,13 @@ public class NodelistUtilTestCase
         {
 
             InputStream is = this.getClass().getResourceAsStream("/org/dataone/service/samples/v2/nodeListSample2.xml");
-            String nodeDoc = IOUtils.toString(is);
+            String nodeDoc = IOUtils.toString(is, StandardCharsets.UTF_8);
             
             assertTrue("Node document null.", (nodeDoc != null));
             assertTrue("Node document has 0 content", nodeDoc.length() > 0);
             log.info(nodeDoc);
             
-            InputStream ndIs = IOUtils.toInputStream(nodeDoc);
+            InputStream ndIs = IOUtils.toInputStream(nodeDoc, StandardCharsets.UTF_8);
             Map<String, String> m = NodelistUtil.mapNodeList(ndIs);
 
             assertTrue("knb-mn key", m.containsKey("urn:node:d1m2"));

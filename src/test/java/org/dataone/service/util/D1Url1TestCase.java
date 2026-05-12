@@ -119,7 +119,7 @@ public class D1Url1TestCase {
 	@Test
 	public void testUrlQuery_ParamPair_Integer() {
 		D1Url url = new D1Url(testBaseUrl,testResource);
-		Integer i = new Integer(37);
+		Integer i = Integer.valueOf(37);
 		url.addNonEmptyParamPair("p1", i);
 		String expected = testBaseUrl + testResource + "?p1=37";
 
