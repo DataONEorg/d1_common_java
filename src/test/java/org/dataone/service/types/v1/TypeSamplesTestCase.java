@@ -49,7 +49,8 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.dataone.exceptions.MarshallingException;
 import org.dataone.service.types.v2.util.ObjectFormatServiceImpl;
 import org.dataone.service.util.TypeMarshaller;
@@ -61,8 +62,8 @@ import org.xml.sax.SAXParseException;
 
 public class TypeSamplesTestCase {
 
-    private static Logger logger = Logger.getLogger(TypeSamplesTestCase.class);
-    static final String datatypeSchemaTagUrl = "https://repository.dataone.org/software/cicore/tags/D1_SCHEMA_1_0_2/";
+    private static Logger logger = LogManager.getLogger(TypeSamplesTestCase.class.getName());
+    static final String datatypeSchemaTagUrl = "https://raw.githubusercontent.com/DataONEorg/d1_schemas/refs/heads/main/";
     static String datatypeSchemaLocation = datatypeSchemaTagUrl + "dataoneTypes.xsd";
     static String systemMetadataSchemaLocation = datatypeSchemaTagUrl + "dataoneTypes.xsd";
     static String systemObjectListSchemaLocation = datatypeSchemaTagUrl + "dataoneTypes.xsd";
@@ -79,65 +80,56 @@ public class TypeSamplesTestCase {
 
     @Test
     public void validateSysmetaSample() throws Exception, SAXException, IOException, ParserConfigurationException {
-// TODO arguments should be injected based on version of service api to test and build
+        // TODO arguments should be injected based on version of service api to test and build
         assertTrue(validateExamples(systemMetadataSchemaLocation, "/org/dataone/service/samples/v1/systemMetadataSample1.xml"));
-
     }
 
     @Test
     public void validateSysmetaMarshalling() throws Exception, SAXException, IOException, ParserConfigurationException {
-// TODO arguments should be injected based on version of service api to test and build
+        // TODO arguments should be injected based on version of service api to test and build
         assertTrue(testSystemMetadataMarshalling("/org/dataone/service/samples/v1/systemMetadataSample1.xml"));
-
     }
 
     @Test
     public void validateSysmetaSampleUnicodeSupplEscaped() throws Exception, SAXException, IOException, ParserConfigurationException {
-// TODO arguments should be injected based on version of service api to test and build
+        // TODO arguments should be injected based on version of service api to test and build
         assertTrue(validateExamples(systemMetadataSchemaLocation, "/org/dataone/service/samples/v1/systemMetadataSampleUnicodeSupplEscaped.xml"));
-
     }
 
-//    @Test
+    // @Test
     public void validateSysmetaSampleUnicodeSupplEscapedMarshalling() throws Exception, SAXException, IOException, ParserConfigurationException {
-// TODO arguments should be injected based on version of service api to test and build
+        // TODO arguments should be injected based on version of service api to test and build
         assertTrue(testSystemMetadataMarshalling("/org/dataone/service/samples/v1/systemMetadataSampleUnicodeSupplEscaped.xml"));
-
     }
 
     @Test
     public void validateObjectListSample() throws Exception, SAXException, IOException, ParserConfigurationException {
-// TODO arguments should be injected based on version of service api to test and build
+        // TODO arguments should be injected based on version of service api to test and build
         assertTrue(validateExamples(systemObjectListSchemaLocation, "/org/dataone/service/samples/v1/objectListSample1.xml"));
-
     }
 
     @Test
     public void validateObjectListMarshalling() throws Exception, SAXException, IOException, ParserConfigurationException {
-// TODO arguments should be injected based on version of service api to test and build
+        // TODO arguments should be injected based on version of service api to test and build
         assertTrue(testObjectListMarshalling("/org/dataone/service/samples/v1/objectListSample1.xml"));
-
     }
 
     @Test
     public void validateLoggingSample() throws Exception, SAXException, IOException, ParserConfigurationException {
-// TODO arguments should be injected based on version of service api to test and build
+        // TODO arguments should be injected based on version of service api to test and build
         assertTrue(validateExamples(systemLoggingSchemaLocation, "/org/dataone/service/samples/v1/loggingSample1.xml"));
-
     }
 
     @Test
     public void validateLoggingMarshalling() throws Exception, SAXException, IOException, ParserConfigurationException {
-// TODO arguments should be injected based on version of service api to test and build
+        // TODO arguments should be injected based on version of service api to test and build
         assertTrue(testLoggingMarshalling("/org/dataone/service/samples/v1/loggingSample1.xml"));
-
     }
 
     @Test
     public void validateNodeRegistrySample() throws Exception, SAXException, IOException, ParserConfigurationException {
-// TODO arguments should be injected based on version of service api to test and build
+        // TODO arguments should be injected based on version of service api to test and build
         assertTrue(validateExamples(systemNodeRegistrySchemaLocation, "/org/dataone/service/samples/v1/nodeListSample1.xml"));
-
     }
     @Test
     public void validateNodeRegistryMarshalling() throws Exception, SAXException, IOException, ParserConfigurationException {
@@ -145,37 +137,31 @@ public class TypeSamplesTestCase {
     }
     @Test
     public void validateNodeSample() throws Exception, SAXException, IOException, ParserConfigurationException {
-// TODO arguments should be injected based on version of service api to test and build
+        // TODO arguments should be injected based on version of service api to test and build
         assertTrue(validateExamples(systemMetadataSchemaLocation, "/org/dataone/service/samples/v1/mnNode1.xml"));
-
     }
 
     @Test
     public void validateIdentifierSample() throws Exception, SAXException, IOException, ParserConfigurationException {
-// TODO arguments should be injected based on version of service api to test and build
+        // TODO arguments should be injected based on version of service api to test and build
         assertTrue(validateExamples(systemIdentifierSchemaLocation, "/org/dataone/service/samples/v1/identifier1.xml"));
-
     }
 
     @Test
     public void validateIdentifierMarshalling() throws Exception, SAXException, IOException, ParserConfigurationException {
-// TODO arguments should be injected based on version of service api to test and build
+        // TODO arguments should be injected based on version of service api to test and build
         assertTrue(testIdentifierMarshalling("/org/dataone/service/samples/v1/identifier1.xml"));
-
     }
 
     @Test
     public void validateChecksumSample() throws Exception, SAXException, IOException, ParserConfigurationException {
-// TODO arguments should be injected based on version of service api to test and build
+        // TODO arguments should be injected based on version of service api to test and build
         assertTrue(validateExamples(systemChecksumSchemaLocation, "/org/dataone/service/samples/v1/checksum1.xml"));
-
     }
 
     @Test
     public void validateChecksuMarshalling() throws Exception, SAXException, IOException, ParserConfigurationException {
-
         assertTrue(testChecksumMarshalling("/org/dataone/service/samples/v1/checksum1.xml"));
-
     }
 
     
@@ -192,7 +178,8 @@ public class TypeSamplesTestCase {
     }
     
     
-    private boolean validateExamples(String xsdUrlString, InputStream xmlInputStream) throws Exception, SAXException, IOException, ParserConfigurationException {
+    private boolean validateExamples(String xsdUrlString, InputStream xmlInputStream) 
+            throws Exception, SAXException, IOException, ParserConfigurationException {
         DocumentBuilder parser;
         // create a SchemaFactory capable of understanding WXS schemas
         SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
@@ -237,7 +224,8 @@ public class TypeSamplesTestCase {
 
     }
 
-    private boolean validateExamples(String xsdUrlString, String xmlDocument) throws Exception, SAXException, IOException, ParserConfigurationException {
+    private boolean validateExamples(String xsdUrlString, String xmlDocument) 
+            throws Exception, SAXException, IOException, ParserConfigurationException {
         return validateExamples(xsdUrlString, this.getClass().getResourceAsStream(xmlDocument));
     }
 
@@ -246,7 +234,7 @@ public class TypeSamplesTestCase {
      * @author Robert P Waltz.
      */
     private class ValidateXmlDocument {
-//	    Logger logger = Logger.getRootLogger();
+        // Logger logger = Logger.getRootLogger();
 
         private class ErrorHandlerImpl implements ErrorHandler {
 
@@ -257,13 +245,13 @@ public class TypeSamplesTestCase {
 
             public void error(SAXParseException exception) throws SAXException {
                 System.out.print(exception.getMessage());
-//	            logger.warn(exception.getMessage());
+                // logger.warn(exception.getMessage());
                 throw exception;
             }
 
             public void fatalError(SAXParseException exception) throws SAXException {
                 System.out.print(exception.getMessage());
-//	            logger.warn(exception.getMessage());
+                // logger.warn(exception.getMessage());
                 throw exception;
             }
         }
@@ -277,7 +265,7 @@ public class TypeSamplesTestCase {
                 validator = schema.newValidator();
                 validator.setErrorHandler(errorHandlerImpl);
             } catch (Exception e) {
-//                logger.error("FATAL ERROR: INITIALIZATION OF XML VALIDATE SERVICE IMPL\n",e);
+                // logger.error("FATAL ERROR: INITIALIZATION OF XML VALIDATE SERVICE IMPL\n",e);
                 validator = null;
             }
         }
@@ -326,9 +314,7 @@ public class TypeSamplesTestCase {
         systemMetadata.setSerialVersion(BigInteger.ONE);
         Identifier identifier = new Identifier();
         identifier.setValue("ABC432");
-//        systemMetadata.
         systemMetadata.setIdentifier(identifier);
-//        ObjectFormat objectFormat;
         ObjectFormatIdentifier fmtid = new ObjectFormatIdentifier();
         fmtid.setValue("CF-1.0");
         ObjectFormat thisOF = ObjectFormatServiceImpl.getInstance().getFormat(fmtid);

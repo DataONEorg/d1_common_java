@@ -25,7 +25,8 @@ package org.dataone.service.types.v2.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.dataone.configuration.Settings;
 import org.dataone.service.types.v2.Node;
 import org.dataone.service.types.v1.NodeState;
@@ -43,7 +44,7 @@ import org.dataone.service.types.v1.Subject;
  */
 public class ServiceMethodRestrictionUtil {
 	
-	private static final Logger logger = Logger.getLogger(ServiceMethodRestrictionUtil.class);
+    private static final Logger logger = LogManager.getLogger(ServiceMethodRestrictionUtil.class.getName());
 
 	/**
 	 * Interprets the CN's ServiceMethodRestriction for a given Subject+serviceName+methodName

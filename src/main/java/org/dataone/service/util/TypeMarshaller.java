@@ -40,7 +40,8 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.dataone.configuration.Settings;
 import org.dataone.exceptions.MarshallingException;
 import org.xml.sax.SAXException;
@@ -64,7 +65,7 @@ import org.xml.sax.helpers.DefaultHandler;
  */
 public class TypeMarshaller {
 
-    static Logger logger = Logger.getLogger(TypeMarshaller.class.getName());
+    static Logger logger = LogManager.getLogger(TypeMarshaller.class.getName());
 
     static final protected Map<Class, JAXBContext> jaxbContextMap = new HashMap<>();
 

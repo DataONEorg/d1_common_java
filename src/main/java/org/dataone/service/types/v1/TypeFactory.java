@@ -32,7 +32,8 @@ import java.util.Date;
 
 import org.apache.commons.io.input.CountingInputStream;
 import org.dataone.exceptions.MarshallingException;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.dataone.service.exceptions.NotFound;
 import org.dataone.service.exceptions.ServiceFailure;
 import org.dataone.service.types.v1.util.ChecksumUtil;
@@ -49,7 +50,7 @@ import org.dataone.service.util.TypeMarshaller;
  */
 public class TypeFactory {
 
-    protected static Logger logger = Logger.getLogger(TypeFactory.class.getName());
+    protected static Logger logger = LogManager.getLogger(TypeFactory.class.getName());
 
     /**
      * Factory method for creating an ObjectFormatIdentifier. Does not enforce business rules.

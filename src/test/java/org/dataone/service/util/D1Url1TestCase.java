@@ -28,12 +28,13 @@ import static org.junit.Assert.fail;
 
 import java.util.Date;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.junit.Test;
 
 
 public class D1Url1TestCase {
-	private static Logger logger = Logger.getLogger(D1Url1TestCase.class);
+	private static Logger logger = LogManager.getLogger(D1Url1TestCase.class.getName());
 	private static String testBaseUrl = "http://foo.com/";
 	private static String testBaseUrlNoEndingSlash = "http://foo.com";
 	private static String testResource = "myResource";

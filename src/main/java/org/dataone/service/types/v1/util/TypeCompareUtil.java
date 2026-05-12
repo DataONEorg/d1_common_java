@@ -38,7 +38,8 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.dataone.service.types.v1.AccessRule;
 import org.dataone.service.types.v1.Identifier;
 import org.dataone.service.types.v1.NodeReference;
@@ -63,7 +64,7 @@ import org.dataone.service.util.DateTimeMarshaller;
  */
 public class TypeCompareUtil {
 
-    static Logger logger = Logger.getLogger(TypeCompareUtil.class.getName());
+    static Logger logger = LogManager.getLogger(TypeCompareUtil.class.getName());
 
     // TODO: compare with https://github.com/SQiShER/java-object-diff/ wrt/ long-term implementation
 

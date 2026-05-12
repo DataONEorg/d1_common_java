@@ -31,7 +31,8 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
 
 import org.dataone.exceptions.MarshallingException;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.dataone.service.types.v1.AccessPolicy;
 import org.dataone.service.types.v1.AccessRule;
 import org.dataone.service.types.v1.Checksum;
@@ -57,7 +58,7 @@ import org.w3c.dom.Document;
  */
 public class SystemMetadataTestCase {
 
-    private static Logger log = Logger.getLogger(SystemMetadataTestCase.class);
+    private static Logger log = LogManager.getLogger(SystemMetadataTestCase.class.getName());
     private static SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 
     private static DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();

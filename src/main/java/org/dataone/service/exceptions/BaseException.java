@@ -34,7 +34,9 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -50,7 +52,8 @@ import org.w3c.dom.Element;
  */
 public class BaseException extends Exception {
 
-    static Logger logger = Logger.getLogger(BaseException.class.getName());
+    private static final Logger logger = LogManager.getLogger(BaseException.class.getName());
+
     /** The major error code associated with this exception. */
     private int code;
     

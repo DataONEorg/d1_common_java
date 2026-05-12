@@ -9,14 +9,15 @@ package org.dataone.service.types;
 import java.util.Iterator;
 import javax.xml.XMLConstants;
 import javax.xml.namespace.NamespaceContext;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 /**
  *
  * @author waltz
  */
 public class D1NamespaceContext implements NamespaceContext {
-private static Logger log = Logger.getLogger(D1NamespaceContext.class);
+private static Logger log = LogManager.getLogger(D1NamespaceContext.class.getName());
         @Override
         public String getNamespaceURI(String prefix) {
             String uri = null;

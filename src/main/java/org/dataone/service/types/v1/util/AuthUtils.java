@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.dataone.service.exceptions.InvalidSystemMetadata;
 import org.dataone.service.types.v1.AccessRule;
 import org.dataone.service.types.v1.Group;
@@ -23,7 +24,7 @@ import org.dataone.service.util.Constants;
 
 public class AuthUtils {
 
-	private static final Logger logger = Logger.getLogger(AuthUtils.class);
+	private static final Logger logger = LogManager.getLogger(AuthUtils.class.getName());
 	
 	
 	private static Subject buildSubject(String value) {

@@ -34,13 +34,14 @@ import java.util.Scanner;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.junit.Before;
 import org.junit.Test;
 
 public class IdentifierEncodingTestCase 
 {
-	private static Logger logger = Logger.getLogger(IdentifierEncodingTestCase.class);
+	private static Logger logger = LogManager.getLogger(IdentifierEncodingTestCase.class.getName());
 //	private static boolean verbose = true;
 	
 	private static String testUnicodeIdentifiersFile = "/org/dataone/service/encodingTestSet/testUnicodeStrings.utf8.txt";

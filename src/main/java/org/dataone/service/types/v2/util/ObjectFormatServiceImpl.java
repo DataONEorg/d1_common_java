@@ -25,7 +25,8 @@ import java.io.InputStream;
 import java.util.HashMap;
 
 import org.dataone.exceptions.MarshallingException;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.dataone.service.exceptions.NotFound;
 import org.dataone.service.exceptions.NotImplemented;
 import org.dataone.service.exceptions.ServiceFailure;
@@ -58,7 +59,7 @@ public class ObjectFormatServiceImpl {
    */
   protected ObjectFormatServiceImpl() throws ServiceFailure {
     
-  	logger = Logger.getLogger(ObjectFormatServiceImpl.class);
+  	logger = LogManager.getLogger(ObjectFormatServiceImpl.class.getName());
   	
   	objectFormatMap = new HashMap<ObjectFormatIdentifier, ObjectFormat>();
     try {

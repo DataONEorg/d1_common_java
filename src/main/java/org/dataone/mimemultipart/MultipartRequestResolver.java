@@ -25,7 +25,7 @@ package org.dataone.mimemultipart;
 import java.io.*;
 import java.util.*;
 
-
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUpload;
@@ -33,7 +33,9 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+
 
 /*
  * Copyright 2002-2010 the original author or authors.
@@ -74,7 +76,8 @@ import org.apache.log4j.Logger;
  */
 public class MultipartRequestResolver {
 
-    Logger logger = Logger.getLogger(MultipartRequestResolver.class.getName());
+    private static final Logger logger = LogManager.getLogger(MultipartRequestResolver.class.getName());
+
     private DiskFileItemFactory factory;
     private org.apache.commons.fileupload.servlet.ServletFileUpload upload;
     final static int SIZE = 16384;
