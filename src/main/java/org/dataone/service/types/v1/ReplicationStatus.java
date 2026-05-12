@@ -1,8 +1,6 @@
 
 package org.dataone.service.types.v1;
 
-import java.io.Serializable;
-
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 import javax.xml.bind.annotation.XmlType;
@@ -37,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlType(name = "ReplicationStatus")
 @XmlEnum
-public enum ReplicationStatus implements Serializable {
+public enum ReplicationStatus {
 
     @XmlEnumValue("queued")
     QUEUED("queued"),

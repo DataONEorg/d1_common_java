@@ -1,8 +1,6 @@
 
 package org.dataone.service.types.v1;
 
-import java.io.Serializable;
-
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 import javax.xml.bind.annotation.XmlType;
@@ -35,7 +33,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlType(name = "Permission")
 @XmlEnum
-public enum Permission implements Serializable {
+public enum Permission {
     @XmlEnumValue("read")
     READ("read"),
     @XmlEnumValue("write")

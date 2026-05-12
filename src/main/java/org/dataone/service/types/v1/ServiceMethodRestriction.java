@@ -1,7 +1,6 @@
 
 package org.dataone.service.types.v1;
 
-import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -28,7 +27,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ServiceMethodRestriction")
 @XmlRootElement(name = "serviceMethodRestriction")
-public class ServiceMethodRestriction extends SubjectList implements Serializable
+public class ServiceMethodRestriction extends SubjectList
 {
 
     @XmlAttribute(name = "methodName", required = true)

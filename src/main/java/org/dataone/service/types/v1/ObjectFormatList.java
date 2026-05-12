@@ -1,7 +1,6 @@
 
 package org.dataone.service.types.v1;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -36,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
     "objectFormat"
 })
 @XmlRootElement(name = "objectFormatList")
-public class ObjectFormatList extends Slice implements Serializable
+public class ObjectFormatList extends Slice
 {
     @XmlElement(required = true)
     protected List<ObjectFormat> objectFormat = new ArrayList<ObjectFormat>();

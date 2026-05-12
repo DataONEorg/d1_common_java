@@ -1,7 +1,6 @@
 
 package org.dataone.service.types.v2;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -31,8 +30,7 @@ import javax.xml.bind.annotation.XmlType;
     "property"
 })
 @XmlRootElement(name = "node")
-public class Node extends org.dataone.service.types.v1.Node implements
-    Serializable
+public class Node extends org.dataone.service.types.v1.Node
 {
     private static final long serialVersionUID = 10000001;
     protected List<Property> property = new ArrayList<Property>();
