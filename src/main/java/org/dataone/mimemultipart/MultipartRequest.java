@@ -44,6 +44,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpUpgradeHandler;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
@@ -66,6 +67,7 @@ public class MultipartRequest implements HttpServletRequest {
      * @param mpParams Map of field name to form field String value
      */
     public MultipartRequest(HttpServletRequest request, Map<String, File> mpFiles, Map<String, List<String>> mpParams) {
+        this.request = request;
         this.multipartFiles = mpFiles;
         this.multipartParameters = mpParams;
     }
@@ -416,11 +418,6 @@ public class MultipartRequest implements HttpServletRequest {
         request.logout();
     }
 
-    /* 
-     * the following 3 methods are servlet-api v 3.1.0 methods, needing to be 
-     * implemented when moving to tomcat 8.0.  Uncomment them at that time.
-     */
-/*    
     @Override
     public String changeSessionId() {
         return request.changeSessionId();
@@ -436,6 +433,6 @@ public class MultipartRequest implements HttpServletRequest {
             throws IOException, ServletException {
         return request.upgrade(arg0);
     }
-*/    
+    
     
 }
