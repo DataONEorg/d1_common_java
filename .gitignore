@@ -2,3 +2,5 @@ target
 .idea
 gpg.asc
 /d1_common_java.iml
+.vscode
+misc
