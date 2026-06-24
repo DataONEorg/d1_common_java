@@ -10,7 +10,7 @@
     <url>https://dataone.org</url>
     <description>DataONE Common Code with Service Interface Definitions</description>
     <properties>
-        <d1_test_resources.version>2.4.0-SNAPSHOT</d1_test_resources.version>
+        <d1_test_resources.version>2.4.0</d1_test_resources.version>
         <d1_format_ids.revision>v1.28</d1_format_ids.revision>
         <maven.compiler.release>25</maven.compiler.release>
     </properties>
