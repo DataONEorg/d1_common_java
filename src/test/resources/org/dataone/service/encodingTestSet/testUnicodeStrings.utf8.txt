@@ -29,10 +29,10 @@ path-unicode-ascii-escaped-double-//case	path-unicode-ascii-escaped-double-%2F%2
 path-unicode-ascii-escaped-double-trailing//	path-unicode-ascii-escaped-double-trailing%2F%2F
 path-unicode-ascii-escaped-double-%2F%2Fcase	path-unicode-ascii-escaped-double-%252F%252Fcase
 path-unicode-ascii-escaped-double-trailing%2F%2F	path-unicode-ascii-escaped-double-trailing%252F%252F
-query-unicode-ascii-safe-;	query-unicode-ascii-safe-;
+query-unicode-ascii-safe-;	query-unicode-ascii-safe-%3B
 query-unicode-ascii-safe-/?	query-unicode-ascii-safe-/?
 query-unicode-ascii-escaped-&=&=	query-unicode-ascii-escaped-%26%3D%26%3D
-fragment-unicode-ascii-safe-;	fragment-unicode-ascii-safe-;
+fragment-unicode-ascii-safe-;	fragment-unicode-ascii-safe-%3B
 fragment-unicode-ascii-safe-&=&=/?	fragment-unicode-ascii-safe-&=&=/?
 common-unicode-bmp-1byte-escaped-¡¢£	common-unicode-bmp-1byte-escaped-%C2%A1%C2%A2%C2%A3
 common-unicode-bmp-2byte-escaped-䦹䦺	common-unicode-bmp-2byte-escaped-%E4%A6%B9%E4%A6%BA

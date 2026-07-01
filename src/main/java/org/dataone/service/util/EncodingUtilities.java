@@ -152,7 +152,6 @@ public class EncodingUtilities {
 		fragmentUnescapedCharacters = (BitSet) pcharUnescapedCharacters.clone();
 		fragmentUnescapedCharacters.set('/');
 		fragmentUnescapedCharacters.set('?');
-		fragmentUnescapedCharacters.set(';');
 
 		// set up queryUnescapedCharacters - in ABNF, is the same as frag
 		// but have to remove a couple character to follow key-value pair convention
