@@ -23,6 +23,7 @@
 package org.dataone.service.util;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -710,9 +711,19 @@ public class ExceptionHandlerTestCase {
                 | SynchronizationFailed | VersionMismatch e) {
             System.out.println(e.getDescription());
         }
-        
-        
-        
-        
+    }
+
+    /**
+     * Test the deserializeXml method not to allow t dtd part
+     * @throws Exception
+     */
+    @Test
+    public void testDeserializeXml() throws Exception {
+        InputStream exceptionInputStream = this.getClass().getClassLoader().getResourceAsStream(
+            "test-files/exception-xml-with-dtd.xml");
+        assertThrows(
+            SAXException.class, () -> {
+                ExceptionHandler.deserializeXml(exceptionInputStream, "default");
+        });
     }
 }
