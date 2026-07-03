@@ -355,10 +355,9 @@ public class TypeMarshallerTestCase {
     /**
      * Test to unmarshalling system metadata with a dtd part. The dtd part should be ignored.
      * This method tests the unmarshalTypeFromFile
-     * @throws Exception
      */
     @Test
-    public void testUnmarshallingSystemMetadataWithDTD2() throws Exception {
+    public void testUnmarshallingSystemMetadataWithDTD2() {
         String filePath =
             "src/test/resources/org/dataone/service/samples/v2/systemMetadataSampleWithdtd.xml";
         assertThrows(MarshallingException.class,

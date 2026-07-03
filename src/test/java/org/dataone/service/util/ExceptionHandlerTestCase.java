@@ -714,11 +714,10 @@ public class ExceptionHandlerTestCase {
     }
 
     /**
-     * Test the deserializeXml method not to allow t dtd part
-     * @throws Exception
+     * Test the deserializeXml method which ignores the dtd part
      */
     @Test
-    public void testDeserializeXml() throws Exception {
+    public void testDeserializeXml() {
         InputStream exceptionInputStream = this.getClass().getClassLoader().getResourceAsStream(
             "test-files/exception-xml-with-dtd.xml");
         assertThrows(
