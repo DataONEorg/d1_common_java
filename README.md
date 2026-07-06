@@ -1,4 +1,4 @@
-DataONE Java Service API
+DataONE Java Common Service API and Types
 ------------------------
 
 ![Java Build SNAPSHOT and push to Maven Central](https://github.com/DataONEorg/d1_common_java/workflows/Java%20Build%20SNAPSHOT%20and%20push%20to%20Maven%20Central/badge.svg) ![Publish package on release](https://github.com/DataONEorg/d1_common_java/workflows/Publish%20package%20on%20release/badge.svg)
@@ -11,7 +11,7 @@ definitions and class definitions for types and exceptions.
 
 See the test classes under `src/test` for example usage.
 
-See LICENSE.txt for the details of distributing this software.
+See LICENSE for the details of distributing this software.
 
 
 ```
