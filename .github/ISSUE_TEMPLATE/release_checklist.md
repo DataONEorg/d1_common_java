@@ -8,6 +8,9 @@ assignees: []
 hidden: true    # do NOT show in template picker every time someone creates a new issue
 ---
 
+> [!TIP]
+> Create an [issue from this template](https://github.com/DataONEorg/d1_common_java/issues/new?template=release_checklist.md)
+
 ## Release checklist
 
 - [ ] Create a branch named `task-<issueNum>-release-<releaseVer>-prep`, and do the following:
