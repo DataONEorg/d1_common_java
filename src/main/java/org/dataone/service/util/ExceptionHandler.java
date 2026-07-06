@@ -30,6 +30,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
 
+import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -625,6 +626,21 @@ public class ExceptionHandler {
     {
         TreeMap<String, String> trace_information = new TreeMap<String, String>();
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+        // This is the PRIMARY defense. If DTDs (doctypes) are disallowed, almost all
+        // XML entity attacks are prevented
+        // Xerces 2 only - http://xerces.apache.org/xerces2-j/features.html#disallow-doctype-decl
+        dbf.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+        dbf.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+        dbf.setFeature("http://xml.org/sax/features/external-general-entities", false);
+        dbf.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
+        try {
+            dbf.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+            dbf.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
+        } catch (IllegalArgumentException e) {
+            log.warn("Those features are not supported: " + e.getMessage());
+        }
+        dbf.setXIncludeAware(false);
+        dbf.setExpandEntityReferences(false);
         Document doc;
         DocumentBuilder db = dbf.newDocumentBuilder();
         doc = db.parse(errorStream);

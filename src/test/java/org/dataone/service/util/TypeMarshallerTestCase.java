@@ -22,8 +22,8 @@
 
 package org.dataone.service.util;
 
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -333,5 +333,35 @@ public class TypeMarshallerTestCase {
         } catch (MarshallingException e) {
             // should throw exception
         }
+    }
+
+    /**
+     * Test to unmarshalling system metadata with a dtd part. The dtd part should be ignored.
+     * @throws Exception
+     */
+    @Test
+    public void testUnmarshallingSystemMetadataWithDTD() throws Exception {
+        try (InputStream is = this.getClass().getResourceAsStream(
+            "/org/dataone/service/samples/v2/systemMetadataSampleWithdtd.xml")) {
+            // Since the dtd part is ignored, a reference to an entity defined in the dtd causes
+            // an exception.
+            assertThrows(MarshallingException.class,
+                () -> TypeMarshaller.unmarshalTypeFromStream(
+                    org.dataone.service.types.v2.SystemMetadata.class, is));
+
+        }
+    }
+
+    /**
+     * Test to unmarshalling system metadata with a dtd part. The dtd part should be ignored.
+     * This method tests the unmarshalTypeFromFile
+     */
+    @Test
+    public void testUnmarshallingSystemMetadataWithDTD2() {
+        String filePath =
+            "src/test/resources/org/dataone/service/samples/v2/systemMetadataSampleWithdtd.xml";
+        assertThrows(MarshallingException.class,
+                     () -> TypeMarshaller.unmarshalTypeFromFile(
+                         org.dataone.service.types.v2.SystemMetadata.class, filePath));
     }
 }

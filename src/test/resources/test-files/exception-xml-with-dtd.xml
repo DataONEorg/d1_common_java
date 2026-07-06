@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE error [
+        <!ENTITY xxe "Invalid_request">
+]>
+<error detailCode="1181" errorCode="400" name="InvalidRequest">
+    <description>&xxe;</description>
+</error>

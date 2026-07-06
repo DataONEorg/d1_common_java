@@ -21,6 +21,7 @@
 package org.dataone.service.util;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -35,6 +36,9 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamReader;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
@@ -245,12 +249,7 @@ public class TypeMarshaller {
      */
     public static <T> T unmarshalTypeFromFile(Class<T> domainClass, File file)
             throws IOException, InstantiationException, IllegalAccessException, MarshallingException {
-        try {
-            Unmarshaller jaxbUnmarshaller = TypeMarshaller.getJAXBContext(domainClass).createUnmarshaller();
-            return (T) jaxbUnmarshaller.unmarshal(file);
-        } catch (JAXBException e) {
-            throw new MarshallingException(e.getMessage(), e);
-        }
+        return unmarshalTypeFromStream(domainClass, new FileInputStream(file));
     }
 
     /**
@@ -285,13 +284,33 @@ public class TypeMarshaller {
      */
     public static <T> T unmarshalTypeFromStream(Class<T> domainClass, InputStream inputStream)
             throws IOException, InstantiationException, IllegalAccessException, MarshallingException {
+        XMLInputFactory xif = XMLInputFactory.newFactory();
+        xif.setProperty(XMLInputFactory.SUPPORT_DTD, false);
+        xif.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, false);
+        XMLStreamReader xsr;
         try {
-            Unmarshaller jaxbUnmarshaller = TypeMarshaller.getJAXBContext(domainClass).createUnmarshaller();
-            return (T) jaxbUnmarshaller.unmarshal(inputStream);
+            xsr = xif.createXMLStreamReader(new StreamSource(inputStream));
+        } catch (XMLStreamException e) {
+            IOUtils.closeQuietly(inputStream);
+            throw new IOException(e);
+        }
+
+        try {
+            Unmarshaller jaxbUnmarshaller =
+                TypeMarshaller.getJAXBContext(domainClass).createUnmarshaller();
+            return (T) jaxbUnmarshaller.unmarshal(xsr);
         } catch (JAXBException e) {
             throw new MarshallingException(e.getMessage(), e);
         } finally {
-            IOUtils.closeQuietly(inputStream);
+            try {
+                if (xsr != null) {
+                    xsr.close();
+                }
+            } catch (XMLStreamException e) {
+                logger.warn("Can't close XMLStreamReader" + e.getMessage());
+            } finally {
+                IOUtils.closeQuietly(inputStream);
+            }
         }
     }
 }
