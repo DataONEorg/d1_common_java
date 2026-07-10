@@ -39,8 +39,8 @@ import org.apache.logging.log4j.Logger;
 /**
  * Temporary mitigation Valve to handle GHSA-95v2-fvxr-qg83-style path confusion/bypass attempts.
  * Added 2026-07-10.
- * Enable via the <Valve> element under <Host ...> in server.xml, e.g.:
- *     <Valve className="org.dataone.security.TemporaryMitigationValve" />
+ * Enable via the {@code <Valve>} element under {@code <Host ...>} in {@code server.xml}, e.g.:
+ *     {@code <Valve className="org.dataone.security.TemporaryMitigationValve" />}
  */
 public class TemporaryMitigationValve extends ValveBase {
 
