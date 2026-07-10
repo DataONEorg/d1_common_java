@@ -73,6 +73,9 @@ public class TemporaryMitigationValve extends ValveBase {
                 return true;
             }
             String decoded = decodeOnce(current);
+            if (decoded == null) {
+                return true;
+            }
             if (decoded.equals(current)) {
                 break;
             }
@@ -85,8 +88,8 @@ public class TemporaryMitigationValve extends ValveBase {
         try {
             return URLDecoder.decode(value, StandardCharsets.UTF_8);
         } catch (IllegalArgumentException e) {
-            // Invalid %-encoding => treat as suspicious
-            return "%BAD_ENCODING%";
+            // Invalid %-encoding: signal decode failure to caller.
+            return null;
         }
     }
 
