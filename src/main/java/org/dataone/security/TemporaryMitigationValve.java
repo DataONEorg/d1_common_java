@@ -33,6 +33,8 @@ import org.apache.catalina.Valve;
 import org.apache.catalina.connector.Request;
 import org.apache.catalina.connector.Response;
 import org.apache.catalina.valves.ValveBase;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Temporary mitigation Valve to handle GHSA-95v2-fvxr-qg83-style path confusion/bypass attempts.
@@ -41,6 +43,8 @@ import org.apache.catalina.valves.ValveBase;
  *     <Valve className="org.dataone.security.TemporaryMitigationValve" />
  */
 public class TemporaryMitigationValve extends ValveBase {
+
+    private static final Logger logger = LogManager.getLogger(TemporaryMitigationValve.class.getName());
 
     private static final int MAX_DECODE_ROUNDS = 3;
 
@@ -56,6 +60,8 @@ public class TemporaryMitigationValve extends ValveBase {
         String target = (qs == null) ? uri : (uri + "?" + qs);
 
         if (isSuspicious(target)) {
+            logger.warn("Rejecting suspicious request from remote address {} for URI {}",
+                safe(request.getRemoteAddr()), uri);
             response.sendError(400, "Malformed request target");
             return;
         }
