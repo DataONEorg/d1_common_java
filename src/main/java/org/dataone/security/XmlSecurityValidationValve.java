@@ -123,8 +123,11 @@ public class XmlSecurityValidationValve extends ValveBase {
     }
 
     private boolean isXmlType(String contentType, String fileName) {
-        if (contentType != null && (contentType.contains("text/xml") || contentType.contains("application/xml"))) {
-            return true;
+        if (contentType != null) {
+            String ct = contentType.toLowerCase();
+            if (ct.contains("text/xml") || ct.contains("application/xml")) {
+                return true;
+            }
         }
         return fileName != null && fileName.toLowerCase().endsWith(".xml");
     }
