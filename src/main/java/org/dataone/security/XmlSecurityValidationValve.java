@@ -47,10 +47,10 @@ import java.io.InputStream;
 import java.util.List;
 
 /**
- * Temporary mitigation Valve to handle GHSA-95v2-fvxr-qg83-style path confusion/bypass attempts.
+ * Temporary mitigation Valve to reject multipart XML parts that declare DTDs/entities (XXE defense).
  * Added 2026-07-10.
- * Enable via the <Valve> element under <Host ...> in server.xml, e.g.:
- *     <Valve className="org.dataone.security.TemporaryMitigationValve" />
+ * Enable via the {@code <Valve>} element under {@code <Host ...>} in server.xml, e.g.:
+ * {@code <Valve className="org.dataone.security.XmlSecurityValidationValve" />}
  */
 public class XmlSecurityValidationValve extends ValveBase {
 
