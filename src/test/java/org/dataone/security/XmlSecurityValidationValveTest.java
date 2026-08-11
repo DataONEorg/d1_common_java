@@ -57,6 +57,22 @@ public class XmlSecurityValidationValveTest {
         assertFalse(containsForbiddenXmlStructures(streamOf(safeXml)));
     }
 
+    @Test
+    public void rejectsMalformedXmlAsUnexpectedFailure() {
+        assertTrue(containsForbiddenXmlStructures(streamOf("<?xml version=\"1.0\"?><root>")));
+        assertTrue(containsForbiddenXmlStructures(streamOf("<root><value>broken</root>")));
+    }
+
+    @Test
+    public void rejectsXmlWithUndefinedEntityReference() {
+        String unresolvedEntityXml =
+                "<?xml version=\"1.0\"?>"
+                + "<!DOCTYPE root [<!ENTITY missing SYSTEM \"file:///etc/passwd\">]>"
+                + "<root>&missing;</root>";
+
+        assertTrue(containsForbiddenXmlStructures(streamOf(unresolvedEntityXml)));
+    }
+
     private boolean isXmlType(String contentType, String fileName) {
         try {
             Method method = XmlSecurityValidationValve.class.getDeclaredMethod("isXmlType", String.class, String.class);
