@@ -40,12 +40,26 @@ public class XmlSecurityValidationValve extends ValveBase {
         // Only inspect if it's a multipart request
         if (contentType != null && contentType.toLowerCase().startsWith("multipart/form-data")) {
             try {
-                // 1. Buffer the raw input stream
+                // 1. Buffer the raw input stream (bounded to avoid memory exhaustion)
+                final long maxRequestBytes = 10 * 1024 * 1024L; // 10 MiB
+                long declaredLength = request.getContentLengthLong();
+                if (declaredLength > maxRequestBytes) {
+                    response.sendError(HttpServletResponse.SC_REQUEST_ENTITY_TOO_LARGE, "Request payload too large.");
+                    return;
+                }
+
                 InputStream rawInputStream = request.getInputStream();
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                byte[] buffer = new byte[1024];
+                ByteArrayOutputStream baos = new ByteArrayOutputStream(
+                        declaredLength > 0 && declaredLength <= Integer.MAX_VALUE ? (int) declaredLength : 1024);
+                byte[] buffer = new byte[8192];
                 int len;
+                long totalRead = 0;
                 while ((len = rawInputStream.read(buffer)) > -1) {
+                    totalRead += len;
+                    if (totalRead > maxRequestBytes) {
+                        response.sendError(HttpServletResponse.SC_REQUEST_ENTITY_TOO_LARGE, "Request payload too large.");
+                        return;
+                    }
                     baos.write(buffer, 0, len);
                 }
                 byte[] requestBytes = baos.toByteArray();
