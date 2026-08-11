@@ -4,14 +4,14 @@ import org.apache.catalina.connector.Request;
 import org.apache.catalina.connector.Response;
 import org.apache.catalina.valves.ValveBase;
 import org.apache.coyote.InputBuffer;
-import org.apache.tomcat.util.buf.ByteChunk;
-import org.apache.tomcat.util.http.fileupload.FileItem;
-import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
-import org.apache.tomcat.util.http.fileupload.servlet.ServletRequestContext;
+import org.apache.tomcat.util.net.ApplicationBufferHandler;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.fileupload.servlet.ServletRequestContext;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletResponse;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletResponse;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.InputSource;
@@ -22,6 +22,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.ByteBuffer;
 import java.util.List;
 
 /**
@@ -79,13 +80,18 @@ public class XmlSecurityValidationValve extends ValveBase {
                     private final ByteArrayInputStream bais = new ByteArrayInputStream(requestBytes);
 
                     @Override
-                    public int doRead(ByteChunk chunk) throws IOException {
+                    public int doRead(ApplicationBufferHandler handler) throws IOException {
                         byte[] buf = new byte[8192];
                         int read = bais.read(buf);
                         if (read > 0) {
-                            chunk.setBytes(buf, 0, read);
+                            handler.setByteBuffer(ByteBuffer.wrap(buf, 0, read));
                         }
                         return read;
+                    }
+
+                    @Override
+                    public int available() {
+                        return bais.available();
                     }
                 });
 
