@@ -50,7 +50,7 @@ public class XmlSecurityValidationValve extends ValveBase {
 
                 InputStream rawInputStream = request.getInputStream();
                 ByteArrayOutputStream baos = new ByteArrayOutputStream(
-                        declaredLength > 0 && declaredLength <= Integer.MAX_VALUE ? (int) declaredLength : 1024);
+                    declaredLength > 0 ? (int) declaredLength : 1024);
                 byte[] buffer = new byte[8192];
                 int len;
                 long totalRead = 0;
