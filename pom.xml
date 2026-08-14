@@ -171,6 +171,12 @@
             <type>jar</type>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.apache.wicket</groupId>
+            <artifactId>wicket-core</artifactId>
+            <version>9.23.0</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <licenses>
         <license>
