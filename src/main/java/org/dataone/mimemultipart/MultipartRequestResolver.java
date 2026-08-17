@@ -23,6 +23,7 @@
 package org.dataone.mimemultipart;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 import javax.servlet.ServletContext;
@@ -150,7 +151,7 @@ public class MultipartRequestResolver {
 
             if (item.isFormField()) {
                 String name = item.getFieldName();
-                String value = item.getString();
+                String value = item.getString(StandardCharsets.UTF_8.name());
                 if (mpParams.containsKey(name)) {
                     mpParams.get(name).add(value);
                 } else {
