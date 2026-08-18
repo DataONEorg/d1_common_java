@@ -1,5 +1,9 @@
 # d1_common_java Release Notes
 
+## 2.5.1 (2026-08-18)
+- Intent: Deliver a bug-fixed patch release following 2.5.0.
+- Bug fixes: Fixed an encoding issue that prevented content containing special characters from being correctly retrieved from HTTP multipart requests (issue #13, PR #14).
+
 ## 2.5.0 (2026-07-06)
 
 - Intent: Deliver a modernization and maintenance release focused on Java 17/21/25 compatibility, security hardening, and release pipeline updates.
